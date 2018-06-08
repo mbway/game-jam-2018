@@ -1,0 +1,9 @@
+
+# CRITICAL
+- player movement (Matt)
+    - gamepad support
+- gun which shoots
+- tileset
+- main menu
+- HUD
+
