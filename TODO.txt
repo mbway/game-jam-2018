@@ -3,7 +3,15 @@
 - player movement (Matt)
     - gamepad support
 - gun which shoots
-- tileset
 - main menu
 - HUD
+- camera shake
 
+
+# Extensions
+- animations
+    - falling
+
+
+# Done
+- tileset
