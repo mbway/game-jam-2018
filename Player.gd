@@ -9,7 +9,7 @@ const BEFORE_START = -999 # ms
 const GRAVITY = 40
 const ACCELERATION = 3000
 const MAX_SPEED = 600
-const JUMP_SPEED = 800
+const JUMP_SPEED = 1000
 const FRICTION_DECAY = 0.6
 # when the user moves in the opposite direction to the current speed, decay the
 # speed quickly. This avoid the character feeling 'floaty' (set to 1.0 to
