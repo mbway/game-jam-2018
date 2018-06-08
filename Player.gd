@@ -17,8 +17,8 @@ const FRICTION_DECAY = 0.6
 const REACTIVITY_DECAY = 0.5
 
 var motion = Vector2(0, 0)
-#const MAX_JUMPS = 2
-#var jumps_left = 2 # to allow double jumps, reset when touching the floor
+const MAX_ADDITIONAL_JUMPS = 1
+var additional_jumps_left = 1 # to allow double jumps, reset when touching the floor
 
 # to make the jumping feel better
 var last_jump_ms = BEFORE_START # ms
@@ -74,8 +74,13 @@ func _physics_process(delta):
 			# able to jump shortly after falling from a platform
 			motion.y -= JUMP_SPEED
 			last_jump_ms = BEFORE_START
+		elif additional_jumps_left > 0:
+			motion.y -= JUMP_SPEED
+			last_jump_ms = BEFORE_START
+			additional_jumps_left -= 1
 
 	if on_floor:
+		additional_jumps_left = MAX_ADDITIONAL_JUMPS
 		# apply friction
 		if direction == 0: # not moving left or right
 			motion.x = lerp(motion.x, 0, FRICTION_DECAY)

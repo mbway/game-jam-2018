@@ -66,6 +66,7 @@ _sections_unfolded = [ "Angular" ]
 
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="HitBox" type="CollisionShape2D" parent="." index="1"]
