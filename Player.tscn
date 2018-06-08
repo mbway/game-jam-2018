@@ -101,6 +101,7 @@ editor_draw_drag_margin = false
 
 [node name="Gun" parent="." index="3" instance=ExtResource( 21 )]
 
-_sections_unfolded = [ "Transform" ]
+z_index = 1
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 
