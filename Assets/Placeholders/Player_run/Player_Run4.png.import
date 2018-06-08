@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/machineguno.png-dcf7280dc4c14216beb80ee5c9b0032f.stex"
+path="res://.import/Player_Run4.png-e01bee569721683ff845f6be9f9c23a7.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/machineguno.png"
-source_md5="849b615e670b28bc00105ce19bd068b0"
+source_file="res://Assets/Placeholders/Player_run/Player_Run4.png"
+source_md5="df9cf64017de6a54edd714e914f4f77c"
 
-dest_files=[ "res://.import/machineguno.png-dcf7280dc4c14216beb80ee5c9b0032f.stex" ]
-dest_md5="f756101b5200b39f1fb07372f5610302"
+dest_files=[ "res://.import/Player_Run4.png-e01bee569721683ff845f6be9f9c23a7.stex" ]
+dest_md5="466377d074cdbcfe7ecb490ffaa1a131"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flamethrowero.png-497fdd2354d547a1fdb0ea4edfe1265c.stex"
+path="res://.import/bullet.png-27d4c119543974aef3e62d8b922b549a.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/flamethrowero.png"
-source_md5="2e981bb98e7808568d9e42d88e93620b"
+source_file="res://Assets/Placeholders/bullet.png"
+source_md5="672a60c3c296d68a69b17b9ee71413ed"
 
-dest_files=[ "res://.import/flamethrowero.png-497fdd2354d547a1fdb0ea4edfe1265c.stex" ]
-dest_md5="d3f5dfd8f7fe13c2f7de6f2521ff8656"
+dest_files=[ "res://.import/bullet.png-27d4c119543974aef3e62d8b922b549a.stex" ]
+dest_md5="21699cb656f1acc61b145c94fa26da09"
 
 [params]
 

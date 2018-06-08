@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laserrifleo.png-4c74a7fd2965e6789e345a5ac0bde546.stex"
+path="res://.import/Player_jumpdown4.png-5a1f49b6b32f64b20a8bea6da1cd0768.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/laserrifleo.png"
-source_md5="813a91bd6e07f7f5030a38e35d1489ac"
+source_file="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown4.png"
+source_md5="a19065af6b207662751b90c1c3b29d43"
 
-dest_files=[ "res://.import/laserrifleo.png-4c74a7fd2965e6789e345a5ac0bde546.stex" ]
-dest_md5="0b73c58a856e8147495f13a412f550cc"
+dest_files=[ "res://.import/Player_jumpdown4.png-5a1f49b6b32f64b20a8bea6da1cd0768.stex" ]
+dest_md5="62a999c0297013f7be3863f17b2ba458"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

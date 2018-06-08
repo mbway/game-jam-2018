@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/miniguno.png-112f727cd19cb4b68d01f51693c0f2d3.stex"
+path="res://.import/Player_Run2.png-130be5066436e5d0d73792b9829c87af.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/miniguno.png"
-source_md5="2fc5fb46e5d25e303a01d36a3e15667c"
+source_file="res://Assets/Placeholders/Player_run/Player_Run2.png"
+source_md5="f38d2a039ebcb37a44be8f4c11ba1e42"
 
-dest_files=[ "res://.import/miniguno.png-112f727cd19cb4b68d01f51693c0f2d3.stex" ]
-dest_md5="77e9dbf3b80a75ae815a6a3ab752f785"
+dest_files=[ "res://.import/Player_Run2.png-130be5066436e5d0d73792b9829c87af.stex" ]
+dest_md5="9acdce7158ee4fe1ab5237825badc7e7"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

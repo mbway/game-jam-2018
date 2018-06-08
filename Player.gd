@@ -17,17 +17,30 @@ const FRICTION_DECAY = 0.6
 const REACTIVITY_DECAY = 0.5
 
 var motion = Vector2(0, 0)
-var double_jump_enabled = false
+#const MAX_JUMPS = 2
+#var jumps_left = 2 # to allow double jumps, reset when touching the floor
 
 # to make the jumping feel better
 var last_jump_ms = BEFORE_START # ms
-var was_on_floor = false
+var was_on_floor = false # was on the floor last physics update
 var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
 const EDGE_JUMP_TOLERANCE = 50 # ms
 
 func _ready():
 	pass
+
+func _process(delta):
+
+	# gun rotation
+	var mouse_pos = $Camera.get_local_mouse_position()
+	var angle = mouse_pos.angle_to_point($Gun.get_position())
+	$Gun.set_rotation(angle)
+	if abs(angle) > PI/2:
+		$Gun.scale.y = -1
+	else:
+		$Gun.scale.y = 1
+
 
 func _physics_process(delta):
 	motion.y += GRAVITY
@@ -46,50 +59,57 @@ func _physics_process(delta):
 		motion.x *= REACTIVITY_DECAY
 	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 
+	var now = OS.get_ticks_msec()
+	var on_floor = is_on_floor()
+
 	# able to register a jump if character just about to hit the floor
 	if Input.is_action_just_pressed('ui_up'):
-		last_jump_ms = OS.get_ticks_msec()
+		last_jump_ms = now
 
-	var now = OS.get_ticks_msec()
-	var want_jump = now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE
-
-	if is_on_floor():
-		was_on_floor = true
-
-		# jump
-		if want_jump:
+	if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
+		if on_floor:
+			motion.y -= JUMP_SPEED
+			last_jump_ms = BEFORE_START
+		elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
+			# able to jump shortly after falling from a platform
 			motion.y -= JUMP_SPEED
 			last_jump_ms = BEFORE_START
 
+	if on_floor:
 		# apply friction
 		if direction == 0: # not moving left or right
 			motion.x = lerp(motion.x, 0, FRICTION_DECAY)
 	else:
-
 		# able to jump shortly after falling from a platform
 		if was_on_floor:
 			left_floor_ms = now
-			was_on_floor = false
-
-		# jump
-		if want_jump and now - left_floor_ms < EDGE_JUMP_TOLERANCE:
-			motion.y -= JUMP_SPEED
-			last_jump_ms = BEFORE_START
 
 		# cancel jump in mid air
 		if Input.is_action_just_released('ui_up'):
 			# if still moving up, then stop moving up
 			motion.y = max(motion.y, -JUMP_SPEED/5)
 
+	was_on_floor = on_floor
+
 	# play the appropriate animations
-	if motion.x == 0:
-		$AnimatedSprite.play('idle')
-	elif motion.x > 0:
-		$AnimatedSprite.play('walk')
+	if on_floor:
+		if motion.x == 0:
+			$AnimatedSprite.play('idle')
+		else:
+			$AnimatedSprite.play('run')
+	else:
+		if motion.y < 0:
+			print('jump')
+			print($AnimatedSprite.get_frame())
+			$AnimatedSprite.play('jump')
+		else:
+			$AnimatedSprite.play('fall')
+
+	if motion.x > 0:
 		$AnimatedSprite.flip_h = false
 	elif motion.x < 0:
-		$AnimatedSprite.play('walk')
 		$AnimatedSprite.flip_h = true
+
 
 	motion = move_and_slide(motion, UP)
 

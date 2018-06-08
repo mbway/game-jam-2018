@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pistolo.png-61a8dacc17ebf34cca13c116640265a6.stex"
+path="res://.import/Player2_jumpup1.png-745a5809d820d4ad3632e8911e9e0d6d.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/pistolo.png"
-source_md5="eddcbb9abbaab0315a71b235dcdb6348"
+source_file="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup1.png"
+source_md5="32728bb5d8a93ef988a84940f21a27ea"
 
-dest_files=[ "res://.import/pistolo.png-61a8dacc17ebf34cca13c116640265a6.stex" ]
-dest_md5="e804e36279ec2de6d66fb1ef26a61a3d"
+dest_files=[ "res://.import/Player2_jumpup1.png-745a5809d820d4ad3632e8911e9e0d6d.stex" ]
+dest_md5="499e69394ef6e776cec2ad57e3d2e9b5"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

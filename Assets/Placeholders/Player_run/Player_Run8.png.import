@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/UZIo.png-5465e9c5f55b5d286f6671029d305aee.stex"
+path="res://.import/Player_Run8.png-e3142f1badcd236717844271efb27400.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/UZIo.png"
-source_md5="189870fd9a0ae5a5d413d7c5f502e8e7"
+source_file="res://Assets/Placeholders/Player_run/Player_Run8.png"
+source_md5="825fd61dc3f48cbd60099f4421e97bad"
 
-dest_files=[ "res://.import/UZIo.png-5465e9c5f55b5d286f6671029d305aee.stex" ]
-dest_md5="c8640da97576f8848e33fc2148824124"
+dest_files=[ "res://.import/Player_Run8.png-e3142f1badcd236717844271efb27400.stex" ]
+dest_md5="efee066f1dfa79fb26b0146d8968b69e"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

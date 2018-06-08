@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocketlaunchero.png-6d0e16f7bfc643e93381f474f1049b96.stex"
+path="res://.import/Player2_jumpup2.png-b8c6bed3c9de09704890b404dbc09275.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/rocketlaunchero.png"
-source_md5="d1a37e14f5bcd886c1e2fa8b853ba0e5"
+source_file="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup2.png"
+source_md5="14b0b8804efb724f8a043a443d250781"
 
-dest_files=[ "res://.import/rocketlaunchero.png-6d0e16f7bfc643e93381f474f1049b96.stex" ]
-dest_md5="5b0bd48d43c1b727372188bd8697db31"
+dest_files=[ "res://.import/Player2_jumpup2.png-b8c6bed3c9de09704890b404dbc09275.stex" ]
+dest_md5="378a66b4144085efd19345fafe68a6f2"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

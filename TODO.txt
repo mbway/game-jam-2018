@@ -1,7 +1,5 @@
 
 # CRITICAL
-- player movement (Matt)
-    - gamepad support
 - gun which shoots
 - main menu
 - HUD
@@ -12,6 +10,13 @@
 - animations
     - falling
 
+# Extension Features
+- teleportation stations
+
+
+
 
 # Done
 - tileset
+- player movement (Matt)
+    - gamepad support

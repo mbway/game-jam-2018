@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stupidrocketlauncher.png-f6fee233b519e425ca67de304dc3531d.stex"
+path="res://.import/Player_jumpdown1.png-10a1176d300564a16eab27ddca1365f5.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/stupidrocketlauncher.png"
-source_md5="d25087bea9a1d4a11de8b6e87e72d709"
+source_file="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown1.png"
+source_md5="11acba9d23c7551fc695643afa3a202b"
 
-dest_files=[ "res://.import/stupidrocketlauncher.png-f6fee233b519e425ca67de304dc3531d.stex" ]
-dest_md5="3c66a7e0410188539d820db0ef26567f"
+dest_files=[ "res://.import/Player_jumpdown1.png-10a1176d300564a16eab27ddca1365f5.stex" ]
+dest_md5="4801584c97c03cf474026e10f3bf9754"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

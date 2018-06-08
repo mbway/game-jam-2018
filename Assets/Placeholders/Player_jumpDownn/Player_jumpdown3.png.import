@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snipero.png-28c1943321360ecf454fcf6921f54a27.stex"
+path="res://.import/Player_jumpdown3.png-be16ee125d6ef7b4c7574dcc5f9440cd.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/snipero.png"
-source_md5="0952939b2c0c0afb5b150ee7a621f40e"
+source_file="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown3.png"
+source_md5="3eecdd9c5833ec5118add5f00d5d40cd"
 
-dest_files=[ "res://.import/snipero.png-28c1943321360ecf454fcf6921f54a27.stex" ]
-dest_md5="b7b3b567947133d064cba206933e100b"
+dest_files=[ "res://.import/Player_jumpdown3.png-be16ee125d6ef7b4c7574dcc5f9440cd.stex" ]
+dest_md5="70d068836ca86136c3ce7e8493eed40e"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
