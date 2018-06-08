@@ -99,8 +99,6 @@ func _physics_process(delta):
 			$AnimatedSprite.play('run')
 	else:
 		if motion.y < 0:
-			print('jump')
-			print($AnimatedSprite.get_frame())
 			$AnimatedSprite.play('jump')
 		else:
 			$AnimatedSprite.play('fall')
@@ -109,7 +107,6 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = false
 	elif motion.x < 0:
 		$AnimatedSprite.flip_h = true
-
 
 	motion = move_and_slide(motion, UP)
 
