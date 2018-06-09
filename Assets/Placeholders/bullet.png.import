@@ -7,10 +7,10 @@ path="res://.import/bullet.png-27d4c119543974aef3e62d8b922b549a.stex"
 [deps]
 
 source_file="res://Assets/Placeholders/bullet.png"
-source_md5="f3ec45092085a23d7add3c3149af7955"
+source_md5="20c5d7990a9de8a995595d3be2f0a3c0"
 
 dest_files=[ "res://.import/bullet.png-27d4c119543974aef3e62d8b922b549a.stex" ]
-dest_md5="cb52a6cc2e5bc4f9647f730e1569720a"
+dest_md5="89afdbdbf839f6fa680c7f2203754b7f"
 
 [params]
 

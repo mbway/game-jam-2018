@@ -3,6 +3,9 @@ extends KinematicBody2D
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
+# used for user input purposes
+export (NodePath) var camera_path = null
+onready var camera = get_node(camera_path)
 
 const UP = Vector2(0, -1)
 const BEFORE_START = -999 # ms
@@ -27,20 +30,17 @@ var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
 const EDGE_JUMP_TOLERANCE = 50 # ms
 
-func _ready():
-	pass
 
 func _process(delta):
-
 	# gun rotation
-	var mouse_pos = $Camera.get_local_mouse_position()
+	var mouse_pos = camera.get_local_mouse_position()
 	var angle = mouse_pos.angle_to_point($Gun.get_position())
 	$Gun.set_rotation(angle)
 	if abs(angle) > PI/2:
 		$Gun.scale.y = -1
 	else:
 		$Gun.scale.y = 1
-
+	
 
 func _physics_process(delta):
 	motion.y += GRAVITY
@@ -114,4 +114,6 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = true
 
 	motion = move_and_slide(motion, UP)
+	
+	camera.set_global_position(global_position)
 

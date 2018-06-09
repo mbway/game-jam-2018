@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/machinegun.png"
 source_md5="604c238b07fb3c40bfc3b64a2eacbf30"
 
 dest_files=[ "res://.import/machinegun.png-fd0b5cb6d34cc592e2f83ea0b774a30e.stex" ]
-dest_md5="d02d196edfbb12b58d2ccec0b18cad83"
+dest_md5="c70780b8ce5ec6eb3b38cef6ce01fa37"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

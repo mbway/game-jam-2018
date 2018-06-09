@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/minigun.png"
 source_md5="c15ddfd0e432cf55e8f76e876932fd0b"
 
 dest_files=[ "res://.import/minigun.png-baf35becb58b0436c007e79a6cf83fa6.stex" ]
-dest_md5="6bdc9df830d886c4d08604cdd169b617"
+dest_md5="48917d173fddd8d860c8191c92688863"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

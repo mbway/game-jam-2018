@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/rocketlauncher.png"
 source_md5="259daaf865c18378ecdd4f564c2861a8"
 
 dest_files=[ "res://.import/rocketlauncher.png-af7594c6bf2715e03dc453b5ddf11721.stex" ]
-dest_md5="0aee0409d431ebcf1cacbf7cdc6bfcc7"
+dest_md5="86459531282d42a98571b30c6c9e6179"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
