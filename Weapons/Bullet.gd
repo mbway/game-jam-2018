@@ -2,21 +2,22 @@ extends RigidBody2D
 
 const MAX_DISTANCE = 1000
 
+# set on setup
 var shot_from
 var vel
-
 var spawn_loc
 var shoot_direction
 
 
-func setup(shot_from, vel):
+func setup(parent, shot_from, vel):
 	self.shot_from = shot_from
 	self.vel = vel
 	
 	rotation = shot_from.rotation
 	
 	# can't use self.get_node because may not be ready/added to the tree yet
-	var parent = shot_from.get_node('/root/Main/Bullets')
+	#var parent = shot_from.get_node(parent_path)
+	#print(parent_path)
 	parent.add_child(self)
 	
 	position = shot_from.get_node('Muzzle').global_position

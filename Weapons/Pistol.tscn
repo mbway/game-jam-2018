@@ -10,13 +10,13 @@ shoot_vel = 2000
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 98.7347, 60 )
+position = Vector2( 22.4707, 9.27777 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 117.144, 54.282 )
+position = Vector2( 40.6264, 3.52123 )
 _sections_unfolded = [ "Transform" ]
 
 
