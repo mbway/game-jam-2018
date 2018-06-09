@@ -11,7 +11,7 @@ var pickup_scene = null
 
 
 func _ready():
-	set_pickup(mg_scene)
+	set_pickup(sniper_scene)
 	
 func _process(delta):
 	pass

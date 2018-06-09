@@ -13,7 +13,8 @@ const JOY_DEADZONE = 0.2
 # set when spawned in
 var is_setup = false
 var input_prefix = null
-var camera = null # used for mouse input, null => 
+var camera = null # used for mouse input
+var mouse_look = true
 var bullet_parent = null # the node to spawn the bullets under
 
 
@@ -43,10 +44,11 @@ const MAX_ADDITIONAL_JUMPS = 1
 var additional_jumps_left = 1 # to allow double jumps, reset when touching the floor
 
 
-func setup(input_prefix, bullet_parent, camera):
+func setup(input_prefix, bullet_parent, camera, mouse_look):
 	self.input_prefix = input_prefix
 	self.bullet_parent = bullet_parent
 	self.camera = camera
+	self.mouse_look = mouse_look
 	is_setup = true
 
 func _process(delta):
@@ -58,22 +60,22 @@ func _process(delta):
 		var angle = 0
 		var angle_correction = 0
 		
-		if camera == null:
+		if mouse_look:
+			# mouse
+			# maths copied from power defence
+			var gun_pos = $Gun.get_position()
+			var mouse_pos = get_local_mouse_position()
+			angle = mouse_pos.angle_to_point(gun_pos)
+			var d = (mouse_pos - gun_pos).length()
+			var o = ($Gun/Muzzle.get_position()-gun_pos).y
+			angle_correction = asin(o/d)
+		else:
 			# gamepad
 			var direction = Vector2(Input.get_joy_axis(0, JOY_X), Input.get_joy_axis(0, JOY_Y))
 			if direction.length() > JOY_DEADZONE:
 				angle = direction.angle()
 			else:
 				angle = $Gun.rotation
-		else:
-			# mouse
-			# maths copied from power defence
-			var gun_pos = $Gun.get_position()
-			var mouse_pos = camera.get_local_mouse_position()
-			angle = mouse_pos.angle_to_point(gun_pos)
-			var d = (mouse_pos - gun_pos).length()
-			var o = ($Gun/Muzzle.get_position()-gun_pos).y
-			angle_correction = asin(o/d)
 
 		if abs(angle) > PI/2:
 			$Gun.scale.y = -1
