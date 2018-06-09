@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Weapons/MachineGun.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=2]
 
 [node name="MachineGun" type="Node2D"]
 
 script = ExtResource( 1 )
 shoot_vel = 2000
+bullet_scene_path = "res://Weapons/Bullet.tscn"
+cooldown = 0.1
+auto_fire = true
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -16,5 +19,15 @@ texture = ExtResource( 2 )
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
 position = Vector2( 42.6815, 9.39457 )
+
+[node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = null
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 

@@ -12,6 +12,8 @@
 
 # Extension Features
 - teleportation stations
+- configurable gamepad buttons and axes
+    - https://godot.readthedocs.io/en/3.0/classes/class_configfile.html
 
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://WeaponSpawn.gd" type="Script" id=1]
+[ext_resource path="res://PickupSpawn.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/WeaponSpawn/WeaponSpawn1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 24, 16 )
 
-[node name="WeaponSpawn" type="Area2D" index="0"]
+[node name="PickupSpawn" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -29,8 +29,17 @@ texture = ExtResource( 2 )
 position = Vector2( 0, -24 )
 shape = SubResource( 1 )
 
-[node name="GunSprite" type="Sprite" parent="." index="2"]
+[node name="Pickup" type="Sprite" parent="." index="2"]
 
-[connection signal="body_entered" from="." to="." method="_on_WeaponSpawn_body_entered"]
+[node name="Cooldown" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[connection signal="body_entered" from="." to="." method="_on_PickupSpawn_body_entered"]
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Weapons/Sniper.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/Sniper.wav" type="AudioStream" id=3]
 [ext_resource path="res://Assets/weapons/sniper_flare.png" type="Texture" id=4]
@@ -9,6 +9,9 @@
 
 script = ExtResource( 1 )
 shoot_vel = 2000
+bullet_scene_path = "res://Weapons/Bullet.tscn"
+cooldown = 0.1
+auto_fire = false
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -18,10 +21,10 @@ _sections_unfolded = [ "Offset" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 65.0331, 13.9566 )
+position = Vector2( 65.1141, 11.2838 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="." index="2"]
+[node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
 position = Vector2( 64, 16 )
 stream = ExtResource( 3 )

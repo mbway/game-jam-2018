@@ -160,9 +160,8 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, UP)
 
-func equip(gun_scene):
+func equip(gun):
 	assert not has_node('Gun')
-	var gun = gun_scene.instance()
 	gun.set_name('Gun')
 	gun.setup(bullet_parent, input_prefix + 'fire')
 	add_child(gun)
