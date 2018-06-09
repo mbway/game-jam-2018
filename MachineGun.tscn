@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MachineGun.gd" type="Script" id=1]
+[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=2]
+
+[node name="MachineGun" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+shoot_vel = 2000
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 10.0904, 13.222 )
+texture = ExtResource( 2 )
+
+[node name="Muzzle" type="Position2D" parent="." index="1"]
+
+position = Vector2( 42.6815, 9.39457 )
+
+
