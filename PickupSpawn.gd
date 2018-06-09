@@ -4,7 +4,7 @@ onready var pistol_scene = load('res://Weapons/Pistol.tscn')
 onready var mg_scene = load('res://Weapons/MachineGun.tscn')
 onready var sniper_scene = load('res://Weapons/Sniper.tscn')
 
-onready var player_scene_path = 'res://Player.tscn'
+const player_scene_path = 'res://Player.tscn'
 
 var pickup_available = false
 var pickup_scene = null

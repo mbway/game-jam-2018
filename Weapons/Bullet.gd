@@ -1,17 +1,20 @@
 extends RigidBody2D
 
 const MAX_DISTANCE = 1000
+const player_scene_path = 'res://Player.tscn'
 
 # set on setup
 var shot_from
 var vel
 var spawn_loc
 var shoot_direction
+var damage
 
 
-func setup(parent, shot_from, vel):
+func setup(parent, shot_from, vel, damage):
 	self.shot_from = shot_from
 	self.vel = vel
+	self.damage = damage
 	
 	rotation = shot_from.rotation
 	
@@ -33,4 +36,6 @@ func _physics_process(delta):
 
 
 func _on_Bullet_body_entered(body):
+	if body.get_filename() == player_scene_path:
+		body.take_damage(damage)
 	queue_free()

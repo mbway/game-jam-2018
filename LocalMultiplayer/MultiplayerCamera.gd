@@ -7,7 +7,6 @@ func _ready():
 	follow = []
 	for f in follow_paths:
 		follow.append(get_node(f))
-	print(follow)
 
 func _physics_process(delta):
 	if len(follow) > 1:
@@ -24,7 +23,7 @@ func _physics_process(delta):
 			if r > furthest_r:
 				furthest = v
 				furthest_r = r
-			
+		
 		# this is purely heuristic
 		furthest.y *= 1.5
 		furthest_r = furthest.length()
