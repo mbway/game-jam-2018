@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minigun.png-baf35becb58b0436c007e79a6cf83fa6.stex"
+path="res://.import/minigun1.png-ef0166a3c4fffc5a71a5377f44d54dab.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/minigun.png"
-source_md5="c15ddfd0e432cf55e8f76e876932fd0b"
+source_file="res://Assets/weapons/Minigun/minigun1.png"
+source_md5="d290ba92959a27698aa759d5dc702628"
 
-dest_files=[ "res://.import/minigun.png-baf35becb58b0436c007e79a6cf83fa6.stex" ]
-dest_md5="48917d173fddd8d860c8191c92688863"
+dest_files=[ "res://.import/minigun1.png-ef0166a3c4fffc5a71a5377f44d54dab.stex" ]
+dest_md5="3cacab7ca6a4d49919409f8d331d93d0"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
