@@ -11,6 +11,7 @@ extents = Vector2( 32, 32 )
 
 [node name="0" type="Sprite" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 32, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -37,6 +38,7 @@ shape = SubResource( 1 )
 
 [node name="1" type="Sprite" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 104, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -63,6 +65,7 @@ shape = SubResource( 1 )
 
 [node name="2" type="Sprite" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 176, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -89,6 +92,7 @@ shape = SubResource( 1 )
 
 [node name="3" type="Sprite" parent="." index="3"]
 
+editor/display_folded = true
 position = Vector2( 248, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -115,6 +119,7 @@ shape = SubResource( 1 )
 
 [node name="4" type="Sprite" parent="." index="4"]
 
+editor/display_folded = true
 position = Vector2( 320, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -141,6 +146,7 @@ shape = SubResource( 1 )
 
 [node name="5" type="Sprite" parent="." index="5"]
 
+editor/display_folded = true
 position = Vector2( 392, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -167,6 +173,7 @@ shape = SubResource( 1 )
 
 [node name="6" type="Sprite" parent="." index="6"]
 
+editor/display_folded = true
 position = Vector2( 464, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -193,6 +200,7 @@ shape = SubResource( 1 )
 
 [node name="7" type="Sprite" parent="." index="7"]
 
+editor/display_folded = true
 position = Vector2( 536, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -219,6 +227,7 @@ shape = SubResource( 1 )
 
 [node name="8" type="Sprite" parent="." index="8"]
 
+editor/display_folded = true
 position = Vector2( 608, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
