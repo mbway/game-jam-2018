@@ -78,8 +78,7 @@ _sections_unfolded = [ "Angular", "Collision", "Pickable", "collision" ]
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 frames = SubResource( 1 )
-animation = "death"
-frame = 7
+animation = "idle"
 playing = true
 _sections_unfolded = [ "Transform" ]
 

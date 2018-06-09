@@ -11,7 +11,7 @@ extents = Vector2( 4, 2.95959 )
 [node name="Bullet" type="RigidBody2D"]
 
 input_pickable = true
-collision_layer = 2
+collision_layer = 0
 collision_mask = 1
 mode = 0
 mass = 1.0

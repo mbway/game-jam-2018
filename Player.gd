@@ -167,20 +167,22 @@ func _physics_process(delta):
 
 		was_on_floor = on_floor
 	else:
-		velocity.x = 0
-		velocity.y = 0
+		# dead
+		if on_floor:
+			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
 
 	# play the appropriate animations
-	if alive and on_floor:
-		if velocity.x == 0:
-			$AnimatedSprite.play('idle')
+	if alive:
+		if on_floor:
+			if velocity.x == 0:
+				$AnimatedSprite.play('idle')
+			else:
+				$AnimatedSprite.play('run')
 		else:
-			$AnimatedSprite.play('run')
-	elif alive:
-		if velocity.y < 0:
-			$AnimatedSprite.play('jump')
-		else:
-			$AnimatedSprite.play('fall')
+			if velocity.y < 0:
+				$AnimatedSprite.play('jump')
+			else:
+				$AnimatedSprite.play('fall')
 	else:
 		$AnimatedSprite.play('death')
 
@@ -212,11 +214,13 @@ func _set_health(new_health):
 
 func die():
 	alive = false
+	layers = 2 # collide with map but not with bullets
 	emit_signal('die')
 
 func spawn(position):
 	show()
 	invulnerable = true
+	layers = 1 # collide with map and bullets
 	$InvulnTimer.start()
 	self.position = position
 	_set_health(max_health)
