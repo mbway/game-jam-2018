@@ -1,6 +1,6 @@
 extends Node2D
 
-export (int) var shoot_vel = 2000
+export (int) var shoot_vel = 3000
 export (int) var damage = 20
 export (String) var bullet_scene_path = 'res://Weapons/Bullet.tscn'
 export (float) var cooldown = 0.1
@@ -13,6 +13,7 @@ var bullet_parent # the node to parent the bullets to
 
 # runtime
 var cooldown_timer = 0
+var active = true
 
 
 func setup(bullet_parent):
@@ -23,7 +24,7 @@ func _process(delta):
 	cooldown_timer -= delta
 	
 func try_shoot(fire_pressed, fire_just_pressed):
-	if cooldown_timer <= 0:
+	if active and cooldown_timer <= 0:
 		if (auto_fire and fire_pressed) or fire_just_pressed:
 			_shoot()
 
@@ -34,3 +35,10 @@ func _shoot():
 	var bullet = bullet_scene.instance()
 	bullet.setup(bullet_parent, self, shoot_vel, damage)
 	cooldown_timer = cooldown
+
+func set_active(active):
+	self.active = active
+	if active:
+		show()
+	else:
+		hide()
