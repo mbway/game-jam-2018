@@ -1,12 +1,12 @@
 extends Node2D
 
-export (int) var shoot_vel = 3000
+export (int) var shoot_vel = 5000
 export (int) var damage = 20
 export (String) var bullet_scene_path = 'res://Weapons/Bullet.tscn'
 export (float) var cooldown = 0.1
 export (bool) var auto_fire = false
 export (float) var charge = 0
-export (float) var spread = 0 #angle of bullet spread in radians 
+export (float) var spread = 0 # angle of bullet spread in radians
 
 # on setup
 var is_setup = false

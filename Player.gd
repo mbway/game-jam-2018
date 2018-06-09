@@ -14,6 +14,8 @@ const JOY_X = 2
 const JOY_Y = 3
 const JOY_DEADZONE = 0.2
 
+onready var pistol_scene = load('res://Weapons/Pistol.tscn')
+
 # set when spawned in
 var is_setup = false
 var input_prefix = null # eg 'p1_' for player 1
@@ -64,6 +66,7 @@ func setup(input_prefix, max_health, bullet_parent, camera, mouse_look):
 	self.bullet_parent = bullet_parent
 	self.camera = camera
 	self.mouse_look = mouse_look
+	#TODO: give pistol
 	is_setup = true
 
 func _process(delta):

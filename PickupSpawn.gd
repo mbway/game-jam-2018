@@ -1,34 +1,33 @@
 extends Area2D
 
-onready var pistol_scene = load('res://Weapons/Pistol.tscn')
-onready var mg_scene = load('res://Weapons/MachineGun.tscn')
-onready var sniper_scene = load('res://Weapons/Sniper.tscn')
-
 const player_scene_path = 'res://Player.tscn'
 
+export (NodePath) var available_pickups_path
+onready var available_pickups = get_node(available_pickups_path)
+
 var pickup_available = false
-var pickup_scene = null
+var current_pickup = null
 
 
 func _ready():
-	set_pickup(sniper_scene)
+	set_pickup(0)
 	
 func _process(delta):
 	pass
-	#$GunSprite.texture = WeaponScene/Sprite.texture
 
 
-func set_pickup(p):
-	pickup_scene = p
+func set_pickup(i):
+	current_pickup = available_pickups.get_child(i)
+	$PickupSprite.texture = current_pickup.texture
+	print($PickupSprite.texture)
 	pickup_available = true
 
 func _on_Cooldown_timeout():
-	set_pickup(mg_scene)
+	set_pickup(0)
 
 
 func _on_PickupSpawn_body_entered(body):
 	if pickup_available and body.get_filename() == player_scene_path:
-		print('giving weapon')
-		print(pickup_scene)
-		body.equip(pickup_scene.instance())
+		print('giving', current_pickup.name)
+		body.equip(current_pickup.scene.instance())
 		$Cooldown.start()

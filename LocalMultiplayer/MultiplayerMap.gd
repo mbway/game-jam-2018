@@ -1,6 +1,5 @@
 extends Node
 
-onready var pistol_scene = load('res://Weapons/Pistol.tscn')
 onready var player_scene = load('res://Player.tscn')
 
 var p1
@@ -10,6 +9,8 @@ var p2_lives = 2
 var game_over = false
 
 func _ready():
+	randomize() # generate true random numbers
+	
 	# setup input
 	var input = load('res://input.gd').new()
 	input.clear_input_maps()
@@ -44,7 +45,6 @@ func _on_p2_die():
 func create_player(prefix, max_health, mouse_look):
 	var p = player_scene.instance()
 	p.setup(prefix, max_health, $Bullets, $Camera, mouse_look)
-	p.equip(pistol_scene.instance())
 	p.connect('die', self, '_on_%sdie' % prefix)
 	$Players.add_child(p)
 	return p

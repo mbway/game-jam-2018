@@ -16,17 +16,17 @@ func setup(parent, shot_from, vel, damage):
 	self.shot_from = shot_from
 	self.vel = vel
 	self.damage = damage
-	
+
 	rotation = shot_from.rotation
-	
+
 	# can't use self.get_node because may not be ready/added to the tree yet
 	#var parent = shot_from.get_node(parent_path)
 	#print(parent_path)
 	parent.add_child(self)
-	
+
 	position = shot_from.get_node('Muzzle').global_position
 	spawn_loc = global_position
-	var spread = rand_range(-shot_from.spread,shot_from.spread)
+	var spread = rand_range(-shot_from.spread, shot_from.spread)
 	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation + spread)
 
 	is_setup = true

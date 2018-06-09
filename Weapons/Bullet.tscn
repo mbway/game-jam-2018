@@ -33,6 +33,8 @@ _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transf
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+position = Vector2( -10, 0 )
+scale = Vector2( 3, 1 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 

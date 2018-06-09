@@ -10,7 +10,7 @@ source_file="res://Assets/Placeholders/bullet.png"
 source_md5="20c5d7990a9de8a995595d3be2f0a3c0"
 
 dest_files=[ "res://.import/bullet.png-27d4c119543974aef3e62d8b922b549a.stex" ]
-dest_md5="89afdbdbf839f6fa680c7f2203754b7f"
+dest_md5="93ff33cc29559b20728df10da15e74bd"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
