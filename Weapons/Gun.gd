@@ -11,7 +11,6 @@ export (float) var charge = 0
 var is_setup = false
 var bullet_scene # the type of bullet to use
 var bullet_parent # the node to parent the bullets to
-var fire_action # the name of the input mapped action which triggers the gun
 var charge_time = 0
 
 # runtime
@@ -19,9 +18,8 @@ var cooldown_timer = 0
 var active = true
 
 
-func setup(bullet_parent, fire_action):
+func setup(bullet_parent):
 	self.bullet_parent = bullet_parent
-	self.fire_action = fire_action
 	bullet_scene = load(bullet_scene_path)
 	charge_time = charge
 
@@ -33,12 +31,12 @@ func try_shoot(fire_pressed, fire_just_pressed):
 		if (auto_fire and fire_pressed) or fire_just_pressed:
 			_shoot()
 
-func shoot():
+func _shoot():
 	$FireSound.play()
 	if has_node('Flare'):
 		$Flare.enabled = true # TODO: disable after timeout
 	var bullet = bullet_scene.instance()
-	bullet.setup(bullet_parent, self, shoot_vel)
+	bullet.setup(bullet_parent, self, shoot_vel, damage)
 	cooldown_timer = cooldown
 
 func set_active(active):

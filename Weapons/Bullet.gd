@@ -4,6 +4,7 @@ const MAX_DISTANCE = 1000
 const player_scene_path = 'res://Player.tscn'
 
 # set on setup
+var is_setup = false
 var shot_from
 var vel
 var spawn_loc
@@ -27,12 +28,14 @@ func setup(parent, shot_from, vel, damage):
 	spawn_loc = global_position
 	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation)
 
+	is_setup = true
 
 # before godot 3, used to be called _fixed_process
 func _physics_process(delta):
-	if global_position.distance_to(spawn_loc) > MAX_DISTANCE:
-		queue_free()
-	position += shoot_direction * vel * delta
+	if is_setup:
+		if global_position.distance_to(spawn_loc) > MAX_DISTANCE:
+			queue_free()
+		position += shoot_direction * vel * delta
 
 
 func _on_Bullet_body_entered(body):
