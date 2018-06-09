@@ -10,7 +10,7 @@ source_file="res://Assets/tiles64.png"
 source_md5="2bb3a5a62f4b1af124aa9575786ad4dc"
 
 dest_files=[ "res://.import/tiles64.png-c5fbb0fca38a27141b7a0cf53ea083d1.stex" ]
-dest_md5="40e5bbb31d294ea7cf190155c0c256fa"
+dest_md5="932ab64fc9b953c98bddc3969be65a89"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
