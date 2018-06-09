@@ -6,9 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 4, 2 )
+extents = Vector2( 4, 2.95959 )
 
-[node name="Bullet" type="RigidBody2D" index="0"]
+[node name="Bullet" type="RigidBody2D"]
 
 input_pickable = true
 collision_layer = 1
