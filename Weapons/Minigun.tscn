@@ -24,6 +24,7 @@ bullet_scene_path = "res://Weapons/Bullet.tscn"
 cooldown = 0.02
 auto_fire = true
 charge = 0.5
+spread = 0.2
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 

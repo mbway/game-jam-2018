@@ -26,7 +26,8 @@ func setup(parent, shot_from, vel, damage):
 	
 	position = shot_from.get_node('Muzzle').global_position
 	spawn_loc = global_position
-	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation)
+	var spread = rand_range(-shot_from.spread,shot_from.spread)
+	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation + spread)
 
 	is_setup = true
 
