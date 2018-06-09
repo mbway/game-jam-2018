@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/UZI.png"
 source_md5="c7ce6f8140266418d65c1723308a0153"
 
 dest_files=[ "res://.import/UZI.png-ab87375cac937fff2f25d03ef81b3e9d.stex" ]
-dest_md5="a5036313e028cab2dad623ef838461af"
+dest_md5="e4154f7e7a8f6a2c7c0d977055773301"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

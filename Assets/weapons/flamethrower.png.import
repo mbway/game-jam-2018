@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/flamethrower.png"
 source_md5="41ae3004a07359f6c3c5a0a503bd5e31"
 
 dest_files=[ "res://.import/flamethrower.png-630760387e6f28d80c8ef3c6da91b04c.stex" ]
-dest_md5="01f77a37c229ecb251c16de7f491d599"
+dest_md5="6761c03fbb1941530d33f375baa365b0"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
