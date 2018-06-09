@@ -18,6 +18,7 @@ func _process(delta):
 		if cooldownCount <= 0:
 			shoot()
 			cooldownCount = COOLDOWN_MAX
+		cooldownCount -= delta
 	
 
 func shoot():
