@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pistol.wav-057967223a6030ba821e82a51cc0eb86.sample"
+
+[deps]
+
+source_file="res://Assets/weapons/pistol.wav"
+source_md5="5c9786e7ba0969f8016809fce73415d9"
+
+dest_files=[ "res://.import/pistol.wav-057967223a6030ba821e82a51cc0eb86.sample" ]
+dest_md5="e4d583027c474194a9b3d832870a4a46"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

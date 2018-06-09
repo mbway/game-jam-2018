@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/machineGun.wav-9ca320a2b32560dff46db1947b02f696.sample"
+
+[deps]
+
+source_file="res://Weapons/machineGun.wav"
+source_md5="d100b72aa413e0561b4e3cb97b5911b6"
+
+dest_files=[ "res://.import/machineGun.wav-9ca320a2b32560dff46db1947b02f696.sample" ]
+dest_md5="6981990060d42581d249dddcf4da6355"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
