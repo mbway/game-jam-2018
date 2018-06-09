@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Pistol.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Pistol.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=2]
+
 
 [node name="Pistol" type="Node2D"]
 

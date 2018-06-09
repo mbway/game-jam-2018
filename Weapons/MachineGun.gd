@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var bullet_scene = load('res://Bullet.tscn')
+onready var bullet_scene = load('res://Weapons/Bullet.tscn')
 
 export (int) var shoot_vel = 2000
 
