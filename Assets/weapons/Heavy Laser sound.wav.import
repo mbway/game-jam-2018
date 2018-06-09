@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Heavy Laser sound.wav-6a608e14d7b883f19ed24afa7f710d46.sample"
+
+[deps]
+
+source_file="res://Assets/weapons/Heavy Laser sound.wav"
+source_md5="75736bf49c321549a2553c49944e9184"
+
+dest_files=[ "res://.import/Heavy Laser sound.wav-6a608e14d7b883f19ed24afa7f710d46.sample" ]
+dest_md5="335b9bdea6cb1830c710722724c91126"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
