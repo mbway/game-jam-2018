@@ -44,4 +44,8 @@ follow_paths = [ NodePath("../Player") ]
 
 position = Vector2( 1272, 714 )
 
+[node name="Player2" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 948, 718 )
+
 

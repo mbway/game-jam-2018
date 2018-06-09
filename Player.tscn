@@ -3,23 +3,23 @@
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Placeholders/Player_idle/Player_idle1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Placeholders/Player_idle/Player_idle2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run1.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run3.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run4.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run5.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run6.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run7.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run8.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup1.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup2.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup3.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup4.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup5.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown1.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown2.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown3.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown4.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown3.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Placeholders/Player_jumpDownn/Player_jumpdown4.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run5.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run6.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run7.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Placeholders/Player_run/Player_Run8.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup1.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup2.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup3.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup4.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Placeholders/Player_jumpUp/Player2_jumpup5.png" type="Texture" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -65,7 +65,6 @@ _sections_unfolded = [ "Angular" ]
 
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
