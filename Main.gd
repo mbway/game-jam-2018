@@ -2,8 +2,8 @@ extends Node
 
 func _ready():
 	var gun_scene = load('res://Weapons/MachineGun.tscn')
-	$Player.setup('p1_', $Bullets, $Camera)
-	#$Player.equip(gun_scene.instance())
+	$Player.setup('p1_', $Bullets, $Camera, true)
+	$Player.equip(gun_scene.instance())
 	
 	
 	var input = load('res://input.gd').new()

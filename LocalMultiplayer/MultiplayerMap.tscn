@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
-[ext_resource path="res://TestMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 
-[node name="MultiplayerMap" type="Node" index="0"]
+[node name="MultiplayerMap" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -46,6 +46,6 @@ position = Vector2( 1272, 714 )
 
 [node name="Player2" parent="." index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 948, 718 )
+position = Vector2( 810, 470 )
 
 
