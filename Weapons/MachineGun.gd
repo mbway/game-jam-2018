@@ -7,8 +7,14 @@ export (int) var shoot_vel = 2000
 const COOLDOWN_MAX = 0.2
 var cooldownCount = 0
 
-func _ready():
-	pass
+# on setup
+var is_setup = false
+var bullet_parent
+var fire_action
+
+func setup(bullet_parent, fire_action):
+	self.bullet_parent = bullet_parent
+	self.fire_action = fire_action
 
 func _process(delta):
 	if Input.is_action_just_pressed('fire'):
@@ -23,4 +29,4 @@ func _process(delta):
 
 func shoot():
 	var bullet = bullet_scene.instance()
-	bullet.setup(self, shoot_vel)
+	bullet.setup(bullet_parent, self, shoot_vel)

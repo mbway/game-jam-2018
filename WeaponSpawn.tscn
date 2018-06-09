@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://WeaponSpawn.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/WeaponSpawn/WeaponSpawn1.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/MachineGun.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Weapons/Pistol.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -32,16 +29,8 @@ texture = ExtResource( 2 )
 position = Vector2( 0, -24 )
 shape = SubResource( 1 )
 
-[node name="MachineGun" parent="." index="2" instance=ExtResource( 3 )]
+[node name="GunSprite" type="Sprite" parent="." index="2"]
 
-position = Vector2( -8, -48 )
-
-[node name="Pistol" parent="." index="3" instance=ExtResource( 4 )]
-
-position = Vector2( 0, -48 )
-
-[node name="Sniper" parent="." index="4" instance=ExtResource( 5 )]
-
-position = Vector2( -40, -64 )
+[connection signal="body_entered" from="." to="." method="_on_WeaponSpawn_body_entered"]
 
 
