@@ -3,6 +3,10 @@ extends KinematicBody2D
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
+## SIGNALS ##
+signal die
+signal hit
+
 ## CONSTANTS ##
 const UP = Vector2(0, -1)
 const BEFORE_START = -999 # timestamp long before the start of the game (ms)
@@ -12,11 +16,14 @@ const JOY_DEADZONE = 0.2
 
 # set when spawned in
 var is_setup = false
-var input_prefix = null
+var input_prefix = null # eg 'p1_' for player 1
 var camera = null # used for mouse input
-var mouse_look = true
+var mouse_look = true # whether to use the mouse for looking around (false => gamepad)
 var bullet_parent = null # the node to spawn the bullets under
+var max_health = 100
 
+## health and damage
+var health
 
 
 ## MOVEMENT ##
@@ -44,8 +51,10 @@ const MAX_ADDITIONAL_JUMPS = 1
 var additional_jumps_left = 1 # to allow double jumps, reset when touching the floor
 
 
-func setup(input_prefix, bullet_parent, camera, mouse_look):
+func setup(input_prefix, max_health, bullet_parent, camera, mouse_look):
 	self.input_prefix = input_prefix
+	self.max_health = max_health
+	health = max_health
 	self.bullet_parent = bullet_parent
 	self.camera = camera
 	self.mouse_look = mouse_look
@@ -54,8 +63,10 @@ func setup(input_prefix, bullet_parent, camera, mouse_look):
 func _process(delta):
 	if not is_setup:
 		return
-		
-	if has_node('Gun'):
+	
+	var alive = bool(health > 0)
+	
+	if alive and has_node('Gun'):
 		# gun rotation
 		var angle = 0
 		var angle_correction = 0
@@ -84,6 +95,11 @@ func _process(delta):
 			$Gun.scale.y = 1
 			angle -= angle_correction
 		$Gun.set_rotation(angle)
+		
+		# gun firing
+		var pressed = Input.is_action_pressed(input_prefix + 'fire')
+		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
+		$Gun.try_shoot(pressed, just_pressed)
 
 
 func _physics_process(delta):
@@ -91,57 +107,62 @@ func _physics_process(delta):
 		return
 		
 	velocity.y += GRAVITY
-
-	# get the direction from user input
-	var direction = 0
-	if Input.is_action_pressed(input_prefix + 'left'):
-		direction += -1
-	if Input.is_action_pressed(input_prefix + 'right'):
-		direction += 1
-
-	# calculate the speed
-	#velocity.x = direction*MAX_SPEED
-	velocity.x += direction*ACCELERATION*delta
-	if sign(velocity.x) != sign(direction):
-		velocity.x *= REACTIVITY_DECAY
-	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-
+	
+	var alive = bool(health > 0)
 	var now = OS.get_ticks_msec()
 	var on_floor = is_on_floor()
+	
+	# get the direction from user input
+	if alive:
+		var direction = 0
+		if Input.is_action_pressed(input_prefix + 'left'):
+			direction += -1
+		if Input.is_action_pressed(input_prefix + 'right'):
+			direction += 1
+	
+		# calculate the speed
+		#velocity.x = direction*MAX_SPEED
+		velocity.x += direction*ACCELERATION*delta
+		if sign(velocity.x) != sign(direction):
+			velocity.x *= REACTIVITY_DECAY
+		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+	
+		# able to register a jump if character just about to hit the floor
+		if Input.is_action_just_pressed(input_prefix + 'up'):
+			last_jump_ms = now
 
-	# able to register a jump if character just about to hit the floor
-	if Input.is_action_just_pressed(input_prefix + 'up'):
-		last_jump_ms = now
+		if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
+			if on_floor:
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
+				# able to jump shortly after falling from a platform
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+			elif additional_jumps_left > 0:
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+				additional_jumps_left -= 1
 
-	if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
 		if on_floor:
-			velocity.y -= JUMP_SPEED
-			last_jump_ms = BEFORE_START
-		elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
+			additional_jumps_left = MAX_ADDITIONAL_JUMPS
+			# apply friction
+			if direction == 0: # not moving left or right
+				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+		else:
 			# able to jump shortly after falling from a platform
-			velocity.y -= JUMP_SPEED
-			last_jump_ms = BEFORE_START
-		elif additional_jumps_left > 0:
-			velocity.y -= JUMP_SPEED
-			last_jump_ms = BEFORE_START
-			additional_jumps_left -= 1
+			if was_on_floor:
+				left_floor_ms = now
+	
+			# cancel jump in mid air
+			if Input.is_action_just_released(input_prefix + 'up'):
+				# if still moving up, then stop moving up
+				velocity.y = max(velocity.y, -JUMP_SPEED/5)
 
-	if on_floor:
-		additional_jumps_left = MAX_ADDITIONAL_JUMPS
-		# apply friction
-		if direction == 0: # not moving left or right
-			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+		was_on_floor = on_floor
 	else:
-		# able to jump shortly after falling from a platform
-		if was_on_floor:
-			left_floor_ms = now
-
-		# cancel jump in mid air
-		if Input.is_action_just_released(input_prefix + 'up'):
-			# if still moving up, then stop moving up
-			velocity.y = max(velocity.y, -JUMP_SPEED/5)
-
-	was_on_floor = on_floor
+		velocity.x = 0
+		velocity.y = 0
 
 	# play the appropriate animations
 	if on_floor:
@@ -165,8 +186,17 @@ func _physics_process(delta):
 func equip(gun):
 	assert not has_node('Gun')
 	gun.set_name('Gun')
-	gun.setup(bullet_parent, input_prefix + 'fire')
+	gun.setup(bullet_parent)
 	add_child(gun)
 
+func take_damage(damage):
+	health = max(health - damage, 0)
+	emit_signal('hit')
+	$HealthBar.set_health(float(health)/max_health)
+	if health <= 0:
+		die()
+
+func die():
+	emit_signal('die')
 
 

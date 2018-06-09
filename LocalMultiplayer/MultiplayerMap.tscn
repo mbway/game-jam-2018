@@ -5,7 +5,7 @@
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 
-[node name="MultiplayerMap" type="Node"]
+[node name="MultiplayerMap" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
