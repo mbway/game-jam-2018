@@ -4,14 +4,14 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Placeholders/Player.png" type="Texture" id=4]
-[ext_resource path="res://Camera.gd" type="Script" id=5]
+[ext_resource path="res://SinglePlayerCamera.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 2.07268, 46.9681 )
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 [node name="TestMap" parent="." index="0" instance=ExtResource( 1 )]
 

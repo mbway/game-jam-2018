@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Weapons/Sniper.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/Sniper.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/weapons/sniper_flare.png" type="Texture" id=4]
 
 [node name="Sniper" type="Node2D"]
 
@@ -10,7 +12,7 @@ shoot_vel = 2000
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 55.4416, 19.2061 )
+position = Vector2( 56, 16 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset" ]
 
@@ -18,5 +20,42 @@ _sections_unfolded = [ "Offset" ]
 
 position = Vector2( 65.0331, 13.9566 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+position = Vector2( 64, 16 )
+stream = ExtResource( 3 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="Flare" type="Light2D" parent="." index="3"]
+
+position = Vector2( 68, 11 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+texture_scale = 1.0
+color = Color( 1, 1, 1, 1 )
+energy = 10.0
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Shadow" ]
 
 

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sniper.wav-0f3c17b5f6c32335924ee8ccc4790e5a.sample"
+
+[deps]
+
+source_file="res://Assets/weapons/Sniper.wav"
+source_md5="52277fbc5ec0d8a7a8814b9996f6a79f"
+
+dest_files=[ "res://.import/Sniper.wav-0f3c17b5f6c32335924ee8ccc4790e5a.sample" ]
+dest_md5="e047df060ea25abb0c0bc2d6dd446f10"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
