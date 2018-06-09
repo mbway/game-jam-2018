@@ -33,13 +33,21 @@ const EDGE_JUMP_TOLERANCE = 50 # ms
 
 func _process(delta):
 	# gun rotation
+	# maths copied from power defence
 	var mouse_pos = camera.get_local_mouse_position()
-	var angle = mouse_pos.angle_to_point($Gun.get_position())
-	$Gun.set_rotation(angle)
+	var gun_pos = $Gun.get_position()
+	var angle = mouse_pos.angle_to_point(gun_pos)
+	var d = (mouse_pos - gun_pos).length()
+	var o = ($Gun/Muzzle.get_position()-gun_pos).y
+	var angle_correction = asin(o/d)
+	
 	if abs(angle) > PI/2:
 		$Gun.scale.y = -1
+		angle += angle_correction
 	else:
 		$Gun.scale.y = 1
+		angle -= angle_correction
+	$Gun.set_rotation(angle)
 	
 
 func _physics_process(delta):
