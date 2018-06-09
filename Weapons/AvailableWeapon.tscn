@@ -2,7 +2,7 @@
 
 [ext_resource path="res://AvailableWeapons.gd" type="Script" id=1]
 
-[node name="AvailableWeapon" type="Node" index="0"]
+[node name="AvailableWeapon" type="Node"]
 
 script = ExtResource( 1 )
 scene = null

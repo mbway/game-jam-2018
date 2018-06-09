@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PickupSpawn.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/WeaponSpawn/WeaponSpawn1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 24, 16 )
 
-[node name="PickupSpawn" type="Area2D" index="0"]
+[node name="PickupSpawn" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -31,6 +32,11 @@ position = Vector2( 0, -24 )
 shape = SubResource( 1 )
 
 [node name="PickupSprite" type="Sprite" parent="." index="2"]
+
+position = Vector2( 0, -25 )
+rotation = -0.349066
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Cooldown" type="Timer" parent="." index="3"]
 

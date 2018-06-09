@@ -14,12 +14,15 @@ func _ready():
 	
 func _process(delta):
 	pass
-
+	#$PickupSprite.position.y = 
 
 func set_pickup(i):
 	current_pickup = available_pickups.get_child(i)
 	$PickupSprite.texture = current_pickup.texture
-	print($PickupSprite.texture)
+	var sc = 60.0 / current_pickup.texture.get_size().x
+	$PickupSprite.scale.x = sc
+	$PickupSprite.scale.y = sc
+	
 	pickup_available = true
 
 func _on_Cooldown_timeout():
