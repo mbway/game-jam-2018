@@ -7,10 +7,10 @@ path="res://.import/minigun1.png-ef0166a3c4fffc5a71a5377f44d54dab.stex"
 [deps]
 
 source_file="res://Assets/weapons/Minigun/minigun1.png"
-source_md5="d290ba92959a27698aa759d5dc702628"
+source_md5="7bb0d69e484435e69c7406aab3e79484"
 
 dest_files=[ "res://.import/minigun1.png-ef0166a3c4fffc5a71a5377f44d54dab.stex" ]
-dest_md5="3cacab7ca6a4d49919409f8d331d93d0"
+dest_md5="1b36152219f4d376d511d2af495c044d"
 
 [params]
 
