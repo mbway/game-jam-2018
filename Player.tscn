@@ -79,6 +79,7 @@ _sections_unfolded = [ "Angular", "Collision", "Pickable", "collision" ]
 
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 

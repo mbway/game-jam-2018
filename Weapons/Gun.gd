@@ -7,6 +7,7 @@ export (float) var cooldown = 0.1
 export (bool) var auto_fire = false
 export (float) var charge = 0
 export (float) var spread = 0 # angle of bullet spread in radians
+export (float) var screen_shake = 7 # amount of screen shake to add each shot
 
 # on setup
 var is_setup = false
@@ -27,10 +28,13 @@ func setup(bullet_parent):
 func _process(delta):
 	cooldown_timer -= delta
 
+# reutrns whether a shot was fired
 func try_shoot(fire_pressed, fire_just_pressed):
 	if active and cooldown_timer <= 0:
 		if (auto_fire and fire_pressed) or fire_just_pressed:
 			_shoot()
+			return true
+	return false
 
 func _shoot():
 	$FireSound.play()

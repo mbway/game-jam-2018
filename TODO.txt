@@ -3,6 +3,9 @@
 - main menu
 - HUD
 - camera shake
+- pickup
+- inventory
+    - inventory GUI
 
 
 # Extensions
