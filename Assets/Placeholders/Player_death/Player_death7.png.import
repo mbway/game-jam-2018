@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tiles64.png-c5fbb0fca38a27141b7a0cf53ea083d1.stex"
+path="res://.import/Player_death7.png-91187d23ed2ab747bfec0add3ddcad90.stex"
 
 [deps]
 
-source_file="res://Assets/tiles64.png"
-source_md5="246cd93b96cd43c71c29fe966cb938d9"
+source_file="res://Assets/Placeholders/Player_death/Player_death7.png"
+source_md5="c7b4b8970aad4fc3ca1d549560752e01"
 
-dest_files=[ "res://.import/tiles64.png-c5fbb0fca38a27141b7a0cf53ea083d1.stex" ]
-dest_md5="f0ae1d43ae4d4d173f088985280bc027"
+dest_files=[ "res://.import/Player_death7.png-91187d23ed2ab747bfec0add3ddcad90.stex" ]
+dest_md5="3447137eb2d4c57c8b762e85cca2ae00"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

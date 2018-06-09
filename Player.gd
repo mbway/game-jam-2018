@@ -171,16 +171,18 @@ func _physics_process(delta):
 		velocity.y = 0
 
 	# play the appropriate animations
-	if on_floor:
+	if alive and on_floor:
 		if velocity.x == 0:
 			$AnimatedSprite.play('idle')
 		else:
 			$AnimatedSprite.play('run')
-	else:
+	elif alive:
 		if velocity.y < 0:
 			$AnimatedSprite.play('jump')
 		else:
 			$AnimatedSprite.play('fall')
+	else:
+		$AnimatedSprite.play('death')
 
 	if velocity.x > 0:
 		$AnimatedSprite.flip_h = false
