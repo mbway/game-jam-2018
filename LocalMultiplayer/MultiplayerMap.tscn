@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
 [ext_resource path="res://Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=3]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=5]
 
 [node name="MultiplayerMap" type="Node" index="0"]
 
@@ -38,14 +39,42 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 script = ExtResource( 3 )
-follow_paths = [ NodePath("../Player"), NodePath("../Player2") ]
+follow_paths = [  ]
 
-[node name="Player" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Players" type="Node" parent="." index="3"]
 
-position = Vector2( 1272, 714 )
+[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
 
-[node name="Player2" parent="." index="4" instance=ExtResource( 4 )]
+[node name="SpawnPoints" type="Node" parent="." index="5"]
 
-position = Vector2( 810, 470 )
+[node name="Spawn1" type="Position2D" parent="SpawnPoints" index="0"]
+
+position = Vector2( 204, 328 )
+
+[node name="Spawn2" type="Position2D" parent="SpawnPoints" index="1"]
+
+position = Vector2( 1086, 552 )
+
+[node name="P1SpawnTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="P2SpawnTimer" type="Timer" parent="." index="7"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="PickupSpawn" parent="." index="8" instance=ExtResource( 5 )]
+
+position = Vector2( 888, 644 )
+
+[connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
+
+[connection signal="timeout" from="P2SpawnTimer" to="." method="_on_P2SpawnTimer_timeout"]
 
 

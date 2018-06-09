@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const MAX_DISTANCE = 1000
+const MAX_DISTANCE = 10000 # despawn after this distance
 const player_scene_path = 'res://Player.tscn'
 
 # set on setup

@@ -13,7 +13,7 @@ func list_maps(action):
 		print(m.as_text(), m)
 
 func assign_keyboard_mouse_input(prefix):
-	var wasd_maps = [['up','w'], ['down','s'], ['left','a'], ['right','d']]
+	var wasd_maps = [['up','w'], ['up','space'], ['down','s'], ['left','a'], ['right','d']]
 	assign_input_maps(prefix, wasd_maps, 'key')
 	var mouse_maps = [['fire',1]]
 	assign_input_maps(prefix, mouse_maps, 'mouse')

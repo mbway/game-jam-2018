@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://HealthBar.gd" type="Script" id=1]
+[ext_resource path="res://Assets/fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Gradient" id=1]
 
@@ -13,6 +14,14 @@ flags = 4
 gradient = SubResource( 1 )
 width = 100
 _sections_unfolded = [ "Resource" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 12
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Resource", "Settings" ]
 
 [node name="HealthBar" type="Node2D"]
 
@@ -46,21 +55,23 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -20.0
-margin_top = -8.0
-margin_right = 20.0
-margin_bottom = 8.0
+margin_left = -28.0
+margin_top = -10.0
+margin_right = 28.0
+margin_bottom = 9.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "100%"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Focus", "custom_colors", "custom_constants" ]
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
 

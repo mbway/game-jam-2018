@@ -23,7 +23,12 @@ var bullet_parent = null # the node to spawn the bullets under
 var max_health = 100
 
 ## health and damage
-var health
+var health = 0
+var alive = false
+var invulnerable = false
+
+## weapons
+var weapons = []
 
 
 ## MOVEMENT ##
@@ -50,11 +55,12 @@ var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 const MAX_ADDITIONAL_JUMPS = 1
 var additional_jumps_left = 1 # to allow double jumps, reset when touching the floor
 
+func _ready():
+	hide()
 
 func setup(input_prefix, max_health, bullet_parent, camera, mouse_look):
 	self.input_prefix = input_prefix
 	self.max_health = max_health
-	health = max_health
 	self.bullet_parent = bullet_parent
 	self.camera = camera
 	self.mouse_look = mouse_look
@@ -63,14 +69,12 @@ func setup(input_prefix, max_health, bullet_parent, camera, mouse_look):
 func _process(delta):
 	if not is_setup:
 		return
-	
-	var alive = bool(health > 0)
-	
+
 	if alive and has_node('Gun'):
 		# gun rotation
 		var angle = 0
 		var angle_correction = 0
-		
+
 		if mouse_look:
 			# mouse
 			# maths copied from power defence
@@ -95,7 +99,7 @@ func _process(delta):
 			$Gun.scale.y = 1
 			angle -= angle_correction
 		$Gun.set_rotation(angle)
-		
+
 		# gun firing
 		var pressed = Input.is_action_pressed(input_prefix + 'fire')
 		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
@@ -105,13 +109,12 @@ func _process(delta):
 func _physics_process(delta):
 	if not is_setup:
 		return
-		
+
 	velocity.y += GRAVITY
-	
-	var alive = bool(health > 0)
+
 	var now = OS.get_ticks_msec()
 	var on_floor = is_on_floor()
-	
+
 	# get the direction from user input
 	if alive:
 		var direction = 0
@@ -119,14 +122,14 @@ func _physics_process(delta):
 			direction += -1
 		if Input.is_action_pressed(input_prefix + 'right'):
 			direction += 1
-	
+
 		# calculate the speed
 		#velocity.x = direction*MAX_SPEED
 		velocity.x += direction*ACCELERATION*delta
 		if sign(velocity.x) != sign(direction):
 			velocity.x *= REACTIVITY_DECAY
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-	
+
 		# able to register a jump if character just about to hit the floor
 		if Input.is_action_just_pressed(input_prefix + 'up'):
 			last_jump_ms = now
@@ -153,7 +156,7 @@ func _physics_process(delta):
 			# able to jump shortly after falling from a platform
 			if was_on_floor:
 				left_floor_ms = now
-	
+
 			# cancel jump in mid air
 			if Input.is_action_just_released(input_prefix + 'up'):
 				# if still moving up, then stop moving up
@@ -184,19 +187,35 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, UP)
 
 func equip(gun):
-	assert not has_node('Gun')
+	weapons.append(gun)
 	gun.set_name('Gun')
 	gun.setup(bullet_parent)
 	add_child(gun)
 
 func take_damage(damage):
-	health = max(health - damage, 0)
+	if invulnerable:
+		return
+	var new_health = max(health - damage, 0)
 	emit_signal('hit')
-	$HealthBar.set_health(float(health)/max_health)
-	if health <= 0:
+	_set_health(new_health)
+	if alive and health <= 0:
 		die()
 
+func _set_health(new_health):
+	health = max(new_health, 0)
+	$HealthBar.set_health(float(health)/max_health)
+
 func die():
+	alive = false
 	emit_signal('die')
 
+func spawn(position):
+	show()
+	invulnerable = true
+	$InvulnTimer.start()
+	self.position = position
+	_set_health(max_health)
+	alive = true
 
+func _on_InvulnTimer_timeout():
+	invulnerable = false

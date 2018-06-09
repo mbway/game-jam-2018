@@ -79,4 +79,13 @@ shape = SubResource( 2 )
 
 position = Vector2( 0, -38 )
 
+[node name="InvulnTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]
+
 

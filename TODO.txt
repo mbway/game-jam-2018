@@ -1,6 +1,5 @@
 
 # CRITICAL
-- gun which shoots
 - main menu
 - HUD
 - camera shake
@@ -22,3 +21,4 @@
 - tileset
 - player movement (Matt)
     - gamepad support
+- gun which shoots

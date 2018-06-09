@@ -1,6 +1,6 @@
 extends Camera2D
 
-export (Array, NodePath) var follow_paths
+export (Array, NodePath) var follow_paths = []
 var follow
 
 func _ready():
@@ -31,5 +31,13 @@ func _physics_process(delta):
 		zoom.x = z
 		zoom.y = z
 		set_global_position(avg)
-	else:
+	elif len(follow) == 1:
 		set_global_position(follow[0].global_position)
+
+func remove_follow(node):
+	follow.erase(node)
+	
+func add_follow(node):
+	if follow.find(node) == -1:
+		follow.append(node)
+

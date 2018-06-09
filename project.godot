@@ -51,4 +51,5 @@ test=[ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_n
 [rendering]
 
 quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.635294, 0.886275, 0.952941, 1 )
 environment/default_environment="res://default_env.tres"

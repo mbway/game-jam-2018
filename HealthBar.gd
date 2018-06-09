@@ -8,5 +8,8 @@ func _ready():
 	
 func set_health(fraction):
 	$Bar.rect_size.x = max(0, fraction * max_width)
-	$Label.text = str(int(fraction * 100)) + '%'
+	if fraction <= 0:
+		$Label.text = ''
+	else:
+		$Label.text = str(int(fraction * 100)) + '%'
 	
