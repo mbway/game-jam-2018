@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/1up_18_sound.wav-2501888e0af83dccf88142ea1b96bbd0.sample"
+
+[deps]
+
+source_file="res://Assets/weapons/1up_18_sound.wav"
+source_md5="497d94cbf10629c103b98ec25c194971"
+
+dest_files=[ "res://.import/1up_18_sound.wav-2501888e0af83dccf88142ea1b96bbd0.sample" ]
+dest_md5="a2fb12009970362388ffbc9e5c876ad7"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	var gun_scene = load('res://Weapons/MachineGun.tscn')
+	var gun_scene = load('res://Weapons/Minigun.tscn')
 	$Player.setup('p1_', $Bullets, $Camera, true)
 	$Player.equip(gun_scene.instance())
 	
