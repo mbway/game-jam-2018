@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
-[ext_resource path="res://Flag.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Flag.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=5]
@@ -10,12 +10,16 @@
 [ext_resource path="res://Map.tscn" type="PackedScene" id=8]
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=9]
 [ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=10]
-[ext_resource path="res://WeaponSlots.tscn" type="PackedScene" id=11]
-[ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Base.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=14]
 
-[node name="MultiplayerMap" type="Node" index="0"]
+
+
+
+
+[node name="MultiplayerMap" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -23,8 +27,6 @@ script = ExtResource( 1 )
 
 position = Vector2( 1900, 660 )
 _sections_unfolded = [ "Collision", "Transform" ]
-homeX = 1900
-homeY = 660
 team = 1
 colour = "blue"
 
@@ -32,8 +34,6 @@ colour = "blue"
 
 position = Vector2( 880, 280 )
 _sections_unfolded = [ "Collision", "Transform" ]
-homeX = 1900
-homeY = 660
 team = 2
 colour = "red"
 

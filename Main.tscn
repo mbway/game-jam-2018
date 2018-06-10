@@ -1,94 +1,260 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://SinglePlayerCamera.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Background1.png" type="Texture" id=3]
-[ext_resource path="res://Map.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Placeholders/Player.png" type="Texture" id=7]
-[ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/clouds.png" type="Texture" id=2]
+[ext_resource path="res://UI/MainMenuBackground.gd" type="Script" id=3]
+[ext_resource path="res://Assets/fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Map1.png" type="Texture" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
 
-custom_solver_bias = 0.0
-extents = Vector2( 2.07268, 46.9681 )
+[sub_resource type="DynamicFont" id=4]
 
-[node name="Main" type="Node"]
+size = 128
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 50
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Material" ]
 
-[node name="Camera" type="Camera2D" parent="." index="0"]
-
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-script = ExtResource( 2 )
-follow_path = NodePath("../Player")
-
-[node name="Sprite" type="Sprite" parent="Camera" index="0"]
-
-texture = ExtResource( 3 )
-
-[node name="Bullets" type="Node" parent="." index="1"]
-
-[node name="Node" parent="." index="2" instance=ExtResource( 4 )]
-
-[node name="Player" parent="." index="3" instance=ExtResource( 5 )]
-
-position = Vector2( 359.803, 361.879 )
-
-[node name="HUD" parent="." index="4" instance=ExtResource( 6 )]
-
-[node name="Node2D" type="Node2D" parent="." index="5"]
+[node name="MainMenu" type="Control" parent="." index="0"]
 
 editor/display_folded = true
-position = Vector2( 251.11, 727.162 )
-__meta__ = {
-"_edit_group_": true
-}
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="Sprite" type="Sprite" parent="Node2D" index="0"]
+[node name="Background" type="Sprite" parent="MainMenu" index="0"]
 
-texture = ExtResource( 7 )
-_sections_unfolded = [ "Offset", "Transform" ]
+modulate = Color( 1, 1, 1, 0.756902 )
+position = Vector2( 800, 450 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1600, 900 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Region", "Transform", "Visibility" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D" index="1"]
+[node name="ModeMenu" type="Control" parent="MainMenu" index="1"]
 
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="0"]
+[node name="Title" type="Label" parent="MainMenu/ModeMenu" index="0"]
 
-shape = SubResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 1600.0
+margin_bottom = 206.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.175781, 0.175781, 0.175781, 1 )
+text = "Power Offence"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Material", "custom_colors", "custom_fonts" ]
 
-[node name="WeaponSpawn" parent="." index="6" instance=ExtResource( 8 )]
+[node name="Sprite" type="Sprite" parent="MainMenu/ModeMenu" index="1"]
 
-position = Vector2( 920, 730 )
+position = Vector2( 440, 580 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TDMButton" type="Button" parent="MainMenu/ModeMenu" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1010.0
+margin_top = 380.0
+margin_right = 1510.0
+margin_bottom = 450.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Team Deathmatch"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="CTFButton" type="Button" parent="MainMenu/ModeMenu" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1010.0
+margin_top = 480.0
+margin_right = 1510.0
+margin_bottom = 550.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Capture The Flag"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="OverruleButton" type="Button" parent="MainMenu/ModeMenu" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1010.0
+margin_top = 580.0
+margin_right = 1510.0
+margin_bottom = 650.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Overrule"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="MapMenu" type="Control" parent="MainMenu" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Title" type="Label" parent="MainMenu/MapMenu" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 1600.0
+margin_bottom = 206.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.175781, 0.175781, 0.175781, 1 )
+text = "Test Map"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Material", "custom_colors", "custom_fonts" ]
+
+[node name="Sprite" type="Sprite" parent="MainMenu/MapMenu" index="1"]
+
+position = Vector2( 820, 520 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Select" type="Button" parent="MainMenu/MapMenu" index="2"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -250.0
+margin_top = -90.0
+margin_right = 250.0
+margin_bottom = -20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Select"
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+
+[connection signal="pressed" from="MainMenu/ModeMenu/TDMButton" to="." method="_on_TDMButton_pressed"]
+
+[connection signal="pressed" from="MainMenu/ModeMenu/CTFButton" to="." method="_on_CTFButton_pressed"]
+
+[connection signal="pressed" from="MainMenu/ModeMenu/OverruleButton" to="." method="_on_OverruleButton_pressed"]
+
+[connection signal="pressed" from="MainMenu/MapMenu/Select" to="." method="_on_Select_pressed"]
 
 

@@ -1,12 +1,8 @@
 
 # CRITICAL
 - main menu
-- HUD
-- camera shake
-- pickup
-- inventory
-    - inventory GUI
-
+- ammo
+- theme
 
 # Extensions
 - animations
@@ -25,3 +21,8 @@
 - player movement (Matt)
     - gamepad support
 - gun which shoots
+- camera shake
+- inventory
+    - inventory GUI
+- pickup
+- HUD

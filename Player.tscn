@@ -28,7 +28,8 @@
 [ext_resource path="res://Assets/Placeholders/Player_death/Player_death6.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Placeholders/Player_death/Player_death7.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Placeholders/Player_death/Player_death8.png" type="Texture" id=28]
-[ext_resource path="res://HealthBar.tscn" type="PackedScene" id=29]
+[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=29]
+
 
 [sub_resource type="SpriteFrames" id=1]
 

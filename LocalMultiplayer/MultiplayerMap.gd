@@ -17,22 +17,25 @@ func _ready():
 	input.assign_keyboard_mouse_input('p1_')
 	input.assign_gamepad_input('p2_')
 
-	p1 = create_player('p1_', 100, true)
+	p1 = create_player('p1_', 100, true, 1)
 	p1.connect('weapon_equiped', $HUD/P1WeaponSlots, '_on_Player_weapon_equiped')
 	p1.connect('weapon_selected', $HUD/P1WeaponSlots, '_on_Player_weapon_selected')
-	p2 = create_player('p2_', 100, false)
+	p2 = create_player('p2_', 100, false, 2)
 	p2.connect('weapon_equiped', $HUD/P2WeaponSlots, '_on_Player_weapon_equiped')
 	p2.connect('weapon_selected', $HUD/P2WeaponSlots, '_on_Player_weapon_selected')
 	
 
 	spawn_player(p1)
 	spawn_player(p2)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	update_HUD()
 
+func update_HUD():
+	$HUD.set_score_labels('P1: %d' % p1_lives, 'P2: %d' % p2_lives)
+	
 
 func _on_p1_die():
 	p1_lives = max(0, p1_lives - 1)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	update_HUD()
 	if p1_lives == 0:
 		$HUD.game_over('P2')
 	else:
@@ -41,15 +44,15 @@ func _on_p1_die():
 
 func _on_p2_die():
 	p2_lives = max(0, p2_lives - 1)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	update_HUD()
 	if p2_lives == 0:
 		$HUD.game_over('P1')
 	else:
 		$P2SpawnTimer.start()
 
-func create_player(prefix, max_health, mouse_look):
+func create_player(prefix, max_health, mouse_look, team):
 	var p = player_scene.instance()
-	p.setup(prefix, max_health, $Bullets, $Camera, mouse_look)
+	p.setup(prefix, max_health, $Bullets, $Camera, mouse_look, team)
 	p.connect('die', self, '_on_%sdie' % prefix)
 	$Players.add_child(p)
 	return p
