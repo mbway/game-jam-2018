@@ -882,7 +882,23 @@ region_enabled = true
 region_rect = Rect2( 512, 512, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Space2" type="Sprite" parent="." index="53"]
+[node name="SpaceGrassWallLeft" type="Sprite" parent="." index="53"]
+
+position = Vector2( 832, 568 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 768, 512, 64, 64 )
+_sections_unfolded = [ "Region" ]
+
+[node name="SpaceGrassWallRight" type="Sprite" parent="." index="54"]
+
+position = Vector2( 896, 568 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 832, 512, 64, 64 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Space2" type="Sprite" parent="." index="55"]
 
 editor/display_folded = true
 position = Vector2( 448, 376 )
@@ -908,7 +924,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_1_1" type="Sprite" parent="." index="54"]
+[node name="SpacePattern_1_1" type="Sprite" parent="." index="56"]
 
 editor/display_folded = true
 position = Vector2( 640, 312 )
@@ -934,7 +950,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_1_2" type="Sprite" parent="." index="55"]
+[node name="SpacePattern_1_2" type="Sprite" parent="." index="57"]
 
 editor/display_folded = true
 position = Vector2( 704, 312 )
@@ -960,7 +976,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_1_3" type="Sprite" parent="." index="56"]
+[node name="SpacePattern_1_3" type="Sprite" parent="." index="58"]
 
 editor/display_folded = true
 position = Vector2( 640, 376 )
@@ -986,7 +1002,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_1_4" type="Sprite" parent="." index="57"]
+[node name="SpacePattern_1_4" type="Sprite" parent="." index="59"]
 
 editor/display_folded = true
 position = Vector2( 704, 376 )
@@ -1012,7 +1028,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_2_1" type="Sprite" parent="." index="58"]
+[node name="SpacePattern_2_1" type="Sprite" parent="." index="60"]
 
 editor/display_folded = true
 position = Vector2( 640, 440 )
@@ -1038,7 +1054,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_2_2" type="Sprite" parent="." index="59"]
+[node name="SpacePattern_2_2" type="Sprite" parent="." index="61"]
 
 editor/display_folded = true
 position = Vector2( 704, 440 )
@@ -1064,7 +1080,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_2_3" type="Sprite" parent="." index="60"]
+[node name="SpacePattern_2_3" type="Sprite" parent="." index="62"]
 
 editor/display_folded = true
 position = Vector2( 640, 504 )
@@ -1090,7 +1106,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_2_4" type="Sprite" parent="." index="61"]
+[node name="SpacePattern_2_4" type="Sprite" parent="." index="63"]
 
 editor/display_folded = true
 position = Vector2( 704, 504 )
@@ -1116,7 +1132,215 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_3_1" type="Sprite" parent="." index="62"]
+[node name="SpaceGrass1" type="Sprite" parent="." index="64"]
+
+editor/display_folded = true
+position = Vector2( 768, 504 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 704, 448, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrass1" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrass1/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrassCornerLeft" type="Sprite" parent="." index="65"]
+
+editor/display_folded = true
+position = Vector2( 768, 568 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 704, 512, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrassCornerLeft" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrassCornerLeft/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrassLeft" type="Sprite" parent="." index="66"]
+
+editor/display_folded = true
+position = Vector2( 768, 632 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 704, 576, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrassLeft" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrassLeft/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrassRight" type="Sprite" parent="." index="67"]
+
+editor/display_folded = true
+position = Vector2( 960, 632 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 896, 576, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrassRight" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrassRight/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrassCornerRight" type="Sprite" parent="." index="68"]
+
+editor/display_folded = true
+position = Vector2( 960, 568 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 896, 512, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrassCornerRight" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrassCornerRight/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrass2" type="Sprite" parent="." index="69"]
+
+editor/display_folded = true
+position = Vector2( 832, 504 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 768, 448, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrass2" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrass2/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrass3" type="Sprite" parent="." index="70"]
+
+editor/display_folded = true
+position = Vector2( 896, 504 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 832, 448, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrass3" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrass3/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpaceGrass4" type="Sprite" parent="." index="71"]
+
+editor/display_folded = true
+position = Vector2( 960, 504 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 896, 448, 64, 64 )
+_sections_unfolded = [ "Region" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpaceGrass4" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceGrass4/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="SpacePattern_3_1" type="Sprite" parent="." index="72"]
 
 editor/display_folded = true
 position = Vector2( 768, 312 )
@@ -1142,7 +1366,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_3_2" type="Sprite" parent="." index="63"]
+[node name="SpacePattern_3_2" type="Sprite" parent="." index="73"]
 
 editor/display_folded = true
 position = Vector2( 832, 312 )
@@ -1168,7 +1392,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_3_3" type="Sprite" parent="." index="64"]
+[node name="SpacePattern_3_3" type="Sprite" parent="." index="74"]
 
 editor/display_folded = true
 position = Vector2( 768, 376 )
@@ -1194,7 +1418,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_3_4" type="Sprite" parent="." index="65"]
+[node name="SpacePattern_3_4" type="Sprite" parent="." index="75"]
 
 editor/display_folded = true
 position = Vector2( 832, 376 )
@@ -1220,7 +1444,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_4_1" type="Sprite" parent="." index="66"]
+[node name="SpacePattern_4_1" type="Sprite" parent="." index="76"]
 
 editor/display_folded = true
 position = Vector2( 896, 312 )
@@ -1246,7 +1470,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_4_2" type="Sprite" parent="." index="67"]
+[node name="SpacePattern_4_2" type="Sprite" parent="." index="77"]
 
 editor/display_folded = true
 position = Vector2( 960, 312 )
@@ -1272,7 +1496,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_4_3" type="Sprite" parent="." index="68"]
+[node name="SpacePattern_4_3" type="Sprite" parent="." index="78"]
 
 editor/display_folded = true
 position = Vector2( 896, 376 )
@@ -1298,7 +1522,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpacePattern_4_4" type="Sprite" parent="." index="69"]
+[node name="SpacePattern_4_4" type="Sprite" parent="." index="79"]
 
 editor/display_folded = true
 position = Vector2( 960, 376 )
@@ -1324,7 +1548,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space3" type="Sprite" parent="." index="70"]
+[node name="Space3" type="Sprite" parent="." index="80"]
 
 editor/display_folded = true
 position = Vector2( 512, 376 )
@@ -1350,7 +1574,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space4" type="Sprite" parent="." index="71"]
+[node name="Space4" type="Sprite" parent="." index="81"]
 
 editor/display_folded = true
 position = Vector2( 448, 440 )
@@ -1376,7 +1600,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space5" type="Sprite" parent="." index="72"]
+[node name="Space5" type="Sprite" parent="." index="82"]
 
 editor/display_folded = true
 position = Vector2( 512, 440 )
@@ -1402,7 +1626,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space6" type="Sprite" parent="." index="73"]
+[node name="Space6" type="Sprite" parent="." index="83"]
 
 editor/display_folded = true
 position = Vector2( 768, 440 )
@@ -1428,7 +1652,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space7" type="Sprite" parent="." index="74"]
+[node name="Space7" type="Sprite" parent="." index="84"]
 
 editor/display_folded = true
 position = Vector2( 832, 440 )
@@ -1454,7 +1678,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space8" type="Sprite" parent="." index="75"]
+[node name="Space8" type="Sprite" parent="." index="85"]
 
 editor/display_folded = true
 position = Vector2( 896, 440 )
@@ -1480,7 +1704,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="Space9" type="Sprite" parent="." index="76"]
+[node name="Space9" type="Sprite" parent="." index="86"]
 
 editor/display_folded = true
 position = Vector2( 960, 440 )
@@ -1506,7 +1730,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceEdgeLeftBlock" type="Sprite" parent="." index="77"]
+[node name="SpaceEdgeLeftBlock" type="Sprite" parent="." index="87"]
 
 editor/display_folded = true
 position = Vector2( 384, 376 )
@@ -1532,7 +1756,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceEdgeRightBlock" type="Sprite" parent="." index="78"]
+[node name="SpaceEdgeRightBlock" type="Sprite" parent="." index="88"]
 
 editor/display_folded = true
 position = Vector2( 576, 376 )
@@ -1558,7 +1782,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceEdgeLeftBlockCorner" type="Sprite" parent="." index="79"]
+[node name="SpaceEdgeLeftBlockCorner" type="Sprite" parent="." index="89"]
 
 editor/display_folded = true
 position = Vector2( 384, 312 )
@@ -1584,7 +1808,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceEdgeRightBlockCorner2" type="Sprite" parent="." index="80"]
+[node name="SpaceEdgeRightBlockCorner2" type="Sprite" parent="." index="90"]
 
 editor/display_folded = true
 position = Vector2( 576, 312 )
@@ -1610,7 +1834,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceWallRight1" type="Sprite" parent="." index="81"]
+[node name="SpaceWallRight1" type="Sprite" parent="." index="91"]
 
 position = Vector2( 320, 376 )
 texture = ExtResource( 1 )
@@ -1618,7 +1842,7 @@ region_enabled = true
 region_rect = Rect2( 256, 320, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceWallRight2" type="Sprite" parent="." index="82"]
+[node name="SpaceWallRight2" type="Sprite" parent="." index="92"]
 
 position = Vector2( 320, 440 )
 texture = ExtResource( 1 )
@@ -1626,7 +1850,7 @@ region_enabled = true
 region_rect = Rect2( 256, 384, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeRight" type="Sprite" parent="." index="83"]
+[node name="SpaceEdgeRight" type="Sprite" parent="." index="93"]
 
 position = Vector2( 320, 312 )
 texture = ExtResource( 1 )
@@ -1634,7 +1858,7 @@ region_enabled = true
 region_rect = Rect2( 256, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeTop1" type="Sprite" parent="." index="84"]
+[node name="SpaceEdgeTop1" type="Sprite" parent="." index="94"]
 
 position = Vector2( 128, 312 )
 texture = ExtResource( 1 )
@@ -1642,7 +1866,7 @@ region_enabled = true
 region_rect = Rect2( 64, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeTop2" type="Sprite" parent="." index="85"]
+[node name="SpaceEdgeTop2" type="Sprite" parent="." index="95"]
 
 position = Vector2( 192, 312 )
 texture = ExtResource( 1 )
@@ -1650,7 +1874,7 @@ region_enabled = true
 region_rect = Rect2( 128, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeTopWallLeft" type="Sprite" parent="." index="86"]
+[node name="SpaceEdgeTopWallLeft" type="Sprite" parent="." index="96"]
 
 position = Vector2( 448, 312 )
 texture = ExtResource( 1 )
@@ -1658,7 +1882,7 @@ region_enabled = true
 region_rect = Rect2( 384, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeTopWallRight" type="Sprite" parent="." index="87"]
+[node name="SpaceEdgeTopWallRight" type="Sprite" parent="." index="97"]
 
 position = Vector2( 512, 312 )
 texture = ExtResource( 1 )
@@ -1666,7 +1890,7 @@ region_enabled = true
 region_rect = Rect2( 448, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceEdgeTop4" type="Sprite" parent="." index="88"]
+[node name="SpaceEdgeTop4" type="Sprite" parent="." index="98"]
 
 position = Vector2( 256, 312 )
 texture = ExtResource( 1 )
@@ -1674,7 +1898,7 @@ region_enabled = true
 region_rect = Rect2( 192, 256, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="SpaceFloor1" type="Sprite" parent="." index="89"]
+[node name="SpaceFloor1" type="Sprite" parent="." index="99"]
 
 editor/display_folded = true
 position = Vector2( 128, 376 )
@@ -1700,7 +1924,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceFloor2" type="Sprite" parent="." index="90"]
+[node name="SpaceFloor2" type="Sprite" parent="." index="100"]
 
 editor/display_folded = true
 position = Vector2( 192, 376 )
@@ -1726,7 +1950,7 @@ bounce = 0.0
 
 shape = SubResource( 1 )
 
-[node name="SpaceFloor3" type="Sprite" parent="." index="91"]
+[node name="SpaceFloor3" type="Sprite" parent="." index="101"]
 
 editor/display_folded = true
 position = Vector2( 256, 376 )

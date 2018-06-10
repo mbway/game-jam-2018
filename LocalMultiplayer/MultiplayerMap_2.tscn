@@ -19,7 +19,7 @@
 [ext_resource path="res://SpaceMap.tscn" type="PackedScene" id=17]
 [ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=18]
 
-[node name="MultiplayerMap" type="Node" index="0"]
+[node name="MultiplayerMap" type="Node"]
 
 script = ExtResource( 1 )
 

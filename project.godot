@@ -12,6 +12,7 @@ config_version=3
 
 config/name="game-jam-2018"
 run/main_scene="res://Main.tscn"
+boot_splash/image="res://Assets/splash.gif"
 config/icon="res://icon.png"
 
 [display]
