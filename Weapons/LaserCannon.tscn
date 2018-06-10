@@ -8,6 +8,7 @@
 [node name="LaserCannon" type="Node2D"]
 
 script = ExtResource( 1 )
+texture = null
 shoot_vel = 3000
 damage = 100
 bullet_scene_path = "res://Weapons/Laser.tscn"

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://LocalMultiplayer/HUD.gd" type="Script" id=1]
 [ext_resource path="res://outline_material.tres" type="Material" id=2]
 [ext_resource path="res://Assets/fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://WeaponSlots.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -159,7 +158,5 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Material", "custom_fonts" ]
-
-[node name="WeaponSlots" parent="." index="3" instance=ExtResource( 4 )]
 
 

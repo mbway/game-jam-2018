@@ -1,7 +1,7 @@
 extends Camera2D
 
 const SHAKE_DECAY = 10 # shake decay per second
-const MAX_SHAKE = 100
+const MAX_SHAKE = 200
 
 export (Array, NodePath) var follow_paths = []
 var follow

@@ -10,11 +10,11 @@ var current_pickup = null
 
 
 func _ready():
-	set_pickup(0)
+	random_pickup()
 	
 func _process(delta):
-	pass
-	#$PickupSprite.position.y = 
+	$PickupSprite.position.y = -35 + sin(OS.get_ticks_msec()/800.0) * 8
+	$PickupSprite.visible = pickup_available
 
 func set_pickup(i):
 	current_pickup = available_pickups.get_child(i)
@@ -25,12 +25,16 @@ func set_pickup(i):
 	
 	pickup_available = true
 
+func random_pickup():
+	var i = randi() % available_pickups.get_child_count()
+	set_pickup(i)
+
 func _on_Cooldown_timeout():
-	set_pickup(0)
+	random_pickup()
 
 
 func _on_PickupSpawn_body_entered(body):
 	if pickup_available and body.get_filename() == player_scene_path:
-		print('giving', current_pickup.name)
-		body.equip(current_pickup.scene.instance())
+		body.equip_weapon(current_pickup.scene.instance())
+		pickup_available = false
 		$Cooldown.start()

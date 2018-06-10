@@ -7,11 +7,15 @@
 [node name="MachineGun" type="Node2D"]
 
 script = ExtResource( 1 )
+texture = ExtResource( 2 )
 shoot_vel = 2000
+damage = 20
 bullet_scene_path = "res://Weapons/Bullet.tscn"
 cooldown = 0.1
 auto_fire = true
 charge = 0
+spread = 0
+screen_shake = 7
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

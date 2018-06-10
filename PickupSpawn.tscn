@@ -19,6 +19,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 available_pickups_path = null
 
 [node name="Base" type="Sprite" parent="." index="0"]
@@ -33,7 +34,7 @@ shape = SubResource( 1 )
 
 [node name="PickupSprite" type="Sprite" parent="." index="2"]
 
-position = Vector2( 0, -25 )
+position = Vector2( 0, -30 )
 rotation = -0.349066
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Offset", "Transform" ]

@@ -1,5 +1,6 @@
 extends Node2D
 
+export (Texture) var texture
 export (int) var shoot_vel = 5000
 export (int) var damage = 20
 export (String) var bullet_scene_path = 'res://Weapons/Bullet.tscn'
@@ -25,6 +26,7 @@ func setup(bullet_parent):
 	self.bullet_parent = bullet_parent
 	bullet_scene = load(bullet_scene_path)
 	charge_timer = charge
+	set_active(false)
 
 func _process(delta):
 	cooldown_timer -= delta
@@ -38,7 +40,7 @@ func try_shoot(fire_pressed, fire_just_pressed, delta):
 			_shoot()
 			return true
 	elif charge_timer >= 0 and fire_pressed:
-		if charge_timer == charge:
+		if charge_timer == charge and has_node('ChargeSound'):
 			$ChargeSound.play()
 		charge_timer -= delta
 	else:
