@@ -117,11 +117,20 @@ func _process(delta):
 			camera.shake(current_weapon.screen_shake)
 	
 		# weapon selecting
-		var next = Input.is_action_just_pressed(input_prefix + 'down')
-		if next:
+		if Input.is_action_just_pressed(input_prefix + 'next'):
 			select_next_weapon(1)
+		if Input.is_action_just_pressed(input_prefix + 'prev'):
+			select_next_weapon(-1)
 	inventory_lock.unlock()
-
+	
+func _input(event):
+	# mouse wheel events have to be handled specially :(
+	# this is apparently because they are more short-lived
+	if mouse_look and event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_WHEEL_UP:
+			select_next_weapon(-1)
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			select_next_weapon(1)
 
 func _physics_process(delta):
 	if not is_setup:
@@ -241,7 +250,13 @@ func select_next_weapon(offset):
 	inventory_lock.lock()
 	if current_weapon != null:
 		current_weapon.set_active(false)
-	var i = (current_weapon.get_index() + offset) % $Inventory.get_child_count()
+	
+	var n = $Inventory.get_child_count()
+	var i = current_weapon.get_index() + offset
+	if i < 0:
+		i += n
+	i = i % n
+	
 	current_weapon = $Inventory.get_child(i)
 	current_weapon.set_active(true)
 	inventory_lock.unlock()

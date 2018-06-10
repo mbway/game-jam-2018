@@ -16,6 +16,8 @@ func _ready():
 	input.clear_input_maps()
 	input.assign_keyboard_mouse_input('p1_')
 	input.assign_gamepad_input('p2_')
+	input.list_maps('p2_fire')
+	input.list_maps('p2_abc')
 
 	p1 = create_player('p1_', 100, true, 1)
 	p1.connect('weapon_equiped', $HUD/P1WeaponSlots, '_on_Player_weapon_equiped')

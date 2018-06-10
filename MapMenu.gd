@@ -29,7 +29,6 @@ func change_selection(offset):
 	current_map = (current_map+offset) % len(maps)
 	var attempts = 0
 	while maps[current_map]['type'] != map_type:
-		print(maps[current_map]['type'])
 		current_map = (current_map+offset) % len(maps)
 		attempts += 1
 		if attempts > len(maps):

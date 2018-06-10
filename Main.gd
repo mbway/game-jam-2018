@@ -1,6 +1,6 @@
 extends Node
 
-onready var input = load('res://input.gd').new()
+#onready var input = load('res://input.gd').new()
 
 var local_multiplayer = true # not currently determined through UI
 var game_mode = null
@@ -10,14 +10,16 @@ var game_mode = null
 func _ready():
 	randomize() # generate true random numbers
 
-	input.clear_input_maps()
+	#input.list_maps('test')
+	#input.clear_input_maps()
 
 
 func start_local_multiplayer():
 	$MainMenu.hide()
 
-	input.assign_keyboard_mouse_input('p1_')
-	input.assign_gamepad_input('p2_')
+	#input.assign_keyboard_mouse_input('p1_')
+	#input.assign_gamepad_input('p2_')
+	#input.list_maps('p2_p')
 
 	var map = $MainMenu/MapMenu.create_map()
 	map.name = 'World'

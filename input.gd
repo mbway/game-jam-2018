@@ -1,13 +1,14 @@
 
 func clear_input_maps():
 	for prefix in ['p1_', 'p2_']:
-		for action in ['up', 'down', 'left', 'right', 'fire']:
+		for action in ['up', 'down', 'left', 'right', 'fire', 'next', 'prev']:
 			var ac = prefix + action
 			if InputMap.has_action(ac):
 				InputMap.erase_action(ac)
 			InputMap.add_action(ac)
 
 func list_maps(action):
+	print('maps for %s:' % action)
 	var maps = InputMap.get_action_list(action)
 	for m in maps:
 		print(m.as_text(), m)
@@ -15,7 +16,7 @@ func list_maps(action):
 func assign_keyboard_mouse_input(prefix):
 	var wasd_maps = [['up','w'], ['up','space'], ['down','s'], ['left','a'], ['right','d']]
 	assign_input_maps(prefix, wasd_maps, 'key')
-	var mouse_maps = [['fire',1]]
+	var mouse_maps = [['fire',1], ['prev',BUTTON_WHEEL_UP], ['next',BUTTON_WHEEL_DOWN]]
 	assign_input_maps(prefix, mouse_maps, 'mouse')
 
 func assign_gamepad_input(prefix):
@@ -23,9 +24,9 @@ func assign_gamepad_input(prefix):
 	assign_input_maps(prefix, joystick_maps, 'gamepad_move')
 	# use the godot input map editor to obtain these indices
 	var button_maps = [['up',0], ['down',13], ['left',14], ['right',15],
-		['fire',5], ['up',4]]
+		['fire',5], ['up',4], ['prev',2], ['next',3]]
 	assign_input_maps(prefix, button_maps, 'gamepad')
-
+	
 func assign_input_maps(prefix, maps, type):
 	for map in maps:
 		var event = null
@@ -44,4 +45,7 @@ func assign_input_maps(prefix, maps, type):
 			event.button_index = map[1]
 		else:
 			assert false
-		InputMap.action_add_event(prefix + map[0], event)
+		var ac = prefix + map[0]
+		#print('adding map ' + ac + ', ' + event.as_text())
+		assert InputMap.has_action(ac)
+		InputMap.action_add_event(ac, event)
