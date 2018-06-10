@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://LocalMultiplayer/CaptureTheFlag.gd" type="Script" id=1]
-[ext_resource path="res://Flag.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Flag.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=5]
@@ -13,11 +13,11 @@
 [ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=11]
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=12]
 [ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=13]
-[ext_resource path="res://WeaponSlots.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/fite_me_irl.ogg" type="AudioStream" id=15]
-[ext_resource path="res://Base.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/fite_me_irl_b.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=16]
 [ext_resource path="res://SpaceMap.tscn" type="PackedScene" id=17]
-[ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
 
 [node name="MultiplayerMap" type="Node"]
 

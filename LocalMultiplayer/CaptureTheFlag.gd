@@ -29,12 +29,12 @@ func _ready():
 
 	spawn_player(p1)
 	spawn_player(p2)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 
 
 func _on_p1_die():
 	#p1_lives = max(0, p1_lives - 1)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 	if p1_lives == 0:
 		$HUD.game_over('P2')
 	$P1SpawnTimer.start()
@@ -42,7 +42,7 @@ func _on_p1_die():
 
 func _on_p2_die():
 	#p2_lives = max(0, p2_lives - 1)
-	$HUD.set_score_labels(p1_lives, p2_lives)
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 	if p2_lives == 0:
 		$HUD.game_over('P1')
 	$P2SpawnTimer.start()
@@ -79,22 +79,22 @@ func _on_P2SpawnTimer_timeout():
 func _on_Base_flag_returned_1():
 	print('hello')
 	team1_score += 1
-	$HUD.set_score_labels(team1_score, team2_score)
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 
 
 func _on_Base2_flag_returned_2():
 	print('goodbye')
 	team2_score += 1
-	$HUD.set_score_labels(team1_score, team2_score)
+	$HUD.set_score_labels('P2 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 
 
 func _on_Base2_flag_returned_1():
 	print('hello')
 	team1_score += 1
-	$HUD.set_score_labels(team1_score, team2_score)
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 
 
 func _on_Base_flag_returned_2():
 	print('hello')
-	team1_score += 1
-	$HUD.set_score_labels(team1_score, team2_score)
+	team2_score += 1
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
