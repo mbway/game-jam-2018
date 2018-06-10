@@ -133,8 +133,8 @@ func _on_Orb_orbDestroyed():
 		earthquake_in_progress = true
 	elif i == 3: # large
 		for p in [p1, p2]:
-			p.scale.x = 4
-			p.scale.y = 4
+			p.scale.x = 3
+			p.scale.y = 3
 	elif i == 4: # upside down
 		for p in [p1, p2]:
 			p.GRAVITY = -40
