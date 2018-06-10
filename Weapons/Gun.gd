@@ -13,7 +13,8 @@ export (float) var screen_shake = 7 # amount of screen shake to add each shot
 var is_setup = false
 var bullet_scene # the type of bullet to use
 var bullet_parent # the node to parent the bullets to
-var charge_time = 0
+var charge_timer = 0
+var fired = false
 
 # runtime
 var cooldown_timer = 0
@@ -23,17 +24,26 @@ var active = true
 func setup(bullet_parent):
 	self.bullet_parent = bullet_parent
 	bullet_scene = load(bullet_scene_path)
-	charge_time = charge
+	charge_timer = charge
 
 func _process(delta):
 	cooldown_timer -= delta
 
 # reutrns whether a shot was fired
-func try_shoot(fire_pressed, fire_just_pressed):
-	if active and cooldown_timer <= 0:
-		if (auto_fire and fire_pressed) or fire_just_pressed:
+func try_shoot(fire_pressed, fire_just_pressed, delta):
+	if active and cooldown_timer <= 0 and charge_timer <= 0:
+		if (auto_fire and fire_pressed) or fire_just_pressed or (fire_pressed and charge):
+			charge_timer = charge
+			fired = true
 			_shoot()
 			return true
+	elif charge_timer >= 0 and fire_pressed:
+		if charge_timer == charge:
+			$ChargeSound.play()
+		charge_timer -= delta
+	else:
+		charge_timer = charge
+		fired = false
 	return false
 
 func _shoot():

@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/city_crumbles.ogg-847b45eff90d118665830bb167bf6f2f.oggstr"
+
+[deps]
+
+source_file="res://Assets/city_crumbles.ogg"
+source_md5="7ef908b19548f4fc0e12b93727b1a700"
+
+dest_files=[ "res://.import/city_crumbles.ogg-847b45eff90d118665830bb167bf6f2f.oggstr" ]
+dest_md5="307581739fd8926d86e89207f790c008"
+
+[params]
+
+loop=true
+loop_offset=0

@@ -155,7 +155,6 @@ _sections_unfolded = [ "Region" ]
 
 [node name="Grass1" type="Sprite" parent="." index="18"]
 
-editor/display_folded = true
 position = Vector2( 128, 128 )
 texture = ExtResource( 1 )
 region_enabled = true

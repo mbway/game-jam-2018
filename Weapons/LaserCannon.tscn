@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/Heavy Laser sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/weapons/1up_18_sound.wav" type="AudioStream" id=4]
 
 [node name="LaserCannon" type="Node2D" index="0"]
 
@@ -13,19 +14,31 @@ bullet_scene_path = "res://Weapons/Laser.tscn"
 cooldown = 0.1
 auto_fire = false
 charge = 1.0
+spread = 0
+screen_shake = 75.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 10, 10 )
+position = Vector2( 32, 0 )
 texture = ExtResource( 2 )
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 54.0431, 4.2809 )
+position = Vector2( 77, -5 )
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
 stream = ExtResource( 3 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="ChargeSound" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 4 )
 volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
