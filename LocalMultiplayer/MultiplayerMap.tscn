@@ -66,15 +66,9 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Smoothing" ]
 follow_paths = [  ]
-
-[node name="Players" type="Node" parent="." index="6"]
-
-[node name="HUD" parent="." index="7" instance=ExtResource( 8 )]
-
-_sections_unfolded = [ "Pause" ]
 
 [node name="SpawnPoints" type="Node" parent="." index="6"]
 
@@ -96,6 +90,12 @@ process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
+
+[node name="Players" type="Node" parent="." index="8"]
+
+[node name="HUD" parent="." index="9" instance=ExtResource( 8 )]
+
+_sections_unfolded = [ "Pause" ]
 
 [node name="P2SpawnTimer" type="Timer" parent="." index="10"]
 
