@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fite_me_irl_b.ogg-0d675f4b9cd51c51c49db4db69423aff.oggstr"
+
+[deps]
+
+source_file="res://Assets/fite_me_irl_b.ogg"
+source_md5="a952fc71617a52b16b4371292ffcde00"
+
+dest_files=[ "res://.import/fite_me_irl_b.ogg-0d675f4b9cd51c51c49db4db69423aff.oggstr" ]
+dest_md5="b3c2a75e2abf32e77eb30ec5a1b80c9d"
+
+[params]
+
+loop=true
+loop_offset=0
