@@ -53,7 +53,10 @@ func spawn_player(p):
 	if game_over:
 		return
 	var spawn = $SpawnPoints.get_child(randi() % $SpawnPoints.get_child_count())
-	p.spawn(spawn.position)
+	# spawn offset helps prevent players from spawning directly on top of
+	# one another and messing with the physics
+	var spawn_offset = Vector2(rand_range(-1,1), rand_range(-1,1))
+	p.spawn(spawn.position + spawn_offset)
 	$Camera.add_follow(p)
 
 func _on_P1SpawnTimer_timeout():
