@@ -120,7 +120,6 @@ func _on_Orb_orbDestroyed():
 	var i = randi()%len(choices)
 	
 	$HUD.show_message('Overruled!\n' + choices[i])
-	i = 4
 	if i == 0: # low gravity
 		for p in [p1, p2]:
 			p.GRAVITY = 5
