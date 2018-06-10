@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
 [ext_resource path="res://Flag.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=7]
 [ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=10]
 
 [node name="MultiplayerMap" type="Node" index="0"]
 
@@ -100,6 +101,14 @@ autostart = false
 
 position = Vector2( 888, 644 )
 available_pickups_path = NodePath("../Pickups")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="12"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 [connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
 

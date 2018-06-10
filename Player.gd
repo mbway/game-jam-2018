@@ -106,7 +106,7 @@ func _process(delta):
 		# gun firing
 		var pressed = Input.is_action_pressed(input_prefix + 'fire')
 		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
-		var fired = $Gun.try_shoot(pressed, just_pressed)
+		var fired = $Gun.try_shoot(pressed, just_pressed, delta)
 		if fired:
 			camera.shake($Gun.screen_shake)
 
