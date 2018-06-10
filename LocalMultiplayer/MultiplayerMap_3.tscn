@@ -15,11 +15,11 @@
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=13]
 [ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Assets/city_crumbles_b_loop.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
 
-[node name="MultiplayerMap" type="Node"]
+[node name="MultiplayerMap" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
