@@ -24,6 +24,12 @@ var maps = [
 		'name' : 'Ship',
 		'screenshot' : preload('res://Assets/Map2.png'),
 		'type' : 'Overrule'
+	},
+	{
+		'path': 'res://LocalMultiplayer/UFOMap.tscn',
+		'name' : 'UFO',
+		'screenshot' : preload('res://Assets/Map2.png'),
+		'type' : 'TDM'
 	}
 ]
 
