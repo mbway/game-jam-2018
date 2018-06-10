@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 
 resource_local_to_scene = true
 code = "shader_type canvas_item;
@@ -40,7 +40,7 @@ _sections_unfolded = [ "Resource" ]
 [resource]
 
 render_priority = 0
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 _sections_unfolded = [ "Resource", "shader_param" ]

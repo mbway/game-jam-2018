@@ -23,6 +23,8 @@ func _ready():
 	spawn_player(p1)
 	spawn_player(p2)
 	$HUD.set_score_labels(p1_lives, p2_lives)
+	
+	$HUD/WeaponSlots.add_weapon($Pickups/Minigun)
 
 
 func _on_p1_die():
