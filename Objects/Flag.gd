@@ -3,7 +3,7 @@ extends Area2D
 signal flag_returned
 
 const player_scene_path = 'res://Player.tscn'
-const base_scene_path = 'res://Base.tscn'
+const base_scene_path = 'res://Objects/Base.tscn'
 
 var homeX = 0
 var homeY = 0
@@ -24,6 +24,7 @@ func _process(delta):
 		position.x = target.position.x
 		position.y = target.position.y - 32
 	else:
+		reset()
 		target = null
 		
 
