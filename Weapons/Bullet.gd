@@ -2,6 +2,7 @@ extends RigidBody2D
 
 const MAX_DISTANCE = 10000 # despawn after this distance
 const player_scene_path = 'res://Player.tscn'
+const orb_scene_path = 'res://Objects/Orb.tscn'
 
 # set on setup
 var is_setup = false
@@ -40,6 +41,6 @@ func _physics_process(delta):
 
 
 func _on_Bullet_body_entered(body):
-	if body.get_filename() == player_scene_path:
+	if body.get_filename() == player_scene_path or body.get_filename() == orb_scene_path:
 		body.take_damage(damage)
 	queue_free()

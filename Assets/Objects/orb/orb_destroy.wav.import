@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/orb_destroy.wav-476ba3ed685d13942974f810aec909a5.sample"
+
+[deps]
+
+source_file="res://Assets/Objects/orb/orb_destroy.wav"
+source_md5="a8537528b659ab98dfd3595c0d35c497"
+
+dest_files=[ "res://.import/orb_destroy.wav-476ba3ed685d13942974f810aec909a5.sample" ]
+dest_md5="b860e2a54b3d427d8dd902a9a58bbe84"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
