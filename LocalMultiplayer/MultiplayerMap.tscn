@@ -76,7 +76,7 @@ follow_paths = [  ]
 
 [node name="Spawn1" type="Position2D" parent="SpawnPoints" index="0"]
 
-position = Vector2( 204, 328 )
+position = Vector2( 204, 332 )
 
 [node name="Spawn2" type="Position2D" parent="SpawnPoints" index="1"]
 
@@ -92,7 +92,7 @@ autostart = false
 [node name="P2SpawnTimer" type="Timer" parent="." index="10"]
 
 process_mode = 1
-wait_time = 1.05
+wait_time = 1.0
 one_shot = true
 autostart = false
 

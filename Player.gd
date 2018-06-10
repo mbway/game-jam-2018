@@ -215,6 +215,8 @@ func _set_health(new_health):
 	$HealthBar.set_health(float(health)/max_health)
 
 func die():
+	if invulnerable:
+		return
 	alive = false
 	layers = 2 # collide with map but not with bullets
 	emit_signal('die')
