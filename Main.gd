@@ -5,6 +5,8 @@ onready var input = load('res://input.gd').new()
 var local_multiplayer = true # not currently determined through UI
 var game_mode = null
 
+
+
 func _ready():
 	randomize() # generate true random numbers
 
@@ -17,7 +19,7 @@ func start_local_multiplayer():
 	input.assign_keyboard_mouse_input('p1_')
 	input.assign_gamepad_input('p2_')
 	
-	var map = load('res://LocalMultiplayer/MultiplayerMap.tscn').instance()
+	var map = $MainMenu/MapMenu.create_map()
 	map.name = 'World'
 	add_child(map)
 
