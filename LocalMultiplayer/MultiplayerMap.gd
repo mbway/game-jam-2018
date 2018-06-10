@@ -18,13 +18,16 @@ func _ready():
 	input.assign_gamepad_input('p2_')
 
 	p1 = create_player('p1_', 100, true)
+	p1.connect('weapon_equiped', $HUD/P1WeaponSlots, '_on_Player_weapon_equiped')
+	p1.connect('weapon_selected', $HUD/P1WeaponSlots, '_on_Player_weapon_selected')
 	p2 = create_player('p2_', 100, false)
+	p2.connect('weapon_equiped', $HUD/P2WeaponSlots, '_on_Player_weapon_equiped')
+	p2.connect('weapon_selected', $HUD/P2WeaponSlots, '_on_Player_weapon_selected')
+	
 
 	spawn_player(p1)
 	spawn_player(p2)
 	$HUD.set_score_labels(p1_lives, p2_lives)
-	
-	$HUD/WeaponSlots.add_weapon($Pickups/Minigun)
 
 
 func _on_p1_die():

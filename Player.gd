@@ -6,6 +6,8 @@ extends KinematicBody2D
 ## SIGNALS ##
 signal die
 signal hit
+signal weapon_equiped(Node)
+signal weapon_selected(Node)
 
 ## CONSTANTS ##
 const UP = Vector2(0, -1)
@@ -24,13 +26,14 @@ var mouse_look = true # whether to use the mouse for looking around (false => ga
 var bullet_parent = null # the node to spawn the bullets under
 var max_health = 100
 
+var current_weapon = null
+var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
+
 ## health and damage
 var health = 0
 var alive = false
 var invulnerable = false
 
-## weapons
-var weapons = []
 
 
 ## MOVEMENT ##
@@ -73,7 +76,8 @@ func _process(delta):
 	if not is_setup:
 		return
 
-	if alive and has_node('Gun'):
+	inventory_lock.lock()
+	if alive and current_weapon != null:
 		# gun rotation
 		var angle = 0
 		var angle_correction = 0
@@ -81,11 +85,11 @@ func _process(delta):
 		if mouse_look:
 			# mouse
 			# maths copied from power defence
-			var gun_pos = $Gun.get_position()
+			var gun_pos = current_weapon.get_position()
 			var mouse_pos = get_local_mouse_position()
 			angle = mouse_pos.angle_to_point(gun_pos)
 			var d = (mouse_pos - gun_pos).length()
-			var o = ($Gun/Muzzle.get_position()-gun_pos).y
+			var o = (current_weapon.get_node('Muzzle').get_position()-gun_pos).y
 			angle_correction = asin(o/d)
 		else:
 			# gamepad
@@ -93,22 +97,28 @@ func _process(delta):
 			if direction.length() > JOY_DEADZONE:
 				angle = direction.angle()
 			else:
-				angle = $Gun.rotation
+				angle = current_weapon.rotation
 
 		if abs(angle) > PI/2:
-			$Gun.scale.y = -1
+			current_weapon.scale.y = -1
 			angle += angle_correction
 		else:
-			$Gun.scale.y = 1
+			current_weapon.scale.y = 1
 			angle -= angle_correction
-		$Gun.set_rotation(angle)
+		current_weapon.set_rotation(angle)
 
 		# gun firing
 		var pressed = Input.is_action_pressed(input_prefix + 'fire')
 		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
-		var fired = $Gun.try_shoot(pressed, just_pressed, delta)
+		var fired = current_weapon.try_shoot(pressed, just_pressed, delta)
 		if fired:
-			camera.shake($Gun.screen_shake)
+			camera.shake(current_weapon.screen_shake)
+	
+		# weapon selecting
+		var next = Input.is_action_just_pressed(input_prefix + 'down')
+		if next:
+			select_next_weapon(1)
+	inventory_lock.unlock()
 
 
 func _physics_process(delta):
@@ -195,11 +205,45 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, UP)
 
-func equip(gun):
-	weapons.append(gun)
-	gun.set_name('Gun')
-	gun.setup(bullet_parent)
-	add_child(gun)
+func _clear_inventory():
+	inventory_lock.lock()
+	current_weapon = null
+	for w in $Inventory.get_children():
+		w.free() # queue_free here causes crashes
+	inventory_lock.unlock()
+	
+func equip_weapon(gun):
+	inventory_lock.lock()
+	if $Inventory.has_node(gun.name):
+		print('player already has weapon: %s' % gun.name)
+	else:
+		gun.setup(bullet_parent)
+		$Inventory.add_child(gun)
+		emit_signal('weapon_equiped', gun)
+	inventory_lock.unlock()
+	
+func select_weapon(name):
+	inventory_lock.lock()
+	if current_weapon != null:
+		current_weapon.set_active(false)
+	elif $Inventory.has_node(name):
+		current_weapon = $Inventory.get_node(name)
+		current_weapon.set_active(true)
+	else:
+		print('player does not have weapon: %s' % name)
+	inventory_lock.unlock()
+	emit_signal('weapon_selected', name)
+		
+# offset = 1 for next, -1 for prev
+func select_next_weapon(offset):
+	inventory_lock.lock()
+	if current_weapon != null:
+		current_weapon.set_active(false)
+	var i = (current_weapon.get_index() + offset) % $Inventory.get_child_count()
+	current_weapon = $Inventory.get_child(i)
+	current_weapon.set_active(true)
+	inventory_lock.unlock()
+	emit_signal('weapon_selected', current_weapon.name)
 
 func take_damage(damage):
 	if invulnerable:
@@ -224,8 +268,14 @@ func die():
 func spawn(position):
 	show()
 	invulnerable = true
-	layers = 1 # collide with map and bullets
 	$InvulnTimer.start()
+	
+	_clear_inventory()
+	equip_weapon(pistol_scene.instance())
+	equip_weapon(load('res://Weapons/Minigun.tscn').instance())
+	select_weapon('Minigun')
+	
+	layers = 1 # collide with map and bullets
 	self.position = position
 	_set_health(max_health)
 	alive = true

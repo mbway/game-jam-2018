@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/laserCannon.png"
 source_md5="cd535ed675ed88251778aa8bf11c1156"
 
 dest_files=[ "res://.import/laserCannon.png-cda12e6a0cd5baf57c4ab9d03f75fdb9.stex" ]
-dest_md5="5858af219036802572407efd45a65c5a"
+dest_md5="4863f597c08d7765a715deceaf14b665"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
