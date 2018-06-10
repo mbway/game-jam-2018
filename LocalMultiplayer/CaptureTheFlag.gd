@@ -36,8 +36,9 @@ func _ready():
 
 func _process(delta):
 	var s = 1.0 + sin(OS.get_ticks_msec()/700.0) * 0.2
-	$Orb.scale.x = s
-	$Orb.scale.y = s
+	if has_node('Orb'):
+		$Orb.scale.x = s
+		$Orb.scale.y = s
 	
 	if earthquake_in_progress:
 		$Camera.shake(20)
