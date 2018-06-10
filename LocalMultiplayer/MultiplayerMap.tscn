@@ -15,10 +15,6 @@
 [ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=14]
 
-
-
-
-
 [node name="MultiplayerMap" type="Node"]
 
 script = ExtResource( 1 )

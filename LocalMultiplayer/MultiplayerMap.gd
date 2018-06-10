@@ -37,7 +37,7 @@ func _on_p1_die():
 	p1_lives = max(0, p1_lives - 1)
 	update_HUD()
 	if p1_lives == 0:
-		$HUD.game_over('P2')
+		$HUD.show_game_over('P2')
 	else:
 		$P1SpawnTimer.start()
 
@@ -46,7 +46,7 @@ func _on_p2_die():
 	p2_lives = max(0, p2_lives - 1)
 	update_HUD()
 	if p2_lives == 0:
-		$HUD.game_over('P1')
+		$HUD.show_game_over('P1')
 	else:
 		$P2SpawnTimer.start()
 

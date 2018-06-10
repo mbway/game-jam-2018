@@ -15,10 +15,10 @@ func _ready():
 
 func start_local_multiplayer():
 	$MainMenu.hide()
-	
+
 	input.assign_keyboard_mouse_input('p1_')
 	input.assign_gamepad_input('p2_')
-	
+
 	var map = $MainMenu/MapMenu.create_map()
 	map.name = 'World'
 	add_child(map)
@@ -37,8 +37,12 @@ func _on_OverruleButton_pressed():
 	show_select_map()
 
 func show_select_map():
+	$MainMenu/MapMenu.map_type = game_mode
+	$MainMenu/MapMenu.change_selection(1)
+	
 	$MainMenu/ModeMenu.hide()
 	$MainMenu/MapMenu.show()
+	
 
 
 func _on_Select_pressed():

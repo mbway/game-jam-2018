@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/tile_set.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=2]
 
-
 [node name="Map" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
