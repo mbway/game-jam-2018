@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 const MAX_DISTANCE = 1000
 const player_scene_path = 'res://Player.tscn'
@@ -39,7 +39,8 @@ func _physics_process(delta):
 		
 
 
-func _on_Bullet_body_entered(body):
+func _on_Laser_body_entered(body):
+	print('zap')
 	if body.get_filename() == player_scene_path:
 		body.take_damage(damage)
-	queue_free()
+
