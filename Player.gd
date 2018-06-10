@@ -10,7 +10,7 @@ signal weapon_equiped(Node)
 signal weapon_selected(Node)
 
 ## CONSTANTS ##
-const UP = Vector2(0, -1)
+var UP = Vector2(0, -1)
 const BEFORE_START = -999 # timestamp long before the start of the game (ms)
 const JOY_X = 2
 const JOY_Y = 3
@@ -38,11 +38,11 @@ var invulnerable = false
 
 
 ## MOVEMENT ##
-const GRAVITY = 40
-const ACCELERATION = 3000
-const MAX_SPEED = 600
-const JUMP_SPEED = 1000
-const FRICTION_DECAY = 0.6
+var GRAVITY = 40
+var ACCELERATION = 3000
+var MAX_SPEED = 600
+var JUMP_SPEED = 1000
+var FRICTION_DECAY = 0.6
 # when the user moves in the opposite direction to the current speed, decay the
 # speed quickly. This avoid the character feeling 'floaty' (set to 1.0 to
 # disable)

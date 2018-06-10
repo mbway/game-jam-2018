@@ -76,7 +76,7 @@ _sections_unfolded = [ "Linear" ]
 frames = SubResource( 1 )
 animation = "75"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="HitBox" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 2 )
 

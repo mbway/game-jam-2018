@@ -43,5 +43,5 @@ render_priority = 0
 shader = SubResource( 1 )
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
-_sections_unfolded = [ "Resource", "shader_param" ]
+_sections_unfolded = [ "shader_param" ]
 

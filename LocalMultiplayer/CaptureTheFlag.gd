@@ -11,6 +11,8 @@ var team2_score = 0
 var game_over = false
 var winning_score = 5
 
+var earthquake_in_progress = false
+
 func _ready():
 	randomize() # generate true random numbers
 	
@@ -32,6 +34,13 @@ func _ready():
 	spawn_player(p2)
 	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 
+func _process(delta):
+	var s = 1.0 + sin(OS.get_ticks_msec()/700.0) * 0.2
+	$Orb.scale.x = s
+	$Orb.scale.y = s
+	
+	if earthquake_in_progress:
+		$Camera.shake(20)
 
 func _on_p1_die():
 	#p1_lives = max(0, p1_lives - 1)
@@ -106,4 +115,43 @@ func _on_Base_flag_returned_2():
 
 
 func _on_Orb_orbDestroyed():
-	pass
+	var choices = ['Low Gravity', 'Fast Movement', 'Earthquake',
+		'Large', 'Upside Down']
+	var i = randi()%len(choices)
+	
+	$HUD.show_message('Overruled!\n' + choices[i])
+	i = 4
+	if i == 0: # low gravity
+		for p in [p1, p2]:
+			p.GRAVITY = 5
+	elif i == 1: # fast
+		for p in [p1, p2]:
+			p.ACCELERATION = 4000
+			p.MAX_SPEED = 2000
+			p.JUMP_SPEED = 2000
+	elif i == 2: # earthquake
+		earthquake_in_progress = true
+	elif i == 3: # large
+		for p in [p1, p2]:
+			p.scale.x = 4
+			p.scale.y = 4
+	elif i == 4: # upside down
+		for p in [p1, p2]:
+			p.GRAVITY = -40
+			p.JUMP_SPEED = -1000
+			p.UP = Vector2(0,1)
+	$ResetTimer.start()
+
+func reset_rules():
+	for p in [p1, p2]:
+		p.UP = Vector2(0,-1)
+		p.ACCELERATION = 3000
+		p.GRAVITY = 40
+		p.MAX_SPEED = 600
+		p.JUMP_SPEED = 1000
+		p.scale.x = 1
+		p.scale.y = 1
+	earthquake_in_progress = false
+
+func _on_ResetTimer_timeout():
+	reset_rules()

@@ -42,6 +42,8 @@ colour = "red"
 
 [node name="Pickups" type="Node" parent="." index="3"]
 
+editor/display_folded = true
+
 [node name="LaserCannon" parent="Pickups" index="0" instance=ExtResource( 4 )]
 
 scene = ExtResource( 5 )
@@ -182,6 +184,13 @@ available_pickups_path = NodePath("../Pickups")
 
 position = Vector2( 960, 70 )
 
+[node name="ResetTimer" type="Timer" parent="." index="18"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
 [connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
 
 [connection signal="timeout" from="P2SpawnTimer" to="." method="_on_P2SpawnTimer_timeout"]
@@ -195,5 +204,7 @@ position = Vector2( 960, 70 )
 [connection signal="flag_returned_2" from="Base2" to="." method="_on_Base2_flag_returned_2"]
 
 [connection signal="orbDestroyed" from="Orb" to="." method="_on_Orb_orbDestroyed"]
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]
 
 

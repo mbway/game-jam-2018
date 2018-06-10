@@ -12,6 +12,7 @@ func _ready():
 func spawn():
 	health = max_health
 	active = true
+	$HitBox.disabled = false
 	$OrbSprites.play('75')
 	show()
 	$HoverTimer.start()
@@ -43,6 +44,8 @@ func destroyed():
 	$DestroySound.play()
 	emit_signal('orbDestroyed')
 	$SpawnTimer.start()
+	active = false
+	$HitBox.disabled = true
 
 func move():
 	linear_velocity.x = rand_range(-5,5)

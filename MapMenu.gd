@@ -3,21 +3,27 @@ extends Control
 var maps = [
 	{
 		'path': 'res://LocalMultiplayer/MultiplayerMap.tscn',
-		'name' : 'Map 1',
+		'name' : 'Test Map',
 		'screenshot' : preload('res://Assets/Map1.png'),
 		'type' : 'TDM'
 	},
 	{
 		'path': 'res://LocalMultiplayer/MultiplayerMap_2.tscn',
-		'name' : 'Map 2',
+		'name' : 'Ship',
 		'screenshot' : preload('res://Assets/Map2.png'),
 		'type' : 'CTF'
 	},
 	{
 		'path': 'res://LocalMultiplayer/MultiplayerMap_3.tscn',
-		'name' : 'Map 3',
+		'name' : 'Obelisk',
 		'screenshot' : preload('res://Assets/Map3.png'),
 		'type' : 'CTF'
+	},
+	{
+		'path': 'res://LocalMultiplayer/MultiplayerMap_2_Overrule.tscn',
+		'name' : 'Ship',
+		'screenshot' : preload('res://Assets/Map2.png'),
+		'type' : 'Overrule'
 	}
 ]
 
