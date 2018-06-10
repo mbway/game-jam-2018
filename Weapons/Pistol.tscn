@@ -4,12 +4,12 @@
 [ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/pistol.wav" type="AudioStream" id=3]
 
-[node name="Pistol" type="Node2D"]
+[node name="Pistol" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 shoot_vel = 5000
-damage = 20
+damage = 10
 bullet_scene_path = "res://Weapons/Bullet.tscn"
 cooldown = 0.1
 auto_fire = false

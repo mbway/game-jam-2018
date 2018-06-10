@@ -152,6 +152,8 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Base" parent="." index="13" instance=ExtResource( 14 )]
 
+position = Vector2( 410, 390 )
+
 [connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
 
 [connection signal="timeout" from="P2SpawnTimer" to="." method="_on_P2SpawnTimer_timeout"]

@@ -28,6 +28,7 @@ var max_health = 100
 
 var current_weapon = null
 var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
+var team
 
 ## health and damage
 var health = 0
@@ -63,12 +64,13 @@ var additional_jumps_left = 1 # to allow double jumps, reset when touching the f
 func _ready():
 	hide()
 
-func setup(input_prefix, max_health, bullet_parent, camera, mouse_look):
+func setup(input_prefix, max_health, bullet_parent, camera, mouse_look, team):
 	self.input_prefix = input_prefix
 	self.max_health = max_health
 	self.bullet_parent = bullet_parent
 	self.camera = camera
 	self.mouse_look = mouse_look
+	self.team = team
 	#TODO: give pistol
 	is_setup = true
 
