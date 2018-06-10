@@ -4,8 +4,8 @@ onready var player_scene = load('res://Player.tscn')
 
 var p1
 var p2
-var p1_lives = 2
-var p2_lives = 2
+var p1_lives = 5
+var p2_lives = 5
 var game_over = false
 
 func _ready():
