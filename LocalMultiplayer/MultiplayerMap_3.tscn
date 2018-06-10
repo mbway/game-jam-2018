@@ -153,12 +153,13 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Base" parent="." index="12" instance=ExtResource( 17 )]
 
-position = Vector2( -1950, 160 )
+position = Vector2( -1950, 170 )
 team = 1
+colour = "blue"
 
 [node name="Base2" parent="." index="13" instance=ExtResource( 17 )]
 
-position = Vector2( 440, 160 )
+position = Vector2( 440, 170 )
 team = 2
 
 [node name="PickupSpawn3" parent="." index="14" instance=ExtResource( 18 )]

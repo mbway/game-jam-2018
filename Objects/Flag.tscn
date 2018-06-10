@@ -1,21 +1,20 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Objects/Flag.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Objects/Flag/Flag1.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Objects/Flag/Flag2.png" type="Texture" id=3]
-
+[ext_resource path="res://Assets/Objects/Flag/Flag2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Objects/Flag/Flag1.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "blue",
+"name": "red",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "red",
+"name": "blue",
 "speed": 5.0
 } ]
 
@@ -36,8 +35,6 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
-homeX = 0
-homeY = 0
 team = 0
 colour = null
 

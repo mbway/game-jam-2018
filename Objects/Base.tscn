@@ -1,13 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Base.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-
+[ext_resource path="res://Assets/Objects/Base/capturepoint_red.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Objects/Base/capturepoint_blue.png" type="Texture" id=3]
+[ext_resource path="res://Assets/capture_sfx.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+extents = Vector2( 32, 20 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "red",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "blue",
+"speed": 5.0
+} ]
 
 [node name="Base" type="Area2D"]
 
@@ -22,17 +37,28 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-homeX = 0
-homeY = 0
 team = 0
+colour = "red"
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+position = Vector2( 0, -11 )
 shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="1"]
+
+frames = SubResource( 2 )
+animation = "red"
+
+[node name="CapturedSound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="area_entered" from="." to="." method="_on_Base_area_entered"]
 

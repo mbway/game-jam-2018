@@ -9,6 +9,7 @@ var p2_lives = 2
 var team1_score = 0
 var team2_score = 0
 var game_over = false
+var winning_score = 5
 
 func _ready():
 	randomize() # generate true random numbers
@@ -36,7 +37,7 @@ func _on_p1_die():
 	#p1_lives = max(0, p1_lives - 1)
 	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 	if p1_lives == 0:
-		$HUD.game_over('P2')
+		$HUD.show_game_over('P2')
 	$P1SpawnTimer.start()
 
 
@@ -44,7 +45,7 @@ func _on_p2_die():
 	#p2_lives = max(0, p2_lives - 1)
 	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
 	if p2_lives == 0:
-		$HUD.game_over('P1')
+		$HUD.show_game_over('P1')
 	$P2SpawnTimer.start()
 
 func create_player(prefix, max_health, mouse_look, team):
@@ -74,27 +75,31 @@ func _on_P1SpawnTimer_timeout():
 
 func _on_P2SpawnTimer_timeout():
 	spawn_player(p2)
+	
+
+func checkWinner():
+	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
+	if(team1_score >= winning_score):
+		$HUD.show_game_over('Player 1')
+	elif(team2_score >= winning_score):
+		$HUD.show_game_over('Player 2')
 
 
 func _on_Base_flag_returned_1():
-	print('hello')
 	team1_score += 1
-	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
+	checkWinner()
 
 
 func _on_Base2_flag_returned_2():
-	print('goodbye')
 	team2_score += 1
-	$HUD.set_score_labels('P2 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
+	checkWinner()
 
 
 func _on_Base2_flag_returned_1():
-	print('hello')
 	team1_score += 1
-	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
+	checkWinner()
 
 
 func _on_Base_flag_returned_2():
-	print('hello')
 	team2_score += 1
-	$HUD.set_score_labels('P1 Score: '+str(team1_score), 'P2 Score: '+str(team2_score))
+	checkWinner()
