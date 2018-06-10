@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://LocalMultiplayer/CaptureTheFlag.gd" type="Script" id=1]
 [ext_resource path="res://SpaceMap.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Assets/fite_me_irl_b.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Objects/Orb.tscn" type="PackedScene" id=19]
 
 [node name="MultiplayerMap" type="Node" index="0"]
 
@@ -177,6 +178,10 @@ available_pickups_path = NodePath("../Pickups")
 position = Vector2( 960, 320 )
 available_pickups_path = NodePath("../Pickups")
 
+[node name="Orb" parent="." index="17" instance=ExtResource( 19 )]
+
+position = Vector2( 960, 70 )
+
 [connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
 
 [connection signal="timeout" from="P2SpawnTimer" to="." method="_on_P2SpawnTimer_timeout"]
@@ -188,5 +193,7 @@ available_pickups_path = NodePath("../Pickups")
 [connection signal="flag_returned_1" from="Base2" to="." method="_on_Base2_flag_returned_1"]
 
 [connection signal="flag_returned_2" from="Base2" to="." method="_on_Base2_flag_returned_2"]
+
+[connection signal="orbDestroyed" from="Orb" to="." method="_on_Orb_orbDestroyed"]
 
 

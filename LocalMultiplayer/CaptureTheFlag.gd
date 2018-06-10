@@ -103,3 +103,7 @@ func _on_Base2_flag_returned_1():
 func _on_Base_flag_returned_2():
 	team2_score += 1
 	checkWinner()
+
+
+func _on_Orb_orbDestroyed():
+	pass
