@@ -272,8 +272,7 @@ func spawn(position):
 	
 	_clear_inventory()
 	equip_weapon(pistol_scene.instance())
-	equip_weapon(load('res://Weapons/Minigun.tscn').instance())
-	select_weapon('Minigun')
+	select_weapon('Pistol')
 	
 	layers = 1 # collide with map and bullets
 	self.position = position

@@ -18,6 +18,9 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 homeX = 0
 homeY = 0
 team = 0

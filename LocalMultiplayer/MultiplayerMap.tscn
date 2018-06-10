@@ -1,12 +1,10 @@
-
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
 [ext_resource path="res://Flag.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=5]
-
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=7]
 [ext_resource path="res://Map.tscn" type="PackedScene" id=8]
@@ -15,6 +13,7 @@
 [ext_resource path="res://WeaponSlots.tscn" type="PackedScene" id=11]
 [ext_resource path="res://PickupSpawn.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Base.tscn" type="PackedScene" id=14]
 
 [node name="MultiplayerMap" type="Node" index="0"]
 
@@ -151,13 +150,7 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[node name="Base" parent="." index="13" instance=ExtResource( 11 )]
-
-position = Vector2( 420, 390 )
-_sections_unfolded = [ "Collision", "Transform" ]
-homeX = 420
-homeY = 390
-team = 3
+[node name="Base" parent="." index="13" instance=ExtResource( 14 )]
 
 [connection signal="timeout" from="P1SpawnTimer" to="." method="_on_P1SpawnTimer_timeout"]
 
