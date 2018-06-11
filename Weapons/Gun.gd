@@ -9,6 +9,7 @@ export (bool) var auto_fire = false
 export (float) var charge = 0
 export (float) var spread = 0 # angle of bullet spread in radians
 export (float) var screen_shake = 7 # amount of screen shake to add each shot
+export (int) var shotCount = 1
 
 # on setup
 var is_setup = false
@@ -52,8 +53,9 @@ func _shoot():
 	$FireSound.play()
 	if has_node('Flare'):
 		$Flare.enabled = true # TODO: disable after timeout
-	var bullet = bullet_scene.instance()
-	bullet.setup(bullet_parent, self, shoot_vel, damage)
+	for i in range(shotCount):
+		var bullet = bullet_scene.instance()
+		bullet.setup(bullet_parent, self, shoot_vel, damage)
 	cooldown_timer = cooldown
 
 func set_active(active):
