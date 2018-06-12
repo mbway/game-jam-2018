@@ -13,7 +13,8 @@ export (float) var screen_shake = 7 # amount of screen shake to add each shot
 # whether the gun has a charge time after the user pulls the trigger and the gun fires
 # weapons with this set to true should contain a ChargeTimer node
 # (with timeout connected to _shoot) and a ChargeSound node
-export (bool) var requires_charging = false 
+export (bool) var requires_charging = false
+export (int) var shot_count = 1 # the number of bullets spawned each shot
 
 # on setup
 var is_setup = false
@@ -31,7 +32,7 @@ func setup(bullet_parent):
 	set_active(false)
 	self.bullet_parent = bullet_parent
 	bullet_scene = load(bullet_scene_path)
-	
+
 	cooldown_timer = Timer.new()
 	cooldown_timer.set_one_shot(true)
 	cooldown_timer.set_wait_time(cooldown)
@@ -51,13 +52,15 @@ func try_shoot(fire_pressed, fire_just_pressed, delta):
 				_shoot()
 
 func _shoot():
-	var bullet = bullet_scene.instance()
-	bullet.setup(bullet_parent, self, shoot_vel, damage)
-	
+	for i in range(shot_count):
+		var bullet = bullet_scene.instance()
+		bullet.setup(bullet_parent, self, shoot_vel, damage)
+
 	$FireSound.play()
 	can_shoot = false
 	cooldown_timer.start()
 	emit_signal('fired')
+	cooldown_timer = cooldown
 
 func set_active(active):
 	self.active = active
@@ -66,7 +69,7 @@ func set_active(active):
 	if requires_charging and not active:
 		$ChargeTimer.stop()
 		can_shoot = true
-	
+
 
 func _on_cooled_down():
 	can_shoot = true

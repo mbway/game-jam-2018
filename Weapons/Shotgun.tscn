@@ -1,34 +1,38 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=2]
-[ext_resource path="res://Assets/weapons/machineGun.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=3]
 
-[node name="MachineGun" type="Node2D"]
+[node name="Shotgun" type="Node2D"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
-shoot_vel = 2000
+shoot_vel = 2500
 damage = 15
 bullet_scene_path = "res://Weapons/Bullet.tscn"
-cooldown = 0.1
-auto_fire = true
+cooldown = 1.0
+auto_fire = false
 charge = 0
-spread = 0.1
-screen_shake = 7
-shotCount = 1
+spread = 0.3
+screen_shake = 80.0
+shotCount = 4
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 10.0904, 13.222 )
+position = Vector2( 16.7355, 11.5202 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 42.6815, 9.39457 )
+position = Vector2( 44.0325, 5.74988 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
+position = Vector2( 1.39922, 8.6829 )
+scale = Vector2( 0.344856, 0.306339 )
 stream = ExtResource( 3 )
 volume_db = 0.0
 autoplay = false

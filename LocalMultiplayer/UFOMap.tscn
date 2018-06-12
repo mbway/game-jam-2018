@@ -144,7 +144,7 @@ available_pickups_path = NodePath("../Pickups")
 
 stream = ExtResource( 16 )
 volume_db = 0.0
-autoplay = false
+autoplay = true
 mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
