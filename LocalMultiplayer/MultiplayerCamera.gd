@@ -43,7 +43,7 @@ func _physics_process(delta):
 				furthest_r = r
 
 		# this is purely heuristic
-		furthest.y *= 1.5
+		furthest.y *= 1.7
 		furthest_r = furthest.length()
 		var z = max(1, furthest_r / get_viewport().size.x * 3)
 		zoom.x = z

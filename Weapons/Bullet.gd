@@ -4,6 +4,8 @@ const MAX_DISTANCE = 10000 # despawn after this distance
 const player_scene_path = 'res://Player.tscn'
 const orb_scene_path = 'res://Objects/Orb.tscn'
 
+onready var Math = preload('res://Math.gd')
+
 # set on setup
 var is_setup = false
 var shot_from
@@ -23,7 +25,8 @@ func setup(parent, shot_from, speed, damage):
 	rotation = shot_from.rotation
 	position = shot_from.get_node('Muzzle').global_position
 	spawn_loc = global_position
-	var spread = rand_range(-shot_from.spread, shot_from.spread)
+	#var spread = rand_range(-shot_from.spread, shot_from.spread)
+	var spread = Math.random_normal(0, shot_from.spread)
 	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation + spread)
 	
 	is_setup = true

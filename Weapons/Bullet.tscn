@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Weapons/Bullet.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Player/bullet.png" type="Texture" id=2]
-
+[ext_resource path="res://Assets/weapons/bullet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 

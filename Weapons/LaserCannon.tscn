@@ -17,6 +17,7 @@ auto_fire = false
 spread = 0
 screen_shake = 150.0
 requires_charging = true
+shot_count = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

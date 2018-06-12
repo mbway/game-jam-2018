@@ -49,6 +49,7 @@
     - particle trails
 - scalable UI elements (for different resolutions)
 - fullscreen option (and keyboard shortcut)
+- plasma ball gun with bullet drop (like the one in raze)
 
 
 # Extension Features

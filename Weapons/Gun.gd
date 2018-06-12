@@ -8,7 +8,7 @@ export (int) var damage = 20
 export (String) var bullet_scene_path = 'res://Weapons/Bullet.tscn'
 export (float) var cooldown = 0.1 # time after firing before the weapon can fire again
 export (bool) var auto_fire = false
-export (float) var spread = 0 # angle of bullet spread in radians
+export (float) var spread = 0 # standard deviation of the angle of bullet spread in radians
 export (float) var screen_shake = 7 # amount of screen shake to add each shot
 # whether the gun has a charge time after the user pulls the trigger and the gun fires
 # weapons with this set to true should contain a ChargeTimer node

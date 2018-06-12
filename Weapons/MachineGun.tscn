@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/machineGun.wav" type="AudioStream" id=3]
 
-[node name="MachineGun" type="Node2D"]
+[node name="MachineGun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
@@ -13,10 +13,10 @@ damage = 15
 bullet_scene_path = "res://Weapons/Bullet.tscn"
 cooldown = 0.1
 auto_fire = true
-charge = 0
-spread = 0.1
+spread = 0.03
 screen_shake = 7
-shotCount = 1
+requires_charging = false
+shot_count = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
