@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/pistol.wav" type="AudioStream" id=3]
 
-[node name="Pistol" type="Node2D" index="0"]
+[node name="Pistol" type="Node2D"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )

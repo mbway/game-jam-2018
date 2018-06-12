@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laser_1.png-9697de78da098b807689f752844c5261.stex"
+path="res://.import/UFOMap.png-42bf95e2def5858d4f9b786a01143692.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/laser/laser_1.png"
-source_md5="4f2757152383a11dfa91d8341e7b28da"
+source_file="res://Assets/UFOMap.png"
+source_md5="410994e0f46090846a88cb3c19baa82c"
 
-dest_files=[ "res://.import/laser_1.png-9697de78da098b807689f752844c5261.stex" ]
-dest_md5="6dd70d6c4ec68585c9bc1cb3502c3744"
+dest_files=[ "res://.import/UFOMap.png-42bf95e2def5858d4f9b786a01143692.stex" ]
+dest_md5="17c0e870fd5695a893c6c06cc3f7e3c2"
 
 [params]
 
@@ -18,8 +18,8 @@ compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
+flags/repeat=0
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

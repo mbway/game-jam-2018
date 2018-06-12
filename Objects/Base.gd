@@ -14,7 +14,6 @@ func _process(delta):
 	$Sprite.play(colour)
 
 func _on_Base_area_entered(body):
-	print('foo')
 	if body.get_filename() == flag_scene_path:
 		if self.team != body.team:
 			$CapturedSound.play()

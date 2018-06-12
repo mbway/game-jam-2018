@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/Sniper.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/weapons/sniper_flare.png" type="Texture" id=4]
 
-[node name="Sniper" type="Node2D" index="0"]
+[node name="Sniper" type="Node2D"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
@@ -14,24 +13,26 @@ damage = 60
 bullet_scene_path = "res://Weapons/Bullet.tscn"
 cooldown = 0.5
 auto_fire = false
-charge = 0
 spread = 0
 screen_shake = 80.0
+requires_charging = false
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 56, 16 )
+position = Vector2( 43, 12 )
+scale = Vector2( 0.65, 0.65 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 65.1141, 11.2838 )
+position = Vector2( 69.0828, 8.85396 )
+scale = Vector2( 0.65, 0.65 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
-position = Vector2( 64, 16 )
+position = Vector2( 23.9076, 8.14352 )
 stream = ExtResource( 3 )
 volume_db = 0.0
 autoplay = false
@@ -39,31 +40,5 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
-
-[node name="Flare" type="Light2D" parent="." index="3"]
-
-position = Vector2( 68, 11 )
-enabled = true
-editor_only = false
-texture = ExtResource( 4 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 10.0
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
-_sections_unfolded = [ "Shadow" ]
 
 

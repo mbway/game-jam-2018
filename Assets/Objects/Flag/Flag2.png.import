@@ -10,7 +10,7 @@ source_file="res://Assets/Objects/Flag/Flag2.png"
 source_md5="fdf2990be432f3420bde1750d2c84ba7"
 
 dest_files=[ "res://.import/Flag2.png-81920dc864fea4a260c7fb0774d771ff.stex" ]
-dest_md5="3668abab07aebf19b33c15632b756881"
+dest_md5="eabc1dc89ff1d67a4abb026b368587ec"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

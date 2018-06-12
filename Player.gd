@@ -112,9 +112,7 @@ func _process(delta):
 		# gun firing
 		var pressed = Input.is_action_pressed(input_prefix + 'fire')
 		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
-		var fired = current_weapon.try_shoot(pressed, just_pressed, delta)
-		if fired:
-			camera.shake(current_weapon.screen_shake)
+		current_weapon.try_shoot(pressed, just_pressed, delta)
 	
 		# weapon selecting
 		if Input.is_action_just_pressed(input_prefix + 'next'):
@@ -229,6 +227,7 @@ func equip_weapon(gun):
 		print('player already has weapon: %s' % gun.name)
 	else:
 		gun.setup(bullet_parent)
+		gun.connect('fired', self, '_on_weapon_fired')
 		$Inventory.add_child(gun)
 		emit_signal('weapon_equiped', gun)
 	inventory_lock.unlock()
@@ -298,3 +297,6 @@ func spawn(position):
 
 func _on_InvulnTimer_timeout():
 	invulnerable = false
+
+func _on_weapon_fired():
+	camera.shake(current_weapon.screen_shake)

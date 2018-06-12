@@ -1,19 +1,23 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://LocalMultiplayer/MultiplayerMap.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Flag.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=5]
-[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=7]
-[ext_resource path="res://Map.tscn" type="PackedScene" id=8]
-[ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=9]
-[ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Weapons/MachineGun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=7]
+[ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=9]
+[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=11]
+[ext_resource path="res://Map.tscn" type="PackedScene" id=12]
+[ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=13]
+[ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=14]
+[ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/city_crumbles.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=18]
 
 [node name="MultiplayerMap" type="Node"]
 
@@ -40,14 +44,24 @@ colour = "red"
 scene = ExtResource( 4 )
 texture = ExtResource( 5 )
 
-[node name="Sniper" parent="Pickups" index="1" instance=ExtResource( 3 )]
+[node name="MachineGun" parent="Pickups" index="1" instance=ExtResource( 3 )]
 
 scene = ExtResource( 6 )
 texture = ExtResource( 7 )
 
+[node name="Minigun" parent="Pickups" index="2" instance=ExtResource( 3 )]
+
+scene = ExtResource( 8 )
+texture = ExtResource( 9 )
+
+[node name="Sniper" parent="Pickups" index="3" instance=ExtResource( 3 )]
+
+scene = ExtResource( 10 )
+texture = ExtResource( 11 )
+
 [node name="Bullets" type="Node" parent="." index="3"]
 
-[node name="TestMap" parent="." index="4" instance=ExtResource( 8 )]
+[node name="TestMap" parent="." index="4" instance=ExtResource( 12 )]
 
 [node name="Camera" type="Camera2D" parent="." index="5"]
 
@@ -73,7 +87,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 9 )
+script = ExtResource( 13 )
 _sections_unfolded = [ "Smoothing" ]
 follow_paths = [  ]
 
@@ -107,11 +121,11 @@ autostart = false
 
 [node name="Players" type="Node" parent="." index="9"]
 
-[node name="HUD" parent="." index="10" instance=ExtResource( 10 )]
+[node name="HUD" parent="." index="10" instance=ExtResource( 14 )]
 
 _sections_unfolded = [ "Pause" ]
 
-[node name="P1WeaponSlots" parent="HUD" index="3" instance=ExtResource( 11 )]
+[node name="P1WeaponSlots" parent="HUD" index="3" instance=ExtResource( 15 )]
 
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -120,7 +134,7 @@ margin_top = -355.0
 margin_right = 260.0
 margin_bottom = 355.0
 
-[node name="P2WeaponSlots" parent="HUD" index="4" instance=ExtResource( 11 )]
+[node name="P2WeaponSlots" parent="HUD" index="4" instance=ExtResource( 15 )]
 
 anchor_left = 1.0
 anchor_top = 0.5
@@ -132,21 +146,21 @@ margin_right = 260.0
 margin_bottom = 355.0
 rect_scale = Vector2( -1, 1 )
 
-[node name="PickupSpawn" parent="." index="11" instance=ExtResource( 12 )]
+[node name="PickupSpawn" parent="." index="11" instance=ExtResource( 16 )]
 
 position = Vector2( 888, 644 )
 available_pickups_path = NodePath("../Pickups")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="12"]
 
-stream = ExtResource( 13 )
+stream = ExtResource( 17 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[node name="Base" parent="." index="13" instance=ExtResource( 14 )]
+[node name="Base" parent="." index="13" instance=ExtResource( 18 )]
 
 position = Vector2( 410, 390 )
 

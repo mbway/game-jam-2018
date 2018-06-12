@@ -1,28 +1,68 @@
 
-# CRITICAL
-- main menu
-- ammo
-- theme
+# Bugs
+- Weapon tray doesn't ever remove weapons. Probably want an 'inventory_changed' signal to account for both addition and removal
+- able to jump on bullets without damaging yourself
+- laser can't shoot the orb
 
-# Extensions
-- animations
-    - falling
+
+# TODO
+- code organisation
+    - pull out the code for the different game modes. Try to combine them to allow for overrule mode
+    - choose the map then the game mode. all game modes on all maps
+    - multiple spawns in capture the flag
+    - dynamic flag spawning
+    - parent flags to player holding
+- main menu
+    - input method selection
+    - handle >2 players by selecting _which_ gamepad to assign to each player
+    - music on/off
+    - gamepad and arrow key support for UI buttons
+    - click to cycle available maps
+    - better level screenshots
+- >2 players would require
+    - re-thinking the inventory and score UI
+    - having a concept of teams
+- hide cursor and render a custom cursor
+- tweak the camera view
+    - view more in the direction that the player is aiming
+    - possibly weight vertically more
+- ammo
+    - UI to show ammo depletion
+    - clip size and reloading
+- bots
+- online multiplayer
+- show invincibility somehow
+- lighting effect around pickup station
+- more pickups
+    - health
+    - invincibility
+- skybox with parallax
+- lights and particle effects
+    - blood
+    - flag captures
+    - muzzle smoke?
+- explosives
+    - grenades
+    - rockets
+    - mines
+    - homing missile?
+    - particle trails
+- scalable UI elements (for different resolutions)
+- fullscreen option (and keyboard shortcut)
+
 
 # Extension Features
+- networking
 - teleportation stations
 - configurable gamepad buttons and axes
     - https://godot.readthedocs.io/en/3.0/classes/class_configfile.html
+- color picker for player color, then tint in-engine
+- overrule effects
+    - switch places and inventories with another player
+- infected game mode
+    - one player has a pistol, the rest have no weapon and they have to touch the player with the gun
+- add mobile controls and export for android
+- lobby system where networked players or bots can be added
+    - perhaps have a button to open it up to the network
+    - and you can add local players and select their control scheme
 
-
-
-
-# Done
-- tileset
-- player movement (Matt)
-    - gamepad support
-- gun which shoots
-- camera shake
-- inventory
-    - inventory GUI
-- pickup
-- HUD

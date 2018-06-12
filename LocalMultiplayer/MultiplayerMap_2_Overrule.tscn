@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://LocalMultiplayer/CaptureTheFlag.gd" type="Script" id=1]
 [ext_resource path="res://SpaceMap.tscn" type="PackedScene" id=2]
@@ -8,17 +8,16 @@
 [ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=6]
 [ext_resource path="res://Weapons/MachineGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=8]
-[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=10]
-[ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=12]
+[ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=10]
+[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=12]
 [ext_resource path="res://LocalMultiplayer/MultiplayerCamera.gd" type="Script" id=13]
 [ext_resource path="res://LocalMultiplayer/HUD.tscn" type="PackedScene" id=14]
-[ext_resource path="res://UI/WeaponSlots.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/fite_me_irl_loop_only.ogg" type="AudioStream" id=16]
-[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Objects/Orb.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/fite_me_irl_loop_only.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Orb.tscn" type="PackedScene" id=18]
 
 [node name="MultiplayerMap" type="Node" index="0"]
 
@@ -42,8 +41,6 @@ colour = "red"
 
 [node name="Pickups" type="Node" parent="." index="3"]
 
-editor/display_folded = true
-
 [node name="LaserCannon" parent="Pickups" index="0" instance=ExtResource( 4 )]
 
 scene = ExtResource( 5 )
@@ -54,12 +51,12 @@ texture = ExtResource( 6 )
 scene = ExtResource( 7 )
 texture = ExtResource( 8 )
 
-[node name="Sniper" parent="Pickups" index="2" instance=ExtResource( 4 )]
+[node name="Minigun" parent="Pickups" index="2" instance=ExtResource( 4 )]
 
 scene = ExtResource( 9 )
 texture = ExtResource( 10 )
 
-[node name="Minigun" parent="Pickups" index="3" instance=ExtResource( 4 )]
+[node name="Sniper" parent="Pickups" index="3" instance=ExtResource( 4 )]
 
 scene = ExtResource( 11 )
 texture = ExtResource( 12 )
@@ -124,63 +121,42 @@ autostart = false
 
 _sections_unfolded = [ "Pause" ]
 
-[node name="P1WeaponSlots" parent="HUD" index="3" instance=ExtResource( 15 )]
-
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 0.0
-margin_top = -355.0
-margin_right = 260.0
-margin_bottom = 355.0
-
-[node name="P2WeaponSlots" parent="HUD" index="4" instance=ExtResource( 15 )]
-
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 0.0
-margin_top = -355.0
-margin_right = 260.0
-margin_bottom = 355.0
-rect_scale = Vector2( -1, 1 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="11"]
 
-stream = ExtResource( 16 )
+stream = ExtResource( 15 )
 volume_db = 0.0
 autoplay = true
 mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[node name="Base" parent="." index="12" instance=ExtResource( 17 )]
+[node name="Base" parent="." index="12" instance=ExtResource( 16 )]
 
 position = Vector2( 150, 1070 )
 team = 1
 colour = "blue"
 
-[node name="Base2" parent="." index="13" instance=ExtResource( 17 )]
+[node name="Base2" parent="." index="13" instance=ExtResource( 16 )]
 
 position = Vector2( 1760, 1070 )
 team = 2
 
-[node name="PickupSpawn" parent="." index="14" instance=ExtResource( 18 )]
+[node name="PickupSpawn" parent="." index="14" instance=ExtResource( 17 )]
 
 position = Vector2( 510, 960 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn2" parent="." index="15" instance=ExtResource( 18 )]
+[node name="PickupSpawn2" parent="." index="15" instance=ExtResource( 17 )]
 
 position = Vector2( 1410, 960 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn3" parent="." index="16" instance=ExtResource( 18 )]
+[node name="PickupSpawn3" parent="." index="16" instance=ExtResource( 17 )]
 
 position = Vector2( 960, 320 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="Orb" parent="." index="17" instance=ExtResource( 19 )]
+[node name="Orb" parent="." index="17" instance=ExtResource( 18 )]
 
 position = Vector2( 960, 70 )
 

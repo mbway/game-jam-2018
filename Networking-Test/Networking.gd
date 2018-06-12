@@ -1,5 +1,7 @@
 extends Node
 
+# Godot's high level networking uses the ENet protocol which is lighter than TCP and built on UDP
+
 
 # Workflow:
 #

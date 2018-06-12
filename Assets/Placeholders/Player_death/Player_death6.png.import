@@ -10,7 +10,7 @@ source_file="res://Assets/Placeholders/Player_death/Player_death6.png"
 source_md5="281311bad48698a2d0d355b0f802a620"
 
 dest_files=[ "res://.import/Player_death6.png-d07fe60a1f177136e6d56f9f63f4d597.stex" ]
-dest_md5="564ec01f98cf15030f22908a214147b8"
+dest_md5="1c2dca8d1919e4b17ec7f001cb32cde8"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

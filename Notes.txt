@@ -1,0 +1,5 @@
+
+
+# Settings for maps
+- the tileset should be on collision layers 1 and 2 with a mask of 1 and 2
+

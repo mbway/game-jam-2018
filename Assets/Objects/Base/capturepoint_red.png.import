@@ -10,7 +10,7 @@ source_file="res://Assets/Objects/Base/capturepoint_red.png"
 source_md5="3fb18f8fef47cebb566afc6b90040d3d"
 
 dest_files=[ "res://.import/capturepoint_red.png-32e8fe76859f42980bc4158e6d9c251f.stex" ]
-dest_md5="184d6c0e18b8e1fb554636ed44c61ebe"
+dest_md5="8a052b81463a918d8d7ceb98fec9ba2b"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

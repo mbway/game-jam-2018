@@ -31,6 +31,4 @@ __meta__ = {
 
 [node name="MapBottom" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 944, 1706 )
-
 

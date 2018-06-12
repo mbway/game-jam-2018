@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+func _ready():
+	$Message.hide()
+	$GameOver.hide()
+	
 func set_score_labels(L, R):
 	$P1Score.text = L
 	$P2Score.text = R

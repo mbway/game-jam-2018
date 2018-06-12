@@ -1,5 +1,6 @@
 extends Control
 
+#TODO: load from configuration file
 var maps = [
 	{
 		'path': 'res://LocalMultiplayer/MultiplayerMap.tscn',
@@ -28,13 +29,13 @@ var maps = [
 	{
 		'path': 'res://LocalMultiplayer/UFOMap.tscn',
 		'name' : 'UFO',
-		'screenshot' : preload('res://Assets/Map2.png'),
+		'screenshot' : preload('res://Assets/UFOMap.png'),
 		'type' : 'TDM'
 	}
 ]
 
 var current_map = 0
-var map_type
+var map_type = null
 
 func change_selection(offset):
 	assert offset != 0
@@ -50,15 +51,12 @@ func change_selection(offset):
 	$Title.text = map['name']
 	$Sprite.texture = map['screenshot']
 
-func create_map():
-	var map_path = maps[current_map]['path']
-	print('loading ', map_path)
-	return load(map_path).instance()
+func get_map_path():
+	return maps[current_map]['path']
 
-#func _ready():
-	#change_selection(0)
 
 func _process(delta):
+	#TODO: only do something if active
 	if Input.is_action_just_pressed('ui_left'):
 		change_selection(-1)
 	elif Input.is_action_just_pressed('ui_right'):

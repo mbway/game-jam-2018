@@ -14,6 +14,10 @@ export (String) var colour
 
 var target = null
 
+#TODO: parent to the player which picks it up rather than manually tracking position
+#TODO: give some movement like slightly swaying when not held.
+#TODO: possibly apply a constant rotation while being held.
+
 func _ready():
 	homeX = position.x
 	homeY = position.y

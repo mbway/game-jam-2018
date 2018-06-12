@@ -117,7 +117,7 @@ func _on_Base_flag_returned_2():
 
 func _on_Orb_orbDestroyed():
 	var choices = ['Low Gravity', 'Fast Movement', 'Earthquake',
-		'Large', 'Upside Down']
+		'Large', 'Small', 'Upside Down']
 	var i = randi()%len(choices)
 	
 	$HUD.show_message('Overruled!\n' + choices[i])
@@ -135,11 +135,17 @@ func _on_Orb_orbDestroyed():
 		for p in [p1, p2]:
 			p.scale.x = 3
 			p.scale.y = 3
-	elif i == 4: # upside down
+	elif i == 4: # small
+		for p in [p1, p2]:
+			p.scale.x = 0.5
+			p.scale.y = 0.5
+	elif i == 5: # upside down
 		for p in [p1, p2]:
 			p.GRAVITY = -40
 			p.JUMP_SPEED = -1000
 			p.UP = Vector2(0,1)
+			p.get_node('AnimatedSprite').flip_v = true
+			p.get_node('HitBox').position.y = -2
 	$ResetTimer.start()
 
 func reset_rules():
@@ -151,6 +157,8 @@ func reset_rules():
 		p.JUMP_SPEED = 1000
 		p.scale.x = 1
 		p.scale.y = 1
+		p.get_node('AnimatedSprite').flip_v = false
+		p.get_node('HitBox').position.y = 2
 	earthquake_in_progress = false
 
 func _on_ResetTimer_timeout():

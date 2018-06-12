@@ -12,20 +12,20 @@ texture = ExtResource( 2 )
 shoot_vel = 3000
 damage = 100
 bullet_scene_path = "res://Weapons/Laser.tscn"
-cooldown = 0.1
+cooldown = 0.3
 auto_fire = false
-charge = 1.0
 spread = 0
-screen_shake = 75.0
+screen_shake = 150.0
+requires_charging = true
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 32, 0 )
+position = Vector2( 24.1941, 15.8479 )
 texture = ExtResource( 2 )
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 77, -5 )
+position = Vector2( 69.1941, 10.8479 )
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
@@ -46,5 +46,14 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="ChargeTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="ChargeTimer" to="." method="_shoot"]
 
 
