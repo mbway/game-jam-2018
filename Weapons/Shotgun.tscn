@@ -4,19 +4,19 @@
 [ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=3]
 
-[node name="Shotgun" type="Node2D"]
+[node name="Shotgun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 shoot_vel = 2500
-damage = 15
+damage = 20
 bullet_scene_path = "res://Weapons/Bullet.tscn"
-cooldown = 1.0
+cooldown = 1.2
 auto_fire = false
-charge = 0
-spread = 0.3
+spread = 0.25
 screen_shake = 80.0
-shotCount = 4
+requires_charging = false
+shot_count = 10
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

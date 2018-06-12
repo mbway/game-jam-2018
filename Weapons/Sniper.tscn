@@ -11,11 +11,12 @@ texture = ExtResource( 2 )
 shoot_vel = 5000
 damage = 60
 bullet_scene_path = "res://Weapons/Bullet.tscn"
-cooldown = 1.5
+cooldown = 0.75
 auto_fire = false
 spread = 0
 screen_shake = 80.0
 requires_charging = false
+shot_count = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

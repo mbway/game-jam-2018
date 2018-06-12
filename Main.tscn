@@ -3,30 +3,6 @@
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu.tscn" type="PackedScene" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 128
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=2]
-
-size = 50
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=3]
-
-size = 100
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
-
 [node name="Main" type="Node"]
 
 script = ExtResource( 1 )

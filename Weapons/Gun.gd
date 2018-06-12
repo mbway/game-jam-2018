@@ -60,7 +60,6 @@ func _shoot():
 	can_shoot = false
 	cooldown_timer.start()
 	emit_signal('fired')
-	cooldown_timer = cooldown
 
 func set_active(active):
 	self.active = active
