@@ -30,6 +30,9 @@ func setup(parent, shot_from, speed, damage):
 	shoot_direction = Vector2(1, 0).rotated(shot_from.rotation + spread)
 	
 	is_setup = true
+	
+func add_collision_exception(body):
+	add_collision_exception_with(body)
 
 # before godot 3, used to be called _fixed_process
 func _physics_process(delta):
@@ -47,6 +50,5 @@ func _on_Bullet_body_entered(body):
 	var parent = body.get_node('..')
 	if parent.get_filename() == player_scene_path:
 		parent.take_damage(damage)
-	
 	
 	queue_free()

@@ -351,6 +351,7 @@ func _set_health(new_health):
 func die():
 	if invulnerable:
 		return
+	_set_health(0)
 	alive = false
 	layers = 2 # collide with map but not with bullets
 	emit_signal('die')
@@ -382,4 +383,4 @@ func _on_weapon_fired(bullets):
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 	
 	for b in bullets:
-		$BulletCollider.add_collision_exception_with(b)
+		b.add_collision_exception($BulletCollider)

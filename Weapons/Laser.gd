@@ -5,6 +5,7 @@ const orb_scene_path = 'res://Objects/Orb.tscn'
 
 # set on setup
 var shot_from
+var collision_exceptions = []
 var damage
 
 func setup(parent, shot_from, vel, damage):
@@ -19,13 +20,22 @@ func setup(parent, shot_from, vel, damage):
 	$Lifetime.start()
 	$AnimationPlayer.play('FadeOut')
 
+func add_collision_exception(body):
+	collision_exceptions.append(body)
 
 func _on_Laser_body_entered(body):
-	# only deal damage to other playersd
-	var hit_other_player = bool(body.get_filename() == player_scene_path and body != shot_from.get_node('../..'))
-	var hit_orb = body.get_filename() == orb_scene_path
-	if hit_other_player or hit_orb:
+	for b in collision_exceptions:
+		if body == b:
+			return
+	
+	if body.get_filename() == orb_scene_path:
 		body.take_damage(damage)
+		
+	# will collide with the bullet collider, the player is its parent
+	var parent = body.get_node('..')
+	if parent.get_filename() == player_scene_path:
+		parent.take_damage(damage)
+	
 
 func _on_Lifetime_timeout():
 	queue_free()

@@ -5,7 +5,6 @@ signal back
 
 var globals
 
-var music_checkbox
 
 # more options ideas
 # - fullscreen
@@ -14,9 +13,14 @@ var music_checkbox
 
 func _ready():
 	globals = get_node('/root/globals')
-	music_checkbox = find_node('Music')
+	
+	var music_checkbox = find_node('Music')
 	var music = globals.settings.get_value('options', 'music', true) # default = true
 	music_checkbox.pressed = music
+	
+	var confined_checkbox = find_node('Confine')
+	var confined = globals.settings.get_value('options', 'mouse_confined', true) # default = true
+	confined_checkbox.pressed = confined
 
 func _process(delta):
 	$Background.region_rect.position.x += delta * 800

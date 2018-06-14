@@ -46,14 +46,15 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = -1.0
 angular_damp = -1.0
+collision_layer = 4
+collision_mask = 4
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Collision", "Visibility" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 1600, 0 )
 z_index = -1
 texture = ExtResource( 2 )
@@ -65,7 +66,6 @@ _sections_unfolded = [ "Region", "Transform", "Visibility", "Z Index" ]
 
 position = Vector2( 1600, 0 )
 shape = SubResource( 1 )
-disabled = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="Lifetime" type="Timer" parent="." index="2"]
