@@ -1,0 +1,157 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
+[ext_resource path="res://Assets/tile_set.tres" type="TileSet" id=2]
+[ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=9]
+[ext_resource path="res://Weapons/MachineGun.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=11]
+[ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=13]
+[ext_resource path="res://Weapons/Shotgun.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=15]
+[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=17]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
+
+[node name="UFO" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="." index="0"]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 3
+collision_mask = 3
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( -720873, 95, 0, -720872, 95, 0, -720871, 95, 0, -720870, 95, 0, -655340, 95, 0, -655339, 95, 0, -655338, 97, 0, -655337, 99, 0, -655336, 99, 0, -655335, 99, 0, -655334, 99, 0, -655333, 96, 0, -655332, 95, 0, -655331, 95, 0, -589805, 97, 0, -589804, 99, 0, -589803, 99, 0, -589802, 99, 0, -589801, 47, 0, -589798, 47, 0, -589797, 99, 0, -589796, 99, 0, -589795, 99, 0, -589794, 96, 0, -524270, 97, 0, -524269, 99, 0, -524268, 47, 0, -524259, 47, 0, -524258, 99, 0, -524257, 96, 0, -458735, 97, 0, -458734, 99, 0, -458733, 47, 0, -458722, 47, 0, -458721, 99, 0, -458720, 96, 0, -393204, 94, 0, -393203, 94, 0, -393202, 94, 0, -393201, 94, 0, -393200, 97, 0, -393199, 99, 0, -393198, 47, 0, -393185, 47, 0, -393184, 99, 0, -393183, 96, 0, -393182, 94, 0, -393181, 94, 0, -393180, 94, 0, -393179, 94, 0, -327669, 97, 0, -327668, 99, 0, -327667, 99, 0, -327666, 99, 0, -327665, 99, 0, -327664, 99, 0, -327663, 88, 0, -327662, 47, 0, -327661, 96, 0, -327660, 98, 0, -327659, 98, 0, -327658, 98, 0, -327653, 98, 0, -327652, 98, 0, -327651, 98, 0, -327650, 97, 0, -327649, 47, 0, -327648, 47, 0, -327647, 99, 0, -327646, 99, 0, -327645, 99, 0, -327644, 99, 0, -327643, 99, 0, -327642, 96, 0, -262134, 97, 0, -262133, 47, 0, -262132, 47, 0, -262131, 44, 0, -262130, 44, 0, -262129, 76, 0, -262128, 77, 0, -262127, 44, 0, -262126, 44, 0, -262125, 44, 0, -262124, 44, 0, -262123, 44, 0, -262122, 66, 0, -262117, 67, 0, -262116, 44, 0, -262115, 44, 0, -262114, 44, 0, -262113, 44, 0, -262112, 44, 0, -262111, 44, 0, -262110, 44, 0, -262109, 76, 0, -262108, 77, 0, -262107, 47, 0, -262106, 47, 0, -262105, 96, 0, -196598, 47, 0, -196597, 47, 0, -196570, 47, 0, -196569, 47, 0, -131062, 47, 0, -131061, 47, 0, -131060, 96, 0, -131035, 97, 0, -131034, 47, 0, -131033, 47, 0, -65525, 47, 0, -65524, 47, 0, -65523, 96, 0, -65500, 97, 0, -65499, 47, 0, -65498, 47, 0, 12, 47, 0, 13, 86, 0, 14, 47, 0, 15, 86, 0, 16, 96, 0, 33, 97, 0, 34, 86, 0, 35, 47, 0, 36, 86, 0, 37, 47, 0, 65549, 41, 0, 65550, 41, 0, 65551, 41, 0, 65552, 41, 0, 65553, 86, 0, 65554, 47, 0, 65555, 86, 0, 65556, 96, 0, 65557, 94, 0, 65558, 94, 0, 65559, 94, 0, 65562, 94, 0, 65563, 94, 0, 65564, 94, 0, 65565, 97, 0, 65566, 86, 0, 65567, 47, 0, 65568, 86, 0, 65569, 41, 0, 65570, 41, 0, 65571, 41, 0, 65572, 41, 0, 131089, 41, 0, 131090, 41, 0, 131091, 41, 0, 131092, 41, 0, 131093, 47, 0, 131094, 47, 0, 131095, 55, 0, 131098, 55, 0, 131099, 47, 0, 131100, 47, 0, 131101, 41, 0, 131102, 41, 0, 131103, 41, 0, 131104, 41, 0, 196629, 41, 0, 196630, 41, 0, 196631, 41, 0, 196634, 41, 0, 196635, 41, 0, 196636, 41, 0, 262169, 19, 0, 262170, 9, 0, 327705, 10, 0, 327706, 11, 0, 393239, 7, 0, 393240, 19, 0, 458775, 10, 0, 458776, 11, 0, 524313, 0, 0, 524314, 5, 0, 589846, 0, 0, 589847, 5, 0, 589848, 7, 0, 589849, 19, 0, 589850, 8, 0, 655382, 6, 0, 655383, 19, 0, 655384, 9, 0, 720919, 12, 0, 786432, 0, 0, 786433, 2, 0, 786434, 2, 0, 786435, 2, 0, 786436, 3, 0, 786437, 2, 0, 786438, 3, 0, 786439, 2, 0, 786440, 2, 0, 786441, 3, 0, 786442, 1, 0, 786443, 2, 0, 786444, 2, 0, 786445, 2, 0, 786446, 2, 0, 786447, 3, 0, 786448, 3, 0, 786449, 5, 0, 786450, 0, 0, 786451, 54, 0, 786452, 69, 0, 786453, 69, 0, 786454, 53, 0, 786458, 54, 0, 786459, 70, 0, 786460, 70, 0, 786461, 53, 0, 786462, 5, 0, 786463, 0, 0, 786464, 2, 0, 786465, 1, 0, 786466, 2, 0, 786467, 2, 0, 786468, 3, 0, 786469, 2, 0, 786470, 3, 0, 786471, 1, 0, 786472, 2, 0, 786473, 3, 0, 786474, 2, 0, 786475, 1, 0, 786476, 3, 0, 786477, 1, 0, 786478, 3, 0, 786479, 2, 0, 786480, 5, 0, 851968, 6, 0, 851969, 18, 0, 851970, 18, 0, 851971, 18, 0, 851972, 18, 0, 851973, 18, 0, 851974, 18, 0, 851975, 18, 0, 851976, 18, 0, 851977, 18, 0, 851978, 18, 0, 851979, 18, 0, 851980, 18, 0, 851981, 18, 0, 851982, 18, 0, 851983, 18, 0, 851984, 18, 0, 851985, 16, 0, 851986, 17, 0, 851987, 18, 0, 851988, 18, 0, 851989, 18, 0, 851990, 18, 0, 851991, 19, 0, 851992, 19, 0, 851993, 19, 0, 851994, 29, 0, 851995, 29, 0, 851996, 29, 0, 851997, 29, 0, 851998, 16, 0, 851999, 17, 0, 852000, 29, 0, 852001, 30, 0, 852002, 29, 0, 852003, 18, 0, 852004, 29, 0, 852005, 18, 0, 852006, 29, 0, 852007, 29, 0, 852008, 18, 0, 852009, 29, 0, 852010, 29, 0, 852011, 30, 0, 852012, 18, 0, 852013, 18, 0, 852014, 18, 0, 852015, 29, 0, 852016, 8, 0, 917504, 7, 0, 917505, 19, 0, 917506, 19, 0, 917507, 19, 0, 917508, 19, 0, 917509, 19, 0, 917510, 19, 0, 917511, 19, 0, 917512, 19, 0, 917513, 19, 0, 917514, 19, 0, 917515, 23, 0, 917516, 27, 0, 917517, 26, 0, 917518, 27, 0, 917519, 28, 0, 917520, 19, 0, 917521, 18, 0, 917522, 18, 0, 917523, 19, 0, 917524, 19, 0, 917525, 19, 0, 917526, 19, 0, 917527, 19, 0, 917528, 19, 0, 917529, 19, 0, 917530, 19, 0, 917531, 19, 0, 917532, 19, 0, 917533, 32, 0, 917534, 29, 0, 917535, 29, 0, 917536, 34, 0, 917537, 20, 0, 917538, 21, 0, 917539, 22, 0, 917540, 19, 0, 917541, 19, 0, 917542, 19, 0, 917543, 19, 0, 917544, 19, 0, 917545, 19, 0, 917546, 19, 0, 917547, 19, 0, 917548, 19, 0, 917549, 19, 0, 917550, 19, 0, 917551, 19, 0, 917552, 9, 0, 983040, 7, 0, 983041, 19, 0, 983042, 19, 0, 983043, 19, 0, 983044, 19, 0, 983045, 19, 0, 983046, 19, 0, 983047, 19, 0, 983048, 19, 0, 983049, 19, 0, 983050, 19, 0, 983051, 19, 0, 983052, 19, 0, 983053, 19, 0, 983054, 19, 0, 983055, 19, 0, 983056, 19, 0, 983057, 23, 0, 983058, 25, 0, 983059, 27, 0, 983060, 26, 0, 983061, 24, 0, 983062, 24, 0, 983063, 26, 0, 983064, 28, 0, 983065, 19, 0, 983066, 19, 0, 983067, 19, 0, 983068, 19, 0, 983069, 19, 0, 983070, 19, 0, 983071, 19, 0, 983072, 19, 0, 983073, 19, 0, 983074, 19, 0, 983075, 19, 0, 983076, 19, 0, 983077, 19, 0, 983078, 19, 0, 983079, 20, 0, 983080, 21, 0, 983081, 22, 0, 983082, 19, 0, 983083, 19, 0, 983084, 19, 0, 983085, 19, 0, 983086, 19, 0, 983087, 19, 0, 983088, 9, 0, 1048576, 7, 0, 1048577, 19, 0, 1048578, 19, 0, 1048579, 19, 0, 1048580, 19, 0, 1048581, 19, 0, 1048582, 19, 0, 1048583, 19, 0, 1048584, 19, 0, 1048585, 19, 0, 1048586, 19, 0, 1048587, 19, 0, 1048588, 19, 0, 1048589, 19, 0, 1048590, 19, 0, 1048591, 19, 0, 1048592, 19, 0, 1048593, 19, 0, 1048594, 19, 0, 1048595, 19, 0, 1048596, 19, 0, 1048597, 19, 0, 1048598, 19, 0, 1048599, 19, 0, 1048600, 19, 0, 1048601, 19, 0, 1048602, 19, 0, 1048603, 19, 0, 1048604, 19, 0, 1048605, 19, 0, 1048606, 19, 0, 1048607, 19, 0, 1048608, 19, 0, 1048609, 19, 0, 1048610, 19, 0, 1048611, 19, 0, 1048612, 19, 0, 1048613, 19, 0, 1048614, 19, 0, 1048615, 19, 0, 1048616, 19, 0, 1048617, 19, 0, 1048618, 19, 0, 1048619, 19, 0, 1048620, 19, 0, 1048621, 19, 0, 1048622, 19, 0, 1048623, 19, 0, 1048624, 9, 0, 1114112, 10, 0, 1114113, 14, 0, 1114114, 14, 0, 1114115, 15, 0, 1114116, 12, 0, 1114117, 15, 0, 1114118, 12, 0, 1114119, 13, 0, 1114120, 14, 0, 1114121, 12, 0, 1114122, 15, 0, 1114123, 13, 0, 1114124, 14, 0, 1114125, 15, 0, 1114126, 12, 0, 1114127, 14, 0, 1114128, 15, 0, 1114129, 14, 0, 1114130, 13, 0, 1114131, 15, 0, 1114132, 13, 0, 1114133, 13, 0, 1114134, 15, 0, 1114135, 14, 0, 1114136, 12, 0, 1114137, 12, 0, 1114138, 15, 0, 1114139, 14, 0, 1114140, 15, 0, 1114141, 12, 0, 1114142, 14, 0, 1114143, 15, 0, 1114144, 13, 0, 1114145, 14, 0, 1114146, 15, 0, 1114147, 13, 0, 1114148, 14, 0, 1114149, 14, 0, 1114150, 13, 0, 1114151, 15, 0, 1114152, 12, 0, 1114153, 13, 0, 1114154, 14, 0, 1114155, 13, 0, 1114156, 15, 0, 1114157, 13, 0, 1114158, 14, 0, 1114159, 15, 0, 1114160, 11, 0 )
+_sections_unfolded = [ "Collision", "Occluder", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="Bullets" type="Node" parent="." index="2"]
+
+[node name="Players" type="Node" parent="." index="3"]
+
+[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
+
+_sections_unfolded = [ "Pause" ]
+
+[node name="Camera" type="Camera2D" parent="." index="5"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 5 )
+_sections_unfolded = [ "Drag Margin", "Editor", "Offset", "Smoothing" ]
+
+[node name="Music" type="AudioStreamPlayer" parent="." index="6"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+_sections_unfolded = [ "Pause" ]
+
+[node name="GameMode" type="Node" parent="." index="7"]
+
+[node name="TDM" type="Node" parent="GameMode" index="0"]
+
+[node name="Pickups" type="Node" parent="GameMode/TDM" index="0"]
+
+editor/display_folded = true
+
+[node name="LaserCannon" parent="GameMode/TDM/Pickups" index="0" instance=ExtResource( 7 )]
+
+scene = ExtResource( 8 )
+texture = ExtResource( 9 )
+
+[node name="MachineGun" parent="GameMode/TDM/Pickups" index="1" instance=ExtResource( 7 )]
+
+scene = ExtResource( 10 )
+texture = ExtResource( 11 )
+
+[node name="Minigun" parent="GameMode/TDM/Pickups" index="2" instance=ExtResource( 7 )]
+
+scene = ExtResource( 12 )
+texture = ExtResource( 13 )
+
+[node name="Shotgun" parent="GameMode/TDM/Pickups" index="3" instance=ExtResource( 7 )]
+
+scene = ExtResource( 14 )
+texture = ExtResource( 15 )
+
+[node name="Sniper" parent="GameMode/TDM/Pickups" index="4" instance=ExtResource( 7 )]
+
+scene = ExtResource( 16 )
+texture = ExtResource( 17 )
+
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="1"]
+
+editor/display_folded = true
+
+[node name="Spawn1" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
+
+position = Vector2( 2690, 800 )
+
+[node name="Spawn2" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="1"]
+
+position = Vector2( 560, 780 )
+
+[node name="Spawn3" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="2"]
+
+position = Vector2( 1800, -280 )
+
+[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 18 )]
+
+position = Vector2( 1340, 770 )
+available_pickups_path = NodePath("../Pickups")
+
+[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 18 )]
+
+position = Vector2( 1790, 770 )
+available_pickups_path = NodePath("../Pickups")
+
+[node name="CTF" type="Node" parent="GameMode" index="1"]
+
+

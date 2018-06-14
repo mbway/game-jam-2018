@@ -16,7 +16,7 @@ const JOY_X = 2
 const JOY_Y = 3
 const JOY_DEADZONE = 0.2
 
-onready var pistol_scene = load('res://Weapons/Pistol.tscn')
+onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 
 # set when spawned in
 var is_setup = false
@@ -71,7 +71,6 @@ func setup(input_prefix, max_health, bullet_parent, camera, mouse_look, team):
 	self.camera = camera
 	self.mouse_look = mouse_look
 	self.team = team
-	#TODO: give pistol
 	is_setup = true
 
 func _process(delta):
@@ -247,19 +246,20 @@ func select_weapon(name):
 # offset = 1 for next, -1 for prev
 func select_next_weapon(offset):
 	inventory_lock.lock()
-	if current_weapon != null:
+	var n = $Inventory.get_child_count()
+	if current_weapon != null and n > 0:
 		current_weapon.set_active(false)
 	
-	var n = $Inventory.get_child_count()
-	var i = current_weapon.get_index() + offset
-	if i < 0:
-		i += n
-	i = i % n
-	
-	current_weapon = $Inventory.get_child(i)
-	current_weapon.set_active(true)
+		var i = current_weapon.get_index() + offset
+		if i < 0:
+			i += n
+		i = i % n
+		
+		current_weapon = $Inventory.get_child(i)
+		current_weapon.set_active(true)
 	inventory_lock.unlock()
-	emit_signal('weapon_selected', current_weapon.name)
+	if current_weapon != null:
+		emit_signal('weapon_selected', current_weapon.name)
 
 func take_damage(damage):
 	if invulnerable:
@@ -294,6 +294,10 @@ func spawn(position):
 	self.position = position
 	_set_health(max_health)
 	alive = true
+
+func delayed_spawn(position):
+	$SpawnTimer.connect('timeout', self, 'spawn', [position], CONNECT_ONESHOT)
+	$SpawnTimer.start()
 
 func _on_InvulnTimer_timeout():
 	invulnerable = false

@@ -4,7 +4,7 @@ const MAX_DISTANCE = 10000 # despawn after this distance
 const player_scene_path = 'res://Player.tscn'
 const orb_scene_path = 'res://Objects/Orb.tscn'
 
-onready var Math = preload('res://Math.gd')
+onready var Math = preload('res://Utils/Math.gd')
 
 # set on setup
 var is_setup = false
