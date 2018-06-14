@@ -1,7 +1,6 @@
 
 # Bugs
 - Weapon tray doesn't ever remove weapons. Probably want an 'inventory_changed' signal to account for both addition and removal
-- able to jump on bullets without damaging yourself
 - can't edit player names in the lobby
 
 

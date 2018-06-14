@@ -8,15 +8,15 @@
 custom_solver_bias = 0.0
 extents = Vector2( 4, 2.95959 )
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" index="0"]
 
 z_index = -1
-input_pickable = true
+input_pickable = false
 collision_layer = 0
-collision_mask = 1
+collision_mask = 6
 mode = 0
-mass = 1.0
-friction = 1.0
+mass = 0.01
+friction = 0.0
 bounce = 0.0
 gravity_scale = 0.0
 custom_integrator = false
@@ -24,7 +24,7 @@ continuous_cd = 2
 contacts_reported = 2
 contact_monitor = true
 sleeping = false
-can_sleep = true
+can_sleep = false
 linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0

@@ -1,6 +1,6 @@
 extends Node2D
 
-signal fired
+signal fired(bullets)
 
 export (Texture) var texture
 export (int) var shoot_vel = 5000
@@ -52,14 +52,16 @@ func try_shoot(fire_held):
 				_shoot()
 
 func _shoot():
+	var bullets = []
 	for i in range(shot_count):
 		var bullet = bullet_scene.instance()
 		bullet.setup(bullet_parent, self, shoot_vel, damage)
+		bullets.append(bullet)
 
 	$FireSound.play()
 	can_shoot = false
 	cooldown_timer.start()
-	emit_signal('fired')
+	emit_signal('fired', bullets)
 
 func set_active(active):
 	self.active = active

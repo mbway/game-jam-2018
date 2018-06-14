@@ -40,9 +40,13 @@ func _physics_process(delta):
 
 
 func _on_Bullet_body_entered(body):
-	# only deal damage to other players
-	var hit_other_player = bool(body.get_filename() == player_scene_path and body != shot_from.get_node('../..'))
-	var hit_orb = body.get_filename() == orb_scene_path
-	if hit_other_player or hit_orb:
+	if body.get_filename() == orb_scene_path:
 		body.take_damage(damage)
+		
+	# will collide with the bullet collider, the player is its parent
+	var parent = body.get_node('..')
+	if parent.get_filename() == player_scene_path:
+		parent.take_damage(damage)
+	
+	
 	queue_free()
