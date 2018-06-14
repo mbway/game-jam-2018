@@ -3,6 +3,9 @@ extends KinematicBody2D
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
+var globals
+onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
+
 ## SIGNALS ##
 signal die
 signal hit
@@ -10,34 +13,30 @@ signal weapon_equiped(Node)
 signal weapon_selected(Node)
 
 ## CONSTANTS ##
-var UP = Vector2(0, -1)
 const BEFORE_START = -999 # timestamp long before the start of the game (ms)
-const JOY_X = 2
-const JOY_Y = 3
-const JOY_DEADZONE = 0.2
 
-onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 
 # set when spawned in
 var is_setup = false
-var input_prefix = null # eg 'p1_' for player 1
-var camera = null # used for mouse input
-var mouse_look = true # whether to use the mouse for looking around (false => gamepad)
+var camera = null # used for mouse input and camera shake
 var bullet_parent = null # the node to spawn the bullets under
-var max_health = 100
+var config # globals.PlayerConfig
 
 var current_weapon = null
 var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
-var team
 
 ## health and damage
+var max_health = 100
 var health = 0
 var alive = false
 var invulnerable = false
 
 
+var fire_pressed = false
+var fire_held = false
 
 ## MOVEMENT ##
+var UP = Vector2(0, -1)
 var GRAVITY = 40
 var ACCELERATION = 3000
 var MAX_SPEED = 600
@@ -54,6 +53,7 @@ var velocity = Vector2(0, 0) # current velocity
 const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
 const EDGE_JUMP_TOLERANCE = 50 # ms
 var last_jump_ms = BEFORE_START # ms
+var jump_released = false # able to cancel jump early by releasing the jump button
 var was_on_floor = false # was on the floor last physics update
 var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 
@@ -61,16 +61,15 @@ var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 const MAX_ADDITIONAL_JUMPS = 1
 var additional_jumps_left = 1 # to allow double jumps, reset when touching the floor
 
+
 func _ready():
+	globals = get_node('/root/globals')
 	hide()
 
-func setup(input_prefix, max_health, bullet_parent, camera, mouse_look, team):
-	self.input_prefix = input_prefix
-	self.max_health = max_health
+func setup(config, bullet_parent, camera):
+	self.config = config
 	self.bullet_parent = bullet_parent
 	self.camera = camera
-	self.mouse_look = mouse_look
-	self.team = team
 	is_setup = true
 
 func _process(delta):
@@ -80,120 +79,24 @@ func _process(delta):
 	inventory_lock.lock()
 	if alive and current_weapon != null:
 		# gun rotation
-		var angle = 0
-		var angle_correction = 0
-
-		if mouse_look:
-			# mouse
-			# maths copied from power defence
-			var gun_pos = current_weapon.get_position()
-			var mouse_pos = get_local_mouse_position()
-			angle = mouse_pos.angle_to_point(gun_pos)
-			var d = (mouse_pos - gun_pos).length()
-			var o = (current_weapon.get_node('Muzzle').get_position()-gun_pos).y
-			angle_correction = asin(o/d)
-		else:
-			# gamepad
-			var direction = Vector2(Input.get_joy_axis(0, JOY_X), Input.get_joy_axis(0, JOY_Y))
-			if direction.length() > JOY_DEADZONE:
-				angle = direction.angle()
-			else:
-				angle = current_weapon.rotation
-
+		var angle = get_weapon_angle()
+		
 		if abs(angle) > PI/2:
 			current_weapon.scale.y = -1
-			angle += angle_correction
 		else:
 			current_weapon.scale.y = 1
-			angle -= angle_correction
+		
 		current_weapon.set_rotation(angle)
-
-		# gun firing
-		var pressed = Input.is_action_pressed(input_prefix + 'fire')
-		var just_pressed = Input.is_action_just_pressed(input_prefix + 'fire')
-		current_weapon.try_shoot(pressed, just_pressed, delta)
-	
-		# weapon selecting
-		if Input.is_action_just_pressed(input_prefix + 'next'):
-			select_next_weapon(1)
-		if Input.is_action_just_pressed(input_prefix + 'prev'):
-			select_next_weapon(-1)
+		
+		if fire_pressed:
+			current_weapon.try_shoot(fire_held)
+			fire_held = true
 	inventory_lock.unlock()
 	
-func _input(event):
-	# mouse wheel events have to be handled specially :(
-	# this is apparently because they are more short-lived
-	if mouse_look and event is InputEventMouseButton and event.pressed:
-		if event.button_index == BUTTON_WHEEL_UP:
-			select_next_weapon(-1)
-		if event.button_index == BUTTON_WHEEL_DOWN:
-			select_next_weapon(1)
-
-func _physics_process(delta):
-	if not is_setup:
-		return
-
-	velocity.y += GRAVITY
-
-	var now = OS.get_ticks_msec()
-	var on_floor = is_on_floor()
-
-	# get the direction from user input
+	
+	# play the appropriate animation
 	if alive:
-		var direction = 0
-		if Input.is_action_pressed(input_prefix + 'left'):
-			direction += -1
-		if Input.is_action_pressed(input_prefix + 'right'):
-			direction += 1
-
-		# calculate the speed
-		#velocity.x = direction*MAX_SPEED
-		velocity.x += direction*ACCELERATION*delta
-		if sign(velocity.x) != sign(direction):
-			velocity.x *= REACTIVITY_DECAY
-		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-
-		# able to register a jump if character just about to hit the floor
-		if Input.is_action_just_pressed(input_prefix + 'up'):
-			last_jump_ms = now
-
-		if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
-			if on_floor:
-				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
-			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
-				# able to jump shortly after falling from a platform
-				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
-			elif additional_jumps_left > 0:
-				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
-				additional_jumps_left -= 1
-
-		if on_floor:
-			additional_jumps_left = MAX_ADDITIONAL_JUMPS
-			# apply friction
-			if direction == 0: # not moving left or right
-				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
-		else:
-			# able to jump shortly after falling from a platform
-			if was_on_floor:
-				left_floor_ms = now
-
-			# cancel jump in mid air
-			if Input.is_action_just_released(input_prefix + 'up'):
-				# if still moving up, then stop moving up
-				velocity.y = max(velocity.y, -JUMP_SPEED/5)
-
-		was_on_floor = on_floor
-	else:
-		# dead
-		if on_floor:
-			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
-
-	# play the appropriate animations
-	if alive:
-		if on_floor:
+		if is_on_floor():
 			if velocity.x == 0:
 				$AnimatedSprite.play('idle')
 			else:
@@ -211,7 +114,178 @@ func _physics_process(delta):
 	elif velocity.x < 0:
 		$AnimatedSprite.flip_h = true
 
+
+func _physics_process(delta):
+	if not is_setup:
+		return
+
+	velocity.y += GRAVITY
+
+	var now = OS.get_ticks_msec()
+	var on_floor = is_on_floor()
+
+	# get the direction from user input
+	if alive:
+		# [-1,1], may be non-integer if analog control
+		var direction = get_move_direction()
+
+		# calculate the speed
+		#velocity.x = direction*MAX_SPEED
+		velocity.x += sign(direction)*ACCELERATION*delta
+		if sign(velocity.x) != sign(direction):
+			velocity.x *= REACTIVITY_DECAY
+		var max_speed = abs(direction)*MAX_SPEED
+		velocity.x = clamp(velocity.x, -max_speed, max_speed)
+
+		# able to register a jump if character just about to hit the floor
+		if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
+			if on_floor:
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
+				# able to jump shortly after falling from a platform
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+			elif additional_jumps_left > 0:
+				# ensure that the current jump is canceled. with more than
+				# one button assigned to jump it is possible to trigger
+				# the double jump without releasing the first
+				velocity.y = max(velocity.y, -JUMP_SPEED/5)
+				
+				velocity.y -= JUMP_SPEED
+				last_jump_ms = BEFORE_START
+				additional_jumps_left -= 1
+
+		if on_floor:
+			#TODO: maybe try and check that we aren't standing on a bullet
+			additional_jumps_left = MAX_ADDITIONAL_JUMPS # reset double jump
+			
+			# apply friction
+			if direction == 0: # not moving left or right
+				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+		else:
+			# able to jump shortly after falling from a platform
+			if was_on_floor:
+				left_floor_ms = now
+
+			# cancel jump in mid air
+			if jump_released:
+				# if still moving up, then stop moving up
+				velocity.y = max(velocity.y, -JUMP_SPEED/5)
+
+	else:
+		# dead
+		if on_floor:
+			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+
+	was_on_floor = on_floor
 	velocity = move_and_slide(velocity, UP)
+
+	
+func _input(event):
+	# mouse wheel events have to be handled specially :(
+	# this is apparently because they are more short-lived
+	if config.control == globals.KEYBOARD_CONTROL:
+		# mouse scroll to switch weapons
+		if event is InputEventMouseButton:
+			if event.pressed:
+				if event.button_index == BUTTON_WHEEL_UP:
+					select_next_weapon(-1)
+				elif event.button_index == BUTTON_WHEEL_DOWN:
+					select_next_weapon(1)
+				elif event.button_index == BUTTON_LEFT:
+					fire_pressed = true
+			else:
+				if event.button_index == BUTTON_LEFT:
+					fire_pressed = false
+					fire_held = false
+		
+		elif event is InputEventKey:
+			if event.pressed: # disregard key repeats
+				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
+					try_jump()
+			else: # released
+				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
+					jump_released = true
+	
+					
+	elif config.control == globals.GAMEPAD_CONTROL:
+		if event is InputEventJoypadButton:
+			if event.pressed:
+				if event.button_index == JOY_XBOX_A or event.button_index == JOY_L:
+					try_jump()
+				elif event.button_index == JOY_XBOX_X:
+					select_next_weapon(1)
+				elif event.button_index == JOY_XBOX_Y:
+					select_next_weapon(-1)
+				elif event.button_index == JOY_R:
+					fire_pressed = true
+						
+			else: # released
+				if event.button_index == JOY_XBOX_A or event.button_index == JOY_L:
+					jump_released = true
+				elif event.button_index == JOY_R:
+					fire_pressed = false
+					fire_held = false
+				
+func try_jump():
+	last_jump_ms = OS.get_ticks_msec() # want to jump
+	jump_released = false
+	
+
+# returns a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
+# with gamepad input this value may be a non-integer value
+func get_move_direction():
+	var direction = 0
+	if config.control == globals.KEYBOARD_CONTROL:
+		if Input.is_key_pressed(KEY_A):
+			direction += -1
+		if Input.is_key_pressed(KEY_D):
+			direction += 1
+	elif config.control == globals.GAMEPAD_CONTROL:
+		direction = Input.get_joy_axis(config.gamepad_id, globals.JOY_MOVE_X)
+		if abs(direction) < globals.JOY_DEADZONE:
+			direction = 0
+			if Input.is_joy_button_pressed(config.gamepad_id, JOY_DPAD_LEFT):
+				direction += -1
+			if Input.is_joy_button_pressed(config.gamepad_id, JOY_DPAD_RIGHT):
+				direction += 1
+	else:
+		print('not implemented')
+	return direction
+
+func get_weapon_angle():
+	var angle = 0
+
+	if config.control == globals.KEYBOARD_CONTROL:
+		# mouse
+		# maths copied from power defence
+		var gun_pos = current_weapon.get_position()
+		var mouse_pos = get_local_mouse_position()
+		angle = mouse_pos.angle_to_point(gun_pos)
+		var d = (mouse_pos - gun_pos).length()
+		var o = (current_weapon.get_node('Muzzle').get_position()-gun_pos).y
+		if d != 0:
+			var angle_correction = asin(o/d)
+			if abs(angle) > PI/2:
+				angle += angle_correction
+			else:
+				angle -= angle_correction
+			
+	elif config.control == globals.GAMEPAD_CONTROL:
+		# gamepad
+		var x = Input.get_joy_axis(config.gamepad_id, globals.JOY_LOOK_X)
+		var y = Input.get_joy_axis(config.gamepad_id, globals.JOY_LOOK_Y)
+		var direction = Vector2(x, y)
+		if direction.length() > globals.JOY_DEADZONE:
+			angle = direction.angle()
+		else:
+			angle = current_weapon.rotation
+	else:
+		print('not implemented')
+	
+	return angle
+
 
 func _clear_inventory():
 	inventory_lock.lock()
@@ -304,3 +378,5 @@ func _on_InvulnTimer_timeout():
 
 func _on_weapon_fired():
 	camera.shake(current_weapon.screen_shake)
+	if config.control == globals.GAMEPAD_CONTROL:
+		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)

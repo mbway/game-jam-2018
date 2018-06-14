@@ -40,9 +40,9 @@ func setup(bullet_parent):
 	add_child(cooldown_timer)
 
 
-func try_shoot(fire_pressed, fire_just_pressed, delta):
+func try_shoot(fire_held):
 	if active and can_shoot: # gun ready
-		if (auto_fire and fire_pressed) or fire_just_pressed: # player wants to fire
+		if not fire_held or (auto_fire and fire_held): # player wants to fire
 			# weapons that require charging fire once their timer expires
 			if requires_charging and $ChargeTimer.is_stopped():
 				can_shoot = false

@@ -31,7 +31,7 @@ var game_modes = [
 	['CTF', 'Capture The Flag'],
 	['Overrule', 'Overrule']
 ]
-var input_methods = [] # [{'type': ['KEY','GAMEPAD','AI'], 'name':#, 'index':(only with GAMEPAD)}]
+var input_methods = [] # [{'type': globals.CONTROL_TYPE, 'name':#, 'index':(only with GAMEPAD)}]
 var teams = ['Team 1', 'Team 2']
 
 var selected_map = 0
@@ -63,10 +63,10 @@ func _ready():
 	
 	players = find_node('PlayerList')
 	
-	input_methods.append({'type' : 'KEY', 'name' : 'Keyboard + Mouse'})
+	input_methods.append({'type' : globals.KEYBOARD_CONTROL, 'name' : 'Keyboard + Mouse'})
 	for g in Input.get_connected_joypads():
-		input_methods.append({'type' : 'GAMEPAD', 'index' : g, 'name' : 'Gamepad %d' % g})
-	input_methods.append({'type' : 'AI', 'name' : 'AI'})
+		input_methods.append({'type' : globals.GAMEPAD_CONTROL, 'index' : g, 'name' : 'Gamepad %d' % g})
+	input_methods.append({'type' : globals.AI_CONTROL, 'name' : 'AI'})
 	
 	# add a player for each non-AI input method
 	for i in range(len(input_methods) - 1):
@@ -95,13 +95,18 @@ func _on_StartButton_pressed():
 	globals.player_data.clear()
 	for i in range(len(players_list)):
 		var p = players_list[i]
-		var details = {
-			'num' : i + 1, # 1-based
-			'name' : p.find_node('PlayerName').text,
-			'controls' : input_methods[p.find_node('ControlOption').selected],
-			'team' : p.find_node('TeamOption').selected + 1 # 1-based
-		}
-		globals.player_data.append(details)
+		
+		var config = globals.PlayerConfig.new()
+		config.num = i + 1 # 1-based
+		config.name = p.find_node('PlayerName').text
+		config.team = p.find_node('TeamOption').selected + 1 # 1-based
+		
+		var selected_input = input_methods[p.find_node('ControlOption').selected]
+		config.control = selected_input['type']
+		if config.control == globals.GAMEPAD_CONTROL:
+			config.gamepad_id = selected_input['index']
+		
+		globals.player_data.append(config)
 	
 	if globals.game_mode == 'TDM':
 		var options = game_mode_options[game_mode_dropdown.selected]

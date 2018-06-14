@@ -26,10 +26,13 @@ var game_mode = null # an element of game_mode_data
 
 func _ready():
 	globals = get_node('/root/globals')
-	input = preload('res://Utils/input.gd').new()
 	
 	if globals.settings.get_value('options', 'music', true):
 		$Music.play()
+	
+	if globals.settings.get_value('options', 'mouse_confined', true):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED) # prevent going outside the game window
+	Input.set_custom_mouse_cursor(preload('res://Assets/crosshairs.png'), Input.CURSOR_ARROW, Vector2(15, 15))
 	
 	for n in $GameMode.get_children():
 		game_mode_nodes[n.name] = n
@@ -37,9 +40,14 @@ func _ready():
 		game_mode_data[n.name] = load('res://Gameplay/' + n.name +'.gd').new()
 		add_child(game_mode_data[n.name])
 	
-	input.reset_input_maps(len(globals.player_data))
+	var keyboard_player = false # whether any players are using the keyboard + mouse
 	for p in globals.player_data:
+		if p.control == globals.KEYBOARD_CONTROL:
+			keyboard_player = true
 		create_player(p)
+	
+	if not keyboard_player:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	set_game_mode(globals.game_mode)
 	game_mode.setup(globals.game_mode_details)
@@ -53,22 +61,10 @@ func set_game_mode(mode):
 	game_mode = game_mode_data[mode]
 	print('game mode changed to: ' + mode)
 
-func create_player(details):
-	var prefix = 'p%d_' % details['num']
+func create_player(config):
 	var p = player_scene.instance()
-	var mouse_look = bool(details['controls']['type'] == 'KEY')
-	setup_player_control(prefix, details['controls'])
-	p.setup(prefix, MAX_HEALTH, $Bullets, $Camera, mouse_look, details['team'])
-	p.name = 'P%d' % details['num']
+	p.setup(config, $Bullets, $Camera)
+	p.name = 'P%d' % config.num
 	$Players.add_child(p)
 
-func setup_player_control(prefix, details):
-	if details['type'] == 'KEY':
-		input.assign_keyboard_mouse_input(prefix)
-		
-	elif details['type'] == 'GAMEPAD':
-		input.assign_gamepad_input(prefix, details['index'])
-		
-	elif details['type'] == 'AI':
-		print('not implemented')
 	

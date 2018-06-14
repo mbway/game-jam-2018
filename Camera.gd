@@ -52,8 +52,20 @@ func _physics_process(delta):
 
 func remove_follow(node):
 	follow.erase(node)
+	update_settings()
 
 func add_follow(node):
 	if follow.find(node) == -1:
 		follow.append(node)
+	update_settings()
+
+func update_settings():
+	if len(follow) == 1:
+		# prevents jittering
+		smoothing_enabled = false
+	else:
+		smoothing_enabled = true
+	
+	
+	
 

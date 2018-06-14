@@ -9,6 +9,10 @@ func _ready():
 	randomize() # generate true random numbers
 	if globals.settings.get_value('options', 'music', true):
 		$Music.play()
+	
+	#Input.set_custom_mouse_cursor(preload('res://Assets/cursor.png'), Input.CURSOR_ARROW, Vector2(2, 2))
+	# if captured, returns the mouse to normal. Also resets the custom cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show_start_screen()
 
 func show_start_screen():

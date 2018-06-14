@@ -25,9 +25,11 @@ func setup(details):
 	is_setup = true
 	
 	
-	#TODO: assuming 2 players
+	#TODO: currently assuming 2 players
 	HUD.connect_player(players.get_child(0), 1)
-	HUD.connect_player(players.get_child(1), 2)
+	if players.get_child_count() > 1:
+		HUD.connect_player(players.get_child(1), 2)
+		
 	update_HUD()
 	
 	for p in players.get_children():
@@ -37,7 +39,7 @@ func setup(details):
 
 
 func on_player_die(player):
-	var t = player.team - 1 # 1-based
+	var t = player.config.team - 1 # 1-based
 	lives[t] = max(0, lives[t] - 1)
 	update_HUD()
 	if lives[t] == 0:
