@@ -201,10 +201,10 @@ func _input(event):
 					fire_held = false
 		
 		elif event is InputEventKey:
-			if event.pressed: # disregard key repeats
+			if event.pressed and not event.is_echo(): # disregard key repeats
 				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
 					try_jump()
-			else: # released
+			elif not event.pressed: # released
 				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
 					jump_released = true
 	
