@@ -52,8 +52,9 @@ var velocity = Vector2(0, 0) # current velocity
 # mechanisms to make the jumping feel better
 const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
 const EDGE_JUMP_TOLERANCE = 50 # ms
-var last_jump_ms = BEFORE_START # ms
+var last_jump_pressed_ms = BEFORE_START # ms
 var jump_released = false # able to cancel jump early by releasing the jump button
+var last_jump_ms = BEFORE_START # ms
 var was_on_floor = false # was on the floor last physics update
 var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 
@@ -68,9 +69,12 @@ func _ready():
 
 func setup(config, bullet_parent, camera):
 	self.config = config
+	if self.config.control != globals.AI_CONTROL:
+		remove_child($AINodes)
 	self.bullet_parent = bullet_parent
 	self.camera = camera
 	is_setup = true
+
 
 func _process(delta):
 	if not is_setup:
@@ -80,20 +84,20 @@ func _process(delta):
 	if alive and current_weapon != null:
 		# gun rotation
 		var angle = get_weapon_angle()
-		
+
 		if abs(angle) > PI/2:
 			current_weapon.scale.y = -1
 		else:
 			current_weapon.scale.y = 1
-		
+
 		current_weapon.set_rotation(angle)
-		
+
 		if fire_pressed:
 			current_weapon.try_shoot(fire_held)
 			fire_held = true
 	inventory_lock.unlock()
-	
-	
+
+
 	# play the appropriate animation
 	if alive:
 		if is_on_floor():
@@ -137,29 +141,61 @@ func _physics_process(delta):
 		var max_speed = abs(direction)*MAX_SPEED
 		velocity.x = clamp(velocity.x, -max_speed, max_speed)
 
+
+		# handle jumping
+
+		# AI jumping
+		if config.control == globals.AI_CONTROL:
+			var t = $AINodes/MoveTarget.position
+			var time_since_jump = now - last_jump_ms
+			var want_to_jump = false
+
+			if t.y < -20 and abs(t.x) < 400:
+				# target above and relatively close
+				want_to_jump = true
+			else:
+				# target not above
+				var blocked_left = sign(velocity.x) < 0 and $AINodes.is_blocked_left()
+				var blocked_right = sign(velocity.x) > 0 and $AINodes.is_blocked_right()
+
+				if t.x < -10 and blocked_left:
+					want_to_jump = true
+				elif t.x > 10 and blocked_right:
+					want_to_jump = true
+				elif not on_floor and t.y > 10 and not (blocked_left or blocked_right):
+					# mid-jump and target below
+					jump_released = true
+
+
+			if want_to_jump and (on_floor or time_since_jump > 250):
+				try_jump()
+
 		# able to register a jump if character just about to hit the floor
-		if now - last_jump_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
+		if now - last_jump_pressed_ms < PREEMPTIVE_JUMP_TOLERANCE: # want to jump
 			if on_floor:
 				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
+				last_jump_pressed_ms = BEFORE_START
+				last_jump_ms = now
 			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
 				# able to jump shortly after falling from a platform
 				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
+				last_jump_pressed_ms = BEFORE_START
+				last_jump_ms = now
 			elif additional_jumps_left > 0:
 				# ensure that the current jump is canceled. with more than
 				# one button assigned to jump it is possible to trigger
 				# the double jump without releasing the first
 				velocity.y = max(velocity.y, -JUMP_SPEED/5)
-				
+
 				velocity.y -= JUMP_SPEED
-				last_jump_ms = BEFORE_START
+				last_jump_pressed_ms = BEFORE_START
 				additional_jumps_left -= 1
+				last_jump_ms = now
 
 		if on_floor:
 			#TODO: maybe try and check that we aren't standing on a bullet
 			additional_jumps_left = MAX_ADDITIONAL_JUMPS # reset double jump
-			
+
 			# apply friction
 			if direction == 0: # not moving left or right
 				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
@@ -181,7 +217,7 @@ func _physics_process(delta):
 	was_on_floor = on_floor
 	velocity = move_and_slide(velocity, UP)
 
-	
+
 func _input(event):
 	# mouse wheel events have to be handled specially :(
 	# this is apparently because they are more short-lived
@@ -199,7 +235,7 @@ func _input(event):
 				if event.button_index == BUTTON_LEFT:
 					fire_pressed = false
 					fire_held = false
-		
+
 		elif event is InputEventKey:
 			if event.pressed and not event.is_echo(): # disregard key repeats
 				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
@@ -207,8 +243,8 @@ func _input(event):
 			elif not event.pressed: # released
 				if event.scancode == KEY_W or event.scancode == KEY_SPACE:
 					jump_released = true
-	
-					
+
+
 	elif config.control == globals.GAMEPAD_CONTROL:
 		if event is InputEventJoypadButton:
 			if event.pressed:
@@ -220,28 +256,30 @@ func _input(event):
 					select_next_weapon(-1)
 				elif event.button_index == JOY_R:
 					fire_pressed = true
-						
+
 			else: # released
 				if event.button_index == JOY_XBOX_A or event.button_index == JOY_L:
 					jump_released = true
 				elif event.button_index == JOY_R:
 					fire_pressed = false
 					fire_held = false
-				
+
 func try_jump():
-	last_jump_ms = OS.get_ticks_msec() # want to jump
+	last_jump_pressed_ms = OS.get_ticks_msec() # want to jump
 	jump_released = false
-	
+
 
 # returns a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
 # with gamepad input this value may be a non-integer value
 func get_move_direction():
 	var direction = 0
+
 	if config.control == globals.KEYBOARD_CONTROL:
 		if Input.is_key_pressed(KEY_A):
 			direction += -1
 		if Input.is_key_pressed(KEY_D):
 			direction += 1
+
 	elif config.control == globals.GAMEPAD_CONTROL:
 		direction = Input.get_joy_axis(config.gamepad_id, globals.JOY_MOVE_X)
 		if abs(direction) < globals.JOY_DEADZONE:
@@ -250,6 +288,16 @@ func get_move_direction():
 				direction += -1
 			if Input.is_joy_button_pressed(config.gamepad_id, JOY_DPAD_RIGHT):
 				direction += 1
+
+	elif config.control == globals.AI_CONTROL:
+		var tx = $AINodes/MoveTarget.position.x
+		if abs(tx) < 5:
+			direction = 0
+		elif abs(tx) < 10:
+			direction = tx/10 # analog control for fine movements
+		else:
+			direction = sign(tx)
+
 	else:
 		print('not implemented')
 	return direction
@@ -271,7 +319,7 @@ func get_weapon_angle():
 				angle += angle_correction
 			else:
 				angle -= angle_correction
-			
+
 	elif config.control == globals.GAMEPAD_CONTROL:
 		# gamepad
 		var x = Input.get_joy_axis(config.gamepad_id, globals.JOY_LOOK_X)
@@ -281,9 +329,13 @@ func get_weapon_angle():
 			angle = direction.angle()
 		else:
 			angle = current_weapon.rotation
+
+	elif config.control == globals.AI_CONTROL:
+		angle = 0 # TODO
+
 	else:
 		print('not implemented')
-	
+
 	return angle
 
 
@@ -293,7 +345,7 @@ func _clear_inventory():
 	for w in $Inventory.get_children():
 		w.free() # queue_free here causes crashes
 	inventory_lock.unlock()
-	
+
 func equip_weapon(gun):
 	inventory_lock.lock()
 	if $Inventory.has_node(gun.name):
@@ -304,7 +356,7 @@ func equip_weapon(gun):
 		$Inventory.add_child(gun)
 		emit_signal('weapon_equiped', gun)
 	inventory_lock.unlock()
-	
+
 func select_weapon(name):
 	inventory_lock.lock()
 	if current_weapon != null:
@@ -316,19 +368,19 @@ func select_weapon(name):
 		print('player does not have weapon: %s' % name)
 	inventory_lock.unlock()
 	emit_signal('weapon_selected', name)
-		
+
 # offset = 1 for next, -1 for prev
 func select_next_weapon(offset):
 	inventory_lock.lock()
 	var n = $Inventory.get_child_count()
 	if current_weapon != null and n > 0:
 		current_weapon.set_active(false)
-	
+
 		var i = current_weapon.get_index() + offset
 		if i < 0:
 			i += n
 		i = i % n
-		
+
 		current_weapon = $Inventory.get_child(i)
 		current_weapon.set_active(true)
 	inventory_lock.unlock()
@@ -360,11 +412,11 @@ func spawn(position):
 	show()
 	invulnerable = true
 	$InvulnTimer.start()
-	
+
 	_clear_inventory()
 	equip_weapon(pistol_scene.instance())
 	select_weapon('Pistol')
-	
+
 	layers = 1 # collide with map and bullets
 	self.position = position
 	_set_health(max_health)
@@ -381,6 +433,6 @@ func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
 	if config.control == globals.GAMEPAD_CONTROL:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
-	
+
 	for b in bullets:
 		b.add_collision_exception($BulletCollider)

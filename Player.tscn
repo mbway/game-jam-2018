@@ -1,34 +1,35 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/Player_idle/Player_idle1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Player_idle/Player_idle2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup1.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup3.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup4.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup5.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown1.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown3.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown4.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run1.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run2.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run3.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run4.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run5.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run6.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run7.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Player/Player_run/Player_Run8.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Player/Player_death/Player_death1.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Player/Player_death/Player_death2.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Player/Player_death/Player_death3.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Player/Player_death/Player_death4.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Player/Player_death/Player_death5.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Player/Player_death/Player_death6.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Player/Player_death/Player_death7.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Player/Player_death/Player_death8.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown3.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown4.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run5.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run6.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run7.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Player/Player_run/Player_Run8.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Player/Player_death/Player_death1.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Player/Player_death/Player_death2.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Player/Player_death/Player_death3.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Player/Player_death/Player_death4.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Player/Player_death/Player_death5.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Player/Player_death/Player_death6.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Player/Player_death/Player_death7.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Player/Player_death/Player_death8.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup1.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup2.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup3.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup4.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup5.png" type="Texture" id=28]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=29]
+[ext_resource path="res://AINodes.gd" type="Script" id=30]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -38,25 +39,25 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": false,
-"name": "jump",
-"speed": 14.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": false,
 "name": "fall",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
 "loop": false,
 "name": "death",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
+"loop": false,
+"name": "jump",
+"speed": 14.0
 } ]
 _sections_unfolded = [ "Resource" ]
 
@@ -65,6 +66,18 @@ _sections_unfolded = [ "Resource" ]
 custom_solver_bias = 0.0
 radius = 22.0
 height = 12.0
+
+[sub_resource type="SegmentShape2D" id=3]
+
+custom_solver_bias = 0.0
+a = Vector2( -52, 18 )
+b = Vector2( -26, 18 )
+
+[sub_resource type="SegmentShape2D" id=4]
+
+custom_solver_bias = 0.0
+a = Vector2( 52, 18 )
+b = Vector2( 26, 18 )
 
 [node name="Player" type="KinematicBody2D" index="0"]
 
@@ -125,6 +138,49 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( 0, 2 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="AINodes" type="Node2D" parent="." index="7"]
+
+script = ExtResource( 30 )
+
+[node name="MoveTarget" type="Position2D" parent="AINodes" index="0"]
+
+z_index = 2
+_sections_unfolded = [ "Z Index" ]
+
+[node name="LeftCollider" type="Area2D" parent="AINodes" index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AINodes/LeftCollider" index="0"]
+
+position = Vector2( 0, 6 )
+shape = SubResource( 3 )
+
+[node name="RightCollider" type="Area2D" parent="AINodes" index="2"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AINodes/RightCollider" index="0"]
+
+position = Vector2( 0, 6 )
+shape = SubResource( 4 )
 
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]
 

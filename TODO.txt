@@ -54,6 +54,7 @@
 - main menu music
 - names above players rather than health percent
 - laser sights for players using gamepads to make aiming easier
+- could add one-way platforms quite easily
 
 
 # Extension Features

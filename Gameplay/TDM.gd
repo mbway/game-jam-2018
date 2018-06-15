@@ -26,15 +26,18 @@ func setup(details):
 	
 	
 	#TODO: currently assuming 2 players
-	HUD.connect_player(players.get_child(0), 1)
-	if players.get_child_count() > 1:
+	var num_players = players.get_child_count()
+	if num_players > 0:
+		HUD.connect_player(players.get_child(0), 1)
+	if num_players > 1:
 		HUD.connect_player(players.get_child(1), 2)
 		
 	update_HUD()
 	
 	for p in players.get_children():
 		p.connect('die', self, 'on_player_die', [p])
-		camera.add_follow(p)
+		if p.config.control != globals.AI_CONTROL:
+			camera.add_follow(p)
 		spawn_player(p, false)
 
 

@@ -46,7 +46,7 @@ func _ready():
 			keyboard_player = true
 		create_player(p)
 	
-	if not keyboard_player:
+	if not keyboard_player and not globals.DEBUG: # don't hide the mouse in debug mode
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	set_game_mode(globals.game_mode)
@@ -63,8 +63,8 @@ func set_game_mode(mode):
 
 func create_player(config):
 	var p = player_scene.instance()
-	p.setup(config, $Bullets, $Camera)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
+	p.setup(config, $Bullets, $Camera)
 
 	
