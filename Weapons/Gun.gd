@@ -6,6 +6,7 @@ export (Texture) var texture
 export (int) var shoot_vel = 5000
 export (int) var damage = 20
 export (String) var bullet_scene_path = 'res://Weapons/Bullet.tscn'
+export (String) var shell_scene_path = 'res://Weapons/BulletShell.tscn'
 export (float) var cooldown = 0.1 # time after firing before the weapon can fire again
 export (bool) var auto_fire = false
 export (float) var spread = 0 # standard deviation of the angle of bullet spread in radians
@@ -20,6 +21,7 @@ export (int) var shot_count = 1 # the number of bullets spawned each shot
 var is_setup = false
 var bullet_scene # the type of bullet to use
 var bullet_parent # the node to parent the bullets to
+var shell_scene # the type of shell to use
 var fired = false
 
 # runtime
@@ -32,6 +34,7 @@ func setup(bullet_parent):
 	set_active(false)
 	self.bullet_parent = bullet_parent
 	bullet_scene = load(bullet_scene_path)
+	shell_scene = load(shell_scene_path)
 
 	cooldown_timer = Timer.new()
 	cooldown_timer.set_one_shot(true)
@@ -57,7 +60,11 @@ func _shoot():
 		var bullet = bullet_scene.instance()
 		bullet.setup(bullet_parent, self, shoot_vel, damage)
 		bullets.append(bullet)
-
+	
+	if has_node('ShellEject'):
+		var shell = shell_scene.instance()
+		shell.setup(bullet_parent,self)
+	
 	$FireSound.play()
 	can_shoot = false
 	cooldown_timer.start()

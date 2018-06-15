@@ -21,6 +21,7 @@ texture = ExtResource( 2 )
 shoot_vel = 2000
 damage = 10
 bullet_scene_path = "res://Weapons/Bullet.tscn"
+shell_scene_path = "res://Weapons/BulletShell.tscn"
 cooldown = 0.02
 auto_fire = true
 spread = 0.1
@@ -60,5 +61,9 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="ShellEject" type="Position2D" parent="." index="4"]
+
+position = Vector2( 1.22378, 9.965 )
 
 

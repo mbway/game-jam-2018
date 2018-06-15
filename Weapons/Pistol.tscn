@@ -11,12 +11,13 @@ texture = ExtResource( 2 )
 shoot_vel = 5000
 damage = 10
 bullet_scene_path = "res://Weapons/Bullet.tscn"
+shell_scene_path = "res://Weapons/BulletShell.tscn"
 cooldown = 0.1
 auto_fire = false
-charge = 0
 spread = 0
 screen_shake = 7
-shotCount = 1
+requires_charging = false
+shot_count = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -38,5 +39,7 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="ShellEject" type="Position2D" parent="." index="3"]
 
 
