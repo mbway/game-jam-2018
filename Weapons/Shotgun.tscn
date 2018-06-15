@@ -4,13 +4,14 @@
 [ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=3]
 
-[node name="Shotgun" type="Node2D"]
+[node name="Shotgun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 shoot_vel = 2500
 damage = 20
 bullet_scene_path = "res://Weapons/ShotgunBullet.tscn"
+shell_scene_path = "res://Weapons/BulletShell.tscn"
 cooldown = 1.2
 auto_fire = false
 spread = 0.15
@@ -40,5 +41,9 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="ShellEject" type="Position2D" parent="." index="3"]
+
+position = Vector2( -1.15982, 5.91509 )
 
 

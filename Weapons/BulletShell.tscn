@@ -6,34 +6,34 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 5, 3 )
+extents = Vector2( 3, 2 )
 
-[node name="Shell" type="RigidBody2D" index="0"]
+[node name="Shell" type="RigidBody2D"]
 
-z_index = -1
 input_pickable = false
 collision_layer = 2
 collision_mask = 2
 mode = 0
-mass = 0.00102041
-friction = 0.0
+mass = 1.0
+friction = 1.0
 bounce = 0.0
-gravity_scale = 98.0
+gravity_scale = 5.0
 custom_integrator = false
-continuous_cd = 2
-contacts_reported = 2
-contact_monitor = true
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
 sleeping = false
-can_sleep = false
+can_sleep = true
 linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Audio Bus", "Collision", "Linear", "collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -44,7 +44,7 @@ shape = SubResource( 1 )
 [node name="DespawnTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 3.0
 one_shot = true
 autostart = false
 

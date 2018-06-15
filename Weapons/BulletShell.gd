@@ -19,7 +19,7 @@ func setup(parent, shot_from):
 	spawn_loc = global_position
 	#var spread = rand_range(-shot_from.spread, shot_from.spread)
 	var spread = Math.random_normal(0, 1)
-	shoot_direction = Vector2(-1000, -1000).rotated(shot_from.rotation + spread)
+	shoot_direction = Vector2(-100, -100).rotated(shot_from.rotation + spread)
 	linear_velocity = shoot_direction
 	angular_velocity = 1
 	

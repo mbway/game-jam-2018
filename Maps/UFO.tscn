@@ -56,9 +56,9 @@ __meta__ = {
 
 [node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="Bullets" type="Node" parent="." index="2"]
+[node name="Players" type="Node" parent="." index="2"]
 
-[node name="Players" type="Node" parent="." index="3"]
+[node name="Bullets" type="Node" parent="." index="3"]
 
 [node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
 
