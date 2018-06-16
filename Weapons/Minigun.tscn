@@ -9,8 +9,8 @@
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "default",
+"loop": false,
+"name": "reload",
 "speed": 5.0
 } ]
 
@@ -28,14 +28,14 @@ spread = 0.1
 screen_shake = 7
 requires_charging = false
 shot_count = 1
+has_reload_animation = true
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 position = Vector2( 40, 17 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 1 )
-animation = "default"
-playing = true
+animation = "reload"
 _sections_unfolded = [ "Transform" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]

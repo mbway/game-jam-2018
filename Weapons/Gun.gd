@@ -16,6 +16,7 @@ export (float) var screen_shake = 7 # amount of screen shake to add each shot
 # (with timeout connected to _shoot) and a ChargeSound node
 export (bool) var requires_charging = false
 export (int) var shot_count = 1 # the number of bullets spawned each shot
+export (bool) var has_reload_animation = false
 
 # on setup
 var is_setup = false
@@ -64,6 +65,10 @@ func _shoot():
 	if has_node('ShellEject'):
 		var shell = shell_scene.instance()
 		shell.setup(bullet_parent,self)
+	
+	if has_reload_animation:
+		$Sprite.play('reload')
+		$Sprite.frame = 0
 	
 	$FireSound.play()
 	can_shoot = false

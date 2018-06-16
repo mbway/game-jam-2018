@@ -14,7 +14,7 @@
 [ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=13]
 [ext_resource path="res://Weapons/Shotgun.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=15]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=15]
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=17]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
@@ -105,8 +105,6 @@ _sections_unfolded = [ "Pause" ]
 [node name="TDM" type="Node" parent="GameMode" index="0"]
 
 [node name="Pickups" type="Node" parent="GameMode/TDM" index="0"]
-
-editor/display_folded = true
 
 [node name="LaserCannon" parent="GameMode/TDM/Pickups" index="0" instance=ExtResource( 7 )]
 
