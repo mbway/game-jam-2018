@@ -36,16 +36,16 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 40.0
-margin_top = 40.0
-margin_right = -40.0
-margin_bottom = -40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
 _sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Size Flags" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
@@ -54,16 +54,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 1520.0
-margin_bottom = 820.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1560.0
+margin_bottom = 860.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 40
+custom_constants/separation = 20
 alignment = 0
 _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
@@ -73,7 +74,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1512.0
+margin_right = 1520.0
 margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -91,7 +92,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1450.0
+margin_right = 1458.0
 margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -112,8 +113,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1454.0
-margin_right = 1512.0
+margin_left = 1462.0
+margin_right = 1520.0
 margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -138,8 +139,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 101.0
-margin_right = 1512.0
+margin_top = 81.0
+margin_right = 1520.0
 margin_bottom = 820.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -149,7 +150,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -157,8 +158,30 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1505.0
-margin_bottom = 712.0
+margin_right = 1513.0
+margin_bottom = 732.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1496.0
+margin_bottom = 715.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -168,7 +191,7 @@ size_flags_vertical = 3
 columns = 2
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/GridContainer" index="0"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -189,7 +212,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Music" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/GridContainer" index="1"]
+[node name="Music" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -214,7 +237,7 @@ flat = false
 align = 0
 _sections_unfolded = [ "Margin" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/GridContainer" index="2"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -237,7 +260,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Hint", "custom_fonts" ]
 
-[node name="Confine" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/GridContainer" index="3"]
+[node name="Confine" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -265,8 +288,8 @@ _sections_unfolded = [ "Hint" ]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
 
-[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/GridContainer/Music" to="." method="_on_Music_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/Music" to="." method="_on_Music_toggled"]
 
-[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/GridContainer/Confine" to="." method="_on_Confine_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/Confine" to="." method="_on_Confine_toggled"]
 
 

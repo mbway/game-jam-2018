@@ -55,6 +55,7 @@
 - names above players rather than health percent
 - laser sights for players using gamepads to make aiming easier
 - could add one-way platforms quite easily
+- could implement an area effect which slows players down, could be created from a 'goo gun' type of thing or perhaps be built into particular areas of the map
 
 
 # Extension Features
@@ -71,4 +72,5 @@
 - lobby system where networked players or bots can be added
     - perhaps have a button to open it up to the network
     - and you can add local players and select their control scheme
+- could switch to using raycasting rather than physical bullets
 

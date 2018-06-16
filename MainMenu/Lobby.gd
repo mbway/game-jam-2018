@@ -76,9 +76,10 @@ func _ready():
 
 # change the selected map index and reflect the change in the UI
 func select_map(index):
-	selected_map = index % len(maps)
+	var n = len(maps)
+	selected_map = index % n
 	var map = maps[selected_map]
-	map_title.text = map['name']
+	map_title.text = '%s   (%d/%d)' % [map['name'], selected_map+1, n]
 	map_screenshot.texture = map['screenshot']
 
 

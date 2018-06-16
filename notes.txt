@@ -1,0 +1,5 @@
+
+
+# Godot Gotchas
+- to use margins in UI elements, don't use the 'Margins' settings because these frequently get overwritten and reset. Instead, use a MarginContainer and set the 'custom variables' section (the 'Margins' settings are reset even on the margin container)
+
