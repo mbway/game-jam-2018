@@ -18,6 +18,7 @@ spread = 0
 screen_shake = 7
 requires_charging = false
 shot_count = 1
+has_reload_animation = false
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -41,5 +42,7 @@ bus = "Master"
 area_mask = 1
 
 [node name="ShellEject" type="Position2D" parent="." index="3"]
+
+position = Vector2( 18.1976, 4.07705 )
 
 

@@ -1,31 +1,16 @@
 extends RigidBody2D
 
-onready var Math = preload('res://Utils/Math.gd')
-
-# set on setup
-var is_setup = false
-var shot_from
-var spawn_loc
-var shoot_direction
-
-
 func setup(parent, shot_from):
-	self.shot_from = shot_from
-	
 	parent.add_child(self)
 
 	rotation = shot_from.rotation
 	position = shot_from.get_node('ShellEject').global_position
-	spawn_loc = global_position
-	#var spread = rand_range(-shot_from.spread, shot_from.spread)
-	var spread = Math.random_normal(0, 1)
-	shoot_direction = Vector2(-100, -100).rotated(shot_from.rotation + spread)
-	linear_velocity = shoot_direction
-	angular_velocity = 1
+	var shoot_normal = Vector2(0, -1).rotated(shot_from.rotation)
+	apply_impulse(Vector2(0, 0), shoot_normal * rand_range(100, 400))
+	applied_torque = rand_range(-300, 300)
 	
 	$DespawnTimer.start()
-	
-	is_setup = true
+	$FadeOut.play('FadeOut')
 
 
 func _on_DespawnTimer_timeout():

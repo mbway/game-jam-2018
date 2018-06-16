@@ -64,7 +64,7 @@ func _shoot():
 	
 	if has_node('ShellEject'):
 		var shell = shell_scene.instance()
-		shell.setup(bullet_parent,self)
+		shell.setup(bullet_parent, self)
 	
 	if has_reload_animation:
 		$Sprite.play('reload')
