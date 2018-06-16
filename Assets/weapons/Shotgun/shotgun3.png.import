@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player.png-5e42ab849d862172be00e6b72c9838e5.stex"
+path="res://.import/shotgun3.png-d50f89e5da1446e71ae4ae6a07567fb7.stex"
 
 [deps]
 
-source_file="res://Assets/Player/player.png"
-source_md5="a5ac6403ced40547f3e48942f9a0b5cd"
+source_file="res://Assets/weapons/Shotgun/shotgun3.png"
+source_md5="2ea6eb63bfd0b7083da91e78ffe24d09"
 
-dest_files=[ "res://.import/player.png-5e42ab849d862172be00e6b72c9838e5.stex" ]
-dest_md5="f8e28a9bc5f500c06f548ce72e5bf778"
+dest_files=[ "res://.import/shotgun3.png-d50f89e5da1446e71ae4ae6a07567fb7.stex" ]
+dest_md5="5016e0ce1965617d4b398b992f17b313"
 
 [params]
 
