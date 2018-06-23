@@ -21,9 +21,10 @@
             - tile metadata: off
             - UV clip: on
             - Image Flags: none
-            - collision layer: 2 only
+            - collision layer: none
             - Post Import Script: 'res://Utils/TiledPostImport.gd'
         - then click 'reimport'
+        - you may need to close and re-open the inherited scene for the changes to take effect
     - right click the root of the scene and click 'Merge From Scene'
         - select `res://Utils/BaseMap.tscn`
         - (this will add the required nodes to the scene in one go)
