@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/panel.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Player/player.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://MainMenu/Font14.tres" type="DynamicFont" id=4]
 
@@ -14,7 +14,7 @@ extra_spacing_bottom = -5
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0

@@ -9,6 +9,7 @@
         - note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
     - Map > autocrop (optional)
     - File > Export As Image to save a screenshot for the main menu. Will have to resize in an image editor
+        - (set the Collision layer to not visible while exporting the image)
 - In Godot
     - double click on the new map (.tmx file)
     - new inherited scene
