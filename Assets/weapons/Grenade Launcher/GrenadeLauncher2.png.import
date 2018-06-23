@@ -10,7 +10,7 @@ source_file="res://Assets/weapons/Grenade Launcher/GrenadeLauncher2.png"
 source_md5="15ac20b42c1f8a94d489a5f9aa621b95"
 
 dest_files=[ "res://.import/GrenadeLauncher2.png-614e2423bc88cd24ea83cab0b98ec28d.stex" ]
-dest_md5="1638de0124900fc457b8b3b2db5aff09"
+dest_md5="d4a62b9c958799e7921be11f1e2a546b"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

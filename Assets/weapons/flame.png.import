@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GrenadeLauncher4.png-8f39988a8a5587d4283601cc0f0d293f.stex"
+path="res://.import/flame.png-fb93e9409d6a9e70f88d8dba510290cf.stex"
 
 [deps]
 
-source_file="res://Assets/weapons/Grenade Launcher/GrenadeLauncher4.png"
-source_md5="cce87490363992e9129c0c8ed07dbc8d"
+source_file="res://Assets/weapons/flame.png"
+source_md5="6fd54e123cc0f898c1cd26c178847961"
 
-dest_files=[ "res://.import/GrenadeLauncher4.png-8f39988a8a5587d4283601cc0f0d293f.stex" ]
-dest_md5="b95708afea75634a23690c981ab2470c"
+dest_files=[ "res://.import/flame.png-fb93e9409d6a9e70f88d8dba510290cf.stex" ]
+dest_md5="3a04e0044019d459817b92415c8865f5"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

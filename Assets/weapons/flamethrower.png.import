@@ -7,10 +7,10 @@ path="res://.import/flamethrower.png-630760387e6f28d80c8ef3c6da91b04c.stex"
 [deps]
 
 source_file="res://Assets/weapons/flamethrower.png"
-source_md5="41ae3004a07359f6c3c5a0a503bd5e31"
+source_md5="8b8d9ebdb6940ec6f4468b1ffedafb95"
 
 dest_files=[ "res://.import/flamethrower.png-630760387e6f28d80c8ef3c6da91b04c.stex" ]
-dest_md5="6761c03fbb1941530d33f375baa365b0"
+dest_md5="2f32b899f5a7a38cdccfeeec57f43181"
 
 [params]
 
