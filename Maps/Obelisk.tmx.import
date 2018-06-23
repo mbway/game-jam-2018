@@ -7,7 +7,7 @@ path="res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn"
 [deps]
 
 source_file="res://Maps/Obelisk.tmx"
-source_md5="29836256ccfa5f4273a7339892c929c6"
+source_md5="335d88360a8f1a85914f4f75fd5ae066"
 
 dest_files=[ "res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn" ]
 dest_md5="33cbba0c1cbb1bbb90984a7bffc7f78f"

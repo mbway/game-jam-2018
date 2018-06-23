@@ -7,7 +7,7 @@ path="res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn"
 [deps]
 
 source_file="res://Maps/SpaceMap.tmx"
-source_md5="f68c6b9675fd4a8021748bf6921b0d14"
+source_md5="8cee6396768c2d39f8772af078304909"
 
 dest_files=[ "res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn" ]
 dest_md5="20a7be7238ff107d27943342072def41"
