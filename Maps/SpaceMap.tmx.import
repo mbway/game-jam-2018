@@ -1,0 +1,24 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn"
+
+[deps]
+
+source_file="res://Maps/SpaceMap.tmx"
+source_md5="8cee6396768c2d39f8772af078304909"
+
+dest_files=[ "res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn" ]
+dest_md5="363acd653e5c56cd401e769063f94aa9"
+
+[params]
+
+custom_properties=false
+tile_metadata=false
+uv_clip=true
+image_flags=0
+collision_layer=2
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script="res://Utils/TiledPostImport.gd"

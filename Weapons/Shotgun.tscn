@@ -1,21 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=2]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun3.png" type="Texture" id=5]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun4.png" type="Texture" id=6]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun5.png" type="Texture" id=7]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun6.png" type="Texture" id=8]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun7.png" type="Texture" id=9]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun8.png" type="Texture" id=10]
-[ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=11]
+[ext_resource path="res://Weapons/ShotgunBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun3.png" type="Texture" id=7]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun4.png" type="Texture" id=8]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun5.png" type="Texture" id=9]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun6.png" type="Texture" id=10]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun7.png" type="Texture" id=11]
+[ext_resource path="res://Assets/weapons/Shotgun/shotgun8.png" type="Texture" id=12]
+[ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "reload",
 "speed": 20.0
@@ -27,8 +29,8 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 shoot_vel = 2500
 damage = 20
-bullet_scene_path = "res://Weapons/ShotgunBullet.tscn"
-shell_scene_path = "res://Weapons/BulletShell.tscn"
+bullet_scene = ExtResource( 3 )
+shell_scene = ExtResource( 4 )
 cooldown = 1.2
 auto_fire = false
 spread = 0.15
@@ -52,7 +54,7 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 1.39922, 8.6829 )
 scale = Vector2( 0.344856, 0.306339 )
-stream = ExtResource( 11 )
+stream = ExtResource( 13 )
 volume_db = 0.0
 autoplay = false
 max_distance = 2000.0

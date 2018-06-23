@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background1.png-bc878af0c1e381e6cac72e1cb51c7a32.stex"
+path="res://.import/TestMap.png-a68a0cbbe0291afa8a4c4ba41998d741.stex"
 
 [deps]
 
-source_file="res://Assets/Background1.png"
-source_md5="4829c10a551a8f75c49f0937c8d2c5e2"
+source_file="res://Maps/TestMap.png"
+source_md5="08e01c4e75891efab024243fdac2da50"
 
-dest_files=[ "res://.import/Background1.png-bc878af0c1e381e6cac72e1cb51c7a32.stex" ]
-dest_md5="85c12d1a54a841539690c67ebda29c8e"
+dest_files=[ "res://.import/TestMap.png-a68a0cbbe0291afa8a4c4ba41998d741.stex" ]
+dest_md5="0c98912fb2f9ac26959d5c2ec76358b4"
 
 [params]
 

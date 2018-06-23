@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tiles64.png-c5fbb0fca38a27141b7a0cf53ea083d1.stex"
+path="res://.import/Background1.png-8be602cb261854caf96a66250f65f73a.stex"
 
 [deps]
 
-source_file="res://Assets/tiles64.png"
-source_md5="05807635c8ef62ea86475b654d6f0e0f"
+source_file="res://Assets/OLD/Background1.png"
+source_md5="4829c10a551a8f75c49f0937c8d2c5e2"
 
-dest_files=[ "res://.import/tiles64.png-c5fbb0fca38a27141b7a0cf53ea083d1.stex" ]
-dest_md5="66d316676d2b1f5e1bbff75d33fb4598"
+dest_files=[ "res://.import/Background1.png-8be602cb261854caf96a66250f65f73a.stex" ]
+dest_md5="85c12d1a54a841539690c67ebda29c8e"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

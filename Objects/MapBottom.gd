@@ -1,7 +1,6 @@
 extends Node2D
 
-const player_scene_path = 'res://Player.tscn'
-
 func _on_Area2D_body_entered(body):
-	if body.get_filename() == player_scene_path:
+	if body.is_in_group('players'):
+		body.invulnerable = false # even if invulnerable: die
 		body.die()

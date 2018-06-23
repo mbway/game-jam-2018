@@ -1,7 +1,5 @@
 extends Area2D
 
-const player_scene_path = 'res://Player.tscn'
-
 export (NodePath) var available_pickups_path
 onready var available_pickups = get_node(available_pickups_path)
 
@@ -34,7 +32,7 @@ func _on_Cooldown_timeout():
 
 
 func _on_PickupSpawn_body_entered(body):
-	if pickup_available and body.get_filename() == player_scene_path:
+	if pickup_available and body.is_in_group('players'):
 		body.equip_weapon(current_pickup.scene.instance())
 		pickup_available = false
 		$Cooldown.start()

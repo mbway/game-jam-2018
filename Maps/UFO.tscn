@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
-[ext_resource path="res://Assets/tile_set.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/OLD/tile_set.tres" type="TileSet" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.gd" type="Script" id=5]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=17]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
+
 
 [sub_resource type="Curve2D" id=1]
 

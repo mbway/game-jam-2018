@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
-[ext_resource path="res://Assets/tile_set.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/OLD/tile_set.tres" type="TileSet" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.gd" type="Script" id=5]
@@ -18,7 +18,8 @@
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=16]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=17]
 
-[node name="Test" type="Node" index="0"]
+
+[node name="Test" type="Node"]
 
 script = ExtResource( 1 )
 

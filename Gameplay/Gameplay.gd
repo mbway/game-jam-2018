@@ -10,7 +10,9 @@ extends Node
 #	- TDM : Node2D
 #	- CTF : Node2D
 
-onready var player_scene = preload('res://Player.tscn')
+onready var keyboard_player_scene = preload('res://Player/KeyboardPlayer.tscn')
+onready var gamepad_player_scene = preload('res://Player/GamepadPlayer.tscn')
+onready var AI_player_scene = preload('res://Player/AIPlayer.tscn')
 
 const MAX_HEALTH = 100
 
@@ -62,9 +64,15 @@ func set_game_mode(mode):
 	print('game mode changed to: ' + mode)
 
 func create_player(config):
-	var p = player_scene.instance()
+	var p = null
+	if config.control == globals.KEYBOARD_CONTROL:
+		p = keyboard_player_scene.instance()
+	elif config.control == globals.GAMEPAD_CONTROL:
+		p = gamepad_player_scene.instance()
+	elif config.control == globals.AI_CONTROL:
+		p = AI_player_scene.instance()
+	p.init(config, $Camera, $Bullets)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
-	p.setup(config, $Bullets, $Camera)
 
 	

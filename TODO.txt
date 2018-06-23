@@ -7,6 +7,7 @@
 
 
 # TODO
+- themed UI, create sprites for buttons and choose colors and style etc
 - code organisation
     - pull out the code for the different game modes. Try to combine them to allow for overrule mode
     - choose the map then the game mode. all game modes on all maps
@@ -56,6 +57,11 @@
 - laser sights for players using gamepads to make aiming easier
 - could add one-way platforms quite easily
 - could implement an area effect which slows players down, could be created from a 'goo gun' type of thing or perhaps be built into particular areas of the map
+- try out using a second reactivity constant when in the air (I'm thinking you should have less control when in the air, but maybe that won't feel good)
+- try bullet trails with line2D <https://www.youtube.com/watch?v=s5DwZZ0fZDg&feature=youtu.be>
+- red dot with RayCast2D <https://www.youtube.com/watch?v=esZdJegvANc&t=627s>
+    - useful for gamepad where aiming is harder
+- FPS counter. enable/disable through the options menu
 
 
 # Extension Features
@@ -73,4 +79,5 @@
     - perhaps have a button to open it up to the network
     - and you can add local players and select their control scheme
 - could switch to using raycasting rather than physical bullets
+- front/back flip when double jumping like raze
 

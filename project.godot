@@ -23,6 +23,10 @@ globals="*res://Utils/globals.gd"
 window/size/width=1600
 window/size/height=900
 
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-tiled-importer" )
+
 [input]
 
 ui_left=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
@@ -59,3 +63,7 @@ test=[ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_n
 quality/2d/use_pixel_snap=true
 environment/default_clear_color=Color( 0.635294, 0.886275, 0.952941, 1 )
 environment/default_environment="res://default_env.tres"
+
+[tiled_importer]
+
+enable_json_format=true

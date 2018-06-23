@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Objects/Orb.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Objects/orb/orb1.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Objects/orb/orb2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Objects/orb/orb4.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Objects/orb/orb3.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Objects/orb/orb6.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Objects/orb/orb5.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Objects/orb/orb6.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Objects/orb/orb1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Objects/orb/orb2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Objects/orb/orb4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Objects/orb/orb5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Objects/orb/orb3.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Objects/orb/orb_destroy.wav" type="AudioStream" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -14,32 +14,32 @@
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
-"name": "75",
+"name": "0",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "60",
+"name": "75",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
-"name": "30",
+"name": "60",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": false,
-"name": "45",
+"name": "30",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
-"name": "0",
+"name": "15",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
-"name": "15",
+"name": "45",
 "speed": 5.0
 } ]
 
@@ -48,7 +48,9 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 30.0
 
-[node name="Orb" type="RigidBody2D"]
+[node name="Orb" type="RigidBody2D" groups=[
+"damageable",
+]]
 
 input_pickable = false
 collision_layer = 1

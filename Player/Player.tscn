@@ -1,6 +1,6 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/Player_idle/Player_idle1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Player_idle/Player_idle2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Player/Player_jumpDownn/Player_jumpdown1.png" type="Texture" id=4]
@@ -29,7 +29,8 @@
 [ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup4.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Player/Player_jumpUp/Player2_jumpup5.png" type="Texture" id=28]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=29]
-[ext_resource path="res://AINodes.gd" type="Script" id=30]
+[ext_resource path="res://Player/BulletCollider.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Player/AINodes.gd" type="Script" id=31]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -70,16 +71,19 @@ height = 12.0
 [sub_resource type="SegmentShape2D" id=3]
 
 custom_solver_bias = 0.0
-a = Vector2( -52, 18 )
-b = Vector2( -26, 18 )
+a = Vector2( -52, 24 )
+b = Vector2( -28, 24 )
 
 [sub_resource type="SegmentShape2D" id=4]
 
 custom_solver_bias = 0.0
-a = Vector2( 52, 18 )
-b = Vector2( 26, 18 )
+a = Vector2( 52, 24 )
+b = Vector2( 28, 24 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D" index="0" groups=[
+"players",
+"damageable",
+]]
 
 input_pickable = true
 collision_layer = 1
@@ -122,26 +126,11 @@ wait_time = 1.5
 one_shot = true
 autostart = false
 
-[node name="BulletCollider" type="StaticBody2D" parent="." index="6"]
-
-input_pickable = false
-collision_layer = 4
-collision_mask = 4
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 0.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="HitBox" type="CollisionShape2D" parent="BulletCollider" index="0"]
-
-position = Vector2( 0, 2 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform", "Z Index" ]
+[node name="BulletCollider" parent="." index="6" instance=ExtResource( 30 )]
 
 [node name="AINodes" type="Node2D" parent="." index="7"]
 
-script = ExtResource( 30 )
+script = ExtResource( 31 )
 
 [node name="MoveTarget" type="Position2D" parent="AINodes" index="0"]
 
@@ -158,12 +147,12 @@ angular_damp = 1.0
 collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AINodes/LeftCollider" index="0"]
 
-position = Vector2( 0, 6 )
 shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="RightCollider" type="Area2D" parent="AINodes" index="2"]
 
@@ -175,12 +164,12 @@ angular_damp = 1.0
 collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AINodes/RightCollider" index="0"]
 
-position = Vector2( 0, 6 )
 shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]
 

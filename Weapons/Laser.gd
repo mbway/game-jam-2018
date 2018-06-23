@@ -1,8 +1,5 @@
 extends Area2D
 
-const player_scene_path = 'res://Player.tscn'
-const orb_scene_path = 'res://Objects/Orb.tscn'
-
 # set on setup
 var shot_from
 var collision_exceptions = []
@@ -28,14 +25,8 @@ func _on_Laser_body_entered(body):
 		if body == b:
 			return
 	
-	if body.get_filename() == orb_scene_path:
+	if body.is_in_group('damageable'):
 		body.take_damage(damage)
-		
-	# will collide with the bullet collider, the player is its parent
-	var parent = body.get_node('..')
-	if parent.get_filename() == player_scene_path:
-		parent.take_damage(damage)
-	
 
 func _on_Lifetime_timeout():
 	queue_free()

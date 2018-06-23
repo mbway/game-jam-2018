@@ -1,5 +1,8 @@
 extends RigidBody2D
 
+## Groups ##
+# 'damageable'  (must have a take_damage method)
+
 signal orbDestroyed
 
 var max_health = 100

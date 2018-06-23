@@ -1,0 +1,12 @@
+# Requirements
+- Godot engine >=3.0
+    - https://godotengine.org/
+- Tiled map editor
+    - https://www.mapeditor.org/
+    - to open map files
+- Godot tiled importer
+    - https://github.com/vnen/godot-tiled-importer
+    - (download into addons directory)
+- Aseprite
+    - https://www.aseprite.org/
+    - to open sprite animations

@@ -24,6 +24,16 @@ var maps = [
 		'path': 'res://Maps/Test.tscn',
 		'name' : 'Test',
 		'screenshot' : preload('res://Assets/MapScreenshots/Test.png'),
+	},
+	{
+		'path': 'res://Maps/TestMap.tscn',
+		'name' : 'Test Map',
+		'screenshot' : preload('res://Maps/TestMap.png'),
+	},
+	{
+		'path': 'res://Maps/SpaceMap.tscn',
+		'name' : 'Space Map',
+		'screenshot' : preload('res://Maps/SpaceMap.png'),
 	}
 ]
 var game_modes = [

@@ -1,8 +1,8 @@
 extends Node2D
 
 var globals
-var red = Color('#ccd95353')  # ARGB
-var grey = Color('#cccdcdcd')  # ARGB
+var red = Color('#ddd95353')  # ARGB
+var grey = Color('#ddaaaaaa')  # ARGB
 
 func _ready():
 	globals = get_node('/root/globals')
@@ -24,6 +24,15 @@ func _draw():
 	draw_line(right_shape.a, right_shape.b, right_color, 3.0)
 
 func is_blocked_left():
-	return len($LeftCollider.get_overlapping_bodies()) > 0
+	var bodies = $LeftCollider.get_overlapping_bodies()
+	var count = len(bodies)
+	if count > 0 and bodies.has(get_parent()):
+		count -= 1
+	return bool(count > 0)
+		
 func is_blocked_right():
-	return len($RightCollider.get_overlapping_bodies()) > 0
+	var bodies = $RightCollider.get_overlapping_bodies()
+	var count = len(bodies)
+	if count > 0 and bodies.has(get_parent()):
+		count -= 1
+	return bool(count > 0)

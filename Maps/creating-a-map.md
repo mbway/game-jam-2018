@@ -1,0 +1,31 @@
+# Creating a map #
+- In Tiled
+    - create a new map (tile size 32x32)
+    - Map > Add External Tileset the tilemap at `res://Assets/Tiles/Tiles.tsx`
+    - create the map
+        - note that multiple tiles in the tileset can be selected to speed up the process
+    - rename the layer to 'Map'
+    - add a new object layer called 'Collision' and add collision shapes to the map
+        - note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
+    - Map > autocrop (optional)
+    - File > Export As Image to save a screenshot for the main menu. Will have to resize in an image editor
+- In Godot
+    - double click on the new map (.tmx file)
+    - new inherited scene
+        - (this means that when the map is edited in Tiled, the Map and Collision nodes update, but other nodes can be added on top)
+    - save the scene (probably best to name identical to the tmx file but with the tscn extension)
+    - single click on the .tmx file then open the Import panel:
+        - use the following properties:
+            - custom properties: off
+            - tile metadata: off
+            - UV clip: on
+            - Image Flags: none
+            - collision layer: 2 only
+            - Post Import Script: 'res://Utils/TiledPostImport.gd'
+        - then click 'reimport'
+    - right click the root of the scene and click 'Merge From Scene'
+        - select `res://Utils/BaseMap.tscn`
+        - (this will add the required nodes to the scene in one go)
+    - attach the `Gameplay.gd` script to the root of the new map (right click > attach script)
+    - add items to the map
+    - in `res://MainMenu/Lobby.gd` add an entry into `maps` for the newly created map
