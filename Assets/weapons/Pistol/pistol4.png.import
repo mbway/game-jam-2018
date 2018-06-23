@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player.png-5e42ab849d862172be00e6b72c9838e5.stex"
+path="res://.import/pistol4.png-b9bbbd17f21e1561884d36ca8f632d59.stex"
 
 [deps]
 
-source_file="res://Assets/Player/player.png"
-source_md5="a5ac6403ced40547f3e48942f9a0b5cd"
+source_file="res://Assets/weapons/Pistol/pistol4.png"
+source_md5="ab4da0ffc1f2c7461435f8ccb5fc1e96"
 
-dest_files=[ "res://.import/player.png-5e42ab849d862172be00e6b72c9838e5.stex" ]
-dest_md5="f8e28a9bc5f500c06f548ce72e5bf778"
+dest_files=[ "res://.import/pistol4.png-b9bbbd17f21e1561884d36ca8f632d59.stex" ]
+dest_md5="de263bc7ce6f0024a8fb7eb6b9be3e3c"
 
 [params]
 
