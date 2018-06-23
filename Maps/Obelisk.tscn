@@ -33,11 +33,7 @@ _sections_unfolded = [ "Cell", "Collision" ]
 
 [node name="17" parent="Collision" index="0"]
 
-_sections_unfolded = [ "Z Index" ]
-
-[node name="17" parent="Collision" index="0"]
-
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Z Index" ]
 
 [node name="MapBottom" parent="." index="2" instance=ExtResource( 3 )]
 

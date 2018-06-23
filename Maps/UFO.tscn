@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/OLD/tile_set.tres" type="TileSet" id=2]
@@ -17,8 +17,9 @@
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=15]
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=17]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=18]
-
+[ext_resource path="res://Weapons/FlameThrower.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/weapons/flamethrower.png" type="Texture" id=19]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -132,6 +133,11 @@ texture = ExtResource( 15 )
 scene = ExtResource( 16 )
 texture = ExtResource( 17 )
 
+[node name="FlameThrower" parent="GameMode/TDM/Pickups" index="5" instance=ExtResource( 7 )]
+
+scene = ExtResource( 18 )
+texture = ExtResource( 19 )
+
 [node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="1"]
 
 editor/display_folded = true
@@ -148,12 +154,12 @@ position = Vector2( 560, 780 )
 
 position = Vector2( 1800, -280 )
 
-[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 18 )]
+[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 20 )]
 
 position = Vector2( 1340, 770 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 18 )]
+[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 20 )]
 
 position = Vector2( 1790, 770 )
 available_pickups_path = NodePath("../Pickups")

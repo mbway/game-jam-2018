@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/OLD/tile_set.tres" type="TileSet" id=2]
@@ -16,7 +16,9 @@
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=14]
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=16]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Weapons/FlameThrower.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/weapons/flamethrower.png" type="Texture" id=18]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=19]
 
 [node name="Test" type="Node"]
 
@@ -117,6 +119,11 @@ texture = ExtResource( 14 )
 scene = ExtResource( 15 )
 texture = ExtResource( 16 )
 
+[node name="FlameThrower" parent="GameMode/TDM/Pickups" index="5" instance=ExtResource( 6 )]
+
+scene = ExtResource( 17 )
+texture = ExtResource( 18 )
+
 [node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="1"]
 
 [node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
@@ -131,17 +138,17 @@ position = Vector2( 1750, 240 )
 
 position = Vector2( 960, 980 )
 
-[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 17 )]
+[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 19 )]
 
 position = Vector2( 610, 130 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 17 )]
+[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 19 )]
 
 position = Vector2( 970, 830 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn3" parent="GameMode/TDM" index="4" instance=ExtResource( 17 )]
+[node name="PickupSpawn3" parent="GameMode/TDM" index="4" instance=ExtResource( 19 )]
 
 position = Vector2( 1310, 130 )
 available_pickups_path = NodePath("../Pickups")
