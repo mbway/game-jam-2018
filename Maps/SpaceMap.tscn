@@ -78,6 +78,8 @@ bus = "Master"
 
 [node name="Pickups" type="Node" parent="GameMode/TDM" index="0"]
 
+editor/display_folded = true
+
 [node name="LaserCannon" parent="GameMode/TDM/Pickups" index="0" instance=ExtResource( 6 )]
 
 scene = ExtResource( 7 )

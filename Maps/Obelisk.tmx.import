@@ -1,0 +1,24 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn"
+
+[deps]
+
+source_file="res://Maps/Obelisk.tmx"
+source_md5="29836256ccfa5f4273a7339892c929c6"
+
+dest_files=[ "res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn" ]
+dest_md5="33cbba0c1cbb1bbb90984a7bffc7f78f"
+
+[params]
+
+custom_properties=false
+tile_metadata=false
+uv_clip=true
+image_flags=0
+collision_layer=0
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script="res://Utils/TiledPostImport.gd"

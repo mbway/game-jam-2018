@@ -7,6 +7,7 @@
     - rename the layer to 'Map'
     - add a new object layer called 'Collision' and add collision shapes to the map
         - note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
+	- note: only use the rectangle tool. The polygon tool causes collision issues with the player.
     - Map > autocrop (optional)
     - File > Export As Image to save a screenshot for the main menu. Will have to resize in an image editor
         - (set the Collision layer to not visible while exporting the image)

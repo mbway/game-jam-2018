@@ -7,7 +7,7 @@ path="res://.import/TestMap.tmx-2b81a802aed20a6bbf6116f88d8c0097.scn"
 [deps]
 
 source_file="res://Maps/TestMap.tmx"
-source_md5="eee521856bd5aa4dbbf03e914a60988a"
+source_md5="b9de659a49a41be54780c63d5d41122c"
 
 dest_files=[ "res://.import/TestMap.tmx-2b81a802aed20a6bbf6116f88d8c0097.scn" ]
 dest_md5="e5cafeeb336208e7a3406341b98c6797"
