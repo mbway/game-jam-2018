@@ -24,10 +24,16 @@
 [node name="Obelisk" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="Map" parent="." index="0"]
 
 editor/display_folded = false
+_sections_unfolded = [ "Cell", "Collision" ]
+
+[node name="17" parent="Collision" index="0"]
+
+_sections_unfolded = [ "Z Index" ]
 
 [node name="17" parent="Collision" index="0"]
 
@@ -37,7 +43,6 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Bullets" type="Node2D" parent="." index="3"]
 
-z_index = -1
 _sections_unfolded = [ "Z Index" ]
 
 [node name="Players" type="Node" parent="." index="4"]
