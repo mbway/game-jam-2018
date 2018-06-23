@@ -23,7 +23,7 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[node name="Shotgun" type="Node2D"]
+[node name="Shotgun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )

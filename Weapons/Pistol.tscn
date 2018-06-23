@@ -1,12 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/Pistol/pistol1.png" type="Texture" id=2]
 [ext_resource path="res://Weapons/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/weapons/pistol.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/weapons/Pistol/pistol2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/weapons/Pistol/pistol3.png" type="Texture" id=6]
+[ext_resource path="res://Assets/weapons/Pistol/pistol4.png" type="Texture" id=7]
+[ext_resource path="res://Assets/weapons/pistol.wav" type="AudioStream" id=8]
 
-[node name="Pistol" type="Node2D"]
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "reload",
+"speed": 30.0
+} ]
+
+[node name="Pistol" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
@@ -20,13 +32,13 @@ spread = 0
 screen_shake = 7
 requires_charging = false
 shot_count = 1
-has_reload_animation = false
+has_reload_animation = true
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 position = Vector2( 22.4707, 9.27777 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset" ]
+frames = SubResource( 1 )
+animation = "reload"
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
@@ -35,7 +47,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
-stream = ExtResource( 5 )
+stream = ExtResource( 8 )
 volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
