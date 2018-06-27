@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Maps/Obelisk.tmx" type="PackedScene" id=1]
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=2]
@@ -7,19 +7,7 @@
 [ext_resource path="res://Camera.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Weapons/AvailableWeapon.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Weapons/LaserCannon.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/weapons/laserCannon.png" type="Texture" id=10]
-[ext_resource path="res://Weapons/MachineGun.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=12]
-[ext_resource path="res://Weapons/Minigun.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/weapons/Minigun/minigun1.png" type="Texture" id=14]
-[ext_resource path="res://Weapons/Shotgun.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=16]
-[ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=18]
-[ext_resource path="res://Weapons/FlameThrower.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Assets/weapons/flamethrower.png" type="Texture" id=20]
+[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=8]
 
 [node name="Obelisk" instance=ExtResource( 1 )]
 
@@ -99,39 +87,9 @@ available_pickups_path = NodePath("../Pickups")
 position = Vector2( 1520, 1376 )
 available_pickups_path = NodePath("../Pickups")
 
-[node name="Pickups" type="Node" parent="GameMode/TDM" index="3"]
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="3"]
 
-[node name="LaserCannon" parent="GameMode/TDM/Pickups" index="0" instance=ExtResource( 8 )]
-
-scene = ExtResource( 9 )
-texture = ExtResource( 10 )
-
-[node name="MachineGun" parent="GameMode/TDM/Pickups" index="1" instance=ExtResource( 8 )]
-
-scene = ExtResource( 11 )
-texture = ExtResource( 12 )
-
-[node name="Minigun" parent="GameMode/TDM/Pickups" index="2" instance=ExtResource( 8 )]
-
-scene = ExtResource( 13 )
-texture = ExtResource( 14 )
-
-[node name="Shotgun" parent="GameMode/TDM/Pickups" index="3" instance=ExtResource( 8 )]
-
-scene = ExtResource( 15 )
-texture = ExtResource( 16 )
-
-[node name="Sniper" parent="GameMode/TDM/Pickups" index="4" instance=ExtResource( 8 )]
-
-scene = ExtResource( 17 )
-texture = ExtResource( 18 )
-
-[node name="FlameThrower" parent="GameMode/TDM/Pickups" index="5" instance=ExtResource( 8 )]
-
-scene = ExtResource( 19 )
-texture = ExtResource( 20 )
-
-[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="4"]
+editor/display_folded = true
 
 [node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
 
@@ -140,5 +98,7 @@ position = Vector2( 320, 208 )
 [node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="1"]
 
 position = Vector2( 2672, 208 )
+
+[node name="Pickups" parent="GameMode/TDM" index="4" instance=ExtResource( 8 )]
 
 
