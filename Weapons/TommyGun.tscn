@@ -1,23 +1,23 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Assets/weapons/machinegun.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/tommyGun.png" type="Texture" id=2]
 [ext_resource path="res://Weapons/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/machineGun.wav" type="AudioStream" id=5]
 
-[node name="MachineGun" type="Node2D"]
+[node name="TommyGun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 shoot_vel = 2000
-damage = 15
+damage = 10
 bullet_scene = ExtResource( 3 )
 shell_scene = ExtResource( 4 )
-cooldown = 0.1
+cooldown = 0.075
 auto_fire = true
-spread = 0.03
-screen_shake = 7
+spread = 0.06
+screen_shake = 4.0
 requires_charging = false
 shot_count = 1
 has_reload_animation = false
@@ -29,7 +29,7 @@ texture = ExtResource( 2 )
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 42.6815, 9.39457 )
+position = Vector2( 42.3405, 6.66634 )
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
@@ -43,6 +43,6 @@ area_mask = 1
 
 [node name="ShellEject" type="Position2D" parent="." index="3"]
 
-position = Vector2( 3.4103, 8.26998 )
+position = Vector2( 6.82059, 5.0302 )
 
 
