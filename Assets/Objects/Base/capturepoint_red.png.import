@@ -7,10 +7,7 @@ path="res://.import/capturepoint_red.png-32e8fe76859f42980bc4158e6d9c251f.stex"
 [deps]
 
 source_file="res://Assets/Objects/Base/capturepoint_red.png"
-source_md5="3fb18f8fef47cebb566afc6b90040d3d"
-
 dest_files=[ "res://.import/capturepoint_red.png-32e8fe76859f42980bc4158e6d9c251f.stex" ]
-dest_md5="8a052b81463a918d8d7ceb98fec9ba2b"
 
 [params]
 

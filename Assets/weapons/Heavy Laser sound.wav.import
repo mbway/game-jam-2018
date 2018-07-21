@@ -7,10 +7,7 @@ path="res://.import/Heavy Laser sound.wav-6a608e14d7b883f19ed24afa7f710d46.sampl
 [deps]
 
 source_file="res://Assets/weapons/Heavy Laser sound.wav"
-source_md5="eda2ad6e823dc6e5acbb6aad7ed9393c"
-
 dest_files=[ "res://.import/Heavy Laser sound.wav-6a608e14d7b883f19ed24afa7f710d46.sample" ]
-dest_md5="855585ae2bf11de413abaacc2701838b"
 
 [params]
 

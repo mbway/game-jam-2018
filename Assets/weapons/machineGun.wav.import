@@ -7,10 +7,7 @@ path="res://.import/machineGun.wav-7c3d00a7e44268d69bd727be0a40e654.sample"
 [deps]
 
 source_file="res://Assets/weapons/machineGun.wav"
-source_md5="d100b72aa413e0561b4e3cb97b5911b6"
-
 dest_files=[ "res://.import/machineGun.wav-7c3d00a7e44268d69bd727be0a40e654.sample" ]
-dest_md5="6981990060d42581d249dddcf4da6355"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/Revolver.png-8b5842f9372302b87e031712c484128c.stex"
 [deps]
 
 source_file="res://Assets/weapons/revolver/Revolver.png"
-source_md5="2dd7f5ebacf6cb12ba30f3dc0d5a2af7"
-
 dest_files=[ "res://.import/Revolver.png-8b5842f9372302b87e031712c484128c.stex" ]
-dest_md5="44a309529527809f6f726def3ac6a72f"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/GrenadeLauncher3.png-b11177a9b3dbd9a0be9a1b967354eff5.stex"
 [deps]
 
 source_file="res://Assets/weapons/Grenade Launcher/GrenadeLauncher3.png"
-source_md5="9bfc79c52234979096ffbef4284791f8"
-
 dest_files=[ "res://.import/GrenadeLauncher3.png-b11177a9b3dbd9a0be9a1b967354eff5.stex" ]
-dest_md5="8633668056bf9d447cd11a8f928b20f1"
 
 [params]
 

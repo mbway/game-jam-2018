@@ -7,10 +7,7 @@ path="res://.import/rocketlauncher.png-af7594c6bf2715e03dc453b5ddf11721.stex"
 [deps]
 
 source_file="res://Assets/weapons/rocketlauncher.png"
-source_md5="259daaf865c18378ecdd4f564c2861a8"
-
 dest_files=[ "res://.import/rocketlauncher.png-af7594c6bf2715e03dc453b5ddf11721.stex" ]
-dest_md5="86459531282d42a98571b30c6c9e6179"
 
 [params]
 

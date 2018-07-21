@@ -7,10 +7,7 @@ path="res://.import/WeaponSpawn1.png-61f0a6e5d7d71cf8131974b751b698b6.stex"
 [deps]
 
 source_file="res://Assets/Objects/WeaponSpawn/WeaponSpawn1.png"
-source_md5="4dd9d67771a679d2dcd01e8d55290426"
-
 dest_files=[ "res://.import/WeaponSpawn1.png-61f0a6e5d7d71cf8131974b751b698b6.stex" ]
-dest_md5="1b457efe19c9199cfb4e0fbaf90b0c5b"
 
 [params]
 

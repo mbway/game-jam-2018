@@ -7,10 +7,7 @@ path="res://.import/pistol1.png-f9c1bbd5954bb6565760eb4297714cb1.stex"
 [deps]
 
 source_file="res://Assets/weapons/Pistol/pistol1.png"
-source_md5="1c8fd1f2ee527da60d7a68d7a60d3024"
-
 dest_files=[ "res://.import/pistol1.png-f9c1bbd5954bb6565760eb4297714cb1.stex" ]
-dest_md5="2f955ce2d2c30baf01b77403c56b8a3d"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/flame_.wav-77479db1cda5d8f31bdfd2638fa030dc.sample"
 [deps]
 
 source_file="res://Assets/weapons/flame_.wav"
-source_md5="7e213a497251ca64f12a3350725a8519"
-
 dest_files=[ "res://.import/flame_.wav-77479db1cda5d8f31bdfd2638fa030dc.sample" ]
-dest_md5="6e7e6bbd285420a8f59b09c504d13a66"
 
 [params]
 

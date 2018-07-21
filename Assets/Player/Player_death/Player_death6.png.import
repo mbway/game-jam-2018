@@ -7,10 +7,7 @@ path="res://.import/Player_death6.png-8ed4e857b091663010abd147b54fbcd3.stex"
 [deps]
 
 source_file="res://Assets/Player/Player_death/Player_death6.png"
-source_md5="281311bad48698a2d0d355b0f802a620"
-
 dest_files=[ "res://.import/Player_death6.png-8ed4e857b091663010abd147b54fbcd3.stex" ]
-dest_md5="1c2dca8d1919e4b17ec7f001cb32cde8"
 
 [params]
 

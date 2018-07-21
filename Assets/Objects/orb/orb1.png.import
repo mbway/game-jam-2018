@@ -7,10 +7,7 @@ path="res://.import/orb1.png-7e966ac5bfe3e53935e08b153ca59e1f.stex"
 [deps]
 
 source_file="res://Assets/Objects/orb/orb1.png"
-source_md5="fcf2e5c44d18da2ae41b82dc27edc562"
-
 dest_files=[ "res://.import/orb1.png-7e966ac5bfe3e53935e08b153ca59e1f.stex" ]
-dest_md5="d1884b14f6563d2e2fa7ee16ea34f812"
 
 [params]
 

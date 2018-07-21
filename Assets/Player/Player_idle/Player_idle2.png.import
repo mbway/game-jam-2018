@@ -7,10 +7,7 @@ path="res://.import/Player_idle2.png-538ebb78ef34d5204fecf32c4e67816c.stex"
 [deps]
 
 source_file="res://Assets/Player/Player_idle/Player_idle2.png"
-source_md5="14b0b8804efb724f8a043a443d250781"
-
 dest_files=[ "res://.import/Player_idle2.png-538ebb78ef34d5204fecf32c4e67816c.stex" ]
-dest_md5="378a66b4144085efd19345fafe68a6f2"
 
 [params]
 

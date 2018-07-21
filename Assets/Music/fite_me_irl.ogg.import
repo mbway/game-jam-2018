@@ -7,10 +7,7 @@ path="res://.import/fite_me_irl.ogg-a50b6a0893ad1716d5f9f15d3a29f1f5.oggstr"
 [deps]
 
 source_file="res://Assets/Music/fite_me_irl.ogg"
-source_md5="a525b5da07db2f808c76e1f47a248706"
-
 dest_files=[ "res://.import/fite_me_irl.ogg-a50b6a0893ad1716d5f9f15d3a29f1f5.oggstr" ]
-dest_md5="6a0408d1ca2e39dd748f577565b07b6f"
 
 [params]
 

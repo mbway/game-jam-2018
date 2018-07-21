@@ -7,10 +7,7 @@ path="res://.import/Obelisk.png-96c598237dd2f94f1e3b2e73256136eb.stex"
 [deps]
 
 source_file="res://Assets/MapScreenshots/Obelisk.png"
-source_md5="03c429d12e1eddf1d3a9698f62bf7d24"
-
 dest_files=[ "res://.import/Obelisk.png-96c598237dd2f94f1e3b2e73256136eb.stex" ]
-dest_md5="cdf49fc7f23944dfbe1d53b0f821fe45"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/UFO.png-1be66fc4cbfe386bb2bdc7074b6526bd.stex"
 [deps]
 
 source_file="res://Assets/MapScreenshots/UFO.png"
-source_md5="59ec11c54ecaa28c4079a931fe9c6332"
-
 dest_files=[ "res://.import/UFO.png-1be66fc4cbfe386bb2bdc7074b6526bd.stex" ]
-dest_md5="967874bc8a54ad2d6ffff0500b188d08"
 
 [params]
 

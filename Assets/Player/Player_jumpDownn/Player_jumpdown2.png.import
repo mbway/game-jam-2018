@@ -7,10 +7,7 @@ path="res://.import/Player_jumpdown2.png-eadd535596ca32d708fb2a029938bdc3.stex"
 [deps]
 
 source_file="res://Assets/Player/Player_jumpDownn/Player_jumpdown2.png"
-source_md5="e5bae6b76f9baa284085f27c2643e232"
-
 dest_files=[ "res://.import/Player_jumpdown2.png-eadd535596ca32d708fb2a029938bdc3.stex" ]
-dest_md5="a57955bee99e9e07d38e512024641ac6"
 
 [params]
 

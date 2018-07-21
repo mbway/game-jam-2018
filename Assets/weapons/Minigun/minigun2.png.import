@@ -7,10 +7,7 @@ path="res://.import/minigun2.png-5ddd89e9ed56945d632c5339e99e980f.stex"
 [deps]
 
 source_file="res://Assets/weapons/Minigun/minigun2.png"
-source_md5="f421af40b1eff50b6d14ca55dad8fadf"
-
 dest_files=[ "res://.import/minigun2.png-5ddd89e9ed56945d632c5339e99e980f.stex" ]
-dest_md5="0c2a56cab0c7be92c9107a338b9c2bff"
 
 [params]
 

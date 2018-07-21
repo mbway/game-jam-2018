@@ -7,10 +7,7 @@ path="res://.import/laser_6.png-c37314dd043dacd418c3e30fa225f8c7.stex"
 [deps]
 
 source_file="res://Assets/weapons/laser/laser_6.png"
-source_md5="a857e25f233004a13d7a09610fdc3de1"
-
 dest_files=[ "res://.import/laser_6.png-c37314dd043dacd418c3e30fa225f8c7.stex" ]
-dest_md5="a3a4e1e2addd794ad48684973c9a3afb"
 
 [params]
 

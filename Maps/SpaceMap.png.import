@@ -7,10 +7,7 @@ path="res://.import/SpaceMap.png-eba2003bc407dce6538c7f14c132a37e.stex"
 [deps]
 
 source_file="res://Maps/SpaceMap.png"
-source_md5="36a6858174f45811833dae57a64d12a1"
-
 dest_files=[ "res://.import/SpaceMap.png-eba2003bc407dce6538c7f14c132a37e.stex" ]
-dest_md5="78d34e728fa337571e4ff5dd3a28daa5"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/flame.png-fb93e9409d6a9e70f88d8dba510290cf.stex"
 [deps]
 
 source_file="res://Assets/weapons/flame.png"
-source_md5="6fd54e123cc0f898c1cd26c178847961"
-
 dest_files=[ "res://.import/flame.png-fb93e9409d6a9e70f88d8dba510290cf.stex" ]
-dest_md5="3a04e0044019d459817b92415c8865f5"
 
 [params]
 

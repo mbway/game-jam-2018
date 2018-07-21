@@ -7,10 +7,7 @@ path="res://.import/Player_walk8.png-cb866072199e544a8e9e944d56b6e43e.stex"
 [deps]
 
 source_file="res://Assets/Player/Player_walk/Player_walk8.png"
-source_md5="274bc1fce3a6e2b96e92ade8406dbc0c"
-
 dest_files=[ "res://.import/Player_walk8.png-cb866072199e544a8e9e944d56b6e43e.stex" ]
-dest_md5="860390b5312755e3733849f33592a165"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/city_crumbles.ogg-f636039b078b0b362bb2df554f57195a.oggstr"
 [deps]
 
 source_file="res://Assets/Music/city_crumbles.ogg"
-source_md5="7ef908b19548f4fc0e12b93727b1a700"
-
 dest_files=[ "res://.import/city_crumbles.ogg-f636039b078b0b362bb2df554f57195a.oggstr" ]
-dest_md5="307581739fd8926d86e89207f790c008"
 
 [params]
 

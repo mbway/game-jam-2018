@@ -7,10 +7,7 @@ path="res://.import/sniper_flare.png-1bd4f998d8eeb710c7193ebd891279ec.stex"
 [deps]
 
 source_file="res://Assets/weapons/sniper_flare.png"
-source_md5="f16242d0679b156bee9e15aa2f47f5f3"
-
 dest_files=[ "res://.import/sniper_flare.png-1bd4f998d8eeb710c7193ebd891279ec.stex" ]
-dest_md5="dcd7c603142298af3e139505d233a43f"
 
 [params]
 

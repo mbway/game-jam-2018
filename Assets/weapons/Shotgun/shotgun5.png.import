@@ -7,10 +7,7 @@ path="res://.import/shotgun5.png-617f673eab5db07e21114395e309de31.stex"
 [deps]
 
 source_file="res://Assets/weapons/Shotgun/shotgun5.png"
-source_md5="c920c80b9333308a48aacf8766b47c62"
-
 dest_files=[ "res://.import/shotgun5.png-617f673eab5db07e21114395e309de31.stex" ]
-dest_md5="cf1c599f5c69e73bc151e2c8a48828ab"
 
 [params]
 
