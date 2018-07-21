@@ -2,38 +2,34 @@ extends Control
 
 signal back
 
+var Math = preload('res://Utils/Math.gd')
 var player_panel_scene = preload('res://MainMenu/PlayerPanel.tscn')
 
 var maps = [
 	{
-		'path': 'res://Maps/UFO.tscn',
+		'path': 'res://Maps/UFO/UFO.tscn',
 		'name' : 'UFO',
-		'screenshot' : preload('res://Assets/MapScreenshots/UFO.png'),
+		'screenshot' : preload('res://Maps/UFO/UFO.png'),
 	},
 	{
-		'path': 'res://Maps/Ship.tscn',
+		'path': 'res://Maps/Ship/Ship.tscn',
 		'name' : 'Ship',
-		'screenshot' : preload('res://Assets/MapScreenshots/Ship.png'),
+		'screenshot' : preload('res://Maps/Ship/Ship.png'),
 	},
 	{
-		'path': 'res://Maps/Obelisk.tscn',
+		'path': 'res://Maps/Obelisk/Obelisk.tscn',
 		'name' : 'Obelisk',
-		'screenshot' : preload('res://Assets/MapScreenshots/Obelisk.png'),
+		'screenshot' : preload('res://Maps/Obelisk/Obelisk.png'),
 	},
 	{
-		'path': 'res://Maps/Test.tscn',
-		'name' : 'Test',
-		'screenshot' : preload('res://Assets/MapScreenshots/Test.png'),
-	},
-	{
-		'path': 'res://Maps/TestMap.tscn',
+		'path': 'res://Maps/TestMap/TestMap.tscn',
 		'name' : 'Test Map',
-		'screenshot' : preload('res://Maps/TestMap.png'),
+		'screenshot' : preload('res://Maps/TestMap/TestMap.png'),
 	},
 	{
-		'path': 'res://Maps/SpaceMap.tscn',
-		'name' : 'Space Map',
-		'screenshot' : preload('res://Maps/SpaceMap.png'),
+		'path': 'res://Maps/AIStressTest/AIStressTest.tscn',
+		'name' : 'AI Stress Test',
+		'screenshot' : preload('res://Maps/AIStressTest/AIStressTest.png'),
 	}
 ]
 var game_modes = [
@@ -87,7 +83,7 @@ func _ready():
 # change the selected map index and reflect the change in the UI
 func select_map(index):
 	var n = len(maps)
-	selected_map = index % n
+	selected_map = Math.positive_modulo(index, n)
 	var map = maps[selected_map]
 	map_title.text = '%s   (%d/%d)' % [map['name'], selected_map+1, n]
 	map_screenshot.texture = map['screenshot']

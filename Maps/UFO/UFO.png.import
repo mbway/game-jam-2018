@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ship.png-10495dcba18f13538016acec78244c3c.stex"
+path="res://.import/UFO.png-730522ccce4caf0e0351f96ddcb1c171.stex"
 
 [deps]
 
-source_file="res://Assets/MapScreenshots/Ship.png"
-dest_files=[ "res://.import/Ship.png-10495dcba18f13538016acec78244c3c.stex" ]
+source_file="res://Maps/UFO/UFO.png"
+dest_files=[ "res://.import/UFO.png-730522ccce4caf0e0351f96ddcb1c171.stex" ]
 
 [params]
 

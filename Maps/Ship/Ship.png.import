@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpaceMap.png-eba2003bc407dce6538c7f14c132a37e.stex"
+path="res://.import/Ship.png-d23997d7cdffc1960ccd9bbb817d061e.stex"
 
 [deps]
 
-source_file="res://Maps/SpaceMap.png"
-dest_files=[ "res://.import/SpaceMap.png-eba2003bc407dce6538c7f14c132a37e.stex" ]
+source_file="res://Maps/Ship/Ship.png"
+dest_files=[ "res://.import/Ship.png-d23997d7cdffc1960ccd9bbb817d061e.stex" ]
 
 [params]
 

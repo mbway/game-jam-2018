@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Obelisk.png-96c598237dd2f94f1e3b2e73256136eb.stex"
+path="res://.import/TestMap.png-74b1a2b7a3fb5e8ef23ac3c68843ff9c.stex"
 
 [deps]
 
-source_file="res://Assets/MapScreenshots/Obelisk.png"
-dest_files=[ "res://.import/Obelisk.png-96c598237dd2f94f1e3b2e73256136eb.stex" ]
+source_file="res://Maps/TestMap/TestMap.png"
+dest_files=[ "res://.import/TestMap.png-74b1a2b7a3fb5e8ef23ac3c68843ff9c.stex" ]
 
 [params]
 

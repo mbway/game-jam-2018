@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Test.png-bcbdbc53b4d8eef674a38fd7c32a2345.stex"
+path="res://.import/AIStressTest.png-a19e890e2bbb662b8788ea04e7672a9d.stex"
 
 [deps]
 
-source_file="res://Assets/MapScreenshots/Test.png"
-dest_files=[ "res://.import/Test.png-bcbdbc53b4d8eef674a38fd7c32a2345.stex" ]
+source_file="res://Maps/AIStressTest/AIStressTest.png"
+dest_files=[ "res://.import/AIStressTest.png-a19e890e2bbb662b8788ea04e7672a9d.stex" ]
 
 [params]
 

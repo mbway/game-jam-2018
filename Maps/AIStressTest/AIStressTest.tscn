@@ -1,0 +1,173 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
+[ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
+[ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera.gd" type="Script" id=5]
+[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=6]
+
+
+[node name="AIStressTest" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="Map" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 0, 1000 )
+
+[node name="Bullets" type="Node2D" parent="." index="2"]
+
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Players" type="Node" parent="." index="3"]
+
+[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
+
+[node name="Camera" type="Camera2D" parent="." index="5"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 5 )
+_sections_unfolded = [ "Drag Margin", "Editor", "Offset", "Smoothing" ]
+
+[node name="Music" type="AudioStreamPlayer" parent="." index="6"]
+
+stream = null
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="GameMode" type="Node" parent="." index="7"]
+
+[node name="TDM" type="Node" parent="GameMode" index="0"]
+
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="0"]
+
+[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
+
+position = Vector2( 3250, 1680 )
+
+[node name="Pickups" parent="GameMode/TDM" index="1" instance=ExtResource( 6 )]
+
+[node name="Text" type="Node2D" parent="." index="8"]
+
+[node name="Label" type="Label" parent="Text" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3430.0
+margin_top = 1350.0
+margin_right = 3771.0
+margin_bottom = 1380.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "To make this jump, you must land on the small ledge"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+[node name="Label2" type="Label" parent="Text" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5230.0
+margin_top = 1150.0
+margin_right = 5460.0
+margin_bottom = 1181.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "This is the highest possible ledge
+you can reach"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label3" type="Label" parent="Text" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5490.0
+margin_top = 720.0
+margin_right = 5720.0
+margin_bottom = 751.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "To reach this ledge you must
+jump on the small ledge first"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label4" type="Label" parent="Text" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2030.0
+margin_top = 2150.0
+margin_right = 2371.0
+margin_bottom = 2180.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "here there are two routes to reach the end location"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+

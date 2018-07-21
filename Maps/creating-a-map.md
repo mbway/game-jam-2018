@@ -1,34 +1,49 @@
 # Creating a map #
 - In Tiled
-    - create a new map (tile size 32x32)
+    - Create a new map (tile size 32x32)
     - Map > Add External Tileset the tilemap at `res://Assets/Tiles/Tiles.tsx`
-    - create the map
-        - note that multiple tiles in the tileset can be selected to speed up the process
-    - rename the layer to 'Map'
-    - add a new object layer called 'Collision' and add collision shapes to the map
-        - note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
-	- note: only use the rectangle tool. The polygon tool causes collision issues with the player.
-    - Map > autocrop (optional)
-    - File > Export As Image to save a screenshot for the main menu. Will have to resize in an image editor
+    - Create the map
+        - tip: you can select multiple tiles in the tileset window to speed up the process by placing many tiles down at once
+    - Rename the layer to 'Map'
+    - Add a new 'Object Layer' called 'Collision' and add collision shapes to the map
+        - Note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
+        - Note: only use the rectangle tool. The polygon tool causes collision issues with the player.
+    - Crop the map (optional)
+        - Map > autocrop
+        - or for more control: Map > crop to selection
+    - File > Export As Image to save a screenshot for the main menu.
+        - Will have to resize in an image editor
         - (set the Collision layer to not visible while exporting the image)
 - In Godot
-    - double click on the new map (.tmx file)
-    - new inherited scene
+    - create a new scene and create a Node2D as the root named the same as the map (without .tmx)
+    - right click on the root node and click 'Instance Child scene'
         - (this means that when the map is edited in Tiled, the Map and Collision nodes update, but other nodes can be added on top)
-    - save the scene (probably best to name identical to the tmx file but with the tscn extension)
-    - single click on the .tmx file then open the Import panel:
+        - Select the new map file (.tmx file)
+        - rename the new node to `Map`
+        - on the toolbar above the main view, click 'Lock the selected object in place' and 'Makes sure the object's children are not selectable'. This will prevent accidentally modifying the tiles in Godot (which would cause it to no longer update when edited in Tiled!)
+    - Save the scene (probably best to name identical to the tmx file but with the tscn extension)
+    - Single click on the .tmx file in the FileSystem panel then open the Import panel:
         - use the following properties:
             - custom properties: off
             - tile metadata: off
             - UV clip: on
             - Image Flags: none
             - collision layer: none
-            - Post Import Script: 'res://Utils/TiledPostImport.gd'
+            - Post Import Script: `res://Utils/TiledPostImport.gd`
         - then click 'reimport'
         - you may need to close and re-open the inherited scene for the changes to take effect
-    - right click the root of the scene and click 'Merge From Scene'
+    - Right click the root of the scene and click 'Merge From Scene'
         - select `res://Utils/BaseMap.tscn`
+        - select all the nodes EXCEPT FOR the root node of `BaseMap.tscn` then click OK
         - (this will add the required nodes to the scene in one go)
-    - attach the `Gameplay.gd` script to the root of the new map (right click > attach script)
-    - add items to the map
-    - in `res://MainMenu/Lobby.gd` add an entry into `maps` for the newly created map
+    - Attach the `Gameplay.gd` script to the root of the new map (right click > attach script)
+    - Add items to the map
+    - In `res://MainMenu/Lobby.gd`, add an entry into `maps` for the newly created map
+
+
+
+- Don't edit the map or collision in Godot. If you do this accidentally then after you save the scene, the map will no longer update to reflect the changes made in Tiled
+    - to fix this, rename the scene to another name, then create a new inherited scene from the `.tmx` file
+    - use 'Merge from Scene' and select the bad map scene and select everything except for the root, Map and Collision, then click OK
+    - re-attach the `Gameplay.gd` script
+    - now save the new scene and delete the bad scene file.

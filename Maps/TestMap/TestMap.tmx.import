@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-path="res://.import/AIStressTest.tmx-83c2e1bf3599d54e000a0451d7e2ebab.scn"
+path="res://.import/TestMap.tmx-1283b6ee2c55de3a15c0e2f07b37cb36.scn"
 
 [deps]
 
-source_file="res://Maps/AIStressTest.tmx"
-dest_files=[ "res://.import/AIStressTest.tmx-83c2e1bf3599d54e000a0451d7e2ebab.scn" ]
+source_file="res://Maps/TestMap/TestMap.tmx"
+dest_files=[ "res://.import/TestMap.tmx-1283b6ee2c55de3a15c0e2f07b37cb36.scn" ]
 
 [params]
 

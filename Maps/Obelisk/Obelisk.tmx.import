@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-path="res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn"
+path="res://.import/Obelisk.tmx-2654959fb458ee104425194fe5bd92d7.scn"
 
 [deps]
 
-source_file="res://Maps/Obelisk.tmx"
-dest_files=[ "res://.import/Obelisk.tmx-efd0fc2aefe8bfbfb3ca027825aee35a.scn" ]
+source_file="res://Maps/Obelisk/Obelisk.tmx"
+dest_files=[ "res://.import/Obelisk.tmx-2654959fb458ee104425194fe5bd92d7.scn" ]
 
 [params]
 

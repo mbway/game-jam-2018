@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-path="res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn"
+path="res://.import/Ship.tmx-fa7789a03faf69cf88bd9e62beeb01a3.scn"
 
 [deps]
 
-source_file="res://Maps/SpaceMap.tmx"
-dest_files=[ "res://.import/SpaceMap.tmx-5898904c0562790894f67c27f5615e0c.scn" ]
+source_file="res://Maps/Ship/Ship.tmx"
+dest_files=[ "res://.import/Ship.tmx-fa7789a03faf69cf88bd9e62beeb01a3.scn" ]
 
 [params]
 

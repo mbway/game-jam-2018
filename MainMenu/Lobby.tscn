@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/clouds.png" type="Texture" id=2]
 [ext_resource path="res://MainMenu/Font20.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/MapScreenshots/UFO.png" type="Texture" id=5]
+[ext_resource path="res://Assets/blank_map.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -38,7 +38,7 @@ use_filter = false
 font_data = ExtResource( 4 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Lobby" type="Control"]
+[node name="Lobby" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -202,6 +202,7 @@ scroll_horizontal_enabled = false
 scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
+scroll_deadzone = 0
 _sections_unfolded = [ "Margin", "Scroll", "Size Flags" ]
 
 [node name="PlayerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer" index="0"]
@@ -244,13 +245,12 @@ _sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
 
 [node name="MapChoice" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 888.0
-margin_bottom = 552.0
+margin_bottom = 527.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -268,7 +268,7 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 881.0
-margin_bottom = 545.0
+margin_bottom = 520.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -289,7 +289,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 5.0
 margin_right = 869.0
-margin_bottom = 533.0
+margin_bottom = 508.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -329,7 +329,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 53.0
 margin_right = 864.0
-margin_bottom = 533.0
+margin_bottom = 508.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -344,8 +344,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 31.0
-margin_bottom = 480.0
+margin_right = 108.0
+margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -370,9 +370,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 35.0
-margin_right = 828.0
-margin_bottom = 480.0
+margin_left = 112.0
+margin_right = 752.0
+margin_bottom = 455.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -389,9 +389,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 832.0
+margin_left = 756.0
 margin_right = 864.0
-margin_bottom = 480.0
+margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -416,7 +416,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 567.0
+margin_top = 542.0
 margin_right = 888.0
 margin_bottom = 819.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -436,7 +436,7 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 881.0
-margin_bottom = 245.0
+margin_bottom = 270.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -458,7 +458,7 @@ anchor_bottom = 0.0
 margin_left = 15.0
 margin_top = 15.0
 margin_right = 859.0
-margin_bottom = 223.0
+margin_bottom = 248.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -558,7 +558,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 59.0
 margin_right = 844.0
-margin_bottom = 208.0
+margin_bottom = 233.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
