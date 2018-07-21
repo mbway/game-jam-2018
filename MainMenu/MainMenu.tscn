@@ -3,7 +3,7 @@
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=2]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 
 stream = ExtResource( 2 )
 volume_db = 1.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"

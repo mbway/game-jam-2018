@@ -13,8 +13,9 @@ onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 ## SIGNALS ##
 signal die
 signal hit
-signal weapon_equiped(Node)
-signal weapon_selected(Node)
+signal weapon_equiped(node)
+signal weapon_unequiped(name)
+signal weapon_selected(node)
 
 
 ## CONSTANTS ##
@@ -64,14 +65,14 @@ var velocity = Vector2(0, 0) # current velocity
 
 # mechanisms to make the jumping feel better
 const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
-const EDGE_JUMP_TOLERANCE = 50 # ms
-var last_jump_ms = BEFORE_START # ms. Time at which the last jump occurred
+const EDGE_JUMP_TOLERANCE = 100 # ms
+var last_jump_ms = BEFORE_START # ms. Time at which the last jump occurred (different from last_jump_pressed_ms)
 var was_on_floor = false # whether the player was in contact with the floor on the last physics update
 var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
 
 # double jumping #
-const MAX_ADDITIONAL_JUMPS = 1
-var additional_jumps_left = 1 # used to allow double jumps. Reset when touching the floor
+const MAX_MID_AIR_JUMPS = 1
+var mid_air_jumps = MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor
 
 
 func init(config, camera, bullet_parent):
@@ -141,15 +142,19 @@ func _physics_process(delta):
 		# able to register a jump if character just about to hit the floor
 		if now - last_jump_pressed_ms < PREEMPTIVE_JUMP_TOLERANCE and not jump_released: # want to jump
 			if on_floor:
+				# if on the floor then jump
+				# if preemptively pressed: initiate jump once on the floor
 				velocity.y -= JUMP_SPEED
 				last_jump_pressed_ms = BEFORE_START
 				last_jump_ms = now
+				
 			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
 				# able to jump shortly after falling from a platform
 				velocity.y -= JUMP_SPEED
 				last_jump_pressed_ms = BEFORE_START
 				last_jump_ms = now
-			elif additional_jumps_left > 0:
+				
+			elif mid_air_jumps > 0:
 				# ensure that the current jump is cancelled. With more than
 				# one button assigned to jump it is possible to trigger
 				# the double jump without releasing the first
@@ -157,12 +162,12 @@ func _physics_process(delta):
 
 				velocity.y -= JUMP_SPEED
 				last_jump_pressed_ms = BEFORE_START
-				additional_jumps_left -= 1
+				mid_air_jumps -= 1
 				last_jump_ms = now
 
 		if on_floor:
-			additional_jumps_left = MAX_ADDITIONAL_JUMPS # reset double jump
-
+			mid_air_jumps = MAX_MID_AIR_JUMPS
+			
 			# apply friction
 			if move_direction == 0: # not moving left or right
 				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
@@ -193,6 +198,7 @@ func _clear_inventory():
 	inventory_lock.lock()
 	current_weapon = null
 	for w in $Inventory.get_children():
+		emit_signal('weapon_unequiped', w.name)
 		w.free() # queue_free here causes crashes
 	inventory_lock.unlock()
 
@@ -208,6 +214,8 @@ func equip_weapon(gun):
 	inventory_lock.unlock()
 
 func select_weapon(name):
+	if not alive:
+		return
 	inventory_lock.lock()
 	if current_weapon != null:
 		current_weapon.set_active(false)
@@ -221,6 +229,8 @@ func select_weapon(name):
 
 # offset = 1 for next, -1 for prev
 func select_next_weapon(offset):
+	if not alive:
+		return
 	inventory_lock.lock()
 	var n = $Inventory.get_child_count()
 	if current_weapon != null and n > 0:
@@ -262,14 +272,15 @@ func spawn(position):
 	show()
 	invulnerable = true
 	$InvulnTimer.start()
+	
+	self.position = position
+	_set_health(max_health)
+	alive = true
 
 	_clear_inventory()
 	equip_weapon(pistol_scene.instance())
 	select_weapon('Pistol')
 
-	self.position = position
-	_set_health(max_health)
-	alive = true
 
 func delayed_spawn(position):
 	if $SpawnTimer.is_stopped(): # if timer already going, don't restart

@@ -14,6 +14,7 @@ func connect_player(player, player_num):
 		print('only 2 weapon slots supported')
 		return
 	player.connect('weapon_equiped', slots, '_on_Player_weapon_equiped')
+	player.connect('weapon_unequiped', slots, '_on_Player_weapon_unequiped')
 	player.connect('weapon_selected', slots, '_on_Player_weapon_selected')
 	
 func set_score_labels(L, R):

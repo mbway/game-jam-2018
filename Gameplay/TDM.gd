@@ -59,7 +59,9 @@ func spawn_player(p, delayed):
 	if is_game_over:
 		return
 	
-	var spawn = spawn_points.get_child(randi() % spawn_points.get_child_count())
+	var num_spawn_points = spawn_points.get_child_count()
+	assert num_spawn_points > 0 # no spawn points!
+	var spawn = spawn_points.get_child(randi() % num_spawn_points)
 	# spawn offset helps prevent players from spawning directly on top of
 	# one another and messing with the physics
 	var spawn_offset = Vector2(rand_range(-1,1), rand_range(-1,1))

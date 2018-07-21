@@ -25,6 +25,8 @@ var game_mode_nodes = {}
 var game_mode_data = {}
 var game_mode = null # an element of game_mode_data
 
+var watch_player = true
+
 
 func _ready():
 	globals = get_node('/root/globals')
@@ -41,6 +43,11 @@ func _ready():
 		$GameMode.remove_child(n)
 		game_mode_data[n.name] = load('res://Gameplay/' + n.name +'.gd').new()
 		add_child(game_mode_data[n.name])
+	
+	if watch_player:
+		var w = preload('res://UI/DebugWatcher.tscn').instance()
+		w.name = 'Watch'
+		add_child(w)
 	
 	var keyboard_player = false # whether any players are using the keyboard + mouse
 	for p in globals.player_data:
@@ -74,5 +81,29 @@ func create_player(config):
 	p.init(config, $Camera, $Bullets)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
+	
+	if watch_player:
+		var node_name = 'Player %d' % config.num
+		# only the interesting attributes
+		var attrs = ['current_weapon',
+					'weapon_angle',
+					'move_direction',
+					'fire_pressed',
+					'fire_held',
+					'last_jump_pressed_ms',
+					'jump_released',
+					'max_health',
+					'health',
+					'alive',
+					'invulnerable',
+					'velocity',
+					'last_jump_ms',
+					'was_on_floor',
+					'left_floor_ms',
+					'mid_air_jumps']
+		if config.control == globals.KEYBOARD_CONTROL:
+			attrs += ['left_pressed', 'right_pressed']
+		for attr in attrs:
+			$Watch.add_watch(node_name, p, attr)
 
 	

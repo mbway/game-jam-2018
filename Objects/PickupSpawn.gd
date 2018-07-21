@@ -17,7 +17,7 @@ func _process(delta):
 func set_pickup(i):
 	current_pickup = available_pickups.get_child(i)
 	$PickupSprite.texture = current_pickup.texture
-	var sc = 60.0 / current_pickup.texture.get_size().x
+	var sc = 60.0 / current_pickup.texture.get_size().x # TODO: need a better equation. Doesn't size the revolver well
 	$PickupSprite.scale.x = sc
 	$PickupSprite.scale.y = sc
 	

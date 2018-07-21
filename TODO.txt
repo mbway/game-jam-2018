@@ -1,19 +1,31 @@
 
 # Bugs
 - Weapon tray doesn't ever remove weapons. Probably want an 'inventory_changed' signal to account for both addition and removal
+- weapon tray should have a fixed ordering
 - can't edit player names in the lobby
 - shooting sounds crackle when mouse is directly over player
+- rendering of guns flicker when aiming directly up
 - custom mouse cursor seems to only last a single game until it is reset
+- can switch weapons when dead
+- seems to be a race condition with the weapon slots GUI so that when re-spawning the new pistol is added first (which fails) then the old pistol is removed, rather than the other way around. So after re-spawning the pistol isn't on the slots GUI
+    - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
 
 # TODO
+- state machine for jumping
+- Large canister shell for the laser gun
+- Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately
+- create a map to stress test the AI
 - themed UI, create sprites for buttons and choose colors and style etc
+- weapon: revolver
+- shield as well as health, with pickups to recharge
 - code organisation
     - pull out the code for the different game modes. Try to combine them to allow for overrule mode
     - choose the map then the game mode. all game modes on all maps
     - multiple spawns in capture the flag
     - dynamic flag spawning
     - parent flags to player holding
+- number keys to switch weapons
 - main menu
     - input method selection
     - handle >2 players by selecting _which_ gamepad to assign to each player
@@ -62,6 +74,11 @@
 - red dot with RayCast2D <https://www.youtube.com/watch?v=esZdJegvANc&t=627s>
     - useful for gamepad where aiming is harder
 - FPS counter. enable/disable through the options menu
+- subtle footstep sound?
+- damage sound?
+- environmental hazards
+    - toxic waste (green with water splashing effect when walking on)
+    - automatic turrets
 
 
 # Extension Features
@@ -80,4 +97,5 @@
     - and you can add local players and select their control scheme
 - could switch to using raycasting rather than physical bullets
 - front/back flip when double jumping like raze
+- split screen. possible now that camera isn't child of player
 

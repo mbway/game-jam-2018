@@ -42,9 +42,19 @@ func add_weapon(w):
 	r.modulate.a = base_alpha
 	
 	add_child(r)
+	
+func remove_weapon(name):
+	for w in get_children():
+		if w.name == name:
+			remove_child(w)
+			w.queue_free()
+			return
 
 func _on_Player_weapon_equiped(weapon):
 	add_weapon(weapon)
+
+func _on_Player_weapon_unequiped(weapon_name):
+	remove_weapon(weapon_name)
 
 func _on_Player_weapon_selected(name):
 	select_weapon(name)
