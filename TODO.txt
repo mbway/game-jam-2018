@@ -17,7 +17,6 @@
 - Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately
 - create a map to stress test the AI
 - themed UI, create sprites for buttons and choose colors and style etc
-- weapon: revolver
 - shield as well as health, with pickups to recharge
 - code organisation
     - pull out the code for the different game modes. Try to combine them to allow for overrule mode
