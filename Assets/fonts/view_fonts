@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PIDS=()
+
+for f in *.ttf; do
+    display "$f" &
+    PIDS+=( "$!" )
+done
+
+read -p "Press enter to close all the display windows"
+
+# not just using killall display since that might interfere with other processes the user has running
+for pid in "${PIDS[@]}"; do
+    kill $pid
+done
+

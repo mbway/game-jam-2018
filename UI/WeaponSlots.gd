@@ -7,6 +7,7 @@ extends VBoxContainer
 
 # to place on the right hand side, set scale.x = -1 for the whole container
 
+onready var G = globals
 
 var base_height = 30
 var selected_height = 50
@@ -17,7 +18,7 @@ var selected_alpha = 0.9
 
 func select_weapon(name):
 	if not has_node(name):
-		print('cannot select %s because not in the tray' % name)
+		G.log_err('cannot select %s because not in the tray' % name)
 		return
 	else:
 		for w in get_children():
@@ -30,9 +31,9 @@ func select_weapon(name):
 
 func add_weapon(w):
 	if has_node(w.name):
-		print('weapon %s already added' % w.name)
+		G.log_err('weapon %s already added' % w.name)
 		return
-		
+
 	var r = TextureRect.new()
 	r.name = w.name
 	r.texture = w.texture
@@ -40,9 +41,9 @@ func add_weapon(w):
 	r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 	r.rect_min_size.y = base_height
 	r.modulate.a = base_alpha
-	
+
 	add_child(r)
-	
+
 func remove_weapon(name):
 	for w in get_children():
 		if w.name == name:

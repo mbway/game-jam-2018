@@ -31,7 +31,7 @@
             - collision layer: none
             - Post Import Script: `res://Utils/TiledPostImport.gd`
         - then click 'reimport'
-        - you may need to close and re-open the inherited scene for the changes to take effect
+        - you may need to close and re-open the scene for the changes to take effect
     - Right click the root of the scene and click 'Merge From Scene'
         - select `res://Utils/BaseMap.tscn`
         - select all the nodes EXCEPT FOR the root node of `BaseMap.tscn` then click OK

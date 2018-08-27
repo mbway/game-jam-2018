@@ -50,14 +50,17 @@ func _physics_process(delta):
 	var mouse_pos = get_local_mouse_position()
 	var angle = mouse_pos.angle_to_point(gun_pos)
 	var d = (mouse_pos - gun_pos).length()
-	var o = (current_weapon.get_node('Muzzle').get_position() - gun_pos).y
 	if d != 0:
+		var o = (current_weapon.get_node('Muzzle').get_position() - gun_pos).y
 		var angle_correction = asin(o/d)
-		if abs(weapon_angle) > PI/2:
-			angle += angle_correction
-		else:
-			angle -= angle_correction
+		 # as of Godot 3.0.6 there is a bug where is_nan(NAN) == false, so this fix doesn't help yet
+		if not is_nan(angle_correction):
+			if abs(weapon_angle+angle_correction) > PI/2:
+				angle += angle_correction
+			else:
+				angle -= angle_correction
 	weapon_angle = angle # atomic update
+	
 
 
 func update_move_direction():

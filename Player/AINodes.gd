@@ -1,19 +1,21 @@
 extends Node2D
 
-var globals
+onready var G = globals
 var red = Color('#ddd95353')  # ARGB
+var green = Color('#dd53d953')  # ARGB
 var grey = Color('#ddaaaaaa')  # ARGB
 
 func _ready():
-	globals = get_node('/root/globals')
-	visible = globals.DEBUG
+	visible = G.settings.get('ai_nodes_visible')
 
 func _process(delta):
-	$MoveTarget.position = get_local_mouse_position()
+	#$MoveTarget.position = get_local_mouse_position()
+	$Waypoint.position = get_local_mouse_position()
 	update() # redraw. Only calls _draw when visible
 
 func _draw():
 	draw_circle($MoveTarget.position, 5, red)
+	draw_circle($Waypoint.position, 15, red)
 
 	var left_shape = $LeftCollider/CollisionShape2D.shape
 	var left_color = red if is_blocked_left() else grey
@@ -29,7 +31,7 @@ func is_blocked_left():
 	if count > 0 and bodies.has(get_parent()):
 		count -= 1
 	return bool(count > 0)
-		
+
 func is_blocked_right():
 	var bodies = $RightCollider.get_overlapping_bodies()
 	var count = len(bodies)

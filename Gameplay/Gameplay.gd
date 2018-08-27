@@ -10,57 +10,45 @@ extends Node
 #	- TDM : Node2D
 #	- CTF : Node2D
 
-onready var keyboard_player_scene = preload('res://Player/KeyboardPlayer.tscn')
-onready var gamepad_player_scene = preload('res://Player/GamepadPlayer.tscn')
-onready var AI_player_scene = preload('res://Player/AIPlayer.tscn')
+const keyboard_player_scene = preload('res://Player/KeyboardPlayer.tscn')
+const gamepad_player_scene = preload('res://Player/GamepadPlayer.tscn')
+const AI_player_scene = preload('res://Player/AIPlayer.tscn')
 
 const MAX_HEALTH = 100
 
-var globals
+onready var G = globals
 var input
 
-# scene tree node containing the scene entities required for each game mode
+# scene tree node containing the scene entities required for each game mode {mode: instance}
 var game_mode_nodes = {}
-# the functionality and data for each game mode (scripts)
+# the functionality and data for each game mode (scripts) {mode: script}
 var game_mode_data = {}
 var game_mode = null # an element of game_mode_data
 
-var watch_player = true
+# whether there is a player using the keyboard and mouse. If not, then the cursor can be hidden.
+var keyboard_player = false
 
 
 func _ready():
-	globals = get_node('/root/globals')
-	
-	if globals.settings.get_value('options', 'music', true):
-		$Music.play()
-	
-	if globals.settings.get_value('options', 'mouse_confined', true):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED) # prevent going outside the game window
-	Input.set_custom_mouse_cursor(preload('res://Assets/crosshairs.png'), Input.CURSOR_ARROW, Vector2(15, 15))
-	
+	# store the game mode specific nodes away in a data structure and remove them from the tree for now
 	for n in $GameMode.get_children():
 		game_mode_nodes[n.name] = n
 		$GameMode.remove_child(n)
 		game_mode_data[n.name] = load('res://Gameplay/' + n.name +'.gd').new()
 		add_child(game_mode_data[n.name])
-	
-	if watch_player:
-		var w = preload('res://UI/DebugWatcher.tscn').instance()
-		w.name = 'Watch'
-		add_child(w)
-	
-	var keyboard_player = false # whether any players are using the keyboard + mouse
-	for p in globals.player_data:
-		if p.control == globals.KEYBOARD_CONTROL:
+
+	for p in G.player_data:
+		if p.control == G.KEYBOARD_CONTROL:
 			keyboard_player = true
 		create_player(p)
+
+
+	set_game_mode(G.game_mode)
+	game_mode.setup(G.game_mode_details)
 	
-	if not keyboard_player and not globals.DEBUG: # don't hide the mouse in debug mode
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	
-	set_game_mode(globals.game_mode)
-	game_mode.setup(globals.game_mode_details)
-	
+	_on_settings_changed()
+	G.settings.connect('settings_changed', self, '_on_settings_changed')
+
 
 func set_game_mode(mode):
 	assert mode in game_mode_nodes
@@ -68,21 +56,21 @@ func set_game_mode(mode):
 		$GameMode.remove_child(n)
 	$GameMode.add_child(game_mode_nodes[mode])
 	game_mode = game_mode_data[mode]
-	print('game mode changed to: ' + mode)
+	G.log('game mode changed to: ' + mode)
 
 func create_player(config):
 	var p = null
-	if config.control == globals.KEYBOARD_CONTROL:
+	if config.control == G.KEYBOARD_CONTROL:
 		p = keyboard_player_scene.instance()
-	elif config.control == globals.GAMEPAD_CONTROL:
+	elif config.control == G.GAMEPAD_CONTROL:
 		p = gamepad_player_scene.instance()
-	elif config.control == globals.AI_CONTROL:
+	elif config.control == G.AI_CONTROL:
 		p = AI_player_scene.instance()
 	p.init(config, $Camera, $Bullets)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
-	
-	if watch_player:
+
+	if G.settings.get('inspect_window'):
 		var node_name = 'Player %d' % config.num
 		# only the interesting attributes
 		var attrs = ['current_weapon',
@@ -101,9 +89,42 @@ func create_player(config):
 					'was_on_floor',
 					'left_floor_ms',
 					'mid_air_jumps']
-		if config.control == globals.KEYBOARD_CONTROL:
+		if config.control == G.KEYBOARD_CONTROL:
 			attrs += ['left_pressed', 'right_pressed']
 		for attr in attrs:
 			$Watch.add_watch(node_name, p, attr)
 
-	
+func _on_settings_changed():
+	if G.settings.get('music'):
+		$Music.play()
+	else:
+		$Music.stop()
+
+	var term_enabled = G.settings.get('terminal_enabled')
+	if term_enabled and not has_node('Terminal'):
+		add_child(preload('res://UI/Terminal.tscn').instance())
+	elif not term_enabled and has_node('Terminal'):
+		$Terminal.queue_free()
+
+	var cursor_visible = keyboard_player or G.settings.get('debug') # don't hide the mouse in debug mode
+	var mode
+	if G.settings.get('mouse_confined'):
+		# captured is the same as confined except also hidden
+		mode = Input.MOUSE_MODE_CONFINED if cursor_visible else Input.MOUSE_MODE_CAPTURED
+	else:
+		mode = Input.MOUSE_MODE_VISIBLE if cursor_visible else Input.MOUSE_MODE_HIDDEN
+	print(cursor_visible)
+	print(mode)
+	Input.set_mouse_mode(mode)
+	Input.set_custom_mouse_cursor(preload('res://Assets/crosshairs.png'), Input.CURSOR_ARROW, Vector2(15, 15))
+
+
+	if G.settings.get('inspect_window'):
+		var w = preload('res://UI/DebugWatcher.tscn').instance()
+		w.name = 'Watch'
+		add_child(w)
+	elif has_node('Watch'):
+		$Watch.queue_free()
+		
+	OS.set_window_fullscreen(G.settings.get('full_screen'))
+

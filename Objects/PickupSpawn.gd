@@ -6,10 +6,11 @@ onready var available_pickups = get_node(available_pickups_path)
 var pickup_available = false
 var current_pickup = null
 
+#TODO: rather than using the scene tree to specify the pickups, may be able to have a list of weapon scenes as a parameter to the spawn
 
 func _ready():
 	random_pickup()
-	
+
 func _process(delta):
 	$PickupSprite.position.y = -35 + sin(OS.get_ticks_msec()/800.0) * 8
 	$PickupSprite.visible = pickup_available

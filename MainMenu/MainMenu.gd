@@ -1,5 +1,6 @@
 extends Node
 
+onready var G = globals
 onready var start_screen_scene = preload('res://MainMenu/StartScreen.tscn')
 onready var options_screen_scene = preload('res://MainMenu/OptionsMenu.tscn')
 onready var lobby_screen_scene = preload('res://MainMenu/Lobby.tscn')
@@ -7,8 +8,8 @@ onready var lobby_screen_scene = preload('res://MainMenu/Lobby.tscn')
 
 func _ready():
 	randomize() # generate true random numbers
-	if globals.settings.get_value('options', 'music', true):
-		$Music.play()
+	_on_settings_changed()
+	G.settings.connect('settings_changed', self, '_on_settings_changed')
 	
 	# Input.set_custom_mouse_cursor(preload('res://Assets/cursor.png'), Input.CURSOR_ARROW, Vector2(2, 2))
 	
@@ -44,7 +45,16 @@ func change_screen(screen_scene):
 	add_child(screen)
 
 func _on_settings_changed():
-	if globals.settings.get_value('options', 'music', true):
+	if G.settings.get('music'):
 		$Music.play()
 	else:
 		$Music.stop()
+	
+	var term_enabled = G.settings.get('terminal_enabled')
+	if term_enabled and not has_node('Terminal'):
+		add_child(preload('res://UI/Terminal.tscn').instance())
+	elif not term_enabled and has_node('Terminal'):
+		$Terminal.queue_free()
+	
+	OS.set_window_fullscreen(G.settings.get('full_screen'))
+

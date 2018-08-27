@@ -6,7 +6,7 @@
 [ext_resource path="res://MainMenu/Font50.tres" type="DynamicFont" id=4]
 [ext_resource path="res://MainMenu/Font20.tres" type="DynamicFont" id=5]
 
-[node name="OptionsMenu" type="Control" index="0"]
+[node name="OptionsMenu" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -197,7 +197,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 147.0
+margin_right = 191.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -210,7 +210,7 @@ text = "Music"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="Music" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="1"]
 
@@ -218,8 +218,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 151.0
-margin_right = 175.0
+margin_left = 195.0
+margin_right = 219.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -235,7 +235,7 @@ shortcut = null
 group = null
 flat = false
 align = 0
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Hint", "Margin" ]
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="2"]
 
@@ -244,7 +244,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 29.0
-margin_right = 147.0
+margin_right = 191.0
 margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -266,9 +266,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 151.0
+margin_left = 195.0
 margin_top = 29.0
-margin_right = 175.0
+margin_right = 219.0
 margin_bottom = 54.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -286,10 +286,55 @@ flat = false
 align = 0
 _sections_unfolded = [ "Hint" ]
 
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 58.0
+margin_right = 191.0
+margin_bottom = 83.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Whether to prevent the mouse from leaving the game window while playing"
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Enable Terminal (`)"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Hint", "custom_fonts" ]
+
+[node name="Terminal" type="CheckBox" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 195.0
+margin_top = 58.0
+margin_right = 219.0
+margin_bottom = 83.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+pressed = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 0
+_sections_unfolded = [ "Hint" ]
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
-
-[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/Music" to="." method="_on_Music_toggled"]
-
-[connection signal="toggled" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/Confine" to="." method="_on_Confine_toggled"]
 
 

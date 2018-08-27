@@ -2,9 +2,17 @@ extends "res://Player/Player.gd"
 
 #TODO: it may be a problem that the collision detectors can collide with bullet shells
 
+var state = 'explore'
+var waypoint = null
+
+
 func _physics_process(delta):
 	var on_floor = is_on_floor()
 	var now = OS.get_ticks_msec()
+	
+	# waypoint
+	if waypoint == null:
+		set_waypoint()
 	
 	# moving
 	var tx = $AINodes/MoveTarget.position.x
@@ -39,3 +47,8 @@ func _physics_process(delta):
 	if want_to_jump and (on_floor or time_since_jump > 250):
 		try_jump()
 
+func set_waypoint():
+	return
+	
+	
+	

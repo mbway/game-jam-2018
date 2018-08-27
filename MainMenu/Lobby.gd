@@ -1,5 +1,7 @@
 extends Control
 
+onready var G = globals
+
 signal back
 
 var Math = preload('res://Utils/Math.gd')
@@ -42,7 +44,6 @@ var teams = ['Team 1', 'Team 2']
 
 var selected_map = 0
 
-var globals
 
 # handles to UI nodes
 var game_mode_dropdown
@@ -53,8 +54,6 @@ var players
 
 
 func _ready():
-	globals = get_node('/root/globals')
-	
 	game_mode_dropdown = find_node('GameMode', true)
 	for m in game_modes:
 		game_mode_dropdown.add_item(m[1])
@@ -62,18 +61,18 @@ func _ready():
 		game_mode_options.append(options)
 		options.hide()
 	_on_GameMode_item_selected(0)
-	
+
 	map_screenshot = find_node('Screenshot', true)
 	map_title = find_node('MapTitle', true)
 	select_map(0)
-	
+
 	players = find_node('PlayerList')
-	
-	input_methods.append({'type' : globals.KEYBOARD_CONTROL, 'name' : 'Keyboard + Mouse'})
+
+	input_methods.append({'type' : G.KEYBOARD_CONTROL, 'name' : 'Keyboard + Mouse'})
 	for g in Input.get_connected_joypads():
-		input_methods.append({'type' : globals.GAMEPAD_CONTROL, 'index' : g, 'name' : 'Gamepad %d' % g})
-	input_methods.append({'type' : globals.AI_CONTROL, 'name' : 'AI'})
-	
+		input_methods.append({'type' : G.GAMEPAD_CONTROL, 'index' : g, 'name' : 'Gamepad %d' % g})
+	input_methods.append({'type' : G.AI_CONTROL, 'name' : 'AI'})
+
 	# add a player for each non-AI input method
 	for i in range(len(input_methods) - 1):
 		_add_player()
@@ -94,42 +93,42 @@ func _on_StartButton_pressed():
 	#TODO: validate that the configuration makes sense
 	# - no two players have the same input
 	# - there is at least one player
-	
+
 	var map_path = maps[selected_map]['path']
-	globals.game_mode = game_modes[game_mode_dropdown.selected][0]
-	
+	G.game_mode = game_modes[game_mode_dropdown.selected][0]
+
 	var players_list = players.get_children()
-	globals.player_data.clear()
+	G.player_data.clear()
 	for i in range(len(players_list)):
 		var p = players_list[i]
-		
-		var config = globals.PlayerConfig.new()
+
+		var config = G.PlayerConfig.new()
 		config.num = i + 1 # 1-based
 		config.name = p.find_node('PlayerName').text
 		config.team = p.find_node('TeamOption').selected + 1 # 1-based
-		
+
 		var selected_input = input_methods[p.find_node('ControlOption').selected]
 		config.control = selected_input['type']
-		if config.control == globals.GAMEPAD_CONTROL:
+		if config.control == G.GAMEPAD_CONTROL:
 			config.gamepad_id = selected_input['index']
-		
-		globals.player_data.append(config)
-	
-	if globals.game_mode == 'TDM':
+
+		G.player_data.append(config)
+
+	if G.game_mode == 'TDM':
 		var options = game_mode_options[game_mode_dropdown.selected]
-		globals.game_mode_details = {
+		G.game_mode_details = {
 			'max_lives' : options.get_node('MaxLives').value
 		}
 	else:
 		print('not implemented')
-	
+
 	get_tree().change_scene(map_path)
 
 
 func _process(delta):
 	$Background.region_rect.position.x += delta * 500
 	$Background.region_rect.position.y -= delta * 20
-	
+
 	if Input.is_action_just_pressed('ui_left'):
 		select_map(selected_map - 1)
 	elif Input.is_action_just_pressed('ui_right'):
@@ -139,7 +138,7 @@ func _on_PrevMap_pressed():
 	select_map(selected_map - 1)
 func _on_NextMap_pressed():
 	select_map(selected_map + 1)
-	
+
 func _on_BackButton_pressed():
 	emit_signal('back')
 
@@ -151,7 +150,7 @@ func _on_GameMode_item_selected(ID):
 	var options = game_mode_options[ID]
 	options.show()
 	options.set_process(true)
-	
+
 
 
 func _add_player():
@@ -161,7 +160,7 @@ func _add_player():
 	var controls = player.find_node('ControlOption')
 	for i in input_methods:
 		controls.add_item(i['name'])
-	
+
 	# initially assign the lowest index into input_methods which has not yet been assigned to a player
 	var available_indices = range(len(input_methods))
 	for p in players.get_children():
@@ -170,17 +169,17 @@ func _add_player():
 		controls.select(len(input_methods) - 1) # AI
 	else:
 		controls.select(available_indices[0]) # the smallest index not yet allocated
-	
+
 	var team = player.find_node('TeamOption')
 	for t in teams:
 		team.add_item(t)
 	team.select(players.get_child_count() % len(teams))
-	
+
 	players.add_child(player)
 
 func _remove_player(player):
 	players.remove_child(player)
 	player.queue_free()
-	
-	
-	
+
+
+

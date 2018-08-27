@@ -97,4 +97,5 @@
 - could switch to using raycasting rather than physical bullets
 - front/back flip when double jumping like raze
 - split screen. possible now that camera isn't child of player
+- a short-range teleport ability/weapon would be cool...
 

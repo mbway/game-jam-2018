@@ -31,7 +31,7 @@ func setup(details):
 		HUD.connect_player(players.get_child(0), 1)
 	if num_players > 1:
 		HUD.connect_player(players.get_child(1), 2)
-		
+	
 	update_HUD()
 	
 	for p in players.get_children():

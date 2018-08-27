@@ -3,7 +3,7 @@ extends KinematicBody2D
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
-var globals
+onready var G = globals
 onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 
 ## Groups ##
@@ -81,20 +81,20 @@ func init(config, camera, bullet_parent):
 	self.bullet_parent = bullet_parent
 
 func _ready():
-	globals = get_node('/root/globals')
 	hide()
 
 
 func _process(delta):
 	inventory_lock.lock()
 	if alive and current_weapon != null:
+		current_weapon.set_rotation(weapon_angle)
+
 		# gun rotation
-		if abs(weapon_angle) > PI/2:
+		# the small margin is to prevent the gun from flickering when aiming directly up
+		if abs(current_weapon.rotation) > PI/2 + 0.01:
 			current_weapon.scale.y = -1
 		else:
 			current_weapon.scale.y = 1
-
-		current_weapon.set_rotation(weapon_angle)
 
 		if fire_pressed:
 			current_weapon.try_shoot(fire_held)
@@ -147,13 +147,13 @@ func _physics_process(delta):
 				velocity.y -= JUMP_SPEED
 				last_jump_pressed_ms = BEFORE_START
 				last_jump_ms = now
-				
+
 			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
 				# able to jump shortly after falling from a platform
 				velocity.y -= JUMP_SPEED
 				last_jump_pressed_ms = BEFORE_START
 				last_jump_ms = now
-				
+
 			elif mid_air_jumps > 0:
 				# ensure that the current jump is cancelled. With more than
 				# one button assigned to jump it is possible to trigger
@@ -167,7 +167,7 @@ func _physics_process(delta):
 
 		if on_floor:
 			mid_air_jumps = MAX_MID_AIR_JUMPS
-			
+
 			# apply friction
 			if move_direction == 0: # not moving left or right
 				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
@@ -205,7 +205,7 @@ func _clear_inventory():
 func equip_weapon(gun):
 	inventory_lock.lock()
 	if $Inventory.has_node(gun.name):
-		print('player already has weapon: %s' % gun.name)
+		G.log_err('player already has weapon: %s' % gun.name)
 	else:
 		gun.setup(bullet_parent)
 		gun.connect('fired', self, '_on_weapon_fired')
@@ -223,7 +223,7 @@ func select_weapon(name):
 		current_weapon = $Inventory.get_node(name)
 		current_weapon.set_active(true)
 	else:
-		print('player does not have weapon: %s' % name)
+		G.log_err('player does not have weapon: %s' % name)
 	inventory_lock.unlock()
 	emit_signal('weapon_selected', name)
 
@@ -272,7 +272,7 @@ func spawn(position):
 	show()
 	invulnerable = true
 	$InvulnTimer.start()
-	
+
 	self.position = position
 	_set_health(max_health)
 	alive = true
@@ -292,7 +292,7 @@ func _on_InvulnTimer_timeout():
 
 func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
-	if config.control == globals.GAMEPAD_CONTROL:
+	if config.control == G.GAMEPAD_CONTROL:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 
 	for b in bullets:
