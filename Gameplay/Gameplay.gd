@@ -68,7 +68,8 @@ func create_player(config):
 		p = gamepad_player_scene.instance()
 	elif config.control == G.AI_CONTROL:
 		p = AI_player_scene.instance()
-	p.init(config, $Camera, $Bullets, $Nav)
+	var nav = null if not has_node('Nav') else $Nav # TODO: make mandatory once pathfinding is finished and applied to all maps
+	p.init(config, $Camera, $Bullets, nav)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
 
