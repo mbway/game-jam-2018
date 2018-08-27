@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/AIPlayer.gd" type="Script" id=2]
@@ -16,7 +16,15 @@ custom_solver_bias = 0.0
 a = Vector2( 52, 24 )
 b = Vector2( 28, 24 )
 
-[node name="Player" index="0" instance=ExtResource( 1 )]
+[sub_resource type="Curve2D" id=3]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array(  )
+}
+_sections_unfolded = [ "Resource" ]
+
+[node name="Player" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 
@@ -28,12 +36,7 @@ frame = 0
 
 script = ExtResource( 3 )
 
-[node name="MoveTarget" type="Position2D" parent="AINodes" index="0"]
-
-z_index = 2
-_sections_unfolded = [ "Z Index" ]
-
-[node name="LeftCollider" type="Area2D" parent="AINodes" index="1"]
+[node name="LeftCollider" type="Area2D" parent="AINodes" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -50,7 +53,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="RightCollider" type="Area2D" parent="AINodes" index="2"]
+[node name="RightCollider" type="Area2D" parent="AINodes" index="1"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -67,6 +70,11 @@ _sections_unfolded = [ "Collision", "Transform" ]
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Waypoint" type="Position2D" parent="AINodes" index="3"]
+[node name="Waypoint" type="Position2D" parent="AINodes" index="2"]
+
+[node name="Path" type="Path2D" parent="AINodes" index="3"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+curve = SubResource( 3 )
 
 

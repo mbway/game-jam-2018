@@ -6,6 +6,7 @@ onready var G = globals
 
 func _ready():
 	randomize() # generate true random numbers
+	G.log('QuickStart')
 
 	G.player_data = [
 		globals.PlayerConfig.new(1, 'Player 1', 1, globals.KEYBOARD_CONTROL),

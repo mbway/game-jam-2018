@@ -26,6 +26,7 @@ const BEFORE_START = -999 # timestamp long before the start of the game (ms)
 var config # globals.PlayerConfig
 var camera = null # used for mouse input and camera shake
 var bullet_parent = null # the node to spawn the bullets under
+var nav = null # the navigation polygon
 
 
 var current_weapon = null
@@ -75,10 +76,11 @@ const MAX_MID_AIR_JUMPS = 1
 var mid_air_jumps = MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor
 
 
-func init(config, camera, bullet_parent):
+func init(config, camera, bullet_parent, nav):
 	self.config = config
 	self.camera = camera
 	self.bullet_parent = bullet_parent
+	self.nav = nav
 
 func _ready():
 	hide()
@@ -105,15 +107,9 @@ func _process(delta):
 	# play the appropriate animation
 	if alive:
 		if is_on_floor():
-			if velocity.x == 0:
-				$AnimatedSprite.play('idle')
-			else:
-				$AnimatedSprite.play('run')
+			$AnimatedSprite.play('idle' if velocity.x == 0 else 'run')
 		else:
-			if velocity.y < 0:
-				$AnimatedSprite.play('jump')
-			else:
-				$AnimatedSprite.play('fall')
+			$AnimatedSprite.play('jump' if velocity.y < 0 else 'fall')
 	else:
 		$AnimatedSprite.play('death')
 

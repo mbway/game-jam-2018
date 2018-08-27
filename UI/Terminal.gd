@@ -12,8 +12,6 @@ var active = false
 var cmd_history = []
 var history_index = -1 # used when scrolling through command history with the arrow keys
 
-func _ready():
-	G.terminal = self # redirect output from stdout to this terminal. weakref so that once freed, does not crash.
 
 func _process(delta):
 	if Input.is_action_just_pressed('terminal_toggle'):
@@ -26,6 +24,16 @@ func _process(delta):
 			line.grab_focus()
 		else:
 			line.focus_mode = Control.FOCUS_NONE # cannot grab focus
+	
+	if active:
+		while not G.output_queue.empty():
+			var item = G.output_queue.pop_front()
+			var is_error = item[0]
+			var msg = item[1] + '\n'
+			if item[0]: # is_error
+				log_error(msg)
+			else:
+				log_text(msg)
 
 func _on_LineEdit_text_entered(input):
 	if not text.text.empty() and not text.text.ends_with('\n'):
@@ -47,7 +55,7 @@ func log_error(txt):
 	text.pop()
 
 # pass table as a 2D list, each inner list is a row. Must have the same length for each row
-func display_table(t):
+func display_table(t, bbcode=false):
 	if len(t) == 0:
 		return
 	var cols = len(t[0])
@@ -56,7 +64,10 @@ func display_table(t):
 		assert len(row) == cols
 		for c in row:
 			text.push_cell()
-			text.add_text(c)
+			if bbcode:
+				text.append_bbcode(c)
+			else:
+				text.add_text(c)
 			text.pop()
 	text.pop()
 
@@ -144,8 +155,11 @@ func handle_command(input):
 	elif cmd == 'get_opts':
 		var t = []
 		for name in G.settings.get_names():
-			t.append([name, str(G.settings.get(name)), G.settings.get_description(name)])
-		display_table(t)
+			var v = G.settings.get(name)
+			if v == true or v == false:
+				v = '[color=%s]%s[/color]' % ['#00ff00' if v else '#ff0000', str(v)]
+			t.append([name, str(v), G.settings.get_description(name)])
+		display_table(t, true)
 	elif cmd == 'reset_opts':
 		G.settings.reset()
 
@@ -156,6 +170,10 @@ func get_prefix_matches(prefix, list):
 			matches.append(item)
 	return matches
 
+func set_line(txt):
+	line.text = txt
+	line.caret_position = len(txt)
+
 func handle_autocomplete(x):
 	assert x == line
 	var t = line.text
@@ -164,16 +182,14 @@ func handle_autocomplete(x):
 		if words[0] == 'set_opt' and len(words) == 2:
 			var matches = get_prefix_matches(words[1], G.settings.get_names())
 			if len(matches) == 1:
-				line.text = '%s %s ' % [words[0], matches[0]]
-				line.caret_position = len(line.text)
+				set_line('%s %s ' % [words[0], matches[0]])
 	else: # command not yet typed
 		var matches = get_prefix_matches(t, commands.keys())
 		if len(matches) == 1:
-			line.text = matches[0] + ' '
-			line.caret_position = len(line.text)
+			set_line(matches[0] + ' ')
 
 func move_in_history(history_index):
 	var l = len(cmd_history)
 	history_index = int(clamp(history_index, -l, 0))
-	line.text = '' if history_index == 0 else cmd_history[l+history_index]
+	set_line('' if history_index == 0 else cmd_history[l+history_index])
 	return history_index

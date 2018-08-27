@@ -11,6 +11,9 @@ func _ready():
 	_on_settings_changed()
 	G.settings.connect('settings_changed', self, '_on_settings_changed')
 	
+	if G.settings.get('auto_quick_start'):
+		get_tree().change_scene('res://Utils/QuickStart.tscn')
+	
 	# Input.set_custom_mouse_cursor(preload('res://Assets/cursor.png'), Input.CURSOR_ARROW, Vector2(2, 2))
 	
 	# if captured, returns the mouse to normal. Also resets the custom cursor

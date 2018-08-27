@@ -34,30 +34,19 @@ var game_mode = null # for possible values see Lobby.gd > game_modes
 var player_data = [] # list of PlayerConfig
 var game_mode_details = {}
 
-# when null, output is directed to stdout, when not null, is a UI/Terminal.tscn instance to redirect the output to
-var terminal = null
+# a list of [is_error, message] for the active terminal to pop from and display
+var output_queue = []
 
 var settings = null
 
 
-func is_freed(node):
-	return weakref(node).get_ref() == null
-
 func log(txt):
 	printerr(txt)
-	if terminal != null:
-		if is_freed(terminal):
-			terminal = null
-		else:
-			terminal.log_text(txt + '\n')
+	output_queue.append([false, txt])
 
 func log_err(txt):
 	print('Error: ' + txt)
-	if terminal != null:
-		if is_freed(terminal):
-			terminal = null
-		else:
-			terminal.log_error(txt + '\n')
+	output_queue.append([true, txt])
 
 
 class Settings:
@@ -75,6 +64,7 @@ class Settings:
 		'terminal_enabled' : [TYPE_BOOL, true,  'whether to open a terminal when the ` key is pressed'],
 		'inspect_window'   : [TYPE_BOOL, false, 'whether to display the inspection window'],
 		'debug'            : [TYPE_BOOL, false, 'whether the game is in debug mode (has various affects)'],
+		'auto_quick_start' : [TYPE_BOOL, false, 'whether to automatically launch QuickStart at startup'],
 		'ai_nodes_visible' : [TYPE_BOOL, false, 'whether to draw AI nodes'],
 	}
 

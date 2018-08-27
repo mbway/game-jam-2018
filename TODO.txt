@@ -12,6 +12,7 @@
 
 
 # TODO
+- free camera, control with arrow keys and scroll wheel for zooming. Enable/disable with the options menu.
 - state machine for jumping
 - Large canister shell for the laser gun
 - Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately

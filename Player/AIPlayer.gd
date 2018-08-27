@@ -3,28 +3,30 @@ extends "res://Player/Player.gd"
 #TODO: it may be a problem that the collision detectors can collide with bullet shells
 
 var state = 'explore'
-var waypoint = null
+var path = []
+onready var _target = null # a global vector specifying where the player should move to
 
+func get_target_relative():
+	return Vector2(0, 0) if _target == null else _target - position
 
 func _physics_process(delta):
 	var on_floor = is_on_floor()
 	var now = OS.get_ticks_msec()
-	
-	# waypoint
-	if waypoint == null:
-		set_waypoint()
-	
+
+	var t =  get_target_relative()
+	if t.length() < 40:
+		_target = null if path.empty() else path.pop_front()
+		t = get_target_relative()
+
 	# moving
-	var tx = $AINodes/MoveTarget.position.x
-	if abs(tx) < 5:
+	if abs(t.x) < 5:
 		move_direction = 0
-	elif abs(tx) < 10:
-		move_direction = tx/10 # analog control for fine movements
+	elif abs(t.x) < 10:
+		move_direction = t.x/10 # analog control for fine movements
 	else:
-		move_direction = sign(tx)
-	
+		move_direction = sign(t.x)
+
 	# jumping
-	var t = $AINodes/MoveTarget.position
 	var time_since_jump = now - last_jump_ms
 	var want_to_jump = false
 
@@ -47,8 +49,21 @@ func _physics_process(delta):
 	if want_to_jump and (on_floor or time_since_jump > 250):
 		try_jump()
 
-func set_waypoint():
-	return
-	
-	
-	
+func _input(event):
+	if event is InputEventMouseButton:
+		var b = event.button_index
+		if event.pressed:
+			if b == BUTTON_LEFT:
+				set_waypoint($AINodes/Waypoint.global_position)
+
+func set_waypoint(location):
+	path = Array(nav.get_simple_path(position, location))
+	_target = null
+	var c = $AINodes/Path.curve
+	c.clear_points()
+	for vec in path:
+		c.add_point(vec)
+
+
+
+

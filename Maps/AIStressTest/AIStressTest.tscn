@@ -9,9 +9,9 @@
 
 [sub_resource type="NavigationPolygon" id=1]
 
-vertices = PoolVector2Array( 3110, 1780, 4130, 1780, 4130, 1840, 3110, 1840 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 3110, 1840, 4130, 1840, 4130, 1780, 3110, 1780 ) ]
+vertices = PoolVector2Array( 3110, 1828, 3110, 1792, 3990, 1792, 4130, 1828, 3270, 1216, 3010, 1216, 3010, 1168, 3200, 1168, 4560, 1600, 4830, 1600, 4830, 1636, 4373.02, 1636, 3280, 1012, 3420, 1084, 3720, 988, 3670, 1036, 3870, 1204, 3870, 1156, 3900, 1204, 3900, 1156, 3990, 1120, 3954, 1084, 4100, 1204, 4050, 1084, 4120, 1180, 4370, 1204, 4480, 1144, 4380, 1228, 4420, 1564, 4370, 1564, 4310, 1624, 4200, 1672, 4010, 1492, 4290, 1420 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 4, 7, 12, 13 ), PoolIntArray( 13, 12, 14, 15 ), PoolIntArray( 16, 15, 14, 17, 18 ), PoolIntArray( 18, 17, 19 ), PoolIntArray( 20, 18, 19, 21 ), PoolIntArray( 22, 20, 21, 23, 24 ), PoolIntArray( 25, 22, 24, 26 ), PoolIntArray( 25, 26, 8, 27 ), PoolIntArray( 28, 27, 8 ), PoolIntArray( 29, 28, 8, 11, 30 ), PoolIntArray( 31, 3, 2, 32, 33 ), PoolIntArray( 30, 31, 33, 29 ) ]
+outlines = [ PoolVector2Array( 3110, 1828, 4130, 1828, 4200, 1672, 4310, 1624, 4373.02, 1636, 4830, 1636, 4830, 1600, 4560, 1600, 4480, 1144, 4120, 1180, 4050, 1084, 3954, 1084, 3900, 1156, 3870, 1156, 3720, 988, 3280, 1012, 3200, 1168, 3010, 1168, 3010, 1216, 3270, 1216, 3420, 1084, 3670, 1036, 3870, 1204, 3900, 1204, 3990, 1120, 4100, 1204, 4370, 1204, 4380, 1228, 4420, 1564, 4370, 1564, 4290, 1420, 4010, 1492, 3990, 1792, 3110, 1792 ) ]
 
 [node name="AIStressTest" type="Node2D" index="0"]
 
@@ -27,7 +27,7 @@ position = Vector2( 0, 1000 )
 
 _sections_unfolded = [ "Z Index" ]
 
-[node name="Players" type="Node" parent="." index="3"]
+[node name="Players" type="Node2D" parent="." index="3"]
 
 [node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
 
@@ -203,7 +203,8 @@ _sections_unfolded = [ "custom_colors" ]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Nav" index="0"]
 
-position = Vector2( 30, 0 )
+position = Vector2( 30, 296.667 )
+scale = Vector2( 1, 0.833333 )
 navpoly = SubResource( 1 )
 enabled = true
 

@@ -30,6 +30,8 @@ var keyboard_player = false
 
 
 func _ready():
+	G.log('Game started: %s' % get_tree().get_current_scene().get_name())
+	
 	# store the game mode specific nodes away in a data structure and remove them from the tree for now
 	for n in $GameMode.get_children():
 		game_mode_nodes[n.name] = n
@@ -66,7 +68,7 @@ func create_player(config):
 		p = gamepad_player_scene.instance()
 	elif config.control == G.AI_CONTROL:
 		p = AI_player_scene.instance()
-	p.init(config, $Camera, $Bullets)
+	p.init(config, $Camera, $Bullets, $Nav)
 	p.name = 'P%d' % config.num
 	$Players.add_child(p)
 
@@ -113,9 +115,8 @@ func _on_settings_changed():
 		mode = Input.MOUSE_MODE_CONFINED if cursor_visible else Input.MOUSE_MODE_CAPTURED
 	else:
 		mode = Input.MOUSE_MODE_VISIBLE if cursor_visible else Input.MOUSE_MODE_HIDDEN
-	print(cursor_visible)
-	print(mode)
 	Input.set_mouse_mode(mode)
+	#TODO: there is a bug where the cursor is incorrect after returning to the menu and starting another game
 	Input.set_custom_mouse_cursor(preload('res://Assets/crosshairs.png'), Input.CURSOR_ARROW, Vector2(15, 15))
 
 
