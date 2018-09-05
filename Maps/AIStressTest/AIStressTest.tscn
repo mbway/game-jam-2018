@@ -1,64 +1,45 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Camera.gd" type="Script" id=5]
-[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/graph-node/Graph2D.gd" type="Script" id=4]
+[ext_resource path="res://addons/graph-node/icon.png" type="Texture" id=5]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=8]
 
-[sub_resource type="NavigationPolygon" id=1]
-
-vertices = PoolVector2Array( 3110, 1828, 3110, 1792, 3990, 1792, 4130, 1828, 3270, 1216, 3010, 1216, 3010, 1168, 3200, 1168, 4560, 1600, 4830, 1600, 4830, 1636, 4373.02, 1636, 3280, 1012, 3420, 1084, 3720, 988, 3670, 1036, 3870, 1204, 3870, 1156, 3900, 1204, 3900, 1156, 3990, 1120, 3954, 1084, 4100, 1204, 4050, 1084, 4120, 1180, 4370, 1204, 4480, 1144, 4380, 1228, 4420, 1564, 4370, 1564, 4310, 1624, 4200, 1672, 4010, 1492, 4290, 1420 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 4, 7, 12, 13 ), PoolIntArray( 13, 12, 14, 15 ), PoolIntArray( 16, 15, 14, 17, 18 ), PoolIntArray( 18, 17, 19 ), PoolIntArray( 20, 18, 19, 21 ), PoolIntArray( 22, 20, 21, 23, 24 ), PoolIntArray( 25, 22, 24, 26 ), PoolIntArray( 25, 26, 8, 27 ), PoolIntArray( 28, 27, 8 ), PoolIntArray( 29, 28, 8, 11, 30 ), PoolIntArray( 31, 3, 2, 32, 33 ), PoolIntArray( 30, 31, 33, 29 ) ]
-outlines = [ PoolVector2Array( 3110, 1828, 4130, 1828, 4200, 1672, 4310, 1624, 4373.02, 1636, 4830, 1636, 4830, 1600, 4560, 1600, 4480, 1144, 4120, 1180, 4050, 1084, 3954, 1084, 3900, 1156, 3870, 1156, 3720, 988, 3280, 1012, 3200, 1168, 3010, 1168, 3010, 1216, 3270, 1216, 3420, 1084, 3670, 1036, 3870, 1204, 3900, 1204, 3990, 1120, 4100, 1204, 4370, 1204, 4380, 1228, 4420, 1564, 4370, 1564, 4290, 1420, 4010, 1492, 3990, 1792, 3110, 1792 ) ]
-
-[node name="AIStressTest" type="Node2D"]
+[node name="AIStressTest" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="Map" parent="." index="0" instance=ExtResource( 2 )]
 
 [node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 0, 1000 )
+position = Vector2( 0, 3500 )
 
-[node name="Bullets" type="Node2D" parent="." index="2"]
+[node name="Nav" type="Node2D" parent="." index="2"]
+
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+nodes = PoolVector2Array( 3136, 1792, 4152, 1792, 4360, 1632, 4840, 1632, 4472, 1632, 4368, 1280, 4144, 1280, 3920, 1280, 3736, 1792, 4048, 1792 )
+edges = [ [ 1, 2, true, true ], [ 2, 4, true, true ], [ 4, 3, true, true ], [ 5, 4, true, true ], [ 5, 3, true, false ], [ 7, 6, true, true ], [ 6, 5, true, true ], [ 0, 8, true, true ], [ 7, 8, true, false ], [ 8, 9, true, true ], [ 9, 1, true, true ], [ 7, 9, true, false ], [ 6, 9, true, false ] ]
+
+[node name="Bullets" type="Node2D" parent="." index="3"]
 
 _sections_unfolded = [ "Z Index" ]
 
-[node name="Players" type="Node2D" parent="." index="3"]
+[node name="Players" type="Node2D" parent="." index="4"]
 
-[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
+[node name="HUD" parent="." index="5" instance=ExtResource( 6 )]
 
-[node name="Camera" type="Camera2D" parent="." index="5"]
+[node name="Camera" parent="." index="6" instance=ExtResource( 7 )]
 
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
-smoothing_enabled = true
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-script = ExtResource( 5 )
-_sections_unfolded = [ "Drag Margin", "Editor", "Offset", "Smoothing" ]
-
-[node name="Music" type="AudioStreamPlayer" parent="." index="6"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="7"]
 
 stream = null
 volume_db = 0.0
@@ -67,7 +48,9 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="GameMode" type="Node" parent="." index="7"]
+[node name="GameMode" type="Node" parent="." index="8"]
+
+editor/display_folded = true
 
 [node name="TDM" type="Node" parent="GameMode" index="0"]
 
@@ -77,9 +60,11 @@ bus = "Master"
 
 position = Vector2( 3250, 1680 )
 
-[node name="Pickups" parent="GameMode/TDM" index="1" instance=ExtResource( 6 )]
+[node name="Pickups" parent="GameMode/TDM" index="1" instance=ExtResource( 8 )]
 
-[node name="Text" type="Node2D" parent="." index="8"]
+[node name="Text" type="Node2D" parent="." index="9"]
+
+editor/display_folded = true
 
 [node name="Label" type="Label" parent="Text" index="0"]
 
@@ -198,14 +183,5 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors" ]
-
-[node name="Nav" type="Navigation2D" parent="." index="9"]
-
-[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Nav" index="0"]
-
-position = Vector2( 30, 296.667 )
-scale = Vector2( 1, 0.833333 )
-navpoly = SubResource( 1 )
-enabled = true
 
 

@@ -1,10 +1,24 @@
 extends Camera2D
 
+onready var G = globals
+
 const SHAKE_DECAY = 10 # shake decay per second
 const MAX_SHAKE = 200
 
 var follow = [] # nodes to follow
 var shake_amount = 0
+
+# whether the user moves the camera manually with the arrow keys and scroll wheel
+var free_camera = false
+var free_vel = Vector2(0, 0) # when not following the player, the velocity to move the camera by
+const free_speed = 1000
+const free_zoom_speed = 0.1
+var free_following = true # when in free_camera mode, whether to follow the player
+
+
+func _ready():
+	_on_settings_changed()
+	G.settings.connect('settings_changed', self, '_on_settings_changed')
 
 func _process(delta):
 	if shake_amount > 0.1:
@@ -21,6 +35,10 @@ func shake(amount):
 	shake_amount = min(shake_amount + amount, MAX_SHAKE)
 
 func _physics_process(delta):
+	if free_camera and not free_following:
+		global_position += free_vel * delta
+		return
+	
 	var following = len(follow)
 	
 	if following == 1:
@@ -49,6 +67,36 @@ func _physics_process(delta):
 		zoom.y = z
 		set_global_position(avg)
 	
+func _input(event):
+	if not free_camera:
+		return
+		
+	if event is InputEventKey:
+		var k = event.scancode
+	
+		free_vel = Vector2(0, 0)
+		if Input.is_key_pressed(KEY_UP):
+			free_vel.y -= free_speed
+		if Input.is_key_pressed(KEY_DOWN):
+			free_vel.y += free_speed
+		if Input.is_key_pressed(KEY_LEFT):
+			free_vel.x -= free_speed
+		if Input.is_key_pressed(KEY_RIGHT):
+			free_vel.x += free_speed
+		
+		if event.pressed and not event.is_echo():
+			if k == KEY_F:
+				free_following = not free_following
+	
+	elif event is InputEventMouseButton:
+		var b = event.button_index
+		if event.pressed:
+			if b == BUTTON_WHEEL_UP:
+				zoom.x -= free_zoom_speed
+				zoom.y -= free_zoom_speed
+			elif b == BUTTON_WHEEL_DOWN:
+				zoom.x += free_zoom_speed
+				zoom.y += free_zoom_speed
 
 func remove_follow(node):
 	follow.erase(node)
@@ -67,5 +115,6 @@ func update_settings():
 		smoothing_enabled = true
 	
 	
-	
+func _on_settings_changed():
+	free_camera = G.settings.get('free_camera')
 

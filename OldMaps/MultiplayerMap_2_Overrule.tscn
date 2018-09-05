@@ -14,12 +14,14 @@
 [ext_resource path="res://Assets/weapons/shotgun.png" type="Texture" id=12]
 [ext_resource path="res://Weapons/Sniper.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=14]
-[ext_resource path="res://Camera.gd" type="Script" id=15]
+[ext_resource path="res://UI/Camera.gd" type="Script" id=15]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/Music/fite_me_irl_loop_only.ogg" type="AudioStream" id=17]
 [ext_resource path="res://Objects/Base.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Objects/Orb.tscn" type="PackedScene" id=20]
+
+
 
 [node name="MultiplayerMap" type="Node"]
 

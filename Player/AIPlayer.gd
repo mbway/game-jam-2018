@@ -5,6 +5,8 @@ extends "res://Player/Player.gd"
 var state = 'explore'
 var path = []
 onready var _target = null # a global vector specifying where the player should move to
+onready var astar = nav.get_astar()
+
 
 func get_target_relative():
 	return Vector2(0, 0) if _target == null else _target - position
@@ -57,6 +59,12 @@ func _input(event):
 				set_waypoint($AINodes/Waypoint.global_position)
 
 func set_waypoint(location):
+	return
+	#TODO: add the current position to the astar then calculate the path then remove
+	var id = astar.get_available_point_id()
+	astar.add_point(id, position, 1.0)
+	
+	
 	path = Array(nav.get_simple_path(position, location))
 	_target = null
 	var c = $AINodes/Path.curve

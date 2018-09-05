@@ -4,12 +4,12 @@
 [ext_resource path="res://Maps/Obelisk/Obelisk.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Camera.gd" type="Script" id=5]
+[ext_resource path="res://UI/Camera.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=8]
 
-[node name="Obelisk" type="Node2D"]
+[node name="Obelisk" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
@@ -17,6 +17,8 @@ _sections_unfolded = [ "Z Index" ]
 [node name="Map" parent="." index="0" instance=ExtResource( 2 )]
 
 [node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 0, 2500 )
 
 [node name="Bullets" type="Node2D" parent="." index="2"]
 

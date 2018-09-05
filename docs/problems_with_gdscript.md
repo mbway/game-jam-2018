@@ -20,4 +20,7 @@ I don't like gdscript very much, here is why.
     - also, inconsistent styling. Some arguments are written `likethis` and others `like_this` for no reason, simply sloppy adherence to a single coding style.
         - even worse, some functions have this problem too: `printraw()` and `print_stack()`
 - the debugging support is virtually non-existent
-
+- too many things change silently between versions. Change is good, but not clearly documenting when an API breaking change is introduced is stupid.
+- there are many problems that aren't caught by the editor which cause runtime issues. For example, using a custom class as an export variable: can't find the script file because the class is defined inline and not in its own file. So giving it its own file works, but causes runtime errors because it gets down-converted back to Object from whatever custom type you had, making any accesses crash.
+    - this could have been avoided by either clearly documenting what is and isn't allowed (I'm still not sure when `export (Array, some_type)` became illegal) or by having the editor flag it up as a problem, or by providing better error messages.
+    - the error messages don't even have any google results, it looks like very few people have built their own editor plugins. The examples in the documentation are shockingly simple and useless and don't help beyond getting set up.

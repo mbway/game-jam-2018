@@ -26,6 +26,7 @@ func _process(delta):
 			line.focus_mode = Control.FOCUS_NONE # cannot grab focus
 	
 	if active:
+		# mirror output sent to stdout or stderr by G.log and G.log_err
 		while not G.output_queue.empty():
 			var item = G.output_queue.pop_front()
 			var is_error = item[0]
@@ -174,10 +175,9 @@ func set_line(txt):
 	line.text = txt
 	line.caret_position = len(txt)
 
-func handle_autocomplete(x):
-	assert x == line
+func handle_autocomplete():
 	var t = line.text
-	var words = line.text.split(' ', true)
+	var words = t.split(' ', true)
 	if len(words) > 1: # command already typed
 		if words[0] == 'set_opt' and len(words) == 2:
 			var matches = get_prefix_matches(words[1], G.settings.get_names())

@@ -3,37 +3,23 @@
 [ext_resource path="res://UI/Terminal.gd" type="Script" id=1]
 [ext_resource path="res://UI/TerminalLineEdit.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="DynamicFontData" id=1]
 
 hinting = 2
 font_path = "res://Assets/fonts/source_code_pro/SourceCodePro-Bold.ttf"
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=2]
 
 size = 18
 use_mipmaps = false
 use_filter = false
-font_data = SubResource( 7 )
+font_data = SubResource( 1 )
 _sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFontData" id=5]
-
-hinting = 2
-font_path = "res://Assets/fonts/source_code_pro/SourceCodePro-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=6]
-
-size = 18
-use_mipmaps = false
-use_filter = false
-font_data = SubResource( 5 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [sub_resource type="DynamicFontData" id=3]
 
 hinting = 2
 font_path = "res://Assets/fonts/source_code_pro/SourceCodePro-Regular.ttf"
-_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="DynamicFont" id=4]
 
@@ -43,7 +29,21 @@ use_filter = false
 font_data = SubResource( 3 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="DynamicFontData" id=5]
+
+hinting = 2
+font_path = "res://Assets/fonts/source_code_pro/SourceCodePro-Regular.ttf"
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 18
+use_mipmaps = false
+use_filter = false
+font_data = SubResource( 5 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[sub_resource type="Animation" id=7]
 
 resource_name = "SlideDown"
 length = 1.0
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "values": [ Vector2( 100, -500 ), Vector2( 100, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 
 resource_name = "SlideUp"
 length = 1.0
@@ -133,15 +133,15 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1386.0
-margin_bottom = 453.0
+margin_bottom = 449.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
-custom_fonts/bold_font = SubResource( 8 )
-custom_fonts/normal_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_constants/table_vseparation = 0
 custom_constants/table_hseparation = 25
 bbcode_enabled = true
@@ -163,7 +163,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 457.0
+margin_top = 453.0
 margin_right = 1386.0
 margin_bottom = 486.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -173,7 +173,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 focus_mode = 2
 context_menu_enabled = true
@@ -191,8 +191,8 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/SlideDown = SubResource( 9 )
-anims/SlideUp = SubResource( 10 )
+anims/SlideDown = SubResource( 7 )
+anims/SlideUp = SubResource( 8 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 

@@ -58,10 +58,11 @@ class Settings:
 	var settings_file = null
 	# {name : [type, default_value, description]}
 	const options = {
+		'terminal_enabled' : [TYPE_BOOL, true,  'whether to open a terminal when the ` key is pressed'],
 		'full_screen'      : [TYPE_BOOL, false,  'whether the game displays in full screen'],
 		'music'            : [TYPE_BOOL, true,  'whether to play music'],
 		'mouse_confined'   : [TYPE_BOOL, false, 'whether to prevent the mouse from leaving the window'],
-		'terminal_enabled' : [TYPE_BOOL, true,  'whether to open a terminal when the ` key is pressed'],
+		'free_camera'      : [TYPE_BOOL, false, 'whether the camera is controllable using the arrow keys and scroll wheel (f to toggle following)'],
 		'inspect_window'   : [TYPE_BOOL, false, 'whether to display the inspection window'],
 		'debug'            : [TYPE_BOOL, false, 'whether the game is in debug mode (has various affects)'],
 		'auto_quick_start' : [TYPE_BOOL, false, 'whether to automatically launch QuickStart at startup'],
@@ -123,9 +124,9 @@ func cast_from_string(txt, type):
 	if type == TYPE_STRING:
 		return txt
 	elif type == TYPE_BOOL:
-		if txt == 'true':
+		if txt == 'true' or txt == '1':
 			return true
-		elif txt == 'false':
+		elif txt == 'false' or txt == '0':
 			return false
 		else:
 			return null
