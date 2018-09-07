@@ -1,11 +1,18 @@
 tool
 extends Node2D
+#class_name 'Graph2D' # TODO: uncomment when godot is updated
+
+export (PoolVector2Array) var nodes
+# can't use a custom class, so instead have to use an array of arrays :(
+# each element of edges is an array of [a, b, ab, ba]
+export (Array) var edges
 
 class GraphEdge:
 	var a
 	var b
 	var ab
 	var ba
+
 	func _init(array):
 		a = array[0]
 		b = array[1]
@@ -16,21 +23,24 @@ class GraphEdge:
 		return [a, b, ab, ba]
 
 
-export (PoolVector2Array) var nodes
-# can't use a custom class, so instead have to use an array of arrays :(
-# each element of edges is an array of [a, b, ab, ba]
-export (Array) var edges
-
 # used by the plugin for editing
-var edge_start_index = null # index
-var moving_index = null
-var cursor_pos = null
+var edge_start_index = null # index of the start node for the currently editing edge
+var moving_index = null # index of the currently moving node
+var cursor_pos = null # position of the cursor (black circle). null => hidden
+
+var _astar = null
 
 func _init():
 	nodes = PoolVector2Array()
 	edges = Array()
 
+func _ready():
+	if not Engine.editor_hint: # in the game
+		visible = false
+		# can cache because the graph won't change during gameplay
+		_astar = get_astar()
 
+# only called after update() is called, since otherwise the content is static
 func _draw():
 	for e in edges:
 		draw_edge(GraphEdge.new(e))
@@ -170,19 +180,19 @@ func closest_to(pos, max_radius=INF):
 func closest_to_mouse(max_radius=INF):
 	return closest_to(mouse_pos(), max_radius)
 
-func stop_editing():
+func clear_editing():
 	edge_start_index = null
 	moving_index = null
 	cursor_pos = null
 	update() # redraw
 
 func add_pending_node():
-	nodes.push_back(cursor_pos)
-	update() # redraw
+	if cursor_pos != null:
+		nodes.push_back(cursor_pos)
+		update() # redraw
 
 func remove_node(index):
 	nodes.remove(index)
-
 	# remove any edges involving the node
 	var i = 0
 	while i < edges.size():
@@ -200,13 +210,14 @@ func remove_node(index):
 
 	update() # redraw
 
+
 # build an AStar object from the graph
+# note: Astar uses Vector3 nodes
 func get_astar():
 	var astar = AStar.new()
 	for i in range(nodes.size()):
 		var n = nodes[i]
 		astar.add_point(i, Vector3(n.x, n.y, 0), 1.0) # id, position, weight scale
-
 	for i in range(edges.size()):
 		var e = get_edge(i)
 		if e.ab and e.ba:
@@ -215,7 +226,93 @@ func get_astar():
 			astar.connect_points(e.a, e.b, false)
 		elif e.ba:
 			astar.connect_points(e.b, e.a, false)
-
 	return astar
+
+
+# the AStar function get_closest_position_in_segment is useless because it
+# doesn't return which segment the resulting point lies in, which is required
+# for the purposes of subdividing an edge by introducing a point midway through.
+# Also the AStar implementation does not give access to the internal edge
+# representation at all!, so this has to be implemented using this custom graph
+# representation. This function has basically the same implementation but also
+# provides the edge index.
+func get_closest_edge(p, max_distance=INF):
+	# max_distance: ignore any edges that are further than this distance
+	var max_distance_sq = max_distance*max_distance # no exponentiation syntax :(
+	var closest_edge_index = null
+	var closest_p_on_edge = null # point projected onto the segment
+	var closest_distance_sq = INF # squared distance between p and the projected p
+	for i in range(edges.size()):
+		var e = get_edge(i)
+		var p_on_edge = Geometry.get_closest_point_to_segment_2d(p, nodes[e.a], nodes[e.b])
+		var d_sq = p.distance_squared_to(p_on_edge)
+		if d_sq < max_distance_sq and d_sq < closest_distance_sq:
+			closest_edge_index = i
+			closest_p_on_edge = p_on_edge
+			closest_distance_sq = d_sq
+
+	# may be [null, null]
+	return [closest_edge_index, closest_p_on_edge]
+
+
+# project a point to the closest edge, then add that point to the given AStar
+# instance, then add edges from the new point to and from the endpoints of the
+# closest edge, then return the id of the new point and the id of the closest edge.
+func _project_and_add(point, astar):
+	var res = get_closest_edge(point)
+	var closest_e = res[0] # index of the closest edge to the point
+	var projected = res[1] # the point projected onto the closest edge
+	if closest_e == null: # problem (probably graph has no edges)
+		return [null, null]
+	var id = astar.get_available_point_id()
+	astar.add_point(id, Vector3(projected.x, projected.y, 0), 1.0)
+
+	var e = get_edge(closest_e)
+	#TODO: these have to be unidirectional if the edges are otherwise paths can be wrong
+	# there seems to be a bug with AStar which crashes the engine sometimes if
+	# these edges are not bidirectional, but this shouldn't be a problem.
+	astar.connect_points(e.a, id, true)
+	astar.connect_points(e.b, id, true)
+
+	return [id, closest_e]
+
+# from and to are 2D vectors
+func get_path(from, to):
+	var res = _project_and_add(from, _astar)
+	var from_id = res[0]
+	var from_edge = res[1]
+	if from_id == null:
+		return []
+	assert _astar.has_point(from_id)
+
+	res = _project_and_add(to, _astar)
+	var to_id = res[0]
+	var to_edge = res[1]
+	if to_id == null:
+		_astar.remove_point(from_id)
+		return []
+	assert _astar.has_point(to_id)
+
+	if from_edge == to_edge:
+		# this could probably be made into a special case where the path is just
+		# [from, to], but just in case there is an edge case, AStar is still used.
+		_astar.connect_points(from_id, to_id)
+
+	var path = [] # not a pool array because some functions don't exist and the path shouldn't be too long anyway
+	var path3D = _astar.get_point_path(from_id, to_id)
+	for p in path3D:
+		path.append(Vector2(p.x, p.y))
+	_astar.remove_point(from_id)
+	_astar.remove_point(to_id)
+
+	#TODO: remove
+	print(from, to)
+	nodes.append(from)
+	nodes.append(to)
+	#nodes.append(path[0])
+	#nodes.append(path[-1])
+	update()
+
+	return path
 
 

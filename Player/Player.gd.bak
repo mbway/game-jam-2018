@@ -18,11 +18,16 @@ signal weapon_unequiped(name)
 signal weapon_selected(node)
 
 
+## CONSTANTS ##
+const BEFORE_START = -999 # timestamp long before the start of the game (ms)
+
+
 ## VARIABLES ##
 var config # globals.PlayerConfig
 var camera = null # used for mouse input and camera shake
 var bullet_parent = null # the node to spawn the bullets under
-var nav = null # the navigation node for the map
+var nav = null # the navigation polygon
+
 
 var current_weapon = null
 var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
@@ -35,6 +40,10 @@ var weapon_angle = 0 # TODO
 var move_direction = 0
 var fire_pressed = false # whether the fire button is pressed down
 var fire_held = false # whether the fire button is held down
+# use try_jump() to initiate a jump and set jump_released to false to cancel it
+var last_jump_pressed_ms = BEFORE_START # ms. Time at which the jump button was last pressed. Don't set directly, use try_jump instead
+var jump_released = false # able to cancel jump early by releasing the jump button
+
 
 ## health and damage
 var max_health = 100
@@ -44,8 +53,10 @@ var invulnerable = false
 
 ## MOVEMENT VARIABLES ##
 var UP = Vector2(0, -1)
-var ACCELERATION = 3000 # horizontal acceleration
-var MAX_SPEED = 600 # horizontal speed limit
+var GRAVITY = 40
+var ACCELERATION = 3000
+var MAX_SPEED = 600
+var JUMP_SPEED = 1000
 var FRICTION_DECAY = 0.6
 # when the user moves in the opposite direction to the current speed, decay the
 # speed quickly. This avoid the character feeling 'floaty' (set to 1.0 to disable)
@@ -53,8 +64,16 @@ const REACTIVITY_DECAY = 0.5
 
 var velocity = Vector2(0, 0) # current velocity
 
-var jump_pressed = false
-onready var jump_physics = preload('JumpPhysics.gd').new()
+# mechanisms to make the jumping feel better
+const PREEMPTIVE_JUMP_TOLERANCE = 50 # ms
+const EDGE_JUMP_TOLERANCE = 100 # ms
+var last_jump_ms = BEFORE_START # ms. Time at which the last jump occurred (different from last_jump_pressed_ms)
+var was_on_floor = false # whether the player was in contact with the floor on the last physics update
+var left_floor_ms = BEFORE_START # the last time the player left the floor in ms
+
+# double jumping #
+const MAX_MID_AIR_JUMPS = 1
+var mid_air_jumps = MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor
 
 
 func init(config, camera, bullet_parent, nav):
@@ -101,6 +120,9 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	velocity.y += GRAVITY
+
+	var now = OS.get_ticks_msec()
 	#TODO: is_on_floor doesn't count for when a player is on top of another player, so cannot jump for example
 	var on_floor = is_on_floor()
 
@@ -112,19 +134,63 @@ func _physics_process(delta):
 			velocity.x *= REACTIVITY_DECAY
 		var max_speed = abs(move_direction)*MAX_SPEED
 		velocity.x = clamp(velocity.x, -max_speed, max_speed)
+
+		# handle jumping
+		# able to register a jump if character just about to hit the floor
+		if now - last_jump_pressed_ms < PREEMPTIVE_JUMP_TOLERANCE and not jump_released: # want to jump
+			if on_floor:
+				# if on the floor then jump
+				# if preemptively pressed: initiate jump once on the floor
+				velocity.y -= JUMP_SPEED
+				last_jump_pressed_ms = BEFORE_START
+				last_jump_ms = now
+
+			elif now - left_floor_ms < EDGE_JUMP_TOLERANCE:
+				# able to jump shortly after falling from a platform
+				velocity.y -= JUMP_SPEED
+				last_jump_pressed_ms = BEFORE_START
+				last_jump_ms = now
+
+			elif mid_air_jumps > 0:
+				# ensure that the current jump is cancelled. With more than
+				# one button assigned to jump it is possible to trigger
+				# the double jump without releasing the first
+				velocity.y = max(velocity.y, -JUMP_SPEED/5)
+
+				velocity.y -= JUMP_SPEED
+				last_jump_pressed_ms = BEFORE_START
+				mid_air_jumps -= 1
+				last_jump_ms = now
+
 		if on_floor:
+			mid_air_jumps = MAX_MID_AIR_JUMPS
+
 			# apply friction
 			if move_direction == 0: # not moving left or right
 				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+		else:
+			# able to jump shortly after falling from a platform
+			if was_on_floor:
+				left_floor_ms = now
 
-		velocity.y = jump_physics.advance_time_step(velocity.y, delta, jump_pressed, on_floor)
+			# cancel jump in mid air
+			if jump_released:
+				# if still moving up, then stop moving up (which is the negative direction)
+				velocity.y = clamp(velocity.y, -JUMP_SPEED/5, INF)
+
 	else:
 		# dead
 		if on_floor:
 			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
 
+	was_on_floor = on_floor
 	velocity = move_and_slide(velocity, UP)
 
+func try_jump():
+	last_jump_pressed_ms = OS.get_ticks_msec() # want to jump
+	jump_released = false
+func release_jump():
+	jump_released = true
 
 func _clear_inventory():
 	inventory_lock.lock()

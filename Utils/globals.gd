@@ -49,11 +49,12 @@ func log_err(txt):
 	output_queue.append([true, txt])
 
 
+#TODO: break out into Settings.gd
 class Settings:
 	extends Node # to use signals
-	
+
 	signal settings_changed
-	
+
 	var settings_path = null
 	var settings_file = null
 	# {name : [type, default_value, description]}
@@ -67,6 +68,8 @@ class Settings:
 		'debug'            : [TYPE_BOOL, false, 'whether the game is in debug mode (has various affects)'],
 		'auto_quick_start' : [TYPE_BOOL, false, 'whether to automatically launch QuickStart at startup'],
 		'ai_nodes_visible' : [TYPE_BOOL, false, 'whether to draw AI nodes'],
+		'nav_visible'      : [TYPE_BOOL, false, 'whether to draw the navigation graph'],
+		'game_speed'       : [TYPE_REAL, 1.0,   'the game play speed (1.0 for normal, 0.5 for half speed etc)'],
 	}
 
 	func _init(settings_path):
@@ -103,13 +106,13 @@ class Settings:
 		else:
 			globals.log_err('unknown option: %s' % name)
 			return null
-	
+
 	func get_names():
 		return options.keys()
-		
+
 	func get_description(name):
 		return options[name][2]
-	
+
 	func reset():
 		for name in get_names():
 			self.settings_file.set_value('options', name, options[name][1])

@@ -25,7 +25,7 @@ func _input(event):
 		var k = event.scancode
 		if event.pressed and not event.is_echo(): # disregard key repeats
 			if k == KEY_W or k == KEY_SPACE:
-				try_jump()
+				jump_pressed = true
 			elif k == KEY_A:
 				left_pressed = true
 				update_move_direction()
@@ -34,7 +34,7 @@ func _input(event):
 				update_move_direction()
 		elif not event.pressed: # released
 			if k == KEY_W or k == KEY_SPACE:
-				jump_released = true
+				jump_pressed = false
 			elif k == KEY_A:
 				left_pressed = false
 				update_move_direction()

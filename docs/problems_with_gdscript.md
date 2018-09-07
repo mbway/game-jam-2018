@@ -9,6 +9,8 @@ I don't like gdscript very much, here is why.
     - not enough data structures. There is no `set` for example. Ties in with the complaint about performance, yes you can use a list instead, but I don't want to.
 - doesn't seem performance oriented, have to always resort to slow workarounds for missing language features
     - for example, cannot return multiple values from a function, so have to construct a list instead and place the multiple elements inside the list, and there is no pattern matching either so you have to manually unpack the list as well
+- missing 'quality of life' language features such as
+    - syntax for exponents: `a**x` or `a^x`
 - doesn't always raise errors when things go wrong
     - have to inherit from `Node` in order to use `connect`, but if you didn't know that or forget, no error will be raised, the connected method will simply never be called...
 - rips off python but changes syntax and conventions arbitrarily just to be different, such as booleans being lower case or using null instead of None, func instead of def etc.
@@ -16,11 +18,21 @@ I don't like gdscript very much, here is why.
     - writing 10+ lines for something that python could do in a single line is a bit exhausting
 - bugs. I am not used to having to deal with bugs in the language
     - eg `is_nan` currently just doesn't work at all. `is_nan(nan)` returns false...
+    - `Engine.editor_hint` is supposed to tell when in the editor and when in the game, but doesn't seem to work when called from a plugin...
 - not well documented. One good example is the documentation for Input.set_mouse_mode: 'Set the mouse mode. See the constants for more information.'. Which constants would those be? You haven't said...
     - also, inconsistent styling. Some arguments are written `likethis` and others `like_this` for no reason, simply sloppy adherence to a single coding style.
         - even worse, some functions have this problem too: `printraw()` and `print_stack()`
 - the debugging support is virtually non-existent
 - too many things change silently between versions. Change is good, but not clearly documenting when an API breaking change is introduced is stupid.
-- there are many problems that aren't caught by the editor which cause runtime issues. For example, using a custom class as an export variable: can't find the script file because the class is defined inline and not in its own file. So giving it its own file works, but causes runtime errors because it gets down-converted back to Object from whatever custom type you had, making any accesses crash.
-    - this could have been avoided by either clearly documenting what is and isn't allowed (I'm still not sure when `export (Array, some_type)` became illegal) or by having the editor flag it up as a problem, or by providing better error messages.
-    - the error messages don't even have any google results, it looks like very few people have built their own editor plugins. The examples in the documentation are shockingly simple and useless and don't help beyond getting set up.
+- there are many problems that aren't caught by the editor which cause runtime issues.
+    - eg https://github.com/godotengine/godot/issues/7584#issuecomment-342968502
+    - For example, using a custom class as an export variable: can't find the script file because the class is defined inline and not in its own file. So giving it its own file works, but causes runtime errors because it gets down-converted back to Object from whatever custom type you had, making any accesses crash.
+        - this could have been avoided by either clearly documenting what is and isn't allowed (I'm still not sure when `export (Array, some_type)` became illegal) or by having the editor flag it up as a problem, or by providing better error messages.
+        - the error messages don't even have any google results, it looks like very few people have built their own editor plugins. The examples in the documentation are shockingly simple and useless and don't help beyond getting set up.
+
+
+# Problems with Godot
+although I like godot, there are many things wrong with it
+- documentation is terrible
+- most error messages are not useful
+    - eg when loading a plugin with a syntax error or similar (like preloading something that doesn't exist), godot says it doesn't inherit from PluginEditor even when it does.

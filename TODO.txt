@@ -12,9 +12,9 @@
 
 
 # TODO
+- with the new jumping mechanism, using Engine.time_scale, can do bullet time :D
+- move away from using OS.get_tick_msec() to allow the game to be slowed down for debugging. accumulate the given delta values instead
 - need a better name than 'power offence'
-- free camera, control with arrow keys and scroll wheel for zooming. Enable/disable with the options menu.
-- state machine for jumping
 - Large canister shell for the laser gun
 - Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately
 - create a map to stress test the AI

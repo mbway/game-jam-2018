@@ -31,6 +31,7 @@ func _process(delta):
 		offset.x = 0
 		offset.y = 0
 
+
 func shake(amount):
 	shake_amount = min(shake_amount + amount, MAX_SHAKE)
 
@@ -38,13 +39,17 @@ func _physics_process(delta):
 	if free_camera and not free_following:
 		global_position += free_vel * delta
 		return
-	
+
 	var following = len(follow)
-	
+
 	if following == 1:
+		# since only one follower: center the camera directly at it
 		set_global_position(follow[0].global_position)
-		
+
 	elif following > 1:
+		# center the camera at the mean position of all the nodes being followed
+		# set the zoom based on the distance between the furthest two nodes begin followed.
+
 		var avg = Vector2(0,0)
 		for f in follow:
 			avg += f.global_position
@@ -66,14 +71,14 @@ func _physics_process(delta):
 		zoom.x = z
 		zoom.y = z
 		set_global_position(avg)
-	
+
 func _input(event):
 	if not free_camera:
 		return
-		
+
 	if event is InputEventKey:
 		var k = event.scancode
-	
+
 		free_vel = Vector2(0, 0)
 		if Input.is_key_pressed(KEY_UP):
 			free_vel.y -= free_speed
@@ -83,11 +88,11 @@ func _input(event):
 			free_vel.x -= free_speed
 		if Input.is_key_pressed(KEY_RIGHT):
 			free_vel.x += free_speed
-		
+
 		if event.pressed and not event.is_echo():
 			if k == KEY_F:
 				free_following = not free_following
-	
+
 	elif event is InputEventMouseButton:
 		var b = event.button_index
 		if event.pressed:
@@ -113,8 +118,8 @@ func update_settings():
 		smoothing_enabled = false
 	else:
 		smoothing_enabled = true
-	
-	
+
+
 func _on_settings_changed():
 	free_camera = G.settings.get('free_camera')
 

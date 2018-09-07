@@ -44,7 +44,7 @@ func make_visible(visible):
 		set_physics_process(false)
 		toolbar.hide()
 		if editing_node != null:
-			editing_node.stop_editing()
+			editing_node.clear_editing()
 			editing_node = null # new node selected
 
 # called when a Graph2D node is selected in the editor
@@ -55,32 +55,27 @@ func edit(object):
 func on_add_nodes(): # menu button
 	edit_mode = MODES.AddNodes
 	if editing_node != null:
-		editing_node.stop_editing()
-	print('edit mode: %s' % edit_mode)
+		editing_node.clear_editing()
 
 func on_move_nodes(): # menu button
 	edit_mode = MODES.MoveNodes
 	if editing_node != null:
-		editing_node.stop_editing()
-	print('edit mode: %s' % edit_mode)
+		editing_node.clear_editing()
 
 func on_delete_nodes(): # menu button
 	edit_mode = MODES.DeleteNodes
 	if editing_node != null:
-		editing_node.stop_editing()
-	print('edit mode: %s' % edit_mode)
+		editing_node.clear_editing()
 
 func on_add_edges(): # menu button
 	edit_mode = MODES.AddEdges
 	if editing_node != null:
-		editing_node.stop_editing()
-	print('edit mode: %s' % edit_mode)
+		editing_node.clear_editing()
 
 func on_delete_edges(): # menu button
 	edit_mode = MODES.DeleteEdges
 	if editing_node != null:
-		editing_node.stop_editing()
-	print('edit mode: %s' % edit_mode)
+		editing_node.clear_editing()
 
 func forward_canvas_gui_input(event):
 	if editing_node == null:
@@ -140,6 +135,7 @@ func forward_canvas_gui_input(event):
 					var ur = get_undo_redo()
 					ur.create_action('move_node')
 					ur.commit_action()
+					editing_node.clear_editing() # once released, have to re-select a node to move it
 			return true # handled
 
 	return false # not handled
@@ -154,9 +150,9 @@ func snaped_mouse_pos():
 	return mouse
 
 func _physics_process(delta):
-	if not Engine.editor_hint:
-		set_physics_process(false)
-		return
+	# Engine.editor_hint doesn't work here because I think that it still returns
+	# true because the plugin is running in the editor even when the game is
+	# active.
 
 	if editing_node == null:
 		return

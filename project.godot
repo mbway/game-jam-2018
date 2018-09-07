@@ -54,6 +54,16 @@ terminal_toggle=[ Object(InputEventKey,"resource_local_to_scene":false,"resource
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":126,"unicode":0,"echo":false,"script":null)
  ]
 
+[layer_names]
+
+2d_physics/layer_1="Player-Map"
+2d_physics/layer_2="Projectile-Map"
+2d_physics/layer_3="Projectile-Player"
+
+[locale]
+
+layer_1=""
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

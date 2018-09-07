@@ -3,3 +3,15 @@
 # Godot Gotchas
 - to use margins in UI elements, don't use the 'Margins' settings because these frequently get overwritten and reset. Instead, use a MarginContainer and set the 'custom variables' section (the 'Margins' settings are reset even on the margin container)
 
+
+# Collision Layers
+layer 1 = player and map
+layer 2 = projectile and map
+layer 3 = projectile and player
+
+Player:         1
+BulletCollider:         3
+Map:            1   2
+Shell:              2
+Bullet:             2   3
+Laser:                  3

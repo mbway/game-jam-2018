@@ -11,7 +11,7 @@ func _input(event):
 		var b = event.button_index
 		if event.pressed:
 			if b == JOY_XBOX_A or event.button_index == JOY_L:
-				try_jump()
+				jump_pressed = true
 			elif b == JOY_XBOX_X:
 				select_next_weapon(1)
 			elif b == JOY_XBOX_Y:
@@ -21,7 +21,7 @@ func _input(event):
 
 		else: # released
 			if b == JOY_XBOX_A or b == JOY_L:
-				jump_released = true
+				jump_pressed = false
 			elif b == JOY_R:
 				fire_pressed = false
 				fire_held = false

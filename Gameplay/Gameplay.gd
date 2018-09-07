@@ -127,6 +127,14 @@ func _on_settings_changed():
 		add_child(w)
 	elif has_node('Watch'):
 		$Watch.queue_free()
+	
+	#TODO: remove check once Nav is compulsory
+	if has_node('Nav'):
+		$Nav.visible = G.settings.get('nav_visible')
+		if $Nav.visible:
+			$Nav.update() # redraw
 		
 	OS.set_window_fullscreen(G.settings.get('full_screen'))
+	
+	Engine.time_scale = G.settings.get('game_speed')
 

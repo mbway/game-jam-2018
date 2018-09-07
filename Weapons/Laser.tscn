@@ -39,7 +39,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[node name="Laser" type="Area2D"]
+[node name="Laser" type="Area2D" index="0"]
 
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
