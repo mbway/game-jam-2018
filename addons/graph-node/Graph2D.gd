@@ -305,14 +305,6 @@ func get_path(from, to):
 	_astar.remove_point(from_id)
 	_astar.remove_point(to_id)
 
-	#TODO: remove
-	print(from, to)
-	nodes.append(from)
-	nodes.append(to)
-	#nodes.append(path[0])
-	#nodes.append(path[-1])
-	update()
-
 	return path
 
 

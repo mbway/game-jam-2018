@@ -100,9 +100,14 @@ func _physics_process(delta):
 				# the player is falling but the target is still above, try to double jump
 				reason = 'target still above'
 				jump_pressed = true
-			elif abs(t.x) > width and falls_short(t):
-				reason = 'falls short'
-				jump_pressed = true
+			else:
+				var ray = cast_ray_down(2*height)
+				# only matters if the player falls short if it doesn't first hit the floor
+				# this isn't the best way of checking this (should check for collisions along
+				# the predicted trajectory) but works as a first approximation.
+				if ray == null and abs(t.x) > width and falls_short(t):
+					reason = 'falls short'
+					jump_pressed = true
 
 	if reason != null:
 		print('%s: jump_pressed = %s' % [reason, jump_pressed])
