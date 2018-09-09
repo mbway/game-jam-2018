@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Weapons/Explosion.gd" type="Script" id=1]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic8.png" type="Texture" id=9]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic9.png" type="Texture" id=10]
+[ext_resource path="res://Assets/weapons/Classic Explosion/explosion_classic10.png" type="Texture" id=11]
+[ext_resource path="res://Assets/weapons/boom.wav" type="AudioStream" id=12]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 20.8255
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "default",
+"speed": 16.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="ClassicExplosion" type="Area2D" index="0"]
+
+scale = Vector2( 2, 2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="DespawnTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="ExplosionAnimation" type="AnimatedSprite" parent="." index="2"]
+
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 2 )
+animation = "default"
+_sections_unfolded = [ "Transform" ]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 12 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
+
+

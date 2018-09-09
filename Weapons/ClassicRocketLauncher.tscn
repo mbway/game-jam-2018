@@ -1,43 +1,43 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Assets/weapons/sniper.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/weapons/rocketlauncher.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/ClassicRocket.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/weapons/Sniper.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/weapons/rocket_launch.wav" type="AudioStream" id=5]
 
-[node name="Sniper" type="Node2D"]
+[node name="ClassicRocketLauncher" type="Node2D"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
-shoot_vel = 5000
-damage = 60
+shoot_vel = 1500
+damage = 50
 bullet_scene = ExtResource( 3 )
 shell_scene = ExtResource( 4 )
-cooldown = 0.75
+cooldown = 1.0
 auto_fire = false
-spread = 0
-screen_shake = 80.0
+spread = 0.0
+screen_shake = 10.0
 requires_charging = false
 shot_count = 1
 has_reload_animation = false
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 43, 12 )
-scale = Vector2( 0.65, 0.65 )
+position = Vector2( -4, 10 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Transform" ]
 
 [node name="Muzzle" type="Position2D" parent="." index="1"]
 
-position = Vector2( 69.0828, 8.85396 )
-scale = Vector2( 0.65, 0.65 )
+position = Vector2( 38, 6 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
-position = Vector2( 23.9076, 8.14352 )
+position = Vector2( -19, 6 )
+scale = Vector2( 0.344856, 0.306339 )
 stream = ExtResource( 5 )
 volume_db = 0.0
 pitch_scale = 1.0
@@ -46,9 +46,5 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
-
-[node name="ShellEject" type="Position2D" parent="." index="3"]
-
-position = Vector2( 16.9841, 7.95936 )
 
 

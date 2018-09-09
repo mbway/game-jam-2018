@@ -52,6 +52,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Grenade_body_entered"]
 
 
