@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/rocketlauncher.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/ClassicRocket.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Projectiles/ClassicRocket.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/rocket_launch.wav" type="AudioStream" id=5]
+
 
 [node name="ClassicRocketLauncher" type="Node2D"]
 

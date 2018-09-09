@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Weapons/Rocket.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Projectiles/Rocket.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/ClassicExplosion.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/weapons/flame.png" type="Texture" id=3]
 [ext_resource path="res://Assets/weapons/rocket.png" type="Texture" id=4]
@@ -71,8 +71,8 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
-bullet_scene = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Collision", "collision" ]
+Explosion = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="." index="0"]
 
@@ -108,7 +108,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="Collision" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( -1, 0 )
 shape = SubResource( 2 )
@@ -116,6 +116,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[connection signal="body_entered" from="." to="." method="_on_Rocket_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 
 
