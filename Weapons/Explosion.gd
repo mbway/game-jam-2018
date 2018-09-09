@@ -10,6 +10,9 @@ func setup(pos, damage):
 	position = pos
 	self.damage = damage
 	monitoring = true
+	if find_node('ExplosionAnimation'):
+		$ExplosionAnimation.frame = 0
+		$ExplosionAnimation.play()
 
 func _on_DespawnTimer_timeout():
 	queue_free()
