@@ -81,7 +81,7 @@ tracks/0/keys = {
 "values": [ Vector2( 100, 0 ), Vector2( 100, -500 ) ]
 }
 
-[node name="Terminal" type="CanvasLayer" index="0"]
+[node name="Terminal" type="CanvasLayer"]
 
 layer = 2
 offset = Vector2( 0, 0 )
@@ -136,6 +136,7 @@ margin_right = 1386.0
 margin_bottom = 449.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -196,6 +197,6 @@ anims/SlideUp = SubResource( 8 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[connection signal="text_entered" from="PanelContainer/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="text_entered" from="PanelContainer/VBoxContainer/LineEdit" to="." method="run"]
 
 

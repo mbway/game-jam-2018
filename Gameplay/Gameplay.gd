@@ -28,9 +28,13 @@ var game_mode = null # an element of game_mode_data
 # whether there is a player using the keyboard and mouse. If not, then the cursor can be hidden.
 var keyboard_player = false
 
+onready var debug_draw = preload('res://Utils/DebugDraw.gd').new()
+
 
 func _ready():
 	G.log('Game started: %s' % get_tree().get_current_scene().get_name())
+	
+	add_child(debug_draw)
 	
 	# store the game mode specific nodes away in a data structure and remove them from the tree for now
 	for n in $GameMode.get_children():
@@ -97,6 +101,12 @@ func create_player(config):
 		for attr in attrs:
 			$Watch.add_watch(node_name, p, attr)
 
+func get_player(num):
+	for p in $Players.get_children():
+		if p.config.num == num:
+			return p
+	return null
+
 func _on_settings_changed():
 	if G.settings.get('music'):
 		$Music.play()
@@ -137,4 +147,11 @@ func _on_settings_changed():
 	OS.set_window_fullscreen(G.settings.get('full_screen'))
 	
 	Engine.time_scale = G.settings.get('game_speed')
+	
+	# doesn't affect currently playing sounds apparently
+	# decibels using logarithmic scale, 0 would be infinitely loud, but is interpreted as 'the maximum audible volume without clipping'
+	# at around -60db sound is no longer audible
+	# reference: https://godot.readthedocs.io/en/3.0/tutorials/audio/audio_buses.html#decibel-scale
+	var volume_db = -60 if G.settings.get('mute_all') else 0
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Master'), volume_db)
 

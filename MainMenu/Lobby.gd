@@ -7,6 +7,8 @@ signal back
 var Math = preload('res://Utils/Math.gd')
 var player_panel_scene = preload('res://MainMenu/PlayerPanel.tscn')
 
+# note: this doesn't belong in globals because it is only used during the main menu
+# not a dictionary because order is important
 var maps = [
 	{
 		'path': 'res://Maps/UFO/UFO.tscn',

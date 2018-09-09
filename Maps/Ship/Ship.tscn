@@ -1,14 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Ship/Ship.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Camera.gd" type="Script" id=5]
-[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=6]
 
-[node name="Ship" type="Node2D" index="0"]
+[node name="Ship" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -80,21 +79,16 @@ position = Vector2( 2010, 610 )
 
 position = Vector2( 1230, 1360 )
 
-[node name="Pickups" parent="GameMode/TDM" index="1" instance=ExtResource( 6 )]
-
-[node name="PickupSpawn" parent="GameMode/TDM" index="2" instance=ExtResource( 7 )]
+[node name="PickupSpawn" parent="GameMode/TDM" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 860, 510 )
-available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn2" parent="GameMode/TDM" index="3" instance=ExtResource( 7 )]
+[node name="PickupSpawn2" parent="GameMode/TDM" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 1570, 510 )
-available_pickups_path = NodePath("../Pickups")
 
-[node name="PickupSpawn3" parent="GameMode/TDM" index="4" instance=ExtResource( 7 )]
+[node name="PickupSpawn3" parent="GameMode/TDM" index="3" instance=ExtResource( 6 )]
 
 position = Vector2( 1220, 1220 )
-available_pickups_path = NodePath("../Pickups")
 
 

@@ -2,11 +2,12 @@ extends Area2D
 
 # set on setup
 var shot_from
-var collision_exceptions = []
+var player
 var damage
 
-func setup(parent, shot_from, vel, damage):
+func setup(player, parent, shot_from, vel, damage):
 	self.shot_from = shot_from
+	self.player = player
 	self.damage = damage
 	
 	parent.add_child(self)
@@ -17,16 +18,11 @@ func setup(parent, shot_from, vel, damage):
 	$Lifetime.start()
 	$AnimationPlayer.play('FadeOut')
 
-func add_collision_exception(body):
-	collision_exceptions.append(body)
-
 func _on_Laser_body_entered(body):
-	for b in collision_exceptions:
-		if body == b:
-			return
-	
+	if body == player.get_node('BulletCollider'): # don't collide with the player who fired the laser
+		return
 	if body.is_in_group('damageable'):
-		body.take_damage(damage)
+		body.take_damage(damage, Vector2(0, 0))
 
 func _on_Lifetime_timeout():
 	queue_free()

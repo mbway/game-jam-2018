@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/Grenade Launcher/GrenadeLauncher1.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/Grenade.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Projectiles/Grenade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/Grenade Launcher/GrenadeLauncher2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/weapons/Grenade Launcher/GrenadeLauncher3.png" type="Texture" id=6]
@@ -18,7 +18,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="GrenadeLauncher" type="Node2D" index="0"]
+[node name="GrenadeLauncher" type="Node2D"]
 
 script = ExtResource( 1 )
 texture = ExtResource( 2 )

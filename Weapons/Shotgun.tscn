@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/ShotgunBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Projectiles/ShotgunBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun3.png" type="Texture" id=6]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun7.png" type="Texture" id=10]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun8.png" type="Texture" id=11]
 [ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=12]
+
 
 [sub_resource type="SpriteFrames" id=1]
 

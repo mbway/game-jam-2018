@@ -7,6 +7,7 @@ const MAX_SHAKE = 200
 
 var follow = [] # nodes to follow
 var shake_amount = 0
+var shake_enabled = true
 
 # whether the user moves the camera manually with the arrow keys and scroll wheel
 var free_camera = false
@@ -21,7 +22,7 @@ func _ready():
 	G.settings.connect('settings_changed', self, '_on_settings_changed')
 
 func _process(delta):
-	if shake_amount > 0.1:
+	if shake_enabled and shake_amount > 0.1:
 		offset.x = rand_range(-1, 1) * shake_amount
 		offset.y = rand_range(-1, 1) * shake_amount
 		shake_amount -= shake_amount * SHAKE_DECAY * delta
@@ -122,4 +123,5 @@ func update_settings():
 
 func _on_settings_changed():
 	free_camera = G.settings.get('free_camera')
+	shake_enabled = G.settings.get('camera_shake')
 

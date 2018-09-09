@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 30.0
+radius = 85.0
 
 [sub_resource type="Gradient" id=2]
 
@@ -159,11 +159,18 @@ wait_time = 1.5
 one_shot = true
 autostart = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Collision" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 1 )
 
-[node name="Flash" type="Particles2D" parent="." index="2"]
+[node name="Flash" type="Particles2D" parent="." index="3"]
 
 emitting = true
 amount = 25
@@ -185,7 +192,7 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures", "Time" ]
 
-[node name="Smoke" type="Particles2D" parent="." index="3"]
+[node name="Smoke" type="Particles2D" parent="." index="4"]
 
 rotation = -1.5708
 emitting = true
@@ -208,7 +215,7 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures", "Time", "Transform" ]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="5"]
 
 stream = ExtResource( 3 )
 volume_db = 0.0
@@ -222,5 +229,7 @@ area_mask = 1
 [connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
+
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]
 
 

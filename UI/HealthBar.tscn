@@ -47,7 +47,7 @@ size_flags_vertical = 1
 texture = SubResource( 2 )
 expand = true
 stretch_mode = 2
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Material", "Visibility" ]
 
 [node name="Label" type="Label" parent="." index="1"]
 

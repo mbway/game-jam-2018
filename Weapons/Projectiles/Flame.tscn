@@ -1,7 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Weapons/Flame.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Projectiles/Flame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/flame.png" type="Texture" id=2]
+
 
 [sub_resource type="Gradient" id=1]
 
@@ -126,14 +127,14 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures", "Time" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="Collision" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( 7.26218, 0.711983 )
 rotation = 1.5708
 shape = SubResource( 6 )
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
 
