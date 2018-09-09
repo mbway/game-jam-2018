@@ -1,7 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Weapons/Laser.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Projectiles/Laser.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/laser/laser_1.png" type="Texture" id=2]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -39,7 +40,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[node name="Laser" type="Area2D" index="0"]
+[node name="Laser" type="Area2D"]
 
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )

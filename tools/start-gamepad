@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # start the gamepad driver on Linux
-sudo xboxdrv --detach-kernel-driver
+sudo xboxdrv --detach-kernel-driver --silent

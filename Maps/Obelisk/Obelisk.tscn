@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Obelisk/Obelisk.tmx" type="PackedScene" id=2]
@@ -7,9 +7,8 @@
 [ext_resource path="res://UI/Camera.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=8]
 
-[node name="Obelisk" type="Node2D" index="0"]
+[node name="Obelisk" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
@@ -71,17 +70,14 @@ bus = "Master"
 [node name="PickupSpawn" parent="GameMode/TDM" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 992, 736 )
-available_pickups_path = NodePath("../Pickups")
 
 [node name="PickupSpawn2" parent="GameMode/TDM" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 2016, 736 )
-available_pickups_path = NodePath("../Pickups")
 
 [node name="PickupSpawn3" parent="GameMode/TDM" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( 1520, 1376 )
-available_pickups_path = NodePath("../Pickups")
 
 [node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="3"]
 
@@ -94,7 +90,5 @@ position = Vector2( 320, 208 )
 [node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="1"]
 
 position = Vector2( 2672, 208 )
-
-[node name="Pickups" parent="GameMode/TDM" index="4" instance=ExtResource( 8 )]
 
 

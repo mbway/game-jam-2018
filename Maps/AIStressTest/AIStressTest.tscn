@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
@@ -7,9 +7,8 @@
 [ext_resource path="res://addons/graph-node/icon.png" type="Texture" id=5]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Weapons/AllPickups.tscn" type="PackedScene" id=8]
 
-[node name="AIStressTest" type="Node2D" index="0"]
+[node name="AIStressTest" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
@@ -57,8 +56,6 @@ bus = "Master"
 [node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
 
 position = Vector2( 3250, 1760 )
-
-[node name="Pickups" parent="GameMode/TDM" index="1" instance=ExtResource( 8 )]
 
 [node name="Text" type="Node2D" parent="." index="9"]
 

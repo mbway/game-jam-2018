@@ -27,7 +27,7 @@ func target_close(t):
 	return abs(t.x) < width / 2 and (-height < t.y and t.y < 1.5*height)
 
 func _physics_process(delta):
-	if not alive:
+	if is_dead():
 		return
 
 	var on_floor = is_on_floor()
@@ -169,6 +169,8 @@ func cast_ray_down(length, pos=null):
 		return [result.position, result.collider]
 
 func set_waypoint(waypoint):
+	if nav == null:#TODO: remove check once made compulsory
+		return
 	#TODO: when in the air, either don't set a waypoint until landed, or project the position down to the floor
 	if not is_on_floor():
 		var collision = cast_ray_down(1000)

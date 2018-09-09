@@ -1,19 +1,31 @@
 extends Area2D
 
 var damage
-var radius = 30
+onready var radius = $Collision.shape.radius
+
+func _init():
+	monitoring = false # don't detect collisions until setup
 
 func setup(pos, damage):
 	position = pos
 	self.damage = damage
+	monitoring = true
 
 func _on_DespawnTimer_timeout():
 	queue_free()
 
+func _on_CollisionTimer_timeout():
+	monitoring = false
+
 func _on_Explosion_body_entered(body):
 	if body.is_in_group('damageable'):
-		var distance = position.distance_to(body.position)
-		var force_scale = distance/radius
-		body.take_damage(damage * force_scale)
-		body.velocity.x += 100
-		body.velocity.y -= 100
+		# slightly lower the center to encourage upwards velocity
+		var v = (body.global_position - Vector2(0, 10)) - global_position
+		var knockback = v.normalized() * 1000
+
+		var dd = globals.get_scene().debug_draw
+		dd.add_vector(v, position, 5)
+
+		body.take_damage(damage, knockback)
+
+

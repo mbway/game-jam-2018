@@ -28,6 +28,17 @@ class PlayerConfig:
 		self.team = team
 		self.control = control
 		self.gamepad_id = gamepad_id
+	
+	func get_control_type_string():
+		if control == KEYBOARD_CONTROL:
+			return 'Keyboard'
+		elif control == GAMEPAD_CONTROL:
+			return 'Gamepad_%s' % gamepad_id
+		elif control == AI_CONTROL:
+			return 'AI'
+		else:
+			return 'Invalid'
+		
 
 # see _on_StartButton_pressed for how these structures are setup
 var game_mode = null # for possible values see Lobby.gd > game_modes
@@ -39,6 +50,40 @@ var output_queue = []
 
 var settings = null
 
+# All the available weapons and pickups and their textures
+# preload everything because it will have to be loaded at some point anyway.
+var pickups = {
+	'Pistol': {
+		'scene':   preload('res://Weapons/Pistol.tscn'),
+		'texture': preload('res://Assets/weapons/pistol.png')},
+	'LaserCannon': {
+		'scene':   preload('res://Weapons/LaserCannon.tscn'),
+		'texture': preload('res://Assets/weapons/laserCannon.png')},
+	'MachineGun': {
+		'scene':   preload('res://Weapons/MachineGun.tscn'),
+		'texture': preload('res://Assets/weapons/machinegun.png')},
+	'Minigun': {
+		'scene':   preload('res://Weapons/Minigun.tscn'), 
+		'texture': preload('res://Assets/weapons/Minigun/minigun1.png')},
+	'Shotgun': {
+		'scene':   preload('res://Weapons/Shotgun.tscn'),
+		'texture': preload('res://Assets/weapons/Shotgun/shotgun1.png')},
+	'Sniper': {
+		'scene':   preload('res://Weapons/Sniper.tscn'),
+		'texture': preload('res://Assets/weapons/sniper.png')},
+	'FlameThrower': {
+		'scene':   preload('res://Weapons/FlameThrower.tscn'),
+		'texture': preload('res://Assets/weapons/flamethrower.png')},
+	'Revolver': {
+		'scene':   preload('res://Weapons/Revolver.tscn'),
+		'texture': preload('res://Assets/weapons/revolver/Revolver.png')},
+	'TommyGun': {
+		'scene':   preload('res://Weapons/TommyGun.tscn'),
+		'texture': preload('res://Assets/weapons/tommyGun.png')},
+	'GrenadeLauncher': {
+		'scene':   preload('res://Weapons/GrenadeLauncher.tscn'),
+		'texture': preload('res://Assets/weapons/Grenade Launcher/GrenadeLauncher1.png')},
+}
 
 func log(txt):
 	printerr(txt)
@@ -47,6 +92,9 @@ func log(txt):
 func log_err(txt):
 	print('Error: ' + txt)
 	output_queue.append([true, txt])
+
+func get_scene():
+	return get_tree().get_current_scene()
 
 
 #TODO: break out into Settings.gd
@@ -64,12 +112,14 @@ class Settings:
 		'music'            : [TYPE_BOOL, true,  'whether to play music'],
 		'mouse_confined'   : [TYPE_BOOL, false, 'whether to prevent the mouse from leaving the window'],
 		'free_camera'      : [TYPE_BOOL, false, 'whether the camera is controllable using the arrow keys and scroll wheel (f to toggle following)'],
+		'camera_shake'     : [TYPE_BOOL, true,  'whether the camera shakes in response to events in the game (like firing a weapon)'],
 		'inspect_window'   : [TYPE_BOOL, false, 'whether to display the inspection window'],
 		'debug'            : [TYPE_BOOL, false, 'whether the game is in debug mode (has various affects)'],
-		'auto_quick_start' : [TYPE_BOOL, false, 'whether to automatically launch QuickStart at startup'],
+		'auto_quick_start' : [TYPE_BOOL, false, 'whether to automatically launch QuickStart at startup (bypassing the main menu)'],
 		'ai_nodes_visible' : [TYPE_BOOL, false, 'whether to draw AI nodes'],
 		'nav_visible'      : [TYPE_BOOL, false, 'whether to draw the navigation graph'],
 		'game_speed'       : [TYPE_REAL, 1.0,   'the game play speed (1.0 for normal, 0.5 for half speed etc)'],
+		'mute_all'         : [TYPE_BOOL, false, 'whether to prevent the game from producing any sound'],
 	}
 
 	func _init(settings_path):

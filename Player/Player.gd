@@ -4,7 +4,6 @@ extends KinematicBody2D
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
 onready var G = globals
-onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 
 ## Groups ##
 # 'players'
@@ -13,6 +12,7 @@ onready var pistol_scene = preload('res://Weapons/Pistol.tscn')
 ## SIGNALS ##
 signal die
 signal hit
+signal invuln_changed
 signal weapon_equiped(node)
 signal weapon_unequiped(name)
 signal weapon_selected(node)
@@ -39,7 +39,6 @@ var fire_held = false # whether the fire button is held down
 ## health and damage
 var max_health = 100
 var health = 0
-var alive = false
 var invulnerable = false
 
 ## MOVEMENT VARIABLES ##
@@ -52,6 +51,8 @@ var FRICTION_DECAY = 0.6
 const REACTIVITY_DECAY = 0.5
 
 var velocity = Vector2(0, 0) # current velocity
+
+var knockback = null # knockback velocity vector
 
 var jump_pressed = false
 onready var jump_physics = preload('JumpPhysics.gd').new()
@@ -68,56 +69,71 @@ func _ready():
 
 
 func _process(delta):
-	inventory_lock.lock()
-	if alive and current_weapon != null:
-		current_weapon.set_rotation(weapon_angle)
+	if is_alive():
+		inventory_lock.lock()
+		if current_weapon != null:
+			current_weapon.set_rotation(weapon_angle)
 
-		# gun rotation
-		# the small margin is to prevent the gun from flickering when aiming directly up
-		if abs(current_weapon.rotation) > PI/2 + 0.01:
-			current_weapon.scale.y = -1
-		else:
-			current_weapon.scale.y = 1
+			# gun rotation
+			# the small margin is to prevent the gun from flickering when aiming directly up
+			if abs(current_weapon.rotation) > PI/2 + 0.01:
+				current_weapon.scale.y = -1
+			else:
+				current_weapon.scale.y = 1
 
-		if fire_pressed:
-			current_weapon.try_shoot(fire_held)
-			fire_held = true
-	inventory_lock.unlock()
+			if fire_pressed:
+				current_weapon.try_shoot(fire_held)
+				fire_held = true
+		inventory_lock.unlock()
 
 
-	# play the appropriate animation
-	if alive:
+		# play the appropriate animation
 		if is_on_floor():
 			$AnimatedSprite.play('idle' if velocity.x == 0 else 'run')
 		else:
 			$AnimatedSprite.play('jump' if velocity.y < 0 else 'fall')
-	else:
+
+		if velocity.x > 0:
+			$AnimatedSprite.flip_h = false
+		elif velocity.x < 0:
+			$AnimatedSprite.flip_h = true
+
+	else: # dead
 		$AnimatedSprite.play('death')
 
-	if velocity.x > 0:
-		$AnimatedSprite.flip_h = false
-	elif velocity.x < 0:
-		$AnimatedSprite.flip_h = true
-
+	var dd = G.get_scene().debug_draw
+	#dd.add_vector(velocity, position, INF, 'vel_%s' % config.num)
 
 func _physics_process(delta):
 	#TODO: is_on_floor doesn't count for when a player is on top of another player, so cannot jump for example
 	var on_floor = is_on_floor()
 
 	# get the direction from user input
-	if alive:
-		# calculate the speed
+	if is_alive():
+		# calculate the horizontal movement
 		velocity.x += sign(move_direction)*ACCELERATION*delta
-		if sign(velocity.x) != sign(move_direction):
-			velocity.x *= REACTIVITY_DECAY
 		var max_speed = abs(move_direction)*MAX_SPEED
 		velocity.x = clamp(velocity.x, -max_speed, max_speed)
-		if on_floor:
-			# apply friction
-			if move_direction == 0: # not moving left or right
-				velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+		if sign(velocity.x) != sign(move_direction):
+			velocity.x *= REACTIVITY_DECAY
+		if on_floor and move_direction == 0: # not moving left or right
+			# apply friction (not physics-based friction, but something that works a bit like it)
+			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
 
 		velocity.y = jump_physics.advance_time_step(velocity.y, delta, jump_pressed, on_floor)
+
+		# apply knockback
+		if knockback != null:
+			if on_floor:
+				knockback.x += 3000 * sign(-knockback.x) * delta # friction
+				knockback.y = clamp(knockback.y, -INF, 0) # sticking to the floor is handled by the main velocity, allow upwards velocity
+			else:
+				knockback += Vector2(0, jump_physics.GRAVITY) * delta
+			knockback = move_and_slide(knockback, UP)
+			var dd = G.get_scene().debug_draw
+			dd.add_vector(knockback, position, INF, 'knock_%s' % config.num)
+			if knockback.length() < 100:
+				knockback = null
 	else:
 		# dead
 		if on_floor:
@@ -139,14 +155,14 @@ func equip_weapon(gun):
 	if $Inventory.has_node(gun.name):
 		G.log_err('player already has weapon: %s' % gun.name)
 	else:
-		gun.setup(bullet_parent)
+		gun.setup(self, bullet_parent)
 		gun.connect('fired', self, '_on_weapon_fired')
 		$Inventory.add_child(gun)
 		emit_signal('weapon_equiped', gun)
 	inventory_lock.unlock()
 
 func select_weapon(name):
-	if not alive:
+	if is_dead():
 		return
 	inventory_lock.lock()
 	if current_weapon != null:
@@ -161,7 +177,7 @@ func select_weapon(name):
 
 # offset = 1 for next, -1 for prev
 func select_next_weapon(offset):
-	if not alive:
+	if is_dead():
 		return
 	inventory_lock.lock()
 	var n = $Inventory.get_child_count()
@@ -179,38 +195,52 @@ func select_next_weapon(offset):
 	if current_weapon != null:
 		emit_signal('weapon_selected', current_weapon.name)
 
-func take_damage(damage):
-	if invulnerable or not alive:
+func take_damage(damage, knockback):
+	if invulnerable or is_dead():
 		return
 	var new_health = max(health - damage, 0)
 	emit_signal('hit')
 	_set_health(new_health)
-	if alive and health <= 0:
+
+	if self.knockback == null:
+		self.knockback = knockback
+	else:
+		self.knockback += knockback
+
+	if is_alive() and health <= 0:
 		die()
+
+func is_alive():
+	return health > 0
+func is_dead():
+	return health <= 0
 
 func _set_health(new_health):
 	health = max(new_health, 0)
 	$HealthBar.set_health(float(health)/max_health)
 
+func _set_invulnerable(new_invuln):
+	invulnerable = new_invuln
+	if invulnerable:
+		$InvulnTimer.start()
+	$HealthBar.set_invulnerable(invulnerable)
+	emit_signal('invuln_changed')
+
 func die():
 	if invulnerable:
 		return
 	_set_health(0)
-	alive = false
 	emit_signal('die')
 
 #TODO: this should probably be handled in the gameplay code
 func spawn(position):
 	show()
-	invulnerable = true
-	$InvulnTimer.start()
-
+	_set_invulnerable(true)
 	self.position = position
 	_set_health(max_health)
-	alive = true
 
 	_clear_inventory()
-	equip_weapon(pistol_scene.instance())
+	equip_weapon(G.pickups['Pistol'].scene.instance())
 	select_weapon('Pistol')
 
 
@@ -220,12 +250,9 @@ func delayed_spawn(position):
 		$SpawnTimer.start()
 
 func _on_InvulnTimer_timeout():
-	invulnerable = false
+	_set_invulnerable(false)
 
 func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
 	if config.control == G.GAMEPAD_CONTROL:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
-
-	for b in bullets:
-		b.add_collision_exception($BulletCollider)

@@ -5,7 +5,7 @@ signal fired(bullets)
 export (Texture) var texture
 export (int) var shoot_vel = 5000
 export (int) var damage = 20
-export (PackedScene) var bullet_scene = preload('res://Weapons/Bullet.tscn')
+export (PackedScene) var bullet_scene = preload('res://Weapons/Projectiles/Bullet.tscn')
 export (PackedScene) var shell_scene = preload('res://Weapons/BulletShell.tscn')
 export (float) var cooldown = 0.1 # time after firing before the weapon can fire again
 export (bool) var auto_fire = false
@@ -21,6 +21,7 @@ export (bool) var has_reload_animation = false
 # on setup
 var is_setup = false
 var bullet_parent # the node to parent the bullets to
+var player # the player holding the gun
 var fired = false
 
 # runtime
@@ -29,8 +30,9 @@ var can_shoot = true
 var active = true
 
 
-func setup(bullet_parent):
+func setup(player, bullet_parent):
 	set_active(false)
+	self.player = player
 	self.bullet_parent = bullet_parent
 
 	cooldown_timer = Timer.new()
@@ -55,17 +57,17 @@ func _shoot():
 	var bullets = []
 	for i in range(shot_count):
 		var bullet = bullet_scene.instance()
-		bullet.setup(bullet_parent, self, shoot_vel, damage)
+		bullet.setup(player, bullet_parent, self, shoot_vel, damage)
 		bullets.append(bullet)
-	
+
 	if has_node('ShellEject'):
 		var shell = shell_scene.instance()
 		shell.setup(bullet_parent, self)
-	
+
 	if has_reload_animation:
 		$Sprite.play('reload')
 		$Sprite.frame = 0
-	
+
 	$FireSound.play()
 	can_shoot = false
 	cooldown_timer.start()

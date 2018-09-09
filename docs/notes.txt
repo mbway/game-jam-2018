@@ -2,6 +2,11 @@
 
 # Godot Gotchas
 - to use margins in UI elements, don't use the 'Margins' settings because these frequently get overwritten and reset. Instead, use a MarginContainer and set the 'custom variables' section (the 'Margins' settings are reset even on the margin container)
+- `new()` creates new objects, `instance()` creates a runtime copy of a resource like a scene
+- don't use OS.get_tick_msec() because it doesn't scale as Engine.timescale changes
+
+## Godot 3 changes
+- `_fixed_process` -> `_physics_process`
 
 
 # Collision Layers

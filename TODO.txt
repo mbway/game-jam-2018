@@ -10,14 +10,12 @@
 - seems to be a race condition with the weapon slots GUI so that when re-spawning the new pistol is added first (which fails) then the old pistol is removed, rather than the other way around. So after re-spawning the pistol isn't on the slots GUI
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
-
 # TODO
 - with the new jumping mechanism, using Engine.time_scale, can do bullet time :D
 - move away from using OS.get_tick_msec() to allow the game to be slowed down for debugging. accumulate the given delta values instead
 - need a better name than 'power offence'
 - Large canister shell for the laser gun
 - Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately
-- create a map to stress test the AI
 - themed UI, create sprites for buttons and choose colors and style etc
 - shield as well as health, with pickups to recharge
 - code organisation

@@ -17,4 +17,5 @@ func _ready():
 	G.game_mode_details = {
 		'max_lives' : 1
 	}
-	get_tree().change_scene('res://Maps/AIStressTest/AIStressTest.tscn')
+	#get_tree().change_scene('res://Maps/AIStressTest/AIStressTest.tscn')
+	get_tree().change_scene('res://Maps/TestMap/TestMap.tscn')

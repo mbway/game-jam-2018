@@ -1,5 +1,6 @@
 extends Node
 
+
 static func random_normal(mu, sigma):
 	# Box-Muller transform
 	

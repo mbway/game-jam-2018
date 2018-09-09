@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/flamethrower.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/Flame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Projectiles/Flame.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/flame.wav" type="AudioStream" id=5]
+
 
 [node name="FlameThrower" type="Node2D"]
 
@@ -36,6 +37,7 @@ position = Vector2( 69.1553, 2.31149 )
 position = Vector2( -1.71712, 1.07319 )
 stream = ExtResource( 5 )
 volume_db = 0.0
+pitch_scale = 1.0
 autoplay = false
 max_distance = 2000.0
 attenuation = 1.0

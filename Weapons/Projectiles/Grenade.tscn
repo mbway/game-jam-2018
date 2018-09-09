@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Weapons/Grenade.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Projectiles/Grenade.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Explosion.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/weapons/bullet.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -32,11 +33,11 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
-bullet_scene = ExtResource( 2 )
+Explosion = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 0, 2.68221e-007 )
+position = Vector2( 0, 2.68221e-07 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
@@ -44,7 +45,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="Collision" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( -1, 0 )
 shape = SubResource( 1 )
@@ -52,6 +53,4 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[connection signal="body_entered" from="." to="." method="_on_Grenade_body_entered"]
-
-
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

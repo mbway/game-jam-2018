@@ -21,7 +21,7 @@ func spawn():
 	$HoverTimer.start()
 	
 
-func take_damage(damage):
+func take_damage(damage, knockback):
 	health -= damage
 	
 	if !active:

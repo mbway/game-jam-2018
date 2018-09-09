@@ -30,7 +30,7 @@ tracks/0/keys = {
 [node name="Shell" type="RigidBody2D"]
 
 input_pickable = false
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 mode = 0
 mass = 1.0
