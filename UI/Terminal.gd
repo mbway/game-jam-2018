@@ -110,7 +110,8 @@ const commands = {
 
 	'players'     : [[], 'display the details of the current players'],
 	'give'        : [['player_num', 'pickup_name'], 'give a pickup to a player'],
-	'player_set'  : [['player_num', 'variable', 'value'], 'set a variable of a player']
+	'player_set'  : [['player_num', 'variable', 'value'], 'set a variable of a player'],
+	'tp'          : [['player_a_num', 'player_b_num'], 'teleport the first player to the location of the second player'],
 }
 
 # autocompletion
@@ -166,7 +167,7 @@ func handle_command(input):
 	var scene = get_tree().get_current_scene()
 
 	# these commands only work in-game
-	if ['list_players', 'give', 'player_set'].has(cmd):
+	if ['list_players', 'give', 'player_set', 'tp'].has(cmd):
 		if not scene.has_node('Players'):
 			log_error('This command can only be used in game.')
 			return
@@ -239,12 +240,26 @@ func handle_command(input):
 		var player = scene.get_player(int(args['player_num']))
 		if player == null:
 			log_error('player %s not found' % args['player_num'])
+			return
 		var name = args['variable']
 		var v = args['value']
 		if name == 'health':
 			player._set_health(int(v))
 		elif name == 'invulnerable':
 			player._set_invulnerable(G.cast_from_string(v, TYPE_BOOL))
+
+	elif cmd == 'tp':
+		var player_a = scene.get_player(int(args['player_a_num']))
+		if player_a == null:
+			log_error('player %s not found' % args['player_a_num'])
+			return
+
+		var player_b = scene.get_player(int(args['player_b_num']))
+		if player_b == null:
+			log_error('player %s not found' % args['player_b_num'])
+			return
+
+		player_a.global_position = player_b.global_position + Vector2(0, -80)
 
 	else:
 		log_error('not implemented')
