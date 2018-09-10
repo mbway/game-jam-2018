@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AddNode.png-4edb29bec8117c69cf30a5978ed8e9d6.stex"
+path="res://.import/AddNode.png-73102dfd2631a7a91e528ce89088f454.stex"
 
 [deps]
 
-source_file="res://addons/graph-node/AddNode.png"
-dest_files=[ "res://.import/AddNode.png-4edb29bec8117c69cf30a5978ed8e9d6.stex" ]
+source_file="res://addons/graph-node/Assets/AddNode.png"
+dest_files=[ "res://.import/AddNode.png-73102dfd2631a7a91e528ce89088f454.stex" ]
 
 [params]
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://addons/graph-node/AddNode.png" type="Texture" id=1]
-[ext_resource path="res://addons/graph-node/DeleteNode.png" type="Texture" id=2]
-[ext_resource path="res://addons/graph-node/MoveNode.png" type="Texture" id=3]
-[ext_resource path="res://addons/graph-node/AddEdge.png" type="Texture" id=4]
-[ext_resource path="res://addons/graph-node/DeleteEdge.png" type="Texture" id=5]
+[ext_resource path="res://addons/graph-node/Assets/AddNode.png" type="Texture" id=1]
+[ext_resource path="res://addons/graph-node/Assets/DeleteNode.png" type="Texture" id=2]
+[ext_resource path="res://addons/graph-node/Assets/MoveNode.png" type="Texture" id=3]
+[ext_resource path="res://addons/graph-node/Assets/AddEdge.png" type="Texture" id=4]
+[ext_resource path="res://addons/graph-node/Assets/DeleteEdge.png" type="Texture" id=5]
 
 [node name="GraphEditToolbar" type="HBoxContainer" index="0"]
 
