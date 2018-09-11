@@ -78,6 +78,7 @@
 - environmental hazards
     - toxic waste (green with water splashing effect when walking on)
     - automatic turrets
+- aim assist for gamepad players
 
 
 # Extension Features

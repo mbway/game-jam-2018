@@ -4,6 +4,11 @@
 - to use margins in UI elements, don't use the 'Margins' settings because these frequently get overwritten and reset. Instead, use a MarginContainer and set the 'custom variables' section (the 'Margins' settings are reset even on the margin container)
 - `new()` creates new objects, `instance()` creates a runtime copy of a resource like a scene
 - don't use OS.get_tick_msec() because it doesn't scale as Engine.timescale changes
+- input events:
+    - https://godot.readthedocs.io/en/3.0/tutorials/inputs/inputevent.html#doc-inputevent
+    - first `_input` is called, then `_gui_input` then `_unhandled_input`. So gameplay related input should be handled in `_unhandled_input` so that the GUI can intercept and process events before hand.
+    - calling `event.accept_event()` will prevent propagation
+    - to allow mouse events through, a Control element should set its `mouse_filter` attribute
 
 ## Godot 3 changes
 - `_fixed_process` -> `_physics_process`

@@ -28,7 +28,7 @@ class PlayerConfig:
 		self.team = team
 		self.control = control
 		self.gamepad_id = gamepad_id
-	
+
 	func get_control_type_string():
 		if control == KEYBOARD_CONTROL:
 			return 'Keyboard'
@@ -38,7 +38,7 @@ class PlayerConfig:
 			return 'AI'
 		else:
 			return 'Invalid'
-		
+
 
 # see _on_StartButton_pressed for how these structures are setup
 var game_mode = null # for possible values see Lobby.gd > game_modes
@@ -63,7 +63,7 @@ var pickups = {
 		'scene':   preload('res://Weapons/MachineGun.tscn'),
 		'texture': preload('res://Assets/weapons/machinegun.png')},
 	'Minigun': {
-		'scene':   preload('res://Weapons/Minigun.tscn'), 
+		'scene':   preload('res://Weapons/Minigun.tscn'),
 		'texture': preload('res://Assets/weapons/Minigun/minigun1.png')},
 	'Shotgun': {
 		'scene':   preload('res://Weapons/Shotgun.tscn'),

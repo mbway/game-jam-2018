@@ -3,10 +3,11 @@ extends "res://Player/Player.gd"
 var aim_direction = Vector2(0, 0)
 
 
-func _input(event):
+# _unhandled_input allows the GUI to process events first
+func _unhandled_input(event):
 	if event.device != config.gamepad_id:
 			return
-	
+
 	if event is InputEventJoypadButton:
 		var b = event.button_index
 		if event.pressed:
@@ -36,7 +37,7 @@ func _input(event):
 			move_direction = event.axis_value
 			if abs(move_direction) < globals.JOY_DEADZONE:
 				move_direction = 0
-	
+
 
 func update_weapon_angle():
 	if aim_direction.length() > globals.JOY_DEADZONE: # only update when outside deadzone

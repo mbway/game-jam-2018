@@ -43,7 +43,8 @@ func make_visible(visible):
 	else:
 		set_physics_process(false)
 		toolbar.hide()
-		if editing_node != null:
+		# weakref to detect whether the node has been freed
+		if editing_node != null and weakref(editing_node).get_ref() != null:
 			editing_node.clear_editing()
 			editing_node = null # new node selected
 

@@ -25,30 +25,33 @@ func _process(delta):
 func _draw():
 	var t = player.get_target_relative()
 	draw_circle(t, 5, red)
-	
+
 	if fall_short_pos != null:
 		var v = to_local(fall_short_pos)
 		var c = pink if falls_short else purple
 		draw_line(Vector2(0, 0), v, c, 1.5, true)
 		draw_circle(v, 8, c)
-	
+
 	draw_collider($LeftCollider)
 	draw_collider($RightCollider)
 	draw_collider($LeftEdgeDetector)
 	draw_collider($RightEdgeDetector)
 
-	var path = player.path # the navigation path being followed
+	var path = []
+	for p in player.path: # the navigation path being followed
+		path.append(p.pos)
+
 	for p in path:
 		draw_circle(to_local(p), 4, blue)
 	path = [player.position, player.position+t] + path
 	for i in range(1, len(path)):
 		draw_line(to_local(path[i-1]), to_local(path[i]), blue, 2, true)
-	
+
 func draw_collider(collider):
 	var shape = collider.get_node('CollisionShape2D').shape
 	var color = red if is_colliding(collider) else grey
 	draw_line(shape.a, shape.b, color, 3.0)
-	
+
 func is_colliding(collider):
 	var bodies = collider.get_overlapping_bodies()
 	var count = len(bodies)

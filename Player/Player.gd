@@ -101,7 +101,7 @@ func _process(delta):
 	else: # dead
 		$AnimatedSprite.play('death')
 
-	var dd = G.get_scene().debug_draw
+	#var dd = G.get_scene().debug_draw
 	#dd.add_vector(velocity, position, INF, 'vel_%s' % config.num)
 
 func _physics_process(delta):
@@ -243,6 +243,14 @@ func spawn(position):
 	equip_weapon(G.pickups['Pistol'].scene.instance())
 	select_weapon('Pistol')
 
+func teleport(location):
+	global_position = location
+	velocity = Vector2(0, 0)
+	move_direction = 0
+	knockback = null
+	jump_pressed = false
+	jump_physics.reset()
+
 
 func delayed_spawn(position):
 	if $SpawnTimer.is_stopped(): # if timer already going, don't restart
@@ -256,3 +264,4 @@ func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
 	if config.control == G.GAMEPAD_CONTROL:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
+

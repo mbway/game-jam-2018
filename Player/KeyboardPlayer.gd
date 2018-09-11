@@ -3,7 +3,8 @@ extends "res://Player/Player.gd"
 var left_pressed = false
 var right_pressed = false
 
-func _input(event):
+# _unhandled_input allows the GUI to process events first
+func _unhandled_input(event):
 	# mouse wheel events have to be handled specially :(
 	# this is apparently because they are more short-lived
 	# mouse scroll to switch weapons

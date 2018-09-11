@@ -11,6 +11,11 @@ I don't like gdscript very much, here is why.
     - for example, cannot return multiple values from a function, so have to construct a list instead and place the multiple elements inside the list, and there is no pattern matching either so you have to manually unpack the list as well
 - missing 'quality of life' language features such as
     - syntax for exponents: `a**x` or `a^x`
+    - variadic arguments
+    - automatic constructors based on the attributes present in the class
+    - destructors
+- using `ClassName.new` is clunky
+- can't access variables and functions of an outer class from within an inner class because the language lacks closures: https://github.com/godotengine/godot/issues/4472
 - doesn't always raise errors when things go wrong
     - have to inherit from `Node` in order to use `connect`, but if you didn't know that or forget, no error will be raised, the connected method will simply never be called...
 - rips off python but changes syntax and conventions arbitrarily just to be different, such as booleans being lower case or using null instead of None, func instead of def etc.
@@ -22,6 +27,9 @@ I don't like gdscript very much, here is why.
 - not well documented. One good example is the documentation for Input.set_mouse_mode: 'Set the mouse mode. See the constants for more information.'. Which constants would those be? You haven't said...
     - also, inconsistent styling. Some arguments are written `likethis` and others `like_this` for no reason, simply sloppy adherence to a single coding style.
         - even worse, some functions have this problem too: `printraw()` and `print_stack()`
+    - some of the naming is a bit suspect
+        - https://godot.readthedocs.io/en/3.0/classes/class_rectangleshape2d.html
+        - 'extents - The rectangle’s half extents'
 - the debugging support is virtually non-existent
 - too many things change silently between versions. Change is good, but not clearly documenting when an API breaking change is introduced is stupid.
 - there are many problems that aren't caught by the editor which cause runtime issues.

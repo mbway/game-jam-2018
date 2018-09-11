@@ -12,7 +12,7 @@ var shake_enabled = true
 # whether the user moves the camera manually with the arrow keys and scroll wheel
 var free_camera = false
 var free_vel = Vector2(0, 0) # when not following the player, the velocity to move the camera by
-const free_speed = 1000
+const free_speed = 16
 const free_zoom_speed = 0.1
 var free_following = true # when in free_camera mode, whether to follow the player
 
@@ -38,7 +38,8 @@ func shake(amount):
 
 func _physics_process(delta):
 	if free_camera and not free_following:
-		global_position += free_vel * delta
+		# no multiplication by delta because the free camera should have the same speed regardless of the game speed
+		global_position += free_vel
 		return
 
 	var following = len(follow)

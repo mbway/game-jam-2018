@@ -1,0 +1,21 @@
+all of these can be copied and pasted into the terminal on the AI stress test map to replay a jump which currently does the wrong thing
+
+shouldn't double jump when changing targets
+tp 2 3923.645264,1281.929565; player_set 2 waypoint 3866.202637,1823.990723;;
+
+target moves on before the player gets under the platform and so gets trapped
+also doesn't recalculate
+tp 2 3245.80249,1281.955078; player_set 2 waypoint 2875.002686,2060.390625;;
+
+doesn't touch the floor before jumping again
+tp 2 2504.354736,2785.930176; player_set 2 waypoint 2844.431152,2050.793457;;
+
+falls short
+tp 2 2409.746582,2550.587891; player_set 2 waypoint 1424.289429,2042.730225;;
+
+double jump too weak
+tp 2 5348.92041,961.930298; player_set 2 waypoint 4235.65918,1296.491699;;
+
+falls because it jumps too early after landing on the first platform
+only occurs when in slow motion
+setop game_speed 0.1; tp 2 4352.629883,1281.921387; player_set 2 waypoint 3103.535645,1293.998779;;
