@@ -23,7 +23,7 @@ func _process(delta):
 	update() # redraw. Only calls _draw when visible
 
 func _draw():
-	var t = player.get_target_relative()
+	var t = player.path_follow.get_target_relative()
 	draw_circle(t, 5, red)
 
 	if fall_short_pos != null:
@@ -38,7 +38,7 @@ func _draw():
 	draw_collider($RightEdgeDetector)
 
 	var path = []
-	for p in player.path: # the navigation path being followed
+	for p in player.path_follow.path: # the navigation path being followed
 		path.append(p.pos)
 
 	for p in path:
