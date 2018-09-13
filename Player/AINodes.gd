@@ -8,6 +8,7 @@ var blue = Color('#dd5353d9')
 var grey = Color('#ddaaaaaa')
 var pink = Color('#ddef1b91')
 var purple = Color('#dd791bef')
+var light_grey = Color('#55aaaaaa')
 
 var falls_short = false
 var fall_short_pos = null
@@ -37,6 +38,8 @@ func _draw():
 	draw_collider($LeftEdgeDetector)
 	draw_collider($RightEdgeDetector)
 
+	draw_rect(get_collision_rect($SearchArea/CollisionShape2D), light_grey, true) # filled
+
 	var path = []
 	for p in player.path_follow.path: # the navigation path being followed
 		path.append(p.pos)
@@ -51,6 +54,11 @@ func draw_collider(collider):
 	var shape = collider.get_node('CollisionShape2D').shape
 	var color = red if is_colliding(collider) else grey
 	draw_line(shape.a, shape.b, color, 3.0)
+
+func get_collision_rect(r):
+	var pos = r.position
+	var e = r.shape.extents # shape.extents are actually half extents
+	return Rect2(pos.x-e.x, pos.y-e.y, e.x*2, e.y*2)
 
 func is_colliding(collider):
 	var bodies = collider.get_overlapping_bodies()

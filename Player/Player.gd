@@ -129,6 +129,7 @@ func _physics_process(delta):
 				knockback.y = clamp(knockback.y, -INF, 0) # sticking to the floor is handled by the main velocity, allow upwards velocity
 			else:
 				knockback += Vector2(0, jump_physics.GRAVITY) * delta
+			knockback = Vector2(clamp(knockback.x, -MAX_SPEED, MAX_SPEED), clamp(knockback.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED))
 			knockback = move_and_slide(knockback, UP)
 			var dd = G.get_scene().debug_draw
 			dd.add_vector(knockback, position, INF, 'knock_%s' % config.num)
@@ -199,6 +200,23 @@ func select_next_weapon(offset):
 	if current_weapon != null:
 		emit_signal('weapon_selected', current_weapon.name)
 
+# pos is relative
+func aim_at(pos):
+	# maths copied from power defence
+	if current_weapon != null:
+		var gun_pos = current_weapon.get_position()
+		var d = (pos - gun_pos).length()
+		if abs(d) > 4: # pixels
+			var angle = pos.angle_to_point(gun_pos)
+			var o = (current_weapon.get_node('Muzzle').get_position() - gun_pos).y
+			var angle_correction = asin(o/d)
+			if not is_nan(angle_correction):
+				if abs(weapon_angle+angle_correction) > PI/2:
+					angle += angle_correction
+				else:
+					angle -= angle_correction
+			weapon_angle = angle # atomic update
+
 func take_damage(damage, knockback):
 	if invulnerable or is_dead():
 		return
@@ -237,12 +255,10 @@ func die():
 	collision_layer = 0 # no longer on the players layer
 	collision_mask = G.Layers.MAP # only collide with the map, not other players
 	$BulletCollider.collision_layer = 0 # no longer collide with projectiles
-	print('die')
 	emit_signal('die')
 
 #TODO: this should probably be handled in the gameplay code
 func spawn(position):
-	show()
 	_set_invulnerable(true)
 	self.position = position
 	collision_layer = G.Layers.PLAYERS
@@ -253,6 +269,7 @@ func spawn(position):
 	_clear_inventory()
 	equip_weapon(G.pickups['Pistol'].scene.instance())
 	select_weapon('Pistol')
+	show()
 
 func teleport(location):
 	global_position = location

@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10000, 30 )
 
-[node name="MapBottom" type="Node2D" index="0"]
+[node name="MapBottom" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -19,9 +19,10 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_layer = 2
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
@@ -31,8 +32,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
 
 input_pickable = false
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0

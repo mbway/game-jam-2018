@@ -49,21 +49,8 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	# mouse aim
 	# updating every physics frame because it is likely that either the player or mouse has moved
-	# maths copied from power defence
 	if current_weapon != null:
-		var gun_pos = current_weapon.get_position()
-		var mouse_pos = get_local_mouse_position()
-		var d = (mouse_pos - gun_pos).length()
-		if abs(d) > 4: # pixels
-			var angle = mouse_pos.angle_to_point(gun_pos)
-			var o = (current_weapon.get_node('Muzzle').get_position() - gun_pos).y
-			var angle_correction = asin(o/d)
-			if not is_nan(angle_correction):
-				if abs(weapon_angle+angle_correction) > PI/2:
-					angle += angle_correction
-				else:
-					angle -= angle_correction
-			weapon_angle = angle # atomic update
+		aim_at(get_local_mouse_position())
 
 
 
