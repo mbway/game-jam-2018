@@ -16,7 +16,7 @@ func connect_player(player, player_num):
 	player.connect('weapon_equiped', slots, '_on_Player_weapon_equiped')
 	player.connect('weapon_unequiped', slots, '_on_Player_weapon_unequiped')
 	player.connect('weapon_selected', slots, '_on_Player_weapon_selected')
-	
+
 func set_score_labels(L, R):
 	$P1Score.text = L
 	$P2Score.text = R
@@ -26,7 +26,7 @@ func show_game_over(winner):
 	$GameOver/GameOverMessage.text = 'Game Over!\n%s Wins' % winner
 	$GameOver.show()
 
-func _input(event):
+func _gui_input(event):
 	if $GameOver.visible:
 		if event is InputEventJoypadButton and event.pressed:
 			if event.button_index == 16: # XBOX button

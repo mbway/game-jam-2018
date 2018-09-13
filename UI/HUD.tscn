@@ -83,7 +83,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -94,7 +94,6 @@ script = ExtResource( 1 )
 
 [node name="GameOver" type="Control" parent="." index="0"]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -121,7 +120,7 @@ margin_right = 268.0
 margin_bottom = 116.5
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -133,7 +132,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "Material", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Margin", "Material", "Mouse", "custom_fonts" ]
 
 [node name="MainMenu" type="Button" parent="GameOver" index="1"]
 
@@ -175,7 +174,7 @@ margin_right = 200.0
 margin_bottom = 99.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -184,7 +183,7 @@ text = "LScore"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Material", "Mouse", "custom_fonts" ]
+_sections_unfolded = [ "Material", "custom_fonts" ]
 
 [node name="P2Score" type="Label" parent="." index="2"]
 
@@ -200,7 +199,7 @@ margin_bottom = 99.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -210,7 +209,7 @@ align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Material", "custom_fonts" ]
+_sections_unfolded = [ "Material", "Mouse", "custom_fonts" ]
 
 [node name="P1WeaponSlots" parent="." index="3" instance=ExtResource( 5 )]
 
@@ -219,8 +218,7 @@ anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -720.0
 margin_bottom = -20.0
-mouse_filter = 2
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect", "Visibility" ]
 
 [node name="P2WeaponSlots" parent="." index="4" instance=ExtResource( 5 )]
 
@@ -233,8 +231,7 @@ margin_top = -720.0
 margin_right = 230.0
 margin_bottom = -20.0
 rect_scale = Vector2( -1, 1 )
-mouse_filter = 2
-_sections_unfolded = [ "Material", "Mouse", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Margin", "Material", "Mouse", "Rect", "Visibility" ]
 
 [node name="Message" type="Label" parent="." index="5"]
 
@@ -248,7 +245,7 @@ margin_right = 800.0
 margin_bottom = 190.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -261,7 +258,7 @@ valign = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Material" ]
+_sections_unfolded = [ "Material", "Mouse" ]
 
 [node name="Timeout" type="Timer" parent="Message" index="0"]
 

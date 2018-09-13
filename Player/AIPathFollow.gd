@@ -217,6 +217,7 @@ func process(delta):
 		#print('%s: player.jump_pressed = %s%s' % [reason, player.jump_pressed, ' (mid air)' if mid_air else ''])
 		#get_tree().paused = true
 
+
 # if the player released jump right now (or kept it released), would it be able
 # to reach to within 'buffer' pixels of the target, or at least land on the
 # platform that the target resides on.
@@ -306,7 +307,7 @@ func cast_ray_down(length, pos=null):
 		pos = player.global_position + Vector2(0, 32) # the player is 64px tall, positioned at 0,0
 	if length <= 0:
 		return null
-	var space_state = get_world_2d().direct_space_state
+	var space_state = player.get_world_2d().direct_space_state
 	# cast in layer 1 (Player-Map layer) with this player as an exception. Only collides with other players and the map
 	var result = space_state.intersect_ray(pos, pos + Vector2(0, length), [self], 1)
 	if result.empty():

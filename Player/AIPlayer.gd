@@ -13,9 +13,9 @@ func _physics_process(delta):
 	# handles controlling the player to reach the waypoint by navigating the map
 	path_follow.process(delta)
 
-# _unhandled_input allows the GUI to process events first
-func _unhandled_input(event):
-	if state == States.MANUAL:
+# can't use _unhandled_input otherwise won't receive mouse events when over a Control node
+func _input(event):
+	if is_alive() and state == States.MANUAL:
 		if event is InputEventMouseButton:
 			var b = event.button_index
 			if event.pressed:

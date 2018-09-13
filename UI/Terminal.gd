@@ -289,7 +289,7 @@ func handle_command(input):
 			else:
 				player._set_invulnerable(val)
 		elif name == 'waypoint':
-			if player.config.control != G.AI_CONTROL:
+			if player.config.control != G.Control.AI:
 				log_error('player %s is not AI controlled' % args['player_num'])
 			else:
 				var waypoint = parse_vector(v)

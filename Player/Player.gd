@@ -138,6 +138,10 @@ func _physics_process(delta):
 		# dead
 		if on_floor:
 			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+			velocity.y = 100 # apply a small downwards force to remain on_floor
+		else:
+			velocity.y += jump_physics.GRAVITY * delta
+			velocity.y = clamp(velocity.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED)
 
 	velocity = move_and_slide(velocity, UP)
 
@@ -198,16 +202,16 @@ func select_next_weapon(offset):
 func take_damage(damage, knockback):
 	if invulnerable or is_dead():
 		return
-	var new_health = max(health - damage, 0)
+	var old_health = health
 	emit_signal('hit')
-	_set_health(new_health)
+	_set_health(health - damage)
 
 	if self.knockback == null:
 		self.knockback = knockback
 	else:
 		self.knockback += knockback
 
-	if is_alive() and health <= 0:
+	if old_health > 0 and health <= 0:
 		die()
 
 func is_alive():
@@ -230,6 +234,10 @@ func die():
 	if invulnerable:
 		return
 	_set_health(0)
+	collision_layer = 0 # no longer on the players layer
+	collision_mask = G.Layers.MAP # only collide with the map, not other players
+	$BulletCollider.collision_layer = 0 # no longer collide with projectiles
+	print('die')
 	emit_signal('die')
 
 #TODO: this should probably be handled in the gameplay code
@@ -237,6 +245,9 @@ func spawn(position):
 	show()
 	_set_invulnerable(true)
 	self.position = position
+	collision_layer = G.Layers.PLAYERS
+	collision_mask = G.Layers.PLAYERS | G.Layers.MAP
+	$BulletCollider.collision_layer = G.Layers.BULLET_COLLIDERS
 	_set_health(max_health)
 
 	_clear_inventory()
@@ -262,6 +273,6 @@ func _on_InvulnTimer_timeout():
 
 func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
-	if config.control == G.GAMEPAD_CONTROL:
+	if config.control == G.Control.GAMEPAD:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 

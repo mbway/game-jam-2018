@@ -57,9 +57,10 @@ terminal_toggle=[ Object(InputEventKey,"resource_local_to_scene":false,"resource
 
 [layer_names]
 
-2d_physics/layer_1="Player-Map"
-2d_physics/layer_2="Projectile-Map"
-2d_physics/layer_3="Projectile-Player"
+2d_physics/layer_1="Players"
+2d_physics/layer_2="Map"
+2d_physics/layer_3="BulletColliders"
+2d_physics/layer_4="CollidableProjectiles"
 
 [locale]
 

@@ -15,13 +15,20 @@
 
 
 # Collision Layers
-layer 1 = player and map
-layer 2 = projectile and map
-layer 3 = projectile and player
+- each collidable node has a 'Layer' and 'Mask' property. Layer determines which layers the node exists on, Mask determines which layers the node scans looking for a collision
+    - a collision occurs if A is on a layer which B scans or B is on a layer which A scans
+    - layers should be named by what lives in them, not what scans them
 
-Player:         1
-BulletCollider:         3
-Map:            1   2
-Shell:              2
-Bullet:             2   3
-Laser:                  3
+Layer 1 = Players
+Layer 2 = Map
+Layer 3 = BulletColliders
+Layer 4 = CollidableProjectiles
+
+Node           | Layer | Mask
+Player         | 1     | 1+2
+Map            | 2     | 0
+BulletCollider | 3     | 0
+Flame          | 4     | 2+3+4
+Shell          | 0     | 2
+Bullet         | 0     | 2+3
+Laser          | 0     | 3

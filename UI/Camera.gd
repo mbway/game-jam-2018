@@ -74,7 +74,22 @@ func _physics_process(delta):
 		zoom.y = z
 		set_global_position(avg)
 
+# can't use _unhandled_input otherwise won't receive mouse events when over a Control node
 func _input(event):
+	if not free_camera:
+		return
+
+	if event is InputEventMouseButton:
+		var b = event.button_index
+		if event.pressed:
+			if b == BUTTON_WHEEL_UP:
+				zoom.x -= free_zoom_speed
+				zoom.y -= free_zoom_speed
+			elif b == BUTTON_WHEEL_DOWN:
+				zoom.x += free_zoom_speed
+				zoom.y += free_zoom_speed
+
+func _unhandled_input(event):
 	if not free_camera:
 		return
 
@@ -95,15 +110,6 @@ func _input(event):
 			if k == KEY_F:
 				free_following = not free_following
 
-	elif event is InputEventMouseButton:
-		var b = event.button_index
-		if event.pressed:
-			if b == BUTTON_WHEEL_UP:
-				zoom.x -= free_zoom_speed
-				zoom.y -= free_zoom_speed
-			elif b == BUTTON_WHEEL_DOWN:
-				zoom.x += free_zoom_speed
-				zoom.y += free_zoom_speed
 
 func remove_follow(node):
 	follow.erase(node)

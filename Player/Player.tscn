@@ -74,7 +74,7 @@ height = 12.0
 
 input_pickable = true
 collision_layer = 1
-collision_mask = 1
+collision_mask = 3
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Collision", "Pickable", "Transform", "collision" ]
@@ -83,7 +83,6 @@ _sections_unfolded = [ "Angular", "Collision", "Pickable", "Transform", "collisi
 
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
@@ -114,6 +113,8 @@ one_shot = true
 autostart = false
 
 [node name="BulletCollider" parent="." index="6" instance=ExtResource( 30 )]
+
+collision_mask = 0
 
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]
 

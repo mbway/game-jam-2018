@@ -1,26 +1,29 @@
 extends Node
 
 # gamepad axis indices
-const JOY_MOVE_X = 0
-const JOY_MOVE_Y = 1
-const JOY_LOOK_X = 2
-const JOY_LOOK_Y = 3
+enum JoyAxis {
+	MOVE_X = 0
+	MOVE_Y = 1
+	LOOK_X = 2
+	LOOK_Y = 3
+}
 const JOY_DEADZONE = 0.2 # the fraction (0-1) of the axis to ignore from the center
 
 
-
 # input methods
-const KEYBOARD_CONTROL = 0
-const GAMEPAD_CONTROL  = 1
-#const NETWORK_CONTROL  = 2 #TODO
-const AI_CONTROL       = 3
+enum Control {
+	KEYBOARD = 0
+	GAMEPAD  = 1
+	#const NETWORK = 2 #TODO
+	AI       = 3
+}
 
 class PlayerConfig:
 	var num # 1-based
 	var name # human readable
 	var team # 1-based
-	var control # CONTROL_TYPE
-	var gamepad_id = -1 # only used when control == CONTROL_TYPE.GAMEPAD
+	var control # Control
+	var gamepad_id = -1 # only used when control == Control.GAMEPAD
 
 	func _init(num=-1, name='', team=-1, control=-1, gamepad_id=-1):
 		self.num = num
@@ -30,11 +33,11 @@ class PlayerConfig:
 		self.gamepad_id = gamepad_id
 
 	func get_control_type_string():
-		if control == KEYBOARD_CONTROL:
+		if control == Control.KEYBOARD:
 			return 'Keyboard'
-		elif control == GAMEPAD_CONTROL:
+		elif control == Control.GAMEPAD:
 			return 'Gamepad_%s' % gamepad_id
-		elif control == AI_CONTROL:
+		elif control == Control.AI:
 			return 'AI'
 		else:
 			return 'Invalid'
@@ -49,6 +52,14 @@ var game_mode_details = {}
 var output_queue = []
 
 var settings = null
+
+# these are elements of a bitmask and can be bitwise OR'd together
+enum Layers {
+	PLAYERS                = 1,
+	MAP                    = 2,
+	BULLET_COLLIDERS       = 4,
+	COLLIDABLE_PROJECTILES = 8
+}
 
 # All the available weapons and pickups and their textures
 # preload everything because it will have to be loaded at some point anyway.

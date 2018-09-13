@@ -3,11 +3,8 @@ extends "res://Player/Player.gd"
 var left_pressed = false
 var right_pressed = false
 
-# _unhandled_input allows the GUI to process events first
-func _unhandled_input(event):
-	# mouse wheel events have to be handled specially :(
-	# this is apparently because they are more short-lived
-	# mouse scroll to switch weapons
+# can't use _unhandled_input otherwise won't receive mouse events when over a Control node
+func _input(event):
 	if event is InputEventMouseButton:
 		var b = event.button_index
 		if event.pressed:
@@ -22,7 +19,13 @@ func _unhandled_input(event):
 				fire_pressed = false
 				fire_held = false
 
-	elif event is InputEventKey:
+
+# _unhandled_input allows the GUI to process events first
+func _unhandled_input(event):
+	# mouse wheel events have to be handled specially :(
+	# this is apparently because they are more short-lived
+	# mouse scroll to switch weapons
+	if event is InputEventKey:
 		var k = event.scancode
 		if event.pressed and not event.is_echo(): # disregard key repeats
 			if k == KEY_W or k == KEY_SPACE:
@@ -61,7 +64,7 @@ func _physics_process(delta):
 				else:
 					angle -= angle_correction
 			weapon_angle = angle # atomic update
-	
+
 
 
 func update_move_direction():
