@@ -129,6 +129,7 @@ const commands = {
 	'exit'        : [[], 'quit the game.'],
 	'menu'        : [[], 'return to the main menu.'],
 	'reload'      : [[], 'reload the current scene. Useful to apply options which do not automatically refresh.'],
+	'pause_set'   : [['paused'], 'set the game paused state'],
 	'quick_start' : [[], 'run the QuickStart scene'],
 
 	'setop'       : [['name', 'value'], 'set an option.'],
@@ -215,6 +216,12 @@ func handle_command(input):
 		get_tree().change_scene('res://MainMenu/MainMenu.tscn')
 	elif cmd == 'reload':
 		get_tree().reload_current_scene()
+	elif cmd == 'pause_set':
+		var paused = G.cast_from_string(args['paused'], TYPE_BOOL)
+		if paused == null:
+			log_error('couldn\'t parse bool from "%s"' % args['paused'])
+		else:
+			get_tree().paused = paused
 	elif cmd == 'quick_start':
 		get_tree().change_scene('res://Utils/QuickStart.tscn')
 
@@ -276,7 +283,11 @@ func handle_command(input):
 			else:
 				log_error('could not parse %s' % v)
 		elif name == 'invulnerable':
-			player._set_invulnerable(G.cast_from_string(v, TYPE_BOOL))
+			var val = G.cast_from_string(v, TYPE_BOOL)
+			if val == null:
+				log_error('couldn\'t parse bool from "%s"' % v)
+			else:
+				player._set_invulnerable(val)
 		elif name == 'waypoint':
 			if player.config.control != G.AI_CONTROL:
 				log_error('player %s is not AI controlled' % args['player_num'])
@@ -409,8 +420,6 @@ func autocomplete_matches(words, possible_matches, case_sensitive=true):
 		else:
 			completion = common_prefix(matches) # no space afterwards because not fully complete
 			log_text(str(matches) + '\n')
-		print(possible_matches)
-		print(completion)
 		var line = ''
 		for i in range(words.size() - 1):
 			line += words[i] + ' '

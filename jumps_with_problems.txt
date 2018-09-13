@@ -1,5 +1,54 @@
 all of these can be copied and pasted into the terminal on the AI stress test map to replay a jump which currently does the wrong thing
 
+ finds a route from the no-return platform which shouldn't be possible (could be due to bidirectional edges being added due to the godot bug in Graph2D?)
+tp 2 4328.833008,3403.921143; player_set 2 waypoint 4020.646973,2753.43042;;
+
+
+
+##########
+# Solved #
+##########
+
+doesn't touch the floor before jumping again
+solved by not advancing the target if player not on the floor and next target not on same platform
+tp 2 2504.354736,2785.930176; player_set 2 waypoint 2844.431152,2050.793457;;
+
+gets stuck
+increased the margin which targets are considered 'directly above'
+tp 2 4691.229492,2202.744141; player_set 2 waypoint 4528.592285,2043.530396;;
+
+double jump too weak
+only release jump if the platform the player is over is the same platform as the target
+tp 2 5348.92041,961.930298; player_set 2 waypoint 4235.65918,1296.491699;;
+
+unnecessary jump on landing on the platform
+avoid making preemptive jumps when the target changes while in mid air, but just about to hit the platform
+the bounces were preemptive jumps
+tp 2 3024.833252,2049.930176; player_set 2 waypoint 2139.666504,1833.187378;;
+
+catches on the edge
+same as above: preemptive jump
+tp 2 2932.735352,2049.930176; player_set 2 waypoint 3347.4729,1811.530273;;
+
+jumps when shouldn't
+solved: accounted for x-acceleration in falls_short rather than assuming that vel.x stays constant
+gets stuck
+fixing the double jump solved this particular issue. In general the nav graph should be designed to avoid moving on too early using mid-air nodes
+tp 2 4138.943359,1793.930176; player_set 2 waypoint 4595.260742,2219.930664;;
+
+not really a big deal, double jumps when doesn't have to
+adding a small delay between detecting that the player can release jump and still reach the target, and actually releasing accounts for some of the inaccuracies in the can_reach_target test. What was happening here was that after releasing jump, the can_reach_target test started saying that the player could no longer reach the target, causing a double jump.
+tp 2 2156.833008,1793.93042; player_set 2 waypoint 2961.77124,2060.788818;;
+
+falls and has to recalculate if you run the first one, then the second one
+have to ensure to clear the jump_release timer when the target changes
+tp 2 2947.684082,2049.930176; player_set 2 waypoint 3681.564697,2792.380371;;
+tp 2 3202.629395,1281.93042; player_set 2 waypoint 2141.071289,1793.988892;;
+
+#################
+# solved itself #
+#################
+
 shouldn't double jump when changing targets
 tp 2 3923.645264,1281.929565; player_set 2 waypoint 3866.202637,1823.990723;;
 
@@ -7,15 +56,17 @@ target moves on before the player gets under the platform and so gets trapped
 also doesn't recalculate
 tp 2 3245.80249,1281.955078; player_set 2 waypoint 2875.002686,2060.390625;;
 
-doesn't touch the floor before jumping again
-tp 2 2504.354736,2785.930176; player_set 2 waypoint 2844.431152,2050.793457;;
-
 falls short
 tp 2 2409.746582,2550.587891; player_set 2 waypoint 1424.289429,2042.730225;;
-
-double jump too weak
-tp 2 5348.92041,961.930298; player_set 2 waypoint 4235.65918,1296.491699;;
 
 falls because it jumps too early after landing on the first platform
 only occurs when in slow motion
 setop game_speed 0.1; tp 2 4352.629883,1281.921387; player_set 2 waypoint 3103.535645,1293.998779;;
+
+get stuck
+tp 2 4176.381348,1281.93042; player_set 2 waypoint 3584.614258,2675.98584;;
+
+no longer does an extra bounce
+tp 2 2947.684082,2049.930176; player_set 2 waypoint 3681.564697,2792.380371;;
+
+

@@ -101,4 +101,5 @@
 - front/back flip when double jumping like raze
 - split screen. possible now that camera isn't child of player
 - a short-range teleport ability/weapon would be cool...
+- fog of war: can only see in the line of sight of the player, so another player on a platform above you wouldn't be visible. Could combine with 2D lighting effects.
 

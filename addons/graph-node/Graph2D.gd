@@ -271,8 +271,17 @@ func _project_and_add(point, astar):
 	#TODO: these have to be unidirectional if the edges are otherwise paths can be wrong
 	# there seems to be a bug with AStar which crashes the engine sometimes if
 	# these edges are not bidirectional, but this shouldn't be a problem.
+
+	#TODO: there is a bug with godot causing a crash with signal 11 (segfault) when unidirectional edges are added. Check after 3.1 is released and if the bug still persists then look into fixing it.
+	#if e.ab and e.ba:
 	astar.connect_points(e.a, id, true)
 	astar.connect_points(e.b, id, true)
+	#elif e.ab:
+	#	astar.connect_points(e.a, id, false)
+	#	astar.connect_points(id, e.b, false)
+	#elif e.ba:
+	#	astar.connect_points(e.b, id, false)
+	#	astar.connect_points(id, e.a, false)
 
 	return [id, closest_e]
 
@@ -297,7 +306,7 @@ func get_path(from, to):
 	if from_edge == to_edge:
 		# this could probably be made into a special case where the path is just
 		# [from, to], but just in case there is an edge case, AStar is still used.
-		_astar.connect_points(from_id, to_id)
+		_astar.connect_points(from_id, to_id, true) # bidirectional
 
 	var path = [] # not a pool array because some functions don't exist and the path shouldn't be too long anyway
 
