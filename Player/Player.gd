@@ -29,7 +29,8 @@ var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
 
 ## INPUT VARIABLES ##
 # these variables are set using whatever method is in control of the player
-var weapon_angle = 0 # TODO
+var _weapon_angle = 0 # set with set_weapon_angle()
+var auto_aim = null # only active when an instance of res://Player/AutoAim.gd
 # a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
 # with analog input this value may be a non-integer
 var move_direction = 0
@@ -65,14 +66,16 @@ func init(config, camera, bullet_parent, nav):
 	self.nav = nav
 
 func _ready():
+	if config.control == G.Control.GAMEPAD:# or config.control == G.Control.KEYBOARD:
+		auto_aim = preload('res://Player/AutoAim.gd').new(self)
 	hide()
-
 
 func _process(delta):
 	if is_alive():
 		inventory_lock.lock()
 		if current_weapon != null:
-			current_weapon.set_rotation(weapon_angle)
+			var angle = _weapon_angle if auto_aim == null else auto_aim.auto_aim(_weapon_angle)
+			current_weapon.set_rotation(angle)
 
 			# gun rotation
 			# the small margin is to prevent the gun from flickering when aiming directly up
@@ -208,14 +211,24 @@ func aim_at(pos):
 		var d = (pos - gun_pos).length()
 		if abs(d) > 4: # pixels
 			var angle = pos.angle_to_point(gun_pos)
-			var o = (current_weapon.get_node('Muzzle').get_position() - gun_pos).y
-			var angle_correction = asin(o/d)
-			if not is_nan(angle_correction):
-				if abs(weapon_angle+angle_correction) > PI/2:
+			var muzzle_pos = current_weapon.get_node('Muzzle').get_position()
+			var o = (muzzle_pos - gun_pos).y
+			# cannot accurately aim at something closer than the muzzle
+			if d > muzzle_pos.length():
+				var angle_correction = asin(o/d)
+				if abs(angle+angle_correction) > PI/2:
 					angle += angle_correction
 				else:
 					angle -= angle_correction
-			weapon_angle = angle # atomic update
+			return angle
+	return pos.angle()
+
+func set_weapon_angle(angle):
+	# _weapon_angle should always be set atomically, ie use a temporary variable
+	# and set once at the end otherwise the aiming becomes jittery. This
+	# function should deter direct access when writing (reading is OK).
+	_weapon_angle = angle
+
 
 func take_damage(damage, knockback):
 	if invulnerable or is_dead():

@@ -67,9 +67,9 @@ custom_solver_bias = 0.0
 radius = 22.0
 height = 12.0
 
-[node name="Player" type="KinematicBody2D" index="0" groups=[
-"players",
+[node name="Player" type="KinematicBody2D" groups=[
 "damageable",
+"players",
 ]]
 
 input_pickable = true
@@ -81,6 +81,7 @@ _sections_unfolded = [ "Angular", "Collision", "Pickable", "Transform", "collisi
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
+position = Vector2( 0, -4 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
@@ -88,7 +89,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="HitBox" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0, 2 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
@@ -97,6 +97,8 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 position = Vector2( 0, -38 )
 
 [node name="Inventory" type="Node2D" parent="." index="3"]
+
+_sections_unfolded = [ "Transform" ]
 
 [node name="InvulnTimer" type="Timer" parent="." index="4"]
 
@@ -114,6 +116,7 @@ autostart = false
 
 [node name="BulletCollider" parent="." index="6" instance=ExtResource( 30 )]
 
+visible = false
 collision_mask = 0
 
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]

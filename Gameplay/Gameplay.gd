@@ -81,21 +81,15 @@ func create_player(config):
 		var node_name = 'Player %d' % config.num
 		# only the interesting attributes
 		var attrs = ['current_weapon',
-					'weapon_angle',
+					'_weapon_angle',
 					'move_direction',
 					'fire_pressed',
 					'fire_held',
-					'last_jump_pressed_ms',
 					'jump_released',
 					'max_health',
 					'health',
-					'alive',
 					'invulnerable',
-					'velocity',
-					'last_jump_ms',
-					'was_on_floor',
-					'left_floor_ms',
-					'mid_air_jumps']
+					'velocity']
 		if config.control == G.Control.KEYBOARD:
 			attrs += ['left_pressed', 'right_pressed']
 		for attr in attrs:
@@ -106,6 +100,9 @@ func get_player(num):
 		if p.config.num == num:
 			return p
 	return null
+
+func get_players():
+	return $Players.get_children()
 
 func _on_settings_changed():
 	if G.settings.get('music'):

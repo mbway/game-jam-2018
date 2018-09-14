@@ -11,6 +11,7 @@
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
 # TODO
+- upgrade the old maps in OldMaps then remove
 - with the new jumping mechanism, using Engine.time_scale, can do bullet time :D
 - move away from using OS.get_tick_msec() to allow the game to be slowed down for debugging. accumulate the given delta values instead
 - need a better name than 'power offence'

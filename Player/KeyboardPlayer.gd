@@ -50,7 +50,7 @@ func _physics_process(delta):
 	# mouse aim
 	# updating every physics frame because it is likely that either the player or mouse has moved
 	if current_weapon != null:
-		aim_at(get_local_mouse_position())
+		set_weapon_angle(aim_at(get_local_mouse_position()))
 
 
 

@@ -315,6 +315,8 @@ func cast_ray_down(length, pos=null):
 	else:
 		return [result.position, result.collider]
 
+#TODO: prevent the jolt which occurs when the waypoint changes
+
 # returns whether the waypoint was set (won't be set if the player is in mid air and not above a platform)
 func set_waypoint(waypoint):
 	if player.nav == null:#TODO: remove check once made compulsory

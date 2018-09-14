@@ -46,7 +46,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 
-frame = 1
+frame = 0
 
 [node name="AINodes" type="Node2D" parent="." index="7"]
 
