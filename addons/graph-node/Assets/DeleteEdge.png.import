@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-663d8e2cacecad70c4fa75d04cb90971.stex"
+path="res://.import/DeleteEdge.png-f5a030137d99cedec336c2a800c268fb.stex"
 
 [deps]
 
-source_file="res://addons/graph-node/icon.png"
-dest_files=[ "res://.import/icon.png-663d8e2cacecad70c4fa75d04cb90971.stex" ]
+source_file="res://addons/graph-node/Assets/DeleteEdge.png"
+dest_files=[ "res://.import/DeleteEdge.png-f5a030137d99cedec336c2a800c268fb.stex" ]
 
 [params]
 

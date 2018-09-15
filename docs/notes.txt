@@ -4,19 +4,31 @@
 - to use margins in UI elements, don't use the 'Margins' settings because these frequently get overwritten and reset. Instead, use a MarginContainer and set the 'custom variables' section (the 'Margins' settings are reset even on the margin container)
 - `new()` creates new objects, `instance()` creates a runtime copy of a resource like a scene
 - don't use OS.get_tick_msec() because it doesn't scale as Engine.timescale changes
+- input events:
+    - https://godot.readthedocs.io/en/3.0/tutorials/inputs/inputevent.html#doc-inputevent
+    - first `_input` is called, then `_gui_input` then `_unhandled_input`. So gameplay related input should be handled in `_unhandled_input` so that the GUI can intercept and process events before hand.
+    - calling `event.accept_event()` will prevent propagation
+    - to allow mouse events through, a Control element should set its `mouse_filter` attribute
 
 ## Godot 3 changes
 - `_fixed_process` -> `_physics_process`
 
 
 # Collision Layers
-layer 1 = player and map
-layer 2 = projectile and map
-layer 3 = projectile and player
+- each collidable node has a 'Layer' and 'Mask' property. Layer determines which layers the node exists on, Mask determines which layers the node scans looking for a collision
+    - a collision occurs if A is on a layer which B scans or B is on a layer which A scans
+    - layers should be named by what lives in them, not what scans them
 
-Player:         1
-BulletCollider:         3
-Map:            1   2
-Shell:              2
-Bullet:             2   3
-Laser:                  3
+Layer 1 = Players
+Layer 2 = Map
+Layer 3 = BulletColliders
+Layer 4 = CollidableProjectiles
+
+Node           | Layer | Mask
+Player         | 1     | 1+2
+Map            | 2     | 0
+BulletCollider | 3     | 0
+Flame          | 4     | 2+3+4
+Shell          | 0     | 2
+Bullet         | 0     | 2+3
+Laser          | 0     | 3

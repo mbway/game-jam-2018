@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DeleteNode.png-e43c9d8c4cf61098d0b83de5feba70fd.stex"
+path="res://.import/MoveNode.png-697a58928e1e05263b9a66a4b1600ccd.stex"
 
 [deps]
 
-source_file="res://addons/graph-node/DeleteNode.png"
-dest_files=[ "res://.import/DeleteNode.png-e43c9d8c4cf61098d0b83de5feba70fd.stex" ]
+source_file="res://addons/graph-node/Assets/MoveNode.png"
+dest_files=[ "res://.import/MoveNode.png-697a58928e1e05263b9a66a4b1600ccd.stex" ]
 
 [params]
 

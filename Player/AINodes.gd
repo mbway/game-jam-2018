@@ -8,6 +8,7 @@ var blue = Color('#dd5353d9')
 var grey = Color('#ddaaaaaa')
 var pink = Color('#ddef1b91')
 var purple = Color('#dd791bef')
+var light_grey = Color('#55aaaaaa')
 
 var falls_short = false
 var fall_short_pos = null
@@ -23,32 +24,42 @@ func _process(delta):
 	update() # redraw. Only calls _draw when visible
 
 func _draw():
-	var t = player.get_target_relative()
+	var t = player.path_follow.get_target_relative()
 	draw_circle(t, 5, red)
-	
+
 	if fall_short_pos != null:
 		var v = to_local(fall_short_pos)
 		var c = pink if falls_short else purple
 		draw_line(Vector2(0, 0), v, c, 1.5, true)
 		draw_circle(v, 8, c)
-	
+
 	draw_collider($LeftCollider)
 	draw_collider($RightCollider)
 	draw_collider($LeftEdgeDetector)
 	draw_collider($RightEdgeDetector)
 
-	var path = player.path # the navigation path being followed
+	draw_rect(get_collision_rect($SearchArea/CollisionShape2D), light_grey, true) # filled
+
+	var path = []
+	for p in player.path_follow.path: # the navigation path being followed
+		path.append(p.pos)
+
 	for p in path:
 		draw_circle(to_local(p), 4, blue)
 	path = [player.position, player.position+t] + path
 	for i in range(1, len(path)):
 		draw_line(to_local(path[i-1]), to_local(path[i]), blue, 2, true)
-	
+
 func draw_collider(collider):
 	var shape = collider.get_node('CollisionShape2D').shape
 	var color = red if is_colliding(collider) else grey
 	draw_line(shape.a, shape.b, color, 3.0)
-	
+
+func get_collision_rect(r):
+	var pos = r.position
+	var e = r.shape.extents # shape.extents are actually half extents
+	return Rect2(pos.x-e.x, pos.y-e.y, e.x*2, e.y*2)
+
 func is_colliding(collider):
 	var bodies = collider.get_overlapping_bodies()
 	var count = len(bodies)

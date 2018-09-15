@@ -3,7 +3,6 @@
 [ext_resource path="res://Weapons/Projectiles/Flame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/flame.png" type="Texture" id=2]
 
-
 [sub_resource type="Gradient" id=1]
 
 offsets = PoolRealArray( 0, 0.1, 0.25, 0.5, 0.8, 1 )
@@ -74,12 +73,12 @@ custom_solver_bias = 0.0
 radius = 7.90632
 height = 26.5577
 
-[node name="Flame" type="RigidBody2D" index="0"]
+[node name="Flame" type="RigidBody2D"]
 
 z_index = -1
 input_pickable = false
-collision_layer = 6
-collision_mask = 6
+collision_layer = 8
+collision_mask = 14
 mode = 0
 mass = 0.01
 friction = 0.0

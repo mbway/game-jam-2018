@@ -81,14 +81,16 @@ tracks/0/keys = {
 "values": [ Vector2( 100, 0 ), Vector2( 100, -500 ) ]
 }
 
-[node name="Terminal" type="CanvasLayer"]
+[node name="Terminal" type="CanvasLayer" index="0"]
 
+pause_mode = 2
 layer = 2
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
 
 [node name="PanelContainer" type="PanelContainer" parent="." index="0"]
 
@@ -106,7 +108,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Rect", "Visibility" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" index="0"]
 
@@ -138,7 +139,7 @@ rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_mode = 2
 mouse_filter = 0
-mouse_default_cursor_shape = 0
+mouse_default_cursor_shape = 1
 size_flags_horizontal = 1
 size_flags_vertical = 3
 custom_fonts/bold_font = SubResource( 2 )
@@ -156,7 +157,6 @@ scroll_active = true
 scroll_following = true
 selection_enabled = true
 override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Focus", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer" index="1"]
 
@@ -171,7 +171,7 @@ rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
-mouse_default_cursor_shape = 1
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 6 )
@@ -183,7 +183,6 @@ caret_blink = false
 caret_blink_speed = 0.65
 caret_position = 0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Anchor", "Caret", "Margin", "Placeholder", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
@@ -197,6 +196,6 @@ anims/SlideUp = SubResource( 8 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[connection signal="text_entered" from="PanelContainer/VBoxContainer/LineEdit" to="." method="run"]
+[connection signal="text_entered" from="PanelContainer/VBoxContainer/LineEdit" to="." method="handle_line"]
 
 

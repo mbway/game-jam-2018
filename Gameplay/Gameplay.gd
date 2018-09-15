@@ -33,9 +33,9 @@ onready var debug_draw = preload('res://Utils/DebugDraw.gd').new()
 
 func _ready():
 	G.log('Game started: %s' % get_tree().get_current_scene().get_name())
-	
+
 	add_child(debug_draw)
-	
+
 	# store the game mode specific nodes away in a data structure and remove them from the tree for now
 	for n in $GameMode.get_children():
 		game_mode_nodes[n.name] = n
@@ -44,14 +44,14 @@ func _ready():
 		add_child(game_mode_data[n.name])
 
 	for p in G.player_data:
-		if p.control == G.KEYBOARD_CONTROL:
+		if p.control == G.Control.KEYBOARD:
 			keyboard_player = true
 		create_player(p)
 
 
 	set_game_mode(G.game_mode)
 	game_mode.setup(G.game_mode_details)
-	
+
 	_on_settings_changed()
 	G.settings.connect('settings_changed', self, '_on_settings_changed')
 
@@ -66,11 +66,11 @@ func set_game_mode(mode):
 
 func create_player(config):
 	var p = null
-	if config.control == G.KEYBOARD_CONTROL:
+	if config.control == G.Control.KEYBOARD:
 		p = keyboard_player_scene.instance()
-	elif config.control == G.GAMEPAD_CONTROL:
+	elif config.control == G.Control.GAMEPAD:
 		p = gamepad_player_scene.instance()
-	elif config.control == G.AI_CONTROL:
+	elif config.control == G.Control.AI:
 		p = AI_player_scene.instance()
 	var nav = null if not has_node('Nav') else $Nav # TODO: make mandatory once pathfinding is finished and applied to all maps
 	p.init(config, $Camera, $Bullets, nav)
@@ -81,22 +81,16 @@ func create_player(config):
 		var node_name = 'Player %d' % config.num
 		# only the interesting attributes
 		var attrs = ['current_weapon',
-					'weapon_angle',
+					'_weapon_angle',
 					'move_direction',
 					'fire_pressed',
 					'fire_held',
-					'last_jump_pressed_ms',
 					'jump_released',
 					'max_health',
 					'health',
-					'alive',
 					'invulnerable',
-					'velocity',
-					'last_jump_ms',
-					'was_on_floor',
-					'left_floor_ms',
-					'mid_air_jumps']
-		if config.control == G.KEYBOARD_CONTROL:
+					'velocity']
+		if config.control == G.Control.KEYBOARD:
 			attrs += ['left_pressed', 'right_pressed']
 		for attr in attrs:
 			$Watch.add_watch(node_name, p, attr)
@@ -106,6 +100,9 @@ func get_player(num):
 		if p.config.num == num:
 			return p
 	return null
+
+func get_players():
+	return $Players.get_children()
 
 func _on_settings_changed():
 	if G.settings.get('music'):
@@ -137,17 +134,17 @@ func _on_settings_changed():
 		add_child(w)
 	elif has_node('Watch'):
 		$Watch.queue_free()
-	
+
 	#TODO: remove check once Nav is compulsory
 	if has_node('Nav'):
 		$Nav.visible = G.settings.get('nav_visible')
 		if $Nav.visible:
 			$Nav.update() # redraw
-		
+
 	OS.set_window_fullscreen(G.settings.get('full_screen'))
-	
+
 	Engine.time_scale = G.settings.get('game_speed')
-	
+
 	# doesn't affect currently playing sounds apparently
 	# decibels using logarithmic scale, 0 would be infinitely loud, but is interpreted as 'the maximum audible volume without clipping'
 	# at around -60db sound is no longer audible

@@ -70,10 +70,10 @@ func _ready():
 
 	players = find_node('PlayerList')
 
-	input_methods.append({'type' : G.KEYBOARD_CONTROL, 'name' : 'Keyboard + Mouse'})
+	input_methods.append({'type' : G.Control.KEYBOARD, 'name' : 'Keyboard + Mouse'})
 	for g in Input.get_connected_joypads():
-		input_methods.append({'type' : G.GAMEPAD_CONTROL, 'index' : g, 'name' : 'Gamepad %d' % g})
-	input_methods.append({'type' : G.AI_CONTROL, 'name' : 'AI'})
+		input_methods.append({'type' : G.Control.GAMEPAD, 'index' : g, 'name' : 'Gamepad %d' % g})
+	input_methods.append({'type' : G.Control.AI, 'name' : 'AI'})
 
 	# add a player for each non-AI input method
 	for i in range(len(input_methods) - 1):
@@ -111,7 +111,7 @@ func _on_StartButton_pressed():
 
 		var selected_input = input_methods[p.find_node('ControlOption').selected]
 		config.control = selected_input['type']
-		if config.control == G.GAMEPAD_CONTROL:
+		if config.control == G.Control.GAMEPAD:
 			config.gamepad_id = selected_input['index']
 
 		G.player_data.append(config)

@@ -3,7 +3,6 @@
 [ext_resource path="res://Weapons/Projectiles/Laser.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/laser/laser_1.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -47,7 +46,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = -1.0
 angular_damp = -1.0
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
 audio_bus_override = false
 audio_bus_name = "Master"

@@ -38,7 +38,7 @@ func _ready():
 	if not Engine.editor_hint: # in the game
 		visible = false
 		# can cache because the graph won't change during gameplay
-		_astar = get_astar()
+		_astar = _get_astar()
 
 # only called after update() is called, since otherwise the content is static
 func _draw():
@@ -213,7 +213,7 @@ func remove_node(index):
 
 # build an AStar object from the graph
 # note: Astar uses Vector3 nodes
-func get_astar():
+func _get_astar():
 	var astar = AStar.new()
 	for i in range(nodes.size()):
 		var n = nodes[i]
@@ -271,12 +271,22 @@ func _project_and_add(point, astar):
 	#TODO: these have to be unidirectional if the edges are otherwise paths can be wrong
 	# there seems to be a bug with AStar which crashes the engine sometimes if
 	# these edges are not bidirectional, but this shouldn't be a problem.
+
+	#TODO: there is a bug with godot causing a crash with signal 11 (segfault) when unidirectional edges are added. Check after 3.1 is released and if the bug still persists then look into fixing it.
+	#if e.ab and e.ba:
 	astar.connect_points(e.a, id, true)
 	astar.connect_points(e.b, id, true)
+	#elif e.ab:
+	#	astar.connect_points(e.a, id, false)
+	#	astar.connect_points(id, e.b, false)
+	#elif e.ba:
+	#	astar.connect_points(e.b, id, false)
+	#	astar.connect_points(id, e.a, false)
 
 	return [id, closest_e]
 
 # from and to are 2D vectors
+# returns a list of {'pos':..., 'id':...}. The ids of some items may be null because they were only added temporarily
 func get_path(from, to):
 	var res = _project_and_add(from, _astar)
 	var from_id = res[0]
@@ -296,12 +306,22 @@ func get_path(from, to):
 	if from_edge == to_edge:
 		# this could probably be made into a special case where the path is just
 		# [from, to], but just in case there is an edge case, AStar is still used.
-		_astar.connect_points(from_id, to_id)
+		_astar.connect_points(from_id, to_id, true) # bidirectional
 
 	var path = [] # not a pool array because some functions don't exist and the path shouldn't be too long anyway
-	var path3D = _astar.get_point_path(from_id, to_id)
-	for p in path3D:
-		path.append(Vector2(p.x, p.y))
+
+	var pathIDs = _astar.get_id_path(from_id, to_id)
+	for p in pathIDs:
+		if p == from_id or p == to_id:
+			var v = _astar.get_point_position(p) # Vector3
+			path.append({'pos': Vector2(v.x, v.y), 'id': null})
+		else:
+			path.append({'pos': nodes[p], 'id': p})
+
+	#var path3D = _astar.get_point_path(from_id, to_id)
+	#for p in path3D:
+		#path.append(Vector2(p.x, p.y))
+
 	_astar.remove_point(from_id)
 	_astar.remove_point(to_id)
 

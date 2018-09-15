@@ -13,7 +13,7 @@ var snap_grid_size = 8
 
 func _enter_tree():
 	# init plugin
-	add_custom_type('Graph2D', 'Node2D', preload('Graph2D.gd'), preload('icon.png'))
+	add_custom_type('Graph2D', 'Node2D', preload('Graph2D.gd'), preload('Assets/icon.png'))
 
 	toolbar = preload('GraphEditToolbar.tscn').instance()
 	toolbar.get_node('AddNodes').connect('pressed', self, 'on_add_nodes')
@@ -43,7 +43,8 @@ func make_visible(visible):
 	else:
 		set_physics_process(false)
 		toolbar.hide()
-		if editing_node != null:
+		# weakref to detect whether the node has been freed
+		if editing_node != null and weakref(editing_node).get_ref() != null:
 			editing_node.clear_editing()
 			editing_node = null # new node selected
 

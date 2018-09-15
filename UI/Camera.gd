@@ -12,7 +12,7 @@ var shake_enabled = true
 # whether the user moves the camera manually with the arrow keys and scroll wheel
 var free_camera = false
 var free_vel = Vector2(0, 0) # when not following the player, the velocity to move the camera by
-const free_speed = 1000
+const free_speed = 16
 const free_zoom_speed = 0.1
 var free_following = true # when in free_camera mode, whether to follow the player
 
@@ -38,7 +38,8 @@ func shake(amount):
 
 func _physics_process(delta):
 	if free_camera and not free_following:
-		global_position += free_vel * delta
+		# no multiplication by delta because the free camera should have the same speed regardless of the game speed
+		global_position += free_vel
 		return
 
 	var following = len(follow)
@@ -73,7 +74,22 @@ func _physics_process(delta):
 		zoom.y = z
 		set_global_position(avg)
 
+# can't use _unhandled_input otherwise won't receive mouse events when over a Control node
 func _input(event):
+	if not free_camera:
+		return
+
+	if event is InputEventMouseButton:
+		var b = event.button_index
+		if event.pressed:
+			if b == BUTTON_WHEEL_UP:
+				zoom.x -= free_zoom_speed
+				zoom.y -= free_zoom_speed
+			elif b == BUTTON_WHEEL_DOWN:
+				zoom.x += free_zoom_speed
+				zoom.y += free_zoom_speed
+
+func _unhandled_input(event):
 	if not free_camera:
 		return
 
@@ -94,15 +110,6 @@ func _input(event):
 			if k == KEY_F:
 				free_following = not free_following
 
-	elif event is InputEventMouseButton:
-		var b = event.button_index
-		if event.pressed:
-			if b == BUTTON_WHEEL_UP:
-				zoom.x -= free_zoom_speed
-				zoom.y -= free_zoom_speed
-			elif b == BUTTON_WHEEL_DOWN:
-				zoom.x += free_zoom_speed
-				zoom.y += free_zoom_speed
 
 func remove_follow(node):
 	follow.erase(node)

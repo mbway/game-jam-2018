@@ -100,7 +100,7 @@ _sections_unfolded = [ "Drawing", "Time", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
-position = Vector2( 0, 2.68221e-007 )
+position = Vector2( 0, 2.68221e-07 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]

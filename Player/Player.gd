@@ -29,7 +29,8 @@ var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
 
 ## INPUT VARIABLES ##
 # these variables are set using whatever method is in control of the player
-var weapon_angle = 0 # TODO
+var _weapon_angle = 0 # set with set_weapon_angle()
+var auto_aim = null # only active when an instance of res://Player/AutoAim.gd
 # a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
 # with analog input this value may be a non-integer
 var move_direction = 0
@@ -65,14 +66,16 @@ func init(config, camera, bullet_parent, nav):
 	self.nav = nav
 
 func _ready():
+	if config.control == G.Control.GAMEPAD:# or config.control == G.Control.KEYBOARD:
+		auto_aim = preload('res://Player/AutoAim.gd').new(self)
 	hide()
-
 
 func _process(delta):
 	if is_alive():
 		inventory_lock.lock()
 		if current_weapon != null:
-			current_weapon.set_rotation(weapon_angle)
+			var angle = _weapon_angle if auto_aim == null else auto_aim.auto_aim(_weapon_angle)
+			current_weapon.set_rotation(angle)
 
 			# gun rotation
 			# the small margin is to prevent the gun from flickering when aiming directly up
@@ -101,7 +104,7 @@ func _process(delta):
 	else: # dead
 		$AnimatedSprite.play('death')
 
-	var dd = G.get_scene().debug_draw
+	#var dd = G.get_scene().debug_draw
 	#dd.add_vector(velocity, position, INF, 'vel_%s' % config.num)
 
 func _physics_process(delta):
@@ -129,6 +132,7 @@ func _physics_process(delta):
 				knockback.y = clamp(knockback.y, -INF, 0) # sticking to the floor is handled by the main velocity, allow upwards velocity
 			else:
 				knockback += Vector2(0, jump_physics.GRAVITY) * delta
+			knockback = Vector2(clamp(knockback.x, -MAX_SPEED, MAX_SPEED), clamp(knockback.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED))
 			knockback = move_and_slide(knockback, UP)
 			var dd = G.get_scene().debug_draw
 			dd.add_vector(knockback, position, INF, 'knock_%s' % config.num)
@@ -138,6 +142,10 @@ func _physics_process(delta):
 		# dead
 		if on_floor:
 			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
+			velocity.y = 100 # apply a small downwards force to remain on_floor
+		else:
+			velocity.y += jump_physics.GRAVITY * delta
+			velocity.y = clamp(velocity.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED)
 
 	velocity = move_and_slide(velocity, UP)
 
@@ -195,19 +203,46 @@ func select_next_weapon(offset):
 	if current_weapon != null:
 		emit_signal('weapon_selected', current_weapon.name)
 
+# pos is relative
+func aim_at(pos):
+	# maths copied from power defence
+	if current_weapon != null:
+		var gun_pos = current_weapon.get_position()
+		var d = (pos - gun_pos).length()
+		if abs(d) > 4: # pixels
+			var angle = pos.angle_to_point(gun_pos)
+			var muzzle_pos = current_weapon.get_node('Muzzle').get_position()
+			var o = (muzzle_pos - gun_pos).y
+			# cannot accurately aim at something closer than the muzzle
+			if d > muzzle_pos.length():
+				var angle_correction = asin(o/d)
+				if abs(angle+angle_correction) > PI/2:
+					angle += angle_correction
+				else:
+					angle -= angle_correction
+			return angle
+	return pos.angle()
+
+func set_weapon_angle(angle):
+	# _weapon_angle should always be set atomically, ie use a temporary variable
+	# and set once at the end otherwise the aiming becomes jittery. This
+	# function should deter direct access when writing (reading is OK).
+	_weapon_angle = angle
+
+
 func take_damage(damage, knockback):
 	if invulnerable or is_dead():
 		return
-	var new_health = max(health - damage, 0)
+	var old_health = health
 	emit_signal('hit')
-	_set_health(new_health)
+	_set_health(health - damage)
 
 	if self.knockback == null:
 		self.knockback = knockback
 	else:
 		self.knockback += knockback
 
-	if is_alive() and health <= 0:
+	if old_health > 0 and health <= 0:
 		die()
 
 func is_alive():
@@ -230,18 +265,32 @@ func die():
 	if invulnerable:
 		return
 	_set_health(0)
+	collision_layer = 0 # no longer on the players layer
+	collision_mask = G.Layers.MAP # only collide with the map, not other players
+	$BulletCollider.collision_layer = 0 # no longer collide with projectiles
 	emit_signal('die')
 
 #TODO: this should probably be handled in the gameplay code
 func spawn(position):
-	show()
 	_set_invulnerable(true)
 	self.position = position
+	collision_layer = G.Layers.PLAYERS
+	collision_mask = G.Layers.PLAYERS | G.Layers.MAP
+	$BulletCollider.collision_layer = G.Layers.BULLET_COLLIDERS
 	_set_health(max_health)
 
 	_clear_inventory()
 	equip_weapon(G.pickups['Pistol'].scene.instance())
 	select_weapon('Pistol')
+	show()
+
+func teleport(location):
+	global_position = location
+	velocity = Vector2(0, 0)
+	move_direction = 0
+	knockback = null
+	jump_pressed = false
+	jump_physics.reset()
 
 
 func delayed_spawn(position):
@@ -254,5 +303,6 @@ func _on_InvulnTimer_timeout():
 
 func _on_weapon_fired(bullets):
 	camera.shake(current_weapon.screen_shake)
-	if config.control == G.GAMEPAD_CONTROL:
+	if config.control == G.Control.GAMEPAD:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
+

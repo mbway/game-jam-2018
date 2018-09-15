@@ -11,6 +11,7 @@
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
 # TODO
+- upgrade the old maps in OldMaps then remove
 - with the new jumping mechanism, using Engine.time_scale, can do bullet time :D
 - move away from using OS.get_tick_msec() to allow the game to be slowed down for debugging. accumulate the given delta values instead
 - need a better name than 'power offence'
@@ -78,6 +79,7 @@
 - environmental hazards
     - toxic waste (green with water splashing effect when walking on)
     - automatic turrets
+- aim assist for gamepad players
 
 
 # Extension Features
@@ -100,4 +102,5 @@
 - front/back flip when double jumping like raze
 - split screen. possible now that camera isn't child of player
 - a short-range teleport ability/weapon would be cool...
+- fog of war: can only see in the line of sight of the player, so another player on a platform above you wouldn't be visible. Could combine with 2D lighting effects.
 

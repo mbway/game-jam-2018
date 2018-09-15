@@ -4,11 +4,11 @@
 [ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/graph-node/Graph2D.gd" type="Script" id=4]
-[ext_resource path="res://addons/graph-node/icon.png" type="Texture" id=5]
+[ext_resource path="res://addons/graph-node/Assets/icon.png" type="Texture" id=5]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=7]
 
-[node name="AIStressTest" type="Node2D" index="0"]
+[node name="AIStressTest" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
@@ -17,7 +17,7 @@ _sections_unfolded = [ "Z Index" ]
 
 [node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 0, 3500 )
+position = Vector2( 0, 4000 )
 
 [node name="Nav" type="Node2D" parent="." index="2"]
 
@@ -25,8 +25,8 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-nodes = PoolVector2Array( 3152, 1800, 4144, 1800, 4368, 1640, 4832, 1640, 4416, 1640, 4144, 1288, 3920, 1288, 3280, 1288, 3048, 1288, 4048, 1800, 3752, 1800, 4416, 1288, 5184, 1352, 5184, 904, 5256, 904, 5256, 520, 5176, 520, 5488, 432, 5720, 432, 5440, 904, 3024, 2048, 2808, 2048, 2328, 1800, 2088, 1800, 1560, 2056, 1328, 2056, 2096, 2376, 2384, 2568, 2448, 2784, 3152, 2784, 3504, 2776, 4216, 2776, 3336, 2944, 3440, 2944, 3216, 2944, 3424, 1800, 2376, 2376, 2432, 2568, 2288, 2376, 2200, 2376 )
-edges = [ [ 1, 2, true, true ], [ 2, 4, true, true ], [ 4, 3, true, true ], [ 8, 7, true, true ], [ 7, 6, true, true ], [ 6, 5, true, true ], [ 6, 10, true, false ], [ 6, 9, true, false ], [ 10, 9, true, true ], [ 9, 1, true, true ], [ 5, 9, true, false ], [ 4, 11, true, true ], [ 5, 11, true, true ], [ 17, 18, true, true ], [ 15, 16, true, true ], [ 15, 14, true, true ], [ 14, 13, true, true ], [ 14, 19, true, true ], [ 16, 17, true, true ], [ 12, 13, true, true ], [ 17, 19, true, false ], [ 17, 14, true, false ], [ 0, 20, true, true ], [ 20, 21, true, true ], [ 21, 22, true, true ], [ 22, 23, true, true ], [ 23, 24, true, true ], [ 24, 25, true, true ], [ 24, 26, true, true ], [ 27, 28, true, false ], [ 28, 29, true, true ], [ 30, 31, true, true ], [ 29, 32, true, true ], [ 32, 30, true, true ], [ 32, 33, true, true ], [ 32, 34, true, true ], [ 29, 34, true, true ], [ 33, 30, true, true ], [ 3, 12, true, true ], [ 10, 35, true, true ], [ 35, 0, true, true ], [ 7, 35, true, false ], [ 6, 35, true, false ], [ 20, 29, true, false ], [ 21, 28, true, false ], [ 27, 36, true, true ], [ 5, 14, false, true ], [ 16, 5, true, false ], [ 28, 37, true, true ], [ 37, 27, true, true ], [ 21, 38, true, false ], [ 38, 26, true, true ], [ 38, 36, true, true ], [ 38, 27, true, false ], [ 38, 39, true, false ], [ 39, 21, true, false ] ]
+nodes = PoolVector2Array( 3152, 1800, 4144, 1800, 4368, 1640, 4832, 1640, 4416, 1640, 4144, 1288, 3920, 1288, 3280, 1288, 3048, 1288, 4048, 1800, 3752, 1800, 4368, 1288, 5184, 1352, 5184, 968, 5240, 968, 5240, 584, 5200, 584, 5480, 520, 5720, 520, 5448, 968, 3024, 2048, 2808, 2048, 2328, 1800, 2088, 1800, 1560, 2056, 1328, 2056, 2096, 2376, 2384, 2568, 2432, 2792, 3152, 2784, 3504, 2776, 4216, 2776, 3336, 2944, 3440, 2944, 3216, 2944, 3424, 1800, 2368, 2376, 2320, 2376, 4368, 3488, 4592, 3488, 4360, 2216, 4496, 2056, 4688, 2056, 4776, 2216, 5624, 2216, 4416, 1288, 2424, 2568, 3336, 2824 )
+edges = [ [ 1, 2, true, true ], [ 2, 4, true, true ], [ 4, 3, true, true ], [ 8, 7, true, true ], [ 7, 6, true, true ], [ 6, 5, true, true ], [ 6, 10, true, false ], [ 6, 9, true, false ], [ 10, 9, true, true ], [ 9, 1, true, true ], [ 5, 9, true, false ], [ 4, 11, false, true ], [ 5, 11, true, true ], [ 17, 18, true, true ], [ 15, 16, true, true ], [ 15, 14, true, true ], [ 14, 13, true, true ], [ 14, 19, true, true ], [ 16, 17, true, true ], [ 12, 13, true, true ], [ 17, 19, true, false ], [ 17, 14, true, false ], [ 0, 20, true, true ], [ 20, 21, true, true ], [ 21, 22, true, true ], [ 22, 23, true, true ], [ 23, 24, true, true ], [ 24, 25, true, true ], [ 24, 26, true, true ], [ 28, 29, true, true ], [ 30, 31, true, true ], [ 29, 32, true, true ], [ 32, 30, true, true ], [ 32, 33, true, true ], [ 32, 34, true, true ], [ 29, 34, true, true ], [ 33, 30, true, true ], [ 3, 12, true, true ], [ 10, 35, true, true ], [ 35, 0, true, true ], [ 7, 35, true, false ], [ 20, 29, true, false ], [ 21, 28, true, false ], [ 27, 36, true, false ], [ 5, 14, false, true ], [ 16, 5, true, false ], [ 21, 37, true, true ], [ 37, 26, true, true ], [ 37, 36, false, true ], [ 37, 27, true, false ], [ 31, 38, true, false ], [ 38, 39, true, true ], [ 1, 40, true, false ], [ 40, 31, true, false ], [ 40, 41, true, true ], [ 41, 42, true, true ], [ 43, 40, true, true ], [ 43, 44, true, true ], [ 45, 4, true, true ], [ 45, 11, true, true ], [ 42, 43, true, true ], [ 28, 46, true, false ], [ 46, 27, true, false ], [ 27, 28, true, false ], [ 37, 28, true, false ], [ 29, 47, true, true ], [ 47, 30, true, true ] ]
 
 [node name="Bullets" type="Node2D" parent="." index="3"]
 
@@ -174,6 +174,30 @@ size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "this jump short enough but obstructed"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+[node name="Label6" type="Label" parent="Text" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4310.0
+margin_top = 3470.0
+margin_right = 4651.0
+margin_bottom = 3500.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "this is a dead end. Death is the only escape!"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0

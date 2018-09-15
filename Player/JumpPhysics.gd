@@ -22,6 +22,11 @@ const EDGE_JUMP_TOLERANCE = 100 / 1000.0 # (seconds) the time after leaving the 
 const MAX_MID_AIR_JUMPS = 1
 var mid_air_jumps = MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor.
 
+func reset():
+	state = State.FLOOR
+	time_in_state = 0
+	vel = 0
+	mid_air_jumps = MAX_MID_AIR_JUMPS
 
 func advance_time_step(last_vel, delta, jump_pressed, on_floor):
 	vel = last_vel
@@ -98,7 +103,7 @@ func transition(to):
 		mid_air_jumps = MAX_MID_AIR_JUMPS
 	elif from == State.JUMPING and to == State.FALLING:
 		vel = clamp(vel, -RELEASE_SPEED, MAX_SPEED)
-		
+
 
 	# enter state actions
 	if to == State.FLOOR:
@@ -116,13 +121,6 @@ func transition(to):
 	#if from == State.PREEMPTIVE_JUMP and to == State.JUMPING:
 		#print('preemptive jump')
 
-# whether releasing the jump button would 
-func is_past_jump_peak():
-	if state == State.JUMPING:
-		return bool(vel > -RELEASE_SPEED) # negative is upwards
-	else:
-		return true # question doesn't make sense in some states but this is still a somewhat sensible answer
-
 func state_name(state):
 	if state == State.FLOOR:
 		return 'FLOOR'
@@ -138,4 +136,5 @@ func state_name(state):
 		return 'PREEMPTIVE_JUMP'
 	else:
 		return 'invalid state'
+
 
