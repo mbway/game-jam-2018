@@ -89,6 +89,9 @@ var pickups = {
 	'ClassicRocketLauncher': {
 		'scene':   preload('res://Weapons/ClassicRocketLauncher.tscn'),
 		'texture': preload('res://Assets/weapons/rocketlauncher.png')},
+	'MineLauncher': {
+		'scene':   preload('res://Weapons/MineLauncher.tscn'),
+		'texture': preload('res://Assets/weapons/Mine Launcher/Mine Launcher1.png')},
 }
 
 func log(txt):
