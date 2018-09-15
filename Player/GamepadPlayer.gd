@@ -5,8 +5,8 @@ var aim_direction = Vector2(0, 0)
 #TODO: ask Adam to playtest and decide what gamepad controls feel best
 var jump_buttons = [JOY_XBOX_A, JOY_L, JOY_R2]
 var auto_fire = true # aim just by looking
-var auto_fire_threshold = 0.9
 var auto_fire_cooldown = 0.2 # auto fire cooldown time
+const FULL_ON_THRESHOLD = 0.9 # an axis value greater than this is considered 'fully pressed' in that direction
 
 #TODO: probably want some kind of key repeat on next/prev weapon to cycle through lots of them
 
@@ -21,9 +21,9 @@ func _unhandled_input(event):
 			if jump_buttons.has(b):
 				jump_pressed = true
 			elif b == JOY_XBOX_X:
-				select_next_weapon(1)
+				inventory.cycle_selection(1)
 			elif b == JOY_XBOX_Y:
-				select_next_weapon(-1)
+				inventory.cycle_selection(-1)
 			elif not auto_fire and b == JOY_R:
 				fire_pressed = true
 
@@ -44,6 +44,10 @@ func _unhandled_input(event):
 			move_direction = event.axis_value
 			if abs(move_direction) < G.JOY_DEADZONE:
 				move_direction = 0
+		elif event.axis == G.JoyAxis.MOVE_Y:
+			if event.axis_value > FULL_ON_THRESHOLD:
+				try_fall_through()
+
 
 
 func update_weapon_angle():
@@ -57,15 +61,16 @@ func handle_auto_fire():
 	if not auto_fire:
 		return
 
-	if current_weapon != null and aim_direction.length() > auto_fire_threshold:
+	var current_weapon = inventory.lock_current()
+	if current_weapon != null and aim_direction.length() > FULL_ON_THRESHOLD:
 		if current_weapon.auto_fire or not fire_held and current_weapon.can_shoot:
 			fire_pressed = true
-			#$AutoFireReset.set_wait_time(current_weapon.cooldown_timer.get_wait_time() * auto_fire_rate)
 			$AutoFireReset.set_wait_time(auto_fire_cooldown)
 			$AutoFireReset.start()
 	else:
 		fire_pressed = false
 		fire_held = false
+	inventory.unlock_current()
 
 
 

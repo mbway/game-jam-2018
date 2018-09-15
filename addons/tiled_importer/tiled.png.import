@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tiled.png-0144d33cac1235d2f1d6de05a3ae94db.stex"
+path="res://.import/tiled.png-ef727fc4b3b4a5e804e2f623484b6474.stex"
 
 [deps]
 
-source_file="res://addons/godot-tiled-importer/tiled.png"
-dest_files=[ "res://.import/tiled.png-0144d33cac1235d2f1d6de05a3ae94db.stex" ]
+source_file="res://addons/tiled_importer/tiled.png"
+dest_files=[ "res://.import/tiled.png-ef727fc4b3b4a5e804e2f623484b6474.stex" ]
 
 [params]
 

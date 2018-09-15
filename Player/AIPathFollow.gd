@@ -24,7 +24,9 @@ var jump_release_delay = 0.02
 var jump_release_timer = null
 
 # node platforms
-var platforms = null
+var platforms = null # the tops of collision rects of the map. List of [left_x, right_x, y, one_way]
+# list of indices into platforms (or null) corresponding to the nodes of nav.
+# ie node_platforms[n] = index of the platform node n is above, or null if it is not above any.
 var node_platforms = null
 const platform_search_distance = 64
 
@@ -44,7 +46,7 @@ func get_target_relative():
 # 'close' is defined based on how close the player should be to the target before moving on to the next.
 # fine control is required in x because moving on early could mean the player is not yet standing on a platform.
 func target_close(t):
-	return abs(t.x) < width / 2 and (-height < t.y and t.y < 1.5*height)
+	return abs(t.x) < width / 2 and (-height/2 < t.y and t.y < 1.5*height)
 
 
 func _set_target(t):
@@ -68,7 +70,7 @@ func process(delta):
 	var t = get_target_relative() # vector from the current position to the target
 	var state = player.jump_physics.state
 	var State = player.jump_physics.State
-	var target_above = bool(t.y < -height)
+	var target_above = bool(t.y < -height/2)
 	var target_below = bool(t.y > height)
 
 	# check whether to move onto the next target
@@ -134,6 +136,7 @@ func process(delta):
 
 	if _target == null:
 		# horizontal movement control (above) still important to come to rest, but jumping is not necessary
+		player.jump_pressed = false
 		return
 
 
@@ -155,10 +158,17 @@ func process(delta):
 				# at the edge of a platform and don't want to just fall off because that wouldn't reach the target
 				reason = 'about to fall'
 				player.jump_pressed = true
-			elif abs(t.x) < 2*width and target_above:
-				# target is (almost directly) above
-				reason = 'target above'
-				player.jump_pressed = true
+			elif abs(t.x) < 2*width: # either above or below
+				if target_above:
+					# target is (almost directly) above
+					reason = 'target above'
+					player.jump_pressed = true
+				elif target_below:
+					var platform = _closest_platform_under(player.global_position)
+					if platform != -1 and platforms[platform][3]: # one-way
+						# target is (almost directly) below a one way platform
+						reason = 'target below one-way platform'
+						player.try_fall_through()
 
 	elif state == State.EDGE_PLATFORM or state == State.PREEMPTIVE_JUMP:
 		# don't do anything in these states.
@@ -236,7 +246,7 @@ func can_fall_to_target(buffer=width/2):
 	if rel_target.y <= 0:
 		# target is above, so must fall short unless the player is over the same platform as the target
 		# (the target may only be slightly above the player)
-		var fall_platform = _closest_platform_under(player.global_position, platform_search_distance)
+		var fall_platform = _closest_platform_under(player.global_position)
 		var can_reach = fall_platform != -1 and fall_platform == get_target_platform(_target)
 		#print('can reach (target above but can reach platform) = %s' % can_reach)
 		return can_reach
@@ -292,28 +302,11 @@ func can_fall_to_target(buffer=width/2):
 	else:
 		# the platform under the fall location, if it is the same as the target
 		# then the player can still reach it by falling (then walking after landing).
-		var fall_platform = _closest_platform_under(pos, platform_search_distance)
+		var fall_platform = _closest_platform_under(pos)
 		can_reach = fall_platform != -1 and fall_platform == get_target_platform(_target)
 		#print('can reach (falls short but can reach platform?) = %s (%s =?= %s)' % [can_reach, fall_platform, get_target_platform(_target)])
 		return can_reach
 
-
-
-# cast a ray of the given length and position (default: current position)
-# returns null if no intersection, and [position, object] if there was.
-# the test is performed on layer 1 with this player as an exception, so the ray may hit another player or the map
-func cast_ray_down(length, pos=null):
-	if pos == null:
-		pos = player.global_position + Vector2(0, 32) # the player is 64px tall, positioned at 0,0
-	if length <= 0:
-		return null
-	var space_state = player.get_world_2d().direct_space_state
-	# cast in layer 1 (Player-Map layer) with this player as an exception. Only collides with other players and the map
-	var result = space_state.intersect_ray(pos, pos + Vector2(0, length), [self], 1)
-	if result.empty():
-		return null
-	else:
-		return [result.position, result.collider]
 
 #TODO: prevent the jolt which occurs when the waypoint changes
 
@@ -322,11 +315,11 @@ func set_waypoint(waypoint):
 	if player.nav == null:#TODO: remove check once made compulsory
 		return
 	if not player.is_on_floor():
-		var collision = cast_ray_down(1000)
+		var collision = player.cast_ray_down(1000)
 		if collision == null:
 			return false # didn't set because it wouldn't be safe (the player might fall and die)
 		else:
-			path = player.nav.get_path(collision[0], waypoint)
+			path = player.nav.get_path(collision.pos, waypoint)
 	else:
 		path = player.nav.get_path(player.position, waypoint)
 	_set_target(null)
@@ -340,14 +333,22 @@ func set_waypoint(waypoint):
 func get_target_platform(t):
 	if t == null:
 		return -1
-	return _closest_platform_under(t.pos, 64) if t.id == null else node_platforms[t.id]
+	return _closest_platform_under(t.pos) if t.id == null else node_platforms[t.id]
 
 func _get_platforms():
 	var platforms = []
-	for c in G.get_scene().get_node('Map/Collision').get_children(): # list of StaticBody2D
+	var map = G.get_scene().get_node('Map')
+	for c in map.get_node('Collision').get_children(): # list of StaticBody2D
 		var pos = c.position
 		var half_extents = c.get_node('CollisionShape2D').shape.extents
-		platforms.append([pos.x, pos.x+2*half_extents.x, pos.y]) # x_left, x_right, y
+		platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, false]) # left_x, right_x, y, one_way
+
+	var one_way = map.get_node('OneWayCollision')
+	if one_way != null:
+		for c in one_way.get_children(): # list of StaticBody2D
+			var pos = c.position
+			var half_extents = c.get_node('CollisionShape2D').shape.extents
+			platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, true]) # left_x, right_x, y, one_way
 
 	#var dd = G.get_scene().debug_draw
 	#for p in platforms: dd.add_line_segment(Vector2(p[0], p[2]), Vector2(p[1], p[2]))
@@ -358,7 +359,7 @@ func _get_platforms():
 func _get_node_platforms():
 	var node_platforms = []
 	for n in player.nav.nodes:
-		node_platforms.append(_closest_platform_under(n, platform_search_distance))
+		node_platforms.append(_closest_platform_under(n))
 
 	for i in range(player.nav.nodes.size()):
 		if node_platforms[i] != -1:
@@ -366,17 +367,18 @@ func _get_node_platforms():
 			var p = platforms[node_platforms[i]]
 	return node_platforms
 
-func _closest_platform_under(point, max_distance):
-	var platform = -1
-	var distance = INF
+# returns the index of the closest platform under the given point
+func _closest_platform_under(point, max_distance=platform_search_distance):
+	var platform_index = -1
+	var distance = max_distance
 	for pi in range(platforms.size()):
 		var p = platforms[pi]
 		if p[0] <= point.x and point.x <= p[1]: # above or below the platform
 			var height = p[2] - point.y
 			if height >= 0 and height <= distance:
-				platform = pi
+				platform_index = pi
 				distance = height
-	return platform if distance <= max_distance else -1
+	return platform_index
 
 
 

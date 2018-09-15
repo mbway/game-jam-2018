@@ -243,7 +243,7 @@ func handle_command(input):
 	elif cmd == 'players':
 		var Players = scene.get_node('Players').get_children()
 		var t = []
-		t.append(['Num', 'Name', 'Team', 'Control Scheme', 'Health', 'Invulnerable'])
+		t.append(['Num', 'Name', 'Team', 'Control Scheme', 'Health', 'Invulnerable', 'position'])
 		for p in Players:
 			t.append([
 				str(p.config.num),
@@ -251,7 +251,8 @@ func handle_command(input):
 				str(p.config.team),
 				p.config.get_control_type_string(),
 				'%s/%s' % [p.health, p.max_health],
-				color_bool(p.invulnerable)
+				color_bool(p.invulnerable),
+				'%s,%s' % [round(p.position.x), round(p.position.y)]
 			])
 		display_table(t, true, true)
 
@@ -265,9 +266,9 @@ func handle_command(input):
 			log_error('pickup "%s" not found' % name)
 		elif name == 'all':
 			for p in G.pickups.values():
-				player.equip_weapon(p.scene.instance())
+				player.inventory.equip(p.scene.instance())
 		else:
-			player.equip_weapon(G.pickups[name].scene.instance())
+			player.inventory.equip(G.pickups[name].scene.instance())
 
 	elif cmd == 'player_set':
 		var player = args['player_num']

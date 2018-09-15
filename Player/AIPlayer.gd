@@ -1,7 +1,7 @@
 extends "res://Player/Player.gd"
 
 enum States { EXPLORE, MANUAL }
-var state = States.EXPLORE#States.MANUAL
+var state = States.MANUAL
 
 var known_players = []
 var target = null
@@ -23,12 +23,8 @@ func _physics_process(delta):
 		target = known_players[0]
 
 	if target != null:
-		set_weapon_angle(aim_at(to_local(target.global_position)))
+		set_weapon_angle(weapon_aim_angle(to_local(target.global_position)))
 		#current_weapon.try_shoot(false)
-
-
-
-
 
 
 

@@ -13,19 +13,14 @@ onready var G = globals
 signal die
 signal hit
 signal invuln_changed
-signal weapon_equiped(node)
-signal weapon_unequiped(name)
-signal weapon_selected(node)
 
 
 ## VARIABLES ##
 var config # globals.PlayerConfig
+
 var camera = null # used for mouse input and camera shake
 var bullet_parent = null # the node to spawn the bullets under
 var nav = null # the navigation node for the map
-
-var current_weapon = null
-var inventory_lock = Mutex.new() # protects current_weapon and $Inventory
 
 ## INPUT VARIABLES ##
 # these variables are set using whatever method is in control of the player
@@ -58,6 +53,12 @@ var knockback = null # knockback velocity vector
 var jump_pressed = false
 onready var jump_physics = preload('JumpPhysics.gd').new()
 
+onready var inventory = $Inventory
+
+# to fall through a one-way platform, a temporary collision exception is added.
+# After OneWayPlatformTimer expires the exception is removed.
+var one_way_platform = null
+
 
 func init(config, camera, bullet_parent, nav):
 	self.config = config
@@ -72,7 +73,7 @@ func _ready():
 
 func _process(delta):
 	if is_alive():
-		inventory_lock.lock()
+		var current_weapon = inventory.lock_current() # prevent current_weapon from changing until we are done
 		if current_weapon != null:
 			var angle = _weapon_angle if auto_aim == null else auto_aim.auto_aim(_weapon_angle)
 			current_weapon.set_rotation(angle)
@@ -87,7 +88,7 @@ func _process(delta):
 			if fire_pressed:
 				current_weapon.try_shoot(fire_held)
 				fire_held = true
-		inventory_lock.unlock()
+		inventory.unlock_current()
 
 
 		# play the appropriate animation
@@ -134,8 +135,8 @@ func _physics_process(delta):
 				knockback += Vector2(0, jump_physics.GRAVITY) * delta
 			knockback = Vector2(clamp(knockback.x, -MAX_SPEED, MAX_SPEED), clamp(knockback.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED))
 			knockback = move_and_slide(knockback, UP)
-			var dd = G.get_scene().debug_draw
-			dd.add_vector(knockback, position, INF, 'knock_%s' % config.num)
+			#var dd = G.get_scene().debug_draw
+			#dd.add_vector(knockback, position, INF, 'knock_%s' % config.num)
 			if knockback.length() < 100:
 				knockback = null
 	else:
@@ -150,67 +151,18 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, UP)
 
 
-func _clear_inventory():
-	inventory_lock.lock()
-	current_weapon = null
-	for w in $Inventory.get_children():
-		emit_signal('weapon_unequiped', w.name)
-		w.free() # queue_free here causes crashes
-	inventory_lock.unlock()
-
-func equip_weapon(gun):
-	inventory_lock.lock()
-	if $Inventory.has_node(gun.name):
-		G.log_err('player already has weapon: %s' % gun.name)
-	else:
-		gun.setup(self, bullet_parent)
-		gun.connect('fired', self, '_on_weapon_fired')
-		$Inventory.add_child(gun)
-		emit_signal('weapon_equiped', gun)
-	inventory_lock.unlock()
-
-func select_weapon(name):
-	if is_dead():
-		return
-	inventory_lock.lock()
-	if current_weapon != null:
-		current_weapon.set_active(false)
-	elif $Inventory.has_node(name):
-		current_weapon = $Inventory.get_node(name)
-		current_weapon.set_active(true)
-	else:
-		G.log_err('player does not have weapon: %s' % name)
-	inventory_lock.unlock()
-	emit_signal('weapon_selected', name)
-
-# offset = 1 for next, -1 for prev
-func select_next_weapon(offset):
-	if is_dead():
-		return
-	inventory_lock.lock()
-	var n = $Inventory.get_child_count()
-	if current_weapon != null and n > 0:
-		current_weapon.set_active(false)
-
-		var i = current_weapon.get_index() + offset
-		if i < 0:
-			i += n
-		i = i % n
-
-		current_weapon = $Inventory.get_child(i)
-		current_weapon.set_active(true)
-	inventory_lock.unlock()
-	if current_weapon != null:
-		emit_signal('weapon_selected', current_weapon.name)
-
+# get the angle to rotate the weapon by such that the barrel exactly aims at the given position.
+# If the barrel isn't along y=0 then a correction term is required.
 # pos is relative
-func aim_at(pos):
+func weapon_aim_angle(pos):
 	# maths copied from power defence
+	var current_weapon = inventory.lock_current()
+	var angle = null
 	if current_weapon != null:
 		var gun_pos = current_weapon.get_position()
 		var d = (pos - gun_pos).length()
 		if abs(d) > 4: # pixels
-			var angle = pos.angle_to_point(gun_pos)
+			angle = pos.angle_to_point(gun_pos)
 			var muzzle_pos = current_weapon.get_node('Muzzle').get_position()
 			var o = (muzzle_pos - gun_pos).y
 			# cannot accurately aim at something closer than the muzzle
@@ -220,8 +172,8 @@ func aim_at(pos):
 					angle += angle_correction
 				else:
 					angle -= angle_correction
-			return angle
-	return pos.angle()
+	inventory.unlock_current()
+	return angle if angle != null else pos.angle()
 
 func set_weapon_angle(angle):
 	# _weapon_angle should always be set atomically, ie use a temporary variable
@@ -245,10 +197,48 @@ func take_damage(damage, knockback):
 	if old_health > 0 and health <= 0:
 		die()
 
+# cast a ray of the given length and position (default: current position) which
+# can collide with the map and other players. Returns null if no intersection,
+# and {'pos':..., 'body':...} if there was.
+func cast_ray_down(length, pos=null):
+	if pos == null:
+		var hitbox = $HitBox.shape
+		# start the ray a few pixels from the bottom of the hitbox
+		pos = global_position + Vector2(0, hitbox.height/2+hitbox.radius-5)
+	if length <= 0:
+		return null
+	var space_state = get_world_2d().direct_space_state
+	# from, to, exclude, collision_layer
+	var result = space_state.intersect_ray(pos, pos + Vector2(0, length), [self], G.Layers.PLAYERS | G.Layers.MAP)
+	if result.empty():
+		return null
+	else:
+		return {'pos': result.position, 'body': result.collider}
+
+# if the player is currently standing on a one way platform: fall through it
+func try_fall_through():
+	# shouldn't be non-null because there shouldn't be two one way platforms close enough for this to occur.
+	# if this does become a problem then a list of platforms is required instead.
+	if one_way_platform == null and is_on_floor():
+		var collision = cast_ray_down(40)
+		if collision != null:
+			var body = collision.body
+			if body.has_node('CollisionShape2D') and body.get_node('CollisionShape2D').one_way_collision:
+				one_way_platform = body
+				add_collision_exception_with(body)
+				$OneWayPlatformTimer.start()
+
+func _on_OneWayPlatformTimer_timeout():
+	if one_way_platform != null:
+		remove_collision_exception_with(one_way_platform)
+		one_way_platform = null
+
 func is_alive():
 	return health > 0
 func is_dead():
 	return health <= 0
+func is_on_screen():
+	return $Visibility.is_on_screen()
 
 func _set_health(new_health):
 	health = max(new_health, 0)
@@ -279,9 +269,9 @@ func spawn(position):
 	$BulletCollider.collision_layer = G.Layers.BULLET_COLLIDERS
 	_set_health(max_health)
 
-	_clear_inventory()
-	equip_weapon(G.pickups['Pistol'].scene.instance())
-	select_weapon('Pistol')
+	inventory.clear()
+	inventory.equip(G.pickups['Pistol'].scene.instance())
+	inventory.select('Pistol')
 	show()
 
 func teleport(location):
@@ -302,7 +292,11 @@ func _on_InvulnTimer_timeout():
 	_set_invulnerable(false)
 
 func _on_weapon_fired(bullets):
-	camera.shake(current_weapon.screen_shake)
+	var current_weapon = inventory.lock_current()
+	if current_weapon != null:
+		camera.shake(current_weapon.screen_shake)
+	inventory.unlock_current()
+
 	if config.control == G.Control.GAMEPAD:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 

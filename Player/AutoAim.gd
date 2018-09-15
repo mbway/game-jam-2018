@@ -3,8 +3,6 @@ var G = globals
 var Math = preload('res://Utils/Math.gd')
 var player
 
-var lock_on_radius = 1000 # lock onto players closer than this distance
-
 # start_diff is calculated by multiplying by the subtended angle by a factor between 1 and this value.
 # larger => the auto aim influences a larger angle range
 var max_start_diff_multiply = 4
@@ -19,7 +17,7 @@ func auto_aim(raw_angle):
 	var min_angle_diff = INF
 	var closest_player = null
 	for p in G.get_scene().get_players():
-		if p != player and p.is_alive() and player.position.distance_to(p.position) < lock_on_radius:
+		if p != player and p.is_alive() and p.is_on_screen():
 			var diff = abs(Math.shortest_angle_between(raw_angle, (p.position-player.position).angle()))
 			if diff < min_angle_diff:
 				min_angle_diff = diff
@@ -31,8 +29,8 @@ func auto_aim(raw_angle):
 		return raw_angle
 
 func auto_aim_at(raw_angle, target_player):
-	# by using aim_at, the weapon-dependent offset is taken into account
-	var target_angle = player.aim_at(target_player.position - player.position)
+	# the weapon-dependent aim angle is taken into account
+	var target_angle = player.weapon_aim_angle(target_player.position - player.position)
 
 	var half_subtended = half_subtended(target_player)
 	var angle_diff = Math.shortest_angle_between(raw_angle, target_angle)

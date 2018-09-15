@@ -34,7 +34,7 @@ func _on_Cooldown_timeout():
 	set_pickup(random_pickup_name())
 
 func give_pickup_to(player):
-	player.equip_weapon(current_pickup.scene.instance())
+	player.inventory.equip(current_pickup.scene.instance())
 	current_pickup = null
 	$PickupSprite.visible = false
 	$Cooldown.start()

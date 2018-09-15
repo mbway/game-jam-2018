@@ -9,9 +9,9 @@ func _input(event):
 		var b = event.button_index
 		if event.pressed:
 			if b == BUTTON_WHEEL_UP:
-				select_next_weapon(-1)
+				inventory.cycle_selection(-1)
 			elif b == BUTTON_WHEEL_DOWN:
-				select_next_weapon(1)
+				inventory.cycle_selection(1)
 			elif b == BUTTON_LEFT:
 				fire_pressed = true
 		else: # released
@@ -30,6 +30,8 @@ func _unhandled_input(event):
 		if event.pressed and not event.is_echo(): # disregard key repeats
 			if k == KEY_W or k == KEY_SPACE:
 				jump_pressed = true
+			elif k == KEY_S:
+				try_fall_through()
 			elif k == KEY_A:
 				left_pressed = true
 				update_move_direction()
@@ -49,8 +51,7 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	# mouse aim
 	# updating every physics frame because it is likely that either the player or mouse has moved
-	if current_weapon != null:
-		set_weapon_angle(aim_at(get_local_mouse_position()))
+	set_weapon_angle(weapon_aim_angle(get_local_mouse_position()))
 
 
 

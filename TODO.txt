@@ -4,16 +4,29 @@
 - weapon tray should have a fixed ordering
 - can't edit player names in the lobby
 - shooting sounds crackle when mouse is directly over player
-- rendering of guns flicker when aiming directly up
 - custom mouse cursor seems to only last a single game until it is reset
 - can switch weapons when dead
 - seems to be a race condition with the weapon slots GUI so that when re-spawning the new pistol is added first (which fails) then the old pistol is removed, rather than the other way around. So after re-spawning the pistol isn't on the slots GUI
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
+short term todo
+- health pack
+- one-way platform
+- parallax background
+- ammo
+- reload animation and drop magazine
+- ai
+
 # TODO
+- need more sounds for things
+    - shells hitting the ground
+    - footsteps
+    - reload sounds (once reload added)
+    - damage
+    - death
+    - switching weapon?
 - upgrade the old maps in OldMaps then remove
 - with the new jumping mechanism, using Engine.time_scale, can do bullet time :D
-- move away from using OS.get_tick_msec() to allow the game to be slowed down for debugging. accumulate the given delta values instead
 - need a better name than 'power offence'
 - Large canister shell for the laser gun
 - Detect when player is above floor. I don't think the obstacle avoidance is working because the ai releases jump immediately
@@ -45,7 +58,6 @@
     - clip size and reloading
 - bots
 - online multiplayer
-- show invincibility somehow
 - lighting effect around pickup station
 - more pickups
     - health
@@ -79,7 +91,6 @@
 - environmental hazards
     - toxic waste (green with water splashing effect when walking on)
     - automatic turrets
-- aim assist for gamepad players
 
 
 # Extension Features

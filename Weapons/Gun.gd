@@ -30,10 +30,11 @@ var can_shoot = true
 var active = true
 
 
-func setup(player, bullet_parent):
+func setup(player):
 	set_active(false)
 	self.player = player
-	self.bullet_parent = bullet_parent
+	self.bullet_parent = player.bullet_parent
+	connect('fired', player, '_on_weapon_fired')
 
 	cooldown_timer = Timer.new()
 	cooldown_timer.set_one_shot(true)

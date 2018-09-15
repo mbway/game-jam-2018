@@ -16,27 +16,28 @@ var base_alpha = 0.5
 var selected_alpha = 0.9
 
 
-func select_weapon(name):
-	if not has_node(name):
+func select_item(name):
+	# note: name may be null, in which case everything in the tray should be deselected
+	if name != null and not has_node(name):
 		G.log_err('cannot select %s because not in the tray' % name)
 		return
 	else:
-		for w in get_children():
-			if w.name == name:
-				w.rect_min_size.y = selected_height
-				w.modulate.a = selected_alpha
+		for i in get_children():
+			if i.name == name:
+				i.rect_min_size.y = selected_height
+				i.modulate.a = selected_alpha
 			else:
-				w.rect_min_size.y = base_height
-				w.modulate.a = base_alpha
+				i.rect_min_size.y = base_height
+				i.modulate.a = base_alpha
 
-func add_weapon(w):
-	if has_node(w.name):
-		G.log_err('weapon %s already added' % w.name)
+func add_item(item):
+	if has_node(item.name):
+		G.log_err('item %s already added' % item.name)
 		return
 
 	var r = TextureRect.new()
-	r.name = w.name
-	r.texture = w.texture
+	r.name = item.name
+	r.texture = item.texture
 	r.expand = true
 	r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 	r.rect_min_size.y = base_height
@@ -44,18 +45,19 @@ func add_weapon(w):
 
 	add_child(r)
 
-func remove_weapon(name):
+func remove_item(name):
 	for w in get_children():
 		if w.name == name:
 			remove_child(w)
 			w.queue_free()
 			return
 
-func _on_Player_weapon_equiped(weapon):
-	add_weapon(weapon)
+func _on_equiped(item):
+	add_item(item)
 
-func _on_Player_weapon_unequiped(weapon_name):
-	remove_weapon(weapon_name)
+func _on_unequiped(item):
+	remove_item(item)
 
-func _on_Player_weapon_selected(name):
-	select_weapon(name)
+func _on_selected(name):
+	select_item(name)
+

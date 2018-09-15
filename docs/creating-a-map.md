@@ -1,4 +1,7 @@
 # Creating a map #
+
+#TODO: create a template map to copy which has most of this already set
+
 - In Tiled
     - Create a new map (tile size 32x32)
     - Map > Add External Tileset the tilemap at `res://Assets/Tiles/Tiles.tsx`
@@ -8,6 +11,9 @@
     - Add a new 'Object Layer' called 'Collision' and add collision shapes to the map
         - Note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
         - Note: only use the rectangle tool. The polygon tool causes collision issues with the player.
+    - Add a new 'Object Layer' called 'OneWayCollision'
+        - right click it and select 'Layer Properties'. Then in the properties pannel set the colour to `[255, 255, 0]`
+        - you may want to check 'View > Snapping > Snap to Fine Grid' for placing one way platforms
     - Crop the map (optional)
         - Map > autocrop
         - or for more control: Map > crop to selection
