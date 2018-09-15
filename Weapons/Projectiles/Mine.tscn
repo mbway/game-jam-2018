@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/Mine.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/weapons/Mine Launcher/Mine1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/weapons/Mine Launcher/Mine2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/weapons/mine.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 6 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Explode",
+"speed": 20.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 16.0
+
+[node name="Mine" type="RigidBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 0
+collision_mask = 6
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.01
+gravity_scale = 5.0
+custom_integrator = false
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = false
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
+Explosion = ExtResource( 2 )
+
+[node name="Collision" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="1"]
+
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 2 )
+animation = "default"
+playing = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="DetonationTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.75
+one_shot = false
+autostart = false
+
+[node name="ActivationSound" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="Detection" type="Area2D" parent="." index="4"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Collision" type="CollisionShape2D" parent="Detection" index="0"]
+
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[connection signal="timeout" from="DetonationTimer" to="." method="_on_DetonationTimer_timeout"]
+
+[connection signal="body_entered" from="Detection" to="." method="_on_Detection_body_entered"]
+
+
