@@ -6,6 +6,7 @@ var editing_node = null
 enum MODES { AddNodes, MoveNodes, DeleteNodes, AddEdges, DeleteEdges }
 var edit_mode = MODES.AddNodes
 var mouse_pressed = false # whether the left mouse button is pressed
+var last_mouse = null # last mouse position
 
 var selection_radius = 25
 var snap_grid_size = 8
@@ -39,9 +40,9 @@ func handles(object):
 func make_visible(visible):
 	if visible:
 		toolbar.show()
-		set_physics_process(true)
+		set_process(true)
 	else:
-		set_physics_process(false)
+		set_process(false)
 		toolbar.hide()
 		# weakref to detect whether the node has been freed
 		if editing_node != null and weakref(editing_node).get_ref() != null:
@@ -144,13 +145,14 @@ func forward_canvas_gui_input(event):
 func snap_to(v, step):
 	return round(v/step) * step
 
-func snaped_mouse_pos():
+func snapped_mouse_pos():
 	var mouse = editing_node.mouse_pos()
 	mouse.x = snap_to(mouse.x, snap_grid_size)
 	mouse.y = snap_to(mouse.y, snap_grid_size)
 	return mouse
 
-func _physics_process(delta):
+
+func _process(delta):
 	# Engine.editor_hint doesn't work here because I think that it still returns
 	# true because the plugin is running in the editor even when the game is
 	# active.
@@ -158,14 +160,22 @@ func _physics_process(delta):
 	if editing_node == null:
 		return
 
+	# this value changes even if the cursor remains still but the camera zooms
+	var m = editing_node.mouse_pos()
+	if last_mouse != m:
+		on_mouse_moved()
+		last_mouse = m
+
+
+func on_mouse_moved():
 	# can't just update when the mouse moves because the camera can change without the mouse moving
 	if edit_mode == MODES.AddNodes:
-		editing_node.cursor_pos = snaped_mouse_pos()
+		editing_node.cursor_pos = snapped_mouse_pos()
 		editing_node.update()
 
 	elif edit_mode == MODES.MoveNodes:
 		if mouse_pressed and editing_node.moving_index != null:
-			var mouse = snaped_mouse_pos()
+			var mouse = snapped_mouse_pos()
 			editing_node.nodes[editing_node.moving_index] = mouse
 			editing_node.cursor_pos = mouse
 		else:

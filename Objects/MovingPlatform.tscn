@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/MovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://Objects/GrassPlatform.tmx" type="PackedScene" id=2]
+
+[node name="MovingPlatform" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+Platform = ExtResource( 2 )
+move_to = Vector2( 0, 0 )
+period = 2
+
+

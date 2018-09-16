@@ -12,7 +12,7 @@ extends Node
 
 const keyboard_player_scene = preload('res://Player/KeyboardPlayer.tscn')
 const gamepad_player_scene = preload('res://Player/GamepadPlayer.tscn')
-const AI_player_scene = preload('res://Player/AIPlayer.tscn')
+const AI_player_scene = preload('res://Player/AI/AIPlayer.tscn')
 
 const MAX_HEALTH = 100
 

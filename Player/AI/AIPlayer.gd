@@ -9,13 +9,14 @@ var target = null
 var path_follow
 
 func _ready():
-	path_follow = preload('res://Player/AIPathFollow.gd').new(self)
+	path_follow = preload('res://Player/AI/PathFollow.gd').new(self)
 
 # path following
 func _physics_process(delta):
 	# handles controlling the player to reach the waypoint by navigating the map
 	path_follow.process(delta)
 
+func _process(delta):
 	if is_dead():
 		return
 

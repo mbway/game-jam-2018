@@ -9,6 +9,7 @@
     - first `_input` is called, then `_gui_input` then `_unhandled_input`. So gameplay related input should be handled in `_unhandled_input` so that the GUI can intercept and process events before hand.
     - calling `event.accept_event()` will prevent propagation
     - to allow mouse events through, a Control element should set its `mouse_filter` attribute
+- only use _physics_process when absolutely necessary, for everything else use _process
 
 ## Godot 3 changes
 - `_fixed_process` -> `_physics_process`

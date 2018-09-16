@@ -11,9 +11,10 @@
     - Add a new 'Object Layer' called 'Collision' and add collision shapes to the map
         - Note: not one per tile, make the shapes span as much as possible, also make sure to snap to grid to avoid gaps
         - Note: only use the rectangle tool. The polygon tool causes collision issues with the player.
-    - Add a new 'Object Layer' called 'OneWayCollision'
-        - right click it and select 'Layer Properties'. Then in the properties pannel set the colour to `[255, 255, 0]`
-        - you may want to check 'View > Snapping > Snap to Fine Grid' for placing one way platforms
+    - optional: only if one way platforms are required:
+        - Add a new 'Object Layer' called 'OneWayCollision'
+            - right click it and select 'Layer Properties'. Then in the properties pannel set the colour to `[255, 255, 0]`
+            - you may want to check 'View > Snapping > Snap to Fine Grid' for placing one way platforms
     - Crop the map (optional)
         - Map > autocrop
         - or for more control: Map > crop to selection
@@ -35,6 +36,9 @@
             - UV clip: on
             - Image Flags: none
             - collision layer: none
+            - Embed Internal Images: off
+            - Save Tiled Properties: off
+            - Add Background: off
             - Post Import Script: `res://Utils/TiledPostImport.gd`
         - then click 'reimport'
         - you may need to close and re-open the scene for the changes to take effect

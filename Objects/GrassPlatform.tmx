@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="10" height="4" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2">
+ <tileset firstgid="1" source="../Assets/Tiles/Tiles.tsx"/>
+ <layer name="Map" width="10" height="4">
+  <data encoding="csv">
+32,33,34,35,36,37,38,39,40,41,
+62,63,64,65,66,67,68,69,70,71,
+92,93,94,95,96,97,98,99,100,101,
+182,183,184,185,186,187,188,189,190,191
+</data>
+ </layer>
+ <objectgroup name="Collision">
+  <object id="1" x="32" y="32" width="256" height="64"/>
+ </objectgroup>
+</map>

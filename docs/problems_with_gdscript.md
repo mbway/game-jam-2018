@@ -37,6 +37,13 @@ I don't like gdscript very much, here is why.
     - For example, using a custom class as an export variable: can't find the script file because the class is defined inline and not in its own file. So giving it its own file works, but causes runtime errors because it gets down-converted back to Object from whatever custom type you had, making any accesses crash.
         - this could have been avoided by either clearly documenting what is and isn't allowed (I'm still not sure when `export (Array, some_type)` became illegal) or by having the editor flag it up as a problem, or by providing better error messages.
         - the error messages don't even have any google results, it looks like very few people have built their own editor plugins. The examples in the documentation are shockingly simple and useless and don't help beyond getting set up.
+- inherited classes cannot override methods in the parent class which are called by the engine. i.e if the child overrides `_process`, both the child and parent versions of `_process` get called!
+    - this was a design decision chosen specifically to avoid problems some users were having when migrating from another language 'squirrel'. What a stupid way to design a language, to prevent newbies from being too scared, while reducing the overall flexibility.
+    - also: the order that they get called in isn't even specified!!!
+    - however for methods which aren't callbacks, they do get overridden and to call the function in the super class `.some_method()` is used
+        - the syntax for this is a bit dumb IMO
+    - https://github.com/godotengine/godot/issues/6500
+    - a workaround is to create a separate function like `_on_process()` which _can_ be overriden, then in `_process` just call `_on_process`...
 
 
 # Problems with Godot

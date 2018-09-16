@@ -17,6 +17,7 @@ const JUMP_SPEED = 1000 # the speed 'impulse' to apply when triggering a jump
 const RELEASE_SPEED = JUMP_SPEED/5 # the maximum upwards velocity after cancelling a jump in mid air
 const PREEMPTIVE_JUMP_TOLERANCE = 50 / 1000.0 # (seconds) the time before hitting the floor in which a 'preemptive jump' can be performed
 const EDGE_JUMP_TOLERANCE = 100 / 1000.0 # (seconds) the time after leaving the floor in which an 'edge jump' can be performed
+const FLOOR_VEL = 200 # positive is downwards
 
 # double jumping #
 const MAX_MID_AIR_JUMPS = 1
@@ -42,7 +43,7 @@ func advance_time_step(last_vel, delta, jump_pressed, on_floor):
 		# to 'stick' to the ground, causing the player to float over the ground
 		# and glitch every now and then. Since this will be corrected to 0
 		# anyway, an arbitrary downwards velocity is chosen.
-		vel = 100 # positive is downwards
+		vel = FLOOR_VEL
 	else:
 		vel += GRAVITY * delta
 		vel = clamp(vel, -MAX_SPEED, MAX_SPEED)

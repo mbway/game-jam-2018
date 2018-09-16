@@ -48,9 +48,8 @@ func _unhandled_input(event):
 				right_pressed = false
 				update_move_direction()
 
-func _physics_process(delta):
-	# mouse aim
-	# updating every physics frame because it is likely that either the player or mouse has moved
+func _process(delta):
+	# mouse aim (updating every frame because it is likely that either the player or mouse has moved)
 	set_weapon_angle(weapon_aim_angle(get_local_mouse_position()))
 
 

@@ -143,7 +143,7 @@ func _physics_process(delta):
 		# dead
 		if on_floor:
 			velocity.x = lerp(velocity.x, 0, FRICTION_DECAY)
-			velocity.y = 100 # apply a small downwards force to remain on_floor
+			velocity.y = jump_physics.FLOOR_VEL # apply a small downwards force to remain on_floor
 		else:
 			velocity.y += jump_physics.GRAVITY * delta
 			velocity.y = clamp(velocity.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED)
