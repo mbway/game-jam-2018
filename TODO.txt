@@ -2,7 +2,6 @@
 # Bugs
 - Weapon tray doesn't ever remove weapons. Probably want an 'inventory_changed' signal to account for both addition and removal
 - weapon tray should have a fixed ordering
-- can't edit player names in the lobby
 - shooting sounds crackle when mouse is directly over player
 - custom mouse cursor seems to only last a single game until it is reset
 - can switch weapons when dead
