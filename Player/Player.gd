@@ -300,3 +300,8 @@ func _on_weapon_fired(bullets):
 	if config.control == G.Control.GAMEPAD:
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 
+
+func _on_AnimatedSprite_frame_changed():
+	if $AnimatedSprite.animation == 'run' and ($AnimatedSprite.frame == 1 or $AnimatedSprite.frame == 5):
+		$FootstepSound.play()
+

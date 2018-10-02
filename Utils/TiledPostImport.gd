@@ -6,7 +6,7 @@ extends Node
 
 func post_import(scene):
 	for c in scene.get_children():
-		if not ['Map', 'Collision', 'OneWayCollision'].has(c.name):
+		if not ['Map', 'Background', 'Collision', 'OneWayCollision'].has(c.name):
 			print('Unknown layer: %s' % c.name)
 			return null
 
