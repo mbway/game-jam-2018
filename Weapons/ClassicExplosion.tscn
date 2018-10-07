@@ -30,7 +30,7 @@ animations = [ {
 } ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="ClassicExplosion" type="Area2D" index="0"]
+[node name="ClassicExplosion" type="Area2D"]
 
 scale = Vector2( 2, 2 )
 input_pickable = true
@@ -50,18 +50,25 @@ wait_time = 1.0
 one_shot = true
 autostart = true
 
-[node name="Collision" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Collision" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 1 )
 
-[node name="ExplosionAnimation" type="AnimatedSprite" parent="." index="2"]
+[node name="ExplosionAnimation" type="AnimatedSprite" parent="." index="3"]
 
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 2 )
 animation = "default"
 _sections_unfolded = [ "Transform" ]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
 
 stream = ExtResource( 14 )
 volume_db = 0.0
@@ -75,5 +82,7 @@ area_mask = 1
 [connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
+
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]
 
 
