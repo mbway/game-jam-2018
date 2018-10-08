@@ -40,8 +40,9 @@ func equip(item):
 		globals.log_err('player already has inventory item: %s' % item.name)
 	else:
 		item.setup(player)
-		add_child(item)
-		equipped = item
+		if item.equippable:
+			add_child(item)
+			equipped = item
 	inventory_lock.unlock()
 	if equipped != null:
 		emit_signal('equiped', equipped)
