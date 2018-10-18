@@ -103,6 +103,9 @@ var pickups = {
 	'MineLauncher': {
 		'scene':   preload('res://Weapons/MineLauncher.tscn'),
 		'texture': preload('res://Assets/weapons/Mine Launcher/Mine Launcher1.png')},
+	'HealthPack':{
+		'scene':   preload('res://Weapons/HealthPack.tscn'),
+		'texture': preload('res://Assets/weapons/health_pack.png')},
 }
 
 func log(txt):

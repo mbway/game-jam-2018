@@ -23,6 +23,7 @@ var is_setup = false
 var bullet_parent # the node to parent the bullets to
 var player # the player holding the gun
 var fired = false
+var equippable = true
 
 # runtime
 var cooldown_timer = null
