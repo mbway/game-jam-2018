@@ -28,6 +28,7 @@ var edge_start_index = null # index of the start node for the currently editing 
 var moving_index = null # index of the currently moving node
 var cursor_pos = null # position of the cursor (black circle). null => hidden
 
+# this AStar instance has node ids which line up with `nodes` and so can be used for either
 var _astar = null
 
 func _init():
@@ -327,4 +328,10 @@ func get_path(from, to):
 
 	return path
 
+# note: returns PoolIntArray
+func get_neighbour_ids(node_id):
+	if node_id == null:
+		return PoolIntArray([])
+	else:
+		return _astar.get_point_connections(node_id)
 

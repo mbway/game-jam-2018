@@ -59,7 +59,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 100, -500 ), Vector2( 100, 0 ) ]
+"values": [ Vector2( 192, -500 ), Vector2( 192, 0 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 100, 0 ), Vector2( 100, -500 ) ]
+"values": [ Vector2( 192, 0 ), Vector2( 192, -500 ) ]
 }
 
 [node name="Terminal" type="CanvasLayer" index="0"]
@@ -99,15 +99,19 @@ anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
-margin_left = -700.0
+margin_left = -768.0
 margin_top = -500.0
-margin_right = 700.0
+margin_right = 768.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" index="0"]
 
@@ -117,7 +121,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1393.0
+margin_right = 1529.0
 margin_bottom = 493.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -133,7 +137,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1386.0
+margin_right = 1522.0
 margin_bottom = 449.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
@@ -165,7 +169,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 453.0
-margin_right = 1386.0
+margin_right = 1522.0
 margin_bottom = 486.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

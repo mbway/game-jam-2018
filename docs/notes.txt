@@ -10,6 +10,7 @@
     - calling `event.accept_event()` will prevent propagation
     - to allow mouse events through, a Control element should set its `mouse_filter` attribute
 - only use _physics_process when absolutely necessary, for everything else use _process
+- supporting multiple resolutions: https://godot.readthedocs.io/en/3.0/about/faq.html#how-should-assets-be-created-to-handle-multiple-resolutions-and-aspect-ratios
 
 ## Godot 3 changes
 - `_fixed_process` -> `_physics_process`

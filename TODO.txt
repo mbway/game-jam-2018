@@ -10,6 +10,8 @@
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
 
 short term todo
+- show names above players
+- color pallete to choose for players. Maybe have a globals pallete. Lobby needs a color picker popup
 - health pack
 - parallax background
 - ammo
@@ -17,6 +19,7 @@ short term todo
 - ai
 
 # TODO
+- support multiple resolutions. have the option to allow the game window to stretch too. ie. could render in 480p but stretch to be 1080p for performance if you like. Also necessary for supporting mobile since they have very different resolutions to desktops.
 - need more sounds for things
     - shells hitting the ground
     - footsteps
@@ -87,6 +90,10 @@ short term todo
 - environmental hazards
     - toxic waste (green with water splashing effect when walking on)
     - automatic turrets
+- HUD improvements
+    - leaderboard after game over
+    - list of recent kills or more generally events
+    - show current game mode
 
 
 # Extension Features
@@ -110,4 +117,5 @@ short term todo
 - split screen. possible now that camera isn't child of player
 - a short-range teleport ability/weapon would be cool...
 - fog of war: can only see in the line of sight of the player, so another player on a platform above you wouldn't be visible. Could combine with 2D lighting effects.
+- horde mode with lots of AI opponents without weapons (or with melee weapons once added)
 

@@ -10,9 +10,10 @@ var G = globals
 # if the node was added temporarily (ie first or last in path) then id may be null
 var path = [] # a list of targets to follow to reach the waypoint
 onready var _target = null # the next target that the player should move directly towards
+
 const CHECK_PROGRESS_EVERY = 2.0 # seconds
-const width = 32.0
-const height = 64.0
+const BUFFER_X = 32.0
+const BUFFER_Y = 64.0
 var last_progress = INF # last distance to the target
 var time_since_last_progress = 0 # time since the progress was measured
 # the time between detecting that the player could reach the target by releasing
@@ -32,9 +33,11 @@ const platform_search_distance = 64
 
 var player = null
 var AINodes = null
+var nav = null
 
 func _init(player):
 	self.player = player
+	nav = player.nav
 	AINodes = player.get_node('AINodes')
 	platforms = _get_platforms()
 	node_platforms = _get_node_platforms()
@@ -46,10 +49,11 @@ func get_target_relative():
 # 'close' is defined based on how close the player should be to the target before moving on to the next.
 # fine control is required in x because moving on early could mean the player is not yet standing on a platform.
 func target_close(t):
-	return abs(t.x) < width / 2 and (-height/2 < t.y and t.y < 1.5*height)
+	return abs(t.x) < BUFFER_X / 2 and (-BUFFER_Y/2 < t.y and t.y < 1.5*BUFFER_Y)
 
 
 func _set_target(t):
+	player._on_passed_through(_target)
 	_target = t
 	last_progress = INF
 	time_since_last_progress = 0
@@ -70,8 +74,8 @@ func process(delta):
 	var t = get_target_relative() # vector from the current position to the target
 	var state = player.jump_physics.state
 	var State = player.jump_physics.State
-	var target_above = bool(t.y < -height/2)
-	var target_below = bool(t.y > height)
+	var target_above = bool(t.y < -BUFFER_Y/2)
+	var target_below = bool(t.y > BUFFER_Y)
 
 	# check whether to move onto the next target
 	var reason = null # the human readable explanation of the AI action for debugging purposes
@@ -97,7 +101,7 @@ func process(delta):
 				if platform_a == -1 or platform_a == platform_b:
 					reason = 'close and player mid-air, but next shares the same platform'
 					t = _next_target()
-		elif abs(t.x) < width and target_below and not path.empty():
+		elif abs(t.x) < BUFFER_X and target_below and not path.empty():
 			# not close to the current target, however the player is above the
 			# current target and this isn't the end of the path. Can move on if the
 			# next target is above the same platform. The assumption is that the
@@ -158,7 +162,7 @@ func process(delta):
 				# at the edge of a platform and don't want to just fall off because that wouldn't reach the target
 				reason = 'about to fall'
 				player.jump_pressed = true
-			elif abs(t.x) < 2*width: # either above or below
+			elif abs(t.x) < 2*BUFFER_X: # either above or below
 				if target_above:
 					# target is (almost directly) above
 					reason = 'target above'
@@ -231,7 +235,7 @@ func process(delta):
 # if the player released jump right now (or kept it released), would it be able
 # to reach to within 'buffer' pixels of the target, or at least land on the
 # platform that the target resides on.
-func can_fall_to_target(buffer=width/2):
+func can_fall_to_target(buffer=BUFFER_X/2):
 	# use motion equations to estimate the falling trajectory of the player.
 	# solve for the time at which the player falls to player.y == target.y
 	# acting under gravity alone. Then plug that time in to get the x
@@ -310,18 +314,59 @@ func can_fall_to_target(buffer=width/2):
 
 #TODO: prevent the jolt which occurs when the waypoint changes
 
+func clear_path():
+	_target = null # didn't actually reach the target, so don't want it passed to _on_passed_through
+	_set_target(null) # clean up timers etc
+	path.clear()
+
+func path_append(node_id):
+	if node_id != null:
+		path.append({'pos': nav.nodes[node_id], 'id': node_id})
+
+# get the ids of the nodes to the left and right of the given position on the
+# same platform as pos. Returns null if pos is not on a platform. The left or
+# right ids may be null (but not both) if there are no nodes in that direction.
+func get_nearest_platform_nodes(pos):
+	var platform = _closest_platform_under(pos)
+	if platform == -1:
+		return null
+
+	# positive is to the right
+	var left = null
+	var left_dist = -INF
+	var right = null
+	var right_dist = INF
+	for n in range(node_platforms.size()):
+		if node_platforms[n] == platform:
+			# n is on the same platform as pos
+			var dist = nav.nodes[n].x - pos.x
+
+			if 0 <= dist and dist < right_dist:
+				right = n
+				right_dist = dist
+
+			elif left_dist < dist and dist <= 0:
+				left = n
+				left_dist = dist
+
+	if left == null and right == null:
+		return null
+	else:
+		return [left, right]
+
+
 # returns whether the waypoint was set (won't be set if the player is in mid air and not above a platform)
 func set_waypoint(waypoint):
-	if player.nav == null:#TODO: remove check once made compulsory
+	if nav == null:#TODO: remove check once made compulsory
 		return
 	if not player.is_on_floor():
 		var collision = player.cast_ray_down(1000)
 		if collision == null:
 			return false # didn't set because it wouldn't be safe (the player might fall and die)
 		else:
-			path = player.nav.get_path(collision.pos, waypoint)
+			path = nav.get_path(collision.pos, waypoint)
 	else:
-		path = player.nav.get_path(player.position, waypoint)
+		path = nav.get_path(player.position, waypoint)
 	_set_target(null)
 	var c = AINodes.get_node('Path').curve
 	c.clear_points()
@@ -329,6 +374,20 @@ func set_waypoint(waypoint):
 		c.add_point(i.pos)
 	return true
 
+
+# returns the index of the closest platform under the given point
+# returns -1 if no platform is found within max_distance
+func _closest_platform_under(point, max_distance=platform_search_distance):
+	var platform_index = -1
+	var distance = max_distance
+	for pi in range(platforms.size()):
+		var p = platforms[pi]
+		if p[0] <= point.x and point.x <= p[1]: # above or below the platform
+			var height = p[2] - point.y
+			if height >= 0 and height <= distance:
+				platform_index = pi
+				distance = height
+	return platform_index
 
 func get_target_platform(t):
 	if t == null:
@@ -343,9 +402,8 @@ func _get_platforms():
 		var half_extents = c.get_node('CollisionShape2D').shape.extents
 		platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, false]) # left_x, right_x, y, one_way
 
-	var one_way = map.get_node('OneWayCollision')
-	if one_way != null:
-		for c in one_way.get_children(): # list of StaticBody2D
+	if map.has_node('OneWayCollision'):
+		for c in map.get_node('OneWayCollision').get_children(): # list of StaticBody2D
 			var pos = c.position
 			var half_extents = c.get_node('CollisionShape2D').shape.extents
 			platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, true]) # left_x, right_x, y, one_way
@@ -358,27 +416,13 @@ func _get_platforms():
 # the index of the platform (collidable rectangle in the node Map/Collision) for each node in the graph.
 func _get_node_platforms():
 	var node_platforms = []
-	for n in player.nav.nodes:
+	for n in nav.nodes:
 		node_platforms.append(_closest_platform_under(n))
 
-	for i in range(player.nav.nodes.size()):
+	for i in range(nav.nodes.size()):
 		if node_platforms[i] != -1:
-			var n = player.nav.nodes[i]
+			var n = nav.nodes[i]
 			var p = platforms[node_platforms[i]]
 	return node_platforms
-
-# returns the index of the closest platform under the given point
-func _closest_platform_under(point, max_distance=platform_search_distance):
-	var platform_index = -1
-	var distance = max_distance
-	for pi in range(platforms.size()):
-		var p = platforms[pi]
-		if p[0] <= point.x and point.x <= p[1]: # above or below the platform
-			var height = p[2] - point.y
-			if height >= 0 and height <= distance:
-				platform_index = pi
-				distance = height
-	return platform_index
-
 
 

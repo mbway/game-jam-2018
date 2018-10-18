@@ -34,7 +34,7 @@ modulate = Color( 1, 1, 1, 0.756902 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 1600, 900 )
+region_rect = Rect2( 0, 0, 1920, 1080 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Title" type="Label" parent="." index="1"]
@@ -63,8 +63,8 @@ _sections_unfolded = [ "Margin", "Material", "custom_colors", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
 
-position = Vector2( 440, 580 )
-scale = Vector2( 10, 10 )
+position = Vector2( 500, 700 )
+scale = Vector2( 12, 12 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
@@ -74,10 +74,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1170.0
-margin_top = 370.0
-margin_right = 1500.0
-margin_bottom = 690.0
+margin_left = 1240.0
+margin_top = 400.0
+margin_right = 1680.0
+margin_bottom = 713.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -87,6 +87,9 @@ size_flags_vertical = 1
 custom_constants/separation = 15
 alignment = 0
 _sections_unfolded = [ "Margin", "custom_constants" ]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Start" type="Button" parent="VBoxContainer" index="0"]
 
@@ -94,7 +97,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 330.0
+margin_right = 440.0
 margin_bottom = 67.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -120,7 +123,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 82.0
-margin_right = 330.0
+margin_right = 440.0
 margin_bottom = 149.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -146,7 +149,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 164.0
-margin_right = 330.0
+margin_right = 440.0
 margin_bottom = 231.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -172,7 +175,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 246.0
-margin_right = 330.0
+margin_right = 440.0
 margin_bottom = 313.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

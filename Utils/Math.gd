@@ -13,9 +13,45 @@ static func random_normal(mu, sigma):
 	var c = sqrt(-2*log(a))*cos(2*PI*b)
 	return c*sigma + mu
 
+#TODO: unit test
+# choose a value from `values` randomly according to the given distribution
+# (i.e. distribution[i] = P(choosing values[i])). If none is passed then a
+# uniform distribution is assumed. The distribution will be normalized if
+# normalized=false.
+static func random_choice(values, distribution=null, normalized=true):
+	var choices = values.size()
+	if choices == 0:
+		return null
+
+	# uniform distribution if not specified
+	if distribution == null:
+		distribution = []
+		var p = 1.0/choices
+		for i in range(choices):
+			distribution.append(p)
+
+	# normalize the distribution
+	assert distribution.size() == choices
+	if not normalized:
+		var sum_p = 0.0
+		for p in distribution:
+			sum_p += float(p)
+		for i in range(choices):
+			distribution[i] /= sum_p
+
+	var r = randf() # between 0 and 1
+	var s = 0 # sum of probabilities up to i (exclusive)
+	for i in range(choices):
+		if s > r: # became greater than r during the transition from i-1 to i => return value i-1
+			return values[i-1]
+		s += distribution[i]
+	return values[choices-1]
+
+# an implementation of `a mod b` where the result is between 0 and b-1 even if a is negative.
 static func positive_modulo(a, b):
 	return (a % b + b) % b
 
+# positive modulo for floating point numbers
 static func positive_fmod(a, b):
 	return fmod(fmod(a, b)+b, b)
 

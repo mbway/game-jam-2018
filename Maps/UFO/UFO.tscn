@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/UFO/UFO.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/Camera.gd" type="Script" id=5]
-[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/graph-node/Graph2D.gd" type="Script" id=4]
+[ext_resource path="res://addons/graph-node/Assets/icon.png" type="Texture" id=5]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Camera.gd" type="Script" id=7]
+[ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=8]
 
 [node name="UFO" type="Node2D"]
 
@@ -17,15 +19,24 @@ script = ExtResource( 1 )
 
 position = Vector2( 0, 2500 )
 
-[node name="Bullets" type="Node2D" parent="." index="2"]
+[node name="Nav" type="Node2D" parent="." index="2"]
+
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+nodes = PoolVector2Array(  )
+edges = [  ]
+
+[node name="Bullets" type="Node2D" parent="." index="3"]
 
 _sections_unfolded = [ "Z Index" ]
 
-[node name="Players" type="Node" parent="." index="3"]
+[node name="Players" type="Node" parent="." index="4"]
 
-[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
+[node name="HUD" parent="." index="5" instance=ExtResource( 6 )]
 
-[node name="Camera" type="Camera2D" parent="." index="5"]
+[node name="Camera" type="Camera2D" parent="." index="6"]
 
 anchor_mode = 1
 rotating = false
@@ -49,10 +60,10 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Drag Margin", "Editor", "Offset", "Smoothing" ]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="6"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="7"]
 
 stream = null
 volume_db = 0.0
@@ -61,7 +72,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="GameMode" type="Node" parent="." index="7"]
+[node name="GameMode" type="Node" parent="." index="8"]
 
 [node name="TDM" type="Node" parent="GameMode" index="0"]
 
@@ -79,11 +90,11 @@ position = Vector2( 350, 1370 )
 
 position = Vector2( 2670, 1370 )
 
-[node name="PickupSpawn" parent="GameMode/TDM" index="1" instance=ExtResource( 6 )]
+[node name="PickupSpawn" parent="GameMode/TDM" index="1" instance=ExtResource( 8 )]
 
 position = Vector2( 1760, 1440 )
 
-[node name="PickupSpawn2" parent="GameMode/TDM" index="2" instance=ExtResource( 6 )]
+[node name="PickupSpawn2" parent="GameMode/TDM" index="2" instance=ExtResource( 8 )]
 
 position = Vector2( 1310, 1440 )
 

@@ -5,6 +5,8 @@ onready var start_screen_scene = preload('res://MainMenu/StartScreen.tscn')
 onready var options_screen_scene = preload('res://MainMenu/OptionsMenu.tscn')
 onready var lobby_screen_scene = preload('res://MainMenu/Lobby.tscn')
 
+#note: for the menus to render at the correct resolution, the min_size has to be set on the root control node for the menu.
+
 
 func _ready():
 	randomize() # generate true random numbers

@@ -145,7 +145,7 @@ const commands = {
 # autocompletion
 var ac_option_names = G.settings.get_names()
 var ac_pickup_names = G.pickups.keys() + ['all'] # (matched case insensitive). 'all' is special and gives all pick-ups at once.
-var ac_player_variables = ['health', 'invulnerable', 'waypoint']
+var ac_player_variables = ['health', 'invulnerable', 'waypoint', 'ai_state']
 
 
 # takes and input line and parses it into a usable form,
@@ -298,6 +298,19 @@ func handle_command(input):
 					log_error('couldn\'t parse Vector2 from "%s"' % v)
 				else:
 					player.set_waypoint(waypoint)
+		elif name == 'ai_state':
+			if player.config.control != G.Control.AI:
+				log_error('player %s is not AI controlled' % args['player_num'])
+			else:
+				if v == 'manual':
+					player.set_state(player.States.MANUAL)
+				elif v == 'explore':
+					player.set_state(player.States.EXPLORE)
+				else:
+					log_error('unknown AI state: "%s"' % v)
+		else:
+			log_error('unknown player variable: "%s"' % name)
+
 
 
 	elif cmd == 'tp':

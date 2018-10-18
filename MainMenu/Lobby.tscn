@@ -38,13 +38,13 @@ use_filter = false
 font_data = ExtResource( 4 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Lobby" type="Control" index="0"]
+[node name="Lobby" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 1600, 900 )
+rect_min_size = Vector2( 1920, 1080 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -60,7 +60,7 @@ self_modulate = Color( 1, 1, 1, 0.397804 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 1600, 900 )
+region_rect = Rect2( 0, 0, 1920, 1080 )
 _sections_unfolded = [ "Offset", "Region", "Visibility" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="." index="1"]
@@ -79,7 +79,7 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "Rect" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
 
@@ -89,8 +89,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 1580.0
-margin_bottom = 880.0
+margin_right = 1900.0
+margin_bottom = 1060.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -133,34 +133,53 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 41.0
-margin_right = 1560.0
-margin_bottom = 860.0
+margin_right = 1880.0
+margin_bottom = 1040.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 alignment = 0
-_sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
+_sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 409.0
-margin_bottom = 819.0
+margin_bottom = 999.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 10
+alignment = 0
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 409.0
+margin_bottom = 882.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_vertical = 3
+_sections_unfolded = [ "Anchor", "Rect", "Size Flags" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -169,7 +188,7 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 402.0
-margin_bottom = 812.0
+margin_bottom = 875.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -181,9 +200,8 @@ custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer" index="0"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -191,7 +209,7 @@ anchor_bottom = 0.0
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 390.0
-margin_bottom = 800.0
+margin_bottom = 863.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
@@ -205,14 +223,14 @@ scroll_vertical = 0
 scroll_deadzone = 0
 _sections_unfolded = [ "Margin", "Scroll", "Size Flags" ]
 
-[node name="PlayerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer" index="0"]
+[node name="PlayerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer/ScrollContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 385.0
-margin_bottom = 795.0
+margin_bottom = 858.0
 rect_min_size = Vector2( 385, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -224,15 +242,103 @@ custom_constants/separation = 10
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect", "Size Flags", "custom_constants" ]
 
-[node name="CenterColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 892.0
+margin_right = 409.0
+margin_bottom = 923.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Add Player"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 933.0
+margin_right = 409.0
+margin_bottom = 964.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Host"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="IPEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 974.0
+margin_right = 409.0
+margin_bottom = 999.0
+rect_min_size = Vector2( 0, 25 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+text = "IP:PORT"
+readonly = false
+highlight_current_line = false
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+override_selected_font_color = false
+context_menu_enabled = true
+smooth_scrolling = false
+v_scroll_speed = 80.0
+hiding_enabled = 0
+wrap_lines = false
+caret_block_mode = false
+caret_blink = false
+caret_blink_speed = 0.65
+caret_moving_by_right_click = true
+_sections_unfolded = [ "Rect" ]
+
+[node name="RightColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 424.0
-margin_right = 1312.0
-margin_bottom = 819.0
+margin_right = 1880.0
+margin_bottom = 999.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -243,13 +349,13 @@ custom_constants/separation = 15
 alignment = 0
 _sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
 
-[node name="MapChoice" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn" index="0"]
+[node name="MapChoice" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 888.0
+margin_right = 1456.0
 margin_bottom = 527.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -259,7 +365,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "custom_styles" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -267,7 +373,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 881.0
+margin_right = 1449.0
 margin_bottom = 520.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -281,14 +387,14 @@ custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 5.0
-margin_right = 869.0
+margin_right = 1437.0
 margin_bottom = 508.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -299,13 +405,13 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin" ]
 
-[node name="MapTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer" index="0"]
+[node name="MapTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 864.0
+margin_right = 1432.0
 margin_bottom = 49.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -321,14 +427,14 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Material", "custom_fonts" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 53.0
-margin_right = 864.0
+margin_right = 1432.0
 margin_bottom = 508.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -338,13 +444,13 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="PrevMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="PrevMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 108.0
+margin_right = 392.0
 margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
@@ -364,14 +470,14 @@ flat = false
 align = 1
 _sections_unfolded = [ "Rect", "custom_fonts" ]
 
-[node name="Screenshot" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="Screenshot" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 112.0
-margin_right = 752.0
+margin_left = 396.0
+margin_right = 1036.0
 margin_bottom = 455.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -383,14 +489,14 @@ texture = ExtResource( 5 )
 stretch_mode = 0
 _sections_unfolded = [ "Offset" ]
 
-[node name="NextMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="2"]
+[node name="NextMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 756.0
-margin_right = 864.0
+margin_left = 1040.0
+margin_right = 1432.0
 margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
@@ -410,15 +516,16 @@ flat = false
 align = 1
 _sections_unfolded = [ "Rect", "custom_fonts", "custom_styles" ]
 
-[node name="GameModeOptions" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn" index="1"]
+[node name="GameModeOptions" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 542.0
-margin_right = 888.0
-margin_bottom = 819.0
+margin_right = 1456.0
+margin_bottom = 999.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -427,7 +534,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -435,8 +542,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 881.0
-margin_bottom = 270.0
+margin_right = 1449.0
+margin_bottom = 450.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -449,7 +556,7 @@ custom_constants/margin_left = 15
 custom_constants/margin_bottom = 15
 _sections_unfolded = [ "Margin", "custom_constants" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -457,8 +564,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 859.0
-margin_bottom = 248.0
+margin_right = 1427.0
+margin_bottom = 428.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -469,13 +576,14 @@ custom_constants/separation = 15
 alignment = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 844.0
+margin_right = 1412.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -485,7 +593,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -506,7 +614,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Material", "custom_fonts" ]
 
-[node name="GameMode" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="GameMode" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -534,14 +642,14 @@ items = [  ]
 selected = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer" index="1"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 40.0
-margin_right = 844.0
+margin_right = 1412.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -550,15 +658,16 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="TDMOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer" index="2"]
+[node name="TDMOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="2"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 59.0
-margin_right = 844.0
-margin_bottom = 233.0
+margin_right = 1412.0
+margin_bottom = 343.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -568,7 +677,7 @@ size_flags_vertical = 3
 columns = 2
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="0"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -589,7 +698,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="MaxLives" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="1"]
+[node name="MaxLives" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -615,7 +724,7 @@ editable = true
 prefix = ""
 suffix = ""
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -637,7 +746,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="NumTeams" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="3"]
+[node name="NumTeams" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -664,8 +773,9 @@ editable = false
 prefix = ""
 suffix = ""
 
-[node name="CTFOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer" index="3"]
+[node name="CTFOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="3"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -683,7 +793,7 @@ size_flags_vertical = 3
 columns = 2
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/CTFOptions" index="0"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/CTFOptions" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -704,8 +814,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="OverruleOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer" index="4"]
+[node name="OverruleOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="4"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -723,7 +834,7 @@ size_flags_vertical = 3
 columns = 2
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/OverruleOptions" index="0"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/OverruleOptions" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -744,137 +855,32 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="RightSideBar" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1327.0
-margin_right = 1560.0
-margin_bottom = 819.0
+margin_top = 358.0
+margin_right = 1412.0
+margin_bottom = 413.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_constants/separation = 10
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+alignment = 2
 
-[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar" index="0"]
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer2" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 233.0
-margin_bottom = 31.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Add Player"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 41.0
-margin_right = 233.0
-margin_bottom = 72.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Host"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="IPEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 82.0
-margin_right = 233.0
-margin_bottom = 107.0
-rect_min_size = Vector2( 0, 25 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-text = "IP:PORT"
-readonly = false
-highlight_current_line = false
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-override_selected_font_color = false
-context_menu_enabled = true
-smooth_scrolling = false
-v_scroll_speed = 80.0
-hiding_enabled = 0
-wrap_lines = false
-caret_block_mode = false
-caret_blink = false
-caret_blink_speed = 0.65
-caret_moving_by_right_click = true
-_sections_unfolded = [ "Rect" ]
-
-[node name="Spacing" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 117.0
-margin_right = 233.0
-margin_bottom = 754.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 3
-_sections_unfolded = [ "Size Flags" ]
-
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 764.0
-margin_right = 233.0
-margin_bottom = 819.0
+margin_left = 1179.0
+margin_right = 1412.0
+margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -894,14 +900,14 @@ _sections_unfolded = [ "Margin", "Size Flags", "custom_colors", "custom_fonts" ]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/PrevMap" to="." method="_on_PrevMap_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/AddPlayerButton" to="." method="_add_player"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/NextMap" to="." method="_on_NextMap_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/PrevMap" to="." method="_on_PrevMap_pressed"]
 
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/CenterColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer/GameMode" to="." method="_on_GameMode_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/NextMap" to="." method="_on_NextMap_pressed"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar/AddPlayerButton" to="." method="_add_player"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer/GameMode" to="." method="_on_GameMode_item_selected"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightSideBar/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_StartButton_pressed"]
 
 
