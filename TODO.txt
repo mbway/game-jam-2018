@@ -7,6 +7,7 @@
 - can switch weapons when dead
 - seems to be a race condition with the weapon slots GUI so that when re-spawning the new pistol is added first (which fails) then the old pistol is removed, rather than the other way around. So after re-spawning the pistol isn't on the slots GUI
     - while you're at it, might want to have all the weapons in the slots and only change their visibility
+- on the AI test level, navigate to the area where there is a gap but you have to drop down rather than double jumping because there is dirt in the way. Drop into the hole then without jumping, walk to the left or right until you hit the side, then try to walk the other way. You will be stuck and have to jump to get free.
 
 short term todo
 - show names above players
@@ -93,7 +94,15 @@ short term todo
     - leaderboard after game over
     - list of recent kills or more generally events
     - show current game mode
+- water
+    - players float
+    - damage once runs out of breath
+    - water shader and splash effects
+- animation when weapons appear in the pickup locations
+- flying gun turret which follows you? (helps you but doesnt do much damage to enemies)
 
+# Reference
+- this game has a really nice art style: Lapis x Labyrinth
 
 # Extension Features
 - networking

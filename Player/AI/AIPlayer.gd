@@ -64,7 +64,7 @@ func _process(delta):
 				var path_len = path_follow.path.size()
 				var path_end = path_follow.path[path_len-1]
 				var neigbour_ids = nav.get_neighbour_ids(path_end.id)
-				if neigbour_ids.empty():
+				if neigbour_ids.size() == 0:
 					break # can't add any more to the path
 				elif path_len > 1:
 					var path_penultimate = path_follow.path[path_len-2]

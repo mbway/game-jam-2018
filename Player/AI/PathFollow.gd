@@ -402,7 +402,7 @@ func _get_platforms():
 		var half_extents = c.get_node('CollisionShape2D').shape.extents
 		platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, false]) # left_x, right_x, y, one_way
 
-	if map.has_node('OneWayCollision'):
+	if map.has_node('OneWayCollision'): # not every map has need for one way collisions
 		for c in map.get_node('OneWayCollision').get_children(): # list of StaticBody2D
 			var pos = c.position
 			var half_extents = c.get_node('CollisionShape2D').shape.extents

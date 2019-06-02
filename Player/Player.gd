@@ -244,11 +244,9 @@ func _set_health(new_health):
 	health = max(new_health, 0)
 	$HealthBar.set_health(float(health)/max_health)
 
+# heal the player without exceeding the maximum health
 func heal(amount):
-	var new_health = health + amount
-	if new_health > max_health: new_health = max_health
-	
-	_set_health(new_health)
+	_set_health(min(health+amount, max_health))
 
 func _set_invulnerable(new_invuln):
 	invulnerable = new_invuln
