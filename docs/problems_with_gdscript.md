@@ -44,6 +44,16 @@ I don't like gdscript very much, here is why.
         - the syntax for this is a bit dumb IMO
     - https://github.com/godotengine/godot/issues/6500
     - a workaround is to create a separate function like `_on_process()` which _can_ be overriden, then in `_process` just call `_on_process`...
+- the type annotation system is half-baked at the time of writing (3.1)
+    - cannot annotate nullable/optional types <https://github.com/godotengine/godot-proposals/issues/162>
+    - cannot annotate values as being enums
+- I spent ages trying to figure out a problem with getting a transform from the viewport to the local frame of a node
+    - The problem turned out to be that Transform2D.inverse() DOES NOT RETURN THE INVERSE!!!
+    - from the docs:
+        "Returns the inverse of the transform, under the assumption that the transformation is composed of rotation and translation (no scaling, use affine_inverse for transforms with scaling)."
+    - !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    - Transform2D.affine_inverse() is the actual operation which performs the inverse
+    - I think this is the single most brain-dead decision for gdscript yet. No doubt the assumption that there is no scale component is used to create a more efficient inverse implementation, however making this THE DEFAULT behaviour of a method called `inverse' is the stupidest thing I've seen from an API in a while. The optimised version of a method with extra assumptions should be the one which has a name like `rigid_inverse` to make the assumption explicit
 
 
 # Problems with Godot

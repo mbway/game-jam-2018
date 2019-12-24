@@ -1,7 +1,7 @@
 
 enum State {
 	FLOOR,			# the player is touching the floor.
-	EDGE_PLATFORM,	# the player has recently fallen from a platform. Is able to jump from this state as if it was still on the floor.
+	EDGE_PLATFORM,	# the player has recently fallen from a platform. Is able to jump from this state as if it was still on the floor. (Coyote time)
 	JUMPING,		# a jump is in progress, the jump button is held.
 	JUMP_FINISHED,	# when the player hits the floor before releasing the jump button. Must release before performing another jump.
 	FALLING,		# not on the floor but jump is not pressed, can jump from this state if there are mid_air_jumps available.

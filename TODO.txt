@@ -100,9 +100,11 @@ short term todo
     - water shader and splash effects
 - animation when weapons appear in the pickup locations
 - flying gun turret which follows you? (helps you but doesnt do much damage to enemies)
+- wall jumping
 
 # Reference
 - this game has a really nice art style: Lapis x Labyrinth
+- thing thing
 
 # Extension Features
 - networking
