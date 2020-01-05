@@ -31,7 +31,7 @@ static func random_choice(values, distribution=null, normalized=true):
 			distribution.append(p)
 
 	# normalize the distribution
-	assert distribution.size() == choices
+	assert(distribution.size() == choices)
 	if not normalized:
 		var sum_p = 0.0
 		for p in distribution:

@@ -98,7 +98,7 @@ func transition(to):
 
 	# transition actions
 	if from == State.FALLING and to == State.JUMPING:
-		assert mid_air_jumps > 0
+		assert(mid_air_jumps > 0)
 		mid_air_jumps -= 1
 	elif from == State.PREEMPTIVE_JUMP and to == State.JUMPING:
 		mid_air_jumps = MAX_MID_AIR_JUMPS

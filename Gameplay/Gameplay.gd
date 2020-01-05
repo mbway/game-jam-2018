@@ -57,7 +57,7 @@ func _ready():
 
 
 func set_game_mode(mode):
-	assert mode in game_mode_nodes
+	assert(mode in game_mode_nodes)
 	for n in $GameMode.get_children():
 		$GameMode.remove_child(n)
 	$GameMode.add_child(game_mode_nodes[mode])

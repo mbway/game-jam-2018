@@ -97,7 +97,7 @@ func display_table(t, bbcode=false, headings=false):
 	text.push_table(cols)
 	var headings_row = headings
 	for row in t:
-		assert len(row) == cols
+		assert(len(row) == cols)
 
 		for c in row:
 			text.push_cell()
@@ -409,13 +409,13 @@ func common_prefix(words):
 	return prefix
 
 #func test_common_prefix():
-#	assert common_prefix(['', '']) == ''
-#	assert common_prefix(['a', 'b']) == ''
-#	assert common_prefix(['a', 'a']) == 'a'
-#	assert common_prefix(['ab', 'a']) == 'a'
-#	assert common_prefix(['ab', 'abc']) == 'ab'
-#	assert common_prefix(['ab', 'abc', 'ab']) == 'ab'
-#	assert common_prefix(['ac', 'abc', 'ab']) == 'a'
+#	assert(common_prefix(['', '']) == '')
+#	assert(common_prefix(['a', 'b']) == '')
+#	assert(common_prefix(['a', 'a']) == 'a')
+#	assert(common_prefix(['ab', 'a']) == 'a')
+#	assert(common_prefix(['ab', 'abc']) == 'ab')
+#	assert(common_prefix(['ab', 'abc', 'ab']) == 'ab')
+#	assert(common_prefix(['ac', 'abc', 'ab']) == 'a')
 
 
 func autocomplete_matches(words, possible_matches, case_sensitive=true):

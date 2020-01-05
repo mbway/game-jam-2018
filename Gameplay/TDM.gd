@@ -60,7 +60,7 @@ func spawn_player(p, delayed):
 		return
 
 	var num_spawn_points = spawn_points.get_child_count()
-	assert num_spawn_points > 0 # no spawn points!
+	assert(num_spawn_points > 0)
 	var spawn = spawn_points.get_child(randi() % num_spawn_points)
 	# spawn offset helps prevent players from spawning directly on top of
 	# one another and messing with the physics
