@@ -1,3 +1,6 @@
 [submodule "addons/graph_node"]
 	path = addons/graph_node
 	url = https://github.com/mbway/godot_graph_node.git
+[submodule "addons/tiled_importer"]
+	path = addons/tiled_importer
+	url = https://github.com/vnen/godot-tiled-importer.git
