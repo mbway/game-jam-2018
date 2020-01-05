@@ -1,103 +1,53 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/graph-node/Graph2D.gd" type="Script" id=4]
-[ext_resource path="res://addons/graph-node/Assets/icon.png" type="Texture" id=5]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=7]
 
 [node name="AIStressTest" type="Node2D"]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Z Index" ]
 
-[node name="Map" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Map" parent="." instance=ExtResource( 2 )]
 
-[node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
-
+[node name="MapBottom" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 4000 )
 
-[node name="Nav" type="Node2D" parent="." index="2"]
+[node name="Bullets" type="Node2D" parent="."]
 
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
-nodes = PoolVector2Array( 3152, 1800, 4144, 1800, 4368, 1640, 4832, 1640, 4416, 1640, 4144, 1288, 3920, 1288, 3280, 1288, 3048, 1288, 4048, 1800, 3752, 1800, 4368, 1288, 5184, 1352, 5184, 968, 5240, 968, 5240, 584, 5200, 584, 5480, 520, 5720, 520, 5448, 968, 3024, 2048, 2808, 2048, 2328, 1800, 2088, 1800, 1560, 2056, 1328, 2056, 2096, 2376, 2384, 2568, 2432, 2792, 3152, 2784, 3504, 2776, 4216, 2776, 3336, 2944, 3440, 2944, 3216, 2944, 3424, 1800, 2368, 2376, 2320, 2376, 4368, 3488, 4592, 3488, 4360, 2216, 4496, 2056, 4688, 2056, 4776, 2216, 5624, 2216, 4416, 1288, 2424, 2568, 3336, 2824, 5120, 2216, 5120, 2040, 5120, 2096, 5032, 2096, 5032, 2048, 5208, 2048, 5208, 2096 )
-edges = [ [ 1, 2, true, true ], [ 2, 4, true, true ], [ 4, 3, true, true ], [ 8, 7, true, true ], [ 7, 6, true, true ], [ 6, 5, true, true ], [ 6, 10, true, false ], [ 6, 9, true, false ], [ 10, 9, true, true ], [ 9, 1, true, true ], [ 5, 9, true, false ], [ 4, 11, false, true ], [ 5, 11, true, true ], [ 17, 18, true, true ], [ 15, 16, true, true ], [ 15, 14, true, true ], [ 14, 13, true, true ], [ 14, 19, true, true ], [ 16, 17, true, true ], [ 12, 13, true, true ], [ 17, 19, true, false ], [ 17, 14, true, false ], [ 0, 20, true, true ], [ 20, 21, true, true ], [ 21, 22, true, true ], [ 22, 23, true, true ], [ 23, 24, true, true ], [ 24, 25, true, true ], [ 24, 26, true, true ], [ 28, 29, true, true ], [ 30, 31, true, true ], [ 29, 32, true, true ], [ 32, 30, true, true ], [ 32, 33, true, true ], [ 32, 34, true, true ], [ 29, 34, true, true ], [ 33, 30, true, true ], [ 3, 12, true, true ], [ 10, 35, true, true ], [ 35, 0, true, true ], [ 7, 35, true, false ], [ 20, 29, true, false ], [ 21, 28, true, false ], [ 27, 36, true, false ], [ 5, 14, false, true ], [ 16, 5, true, false ], [ 21, 37, true, true ], [ 37, 26, true, true ], [ 37, 36, false, true ], [ 37, 27, true, false ], [ 31, 38, true, false ], [ 38, 39, true, true ], [ 1, 40, true, false ], [ 40, 31, true, false ], [ 40, 41, true, true ], [ 41, 42, true, true ], [ 43, 40, true, true ], [ 45, 4, true, true ], [ 45, 11, true, true ], [ 42, 43, true, true ], [ 28, 46, true, false ], [ 46, 27, true, false ], [ 27, 28, true, false ], [ 37, 28, true, false ], [ 29, 47, true, true ], [ 47, 30, true, true ], [ 48, 50, true, true ], [ 50, 49, true, true ], [ 43, 48, true, true ], [ 48, 44, true, true ], [ 51, 50, true, true ], [ 50, 54, true, true ], [ 53, 49, true, true ], [ 49, 52, true, true ], [ 52, 42, true, true ] ]
+[node name="Players" type="Node2D" parent="."]
 
-[node name="Bullets" type="Node2D" parent="." index="3"]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
-_sections_unfolded = [ "Z Index" ]
+[node name="Camera" parent="." instance=ExtResource( 7 )]
 
-[node name="Players" type="Node2D" parent="." index="4"]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 
-[node name="HUD" parent="." index="5" instance=ExtResource( 6 )]
+[node name="GameMode" type="Node" parent="."]
 
-[node name="Camera" parent="." index="6" instance=ExtResource( 7 )]
+[node name="TDM" type="Node" parent="GameMode"]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="7"]
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM"]
 
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-[node name="GameMode" type="Node" parent="." index="8"]
-
-[node name="TDM" type="Node" parent="GameMode" index="0"]
-
-[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="0"]
-
-[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
-
+[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints"]
 position = Vector2( 3250, 1760 )
 
-[node name="Text" type="Node2D" parent="." index="9"]
+[node name="Text" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="Text" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="Text"]
 margin_left = 3430.0
 margin_top = 1350.0
 margin_right = 3771.0
 margin_bottom = 1380.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "To make this jump, you must land on the small ledge"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
 
-[node name="Label2" type="Label" parent="Text" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label2" type="Label" parent="Text"]
 margin_left = 5230.0
 margin_top = 1150.0
 margin_right = 5460.0
 margin_bottom = 1181.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "This is the highest possible ledge
 you can reach
 
@@ -105,103 +55,39 @@ you can reach
 with the top line of text)"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label3" type="Label" parent="Text" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label3" type="Label" parent="Text"]
 margin_left = 5490.0
 margin_top = 720.0
 margin_right = 5720.0
 margin_bottom = 751.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "To reach this ledge you must
 jump on the small ledge first"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label4" type="Label" parent="Text" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label4" type="Label" parent="Text"]
 margin_left = 2030.0
 margin_top = 2150.0
 margin_right = 2371.0
 margin_bottom = 2180.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "here there are two routes to reach the end location"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
 
-[node name="Label5" type="Label" parent="Text" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label5" type="Label" parent="Text"]
 margin_left = 3170.0
 margin_top = 2740.0
 margin_right = 3511.0
 margin_bottom = 2770.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "this jump short enough but obstructed"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
 
-[node name="Label6" type="Label" parent="Text" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label6" type="Label" parent="Text"]
 margin_left = 4310.0
 margin_top = 3470.0
 margin_right = 4651.0
 margin_bottom = 3500.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "this is a dead end. Death is the only escape!"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
-
-
