@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/AIStressTest/AIStressTest.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/graph_node/src/DiGraph2D.gd" type="Script" id=4]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=7]
 
@@ -17,6 +18,20 @@ position = Vector2( 0, 4000 )
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="Players" type="Node2D" parent="."]
+
+[node name="Nav" type="Node2D" parent="."]
+script = ExtResource( 4 )
+_stored_adjacency = "3144.000000 1800.000000 10
+4144.000000 1800.000000 7 10
+3048.000000 1288.000000 3
+3280.000000 1288.000000 4 2 10 1
+3920.000000 1288.000000 1 3 10 5
+4136.000000 1288.000000 4 6 10
+4408.000000 1288.000000 9 5 8
+4360.000000 1640.000000 1 9
+4848.000000 1640.000000 9 6
+4408.000000 1640.000000 7 8 6
+3592.000000 1800.000000 0 1"
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 

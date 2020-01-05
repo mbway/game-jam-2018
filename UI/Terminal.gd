@@ -9,6 +9,9 @@ extends CanvasLayer
 # - if a sequence of commands is frequently used, a macro can be created and played back with the macro command
 # - enter vectors like x,y (no spaces allowed)
 
+# TODO: split the terminal operation and specific commands. Maybe turn it into an addon?
+# TODO: use function references or call by strings or something
+
 var G = globals
 
 onready var utils = preload('res://Utils/Utils.gd')
@@ -49,7 +52,7 @@ func _process(delta):
 			var item = G.output_queue.pop_front()
 			var is_error = item[0]
 			var msg = item[1] + '\n'
-			if item[0]: # is_error
+			if is_error:
 				log_error(msg)
 			else:
 				log_text(msg)

@@ -8,7 +8,7 @@ var G = globals
 
 # an array of dictionaries with 'pos' and 'id' elements. 'id' indexes into nav.nodes and a 'pos' is a Vector2.
 # if the node was added temporarily (ie first or last in path) then id may be null
-var path = [] # a list of targets to follow to reach the waypoint
+var path := [] # a list of targets to follow to reach the waypoint
 onready var _target = null # the next target that the player should move directly towards
 
 const CHECK_PROGRESS_EVERY = 2.0 # seconds
@@ -321,7 +321,12 @@ func clear_path():
 
 func path_append(node_id):
 	if node_id != null:
-		path.append({'pos': nav.nodes[node_id], 'id': node_id})
+		path.append({'pos': nav.get_node_pos(node_id), 'id': node_id})
+
+func _set_from_path_along_graph(path_along_graph):
+	path = []
+	for i in range(path_along_graph.points.size()):
+		path.append({'pos': path_along_graph.points[i], 'id': path_along_graph.ids[i]})
 
 # get the ids of the nodes to the left and right of the given position on the
 # same platform as pos. Returns null if pos is not on a platform. The left or
@@ -339,7 +344,7 @@ func get_nearest_platform_nodes(pos):
 	for n in range(node_platforms.size()):
 		if node_platforms[n] == platform:
 			# n is on the same platform as pos
-			var dist = nav.nodes[n].x - pos.x
+			var dist = nav.get_node_pos(n).x - pos.x
 
 			if 0 <= dist and dist < right_dist:
 				right = n
@@ -364,9 +369,9 @@ func set_waypoint(waypoint):
 		if collision == null:
 			return false # didn't set because it wouldn't be safe (the player might fall and die)
 		else:
-			path = nav.get_path(collision.pos, waypoint)
+			_set_from_path_along_graph(nav.get_shortest_path(collision.pos, waypoint))
 	else:
-		path = nav.get_path(player.position, waypoint)
+		_set_from_path_along_graph(nav.get_shortest_path(player.position, waypoint))
 	_set_target(null)
 	var c = AINodes.get_node('Path').curve
 	c.clear_points()
@@ -416,12 +421,13 @@ func _get_platforms():
 # the index of the platform (collidable rectangle in the node Map/Collision) for each node in the graph.
 func _get_node_platforms():
 	var node_platforms = []
-	for n in nav.nodes:
+	var node_positions = nav.get_node_positions()
+	for n in node_positions:
 		node_platforms.append(_closest_platform_under(n))
 
-	for i in range(nav.nodes.size()):
+	for i in range(node_positions.size()):
 		if node_platforms[i] != -1:
-			var n = nav.nodes[i]
+			var n = node_positions[i]
 			var p = platforms[node_platforms[i]]
 	return node_platforms
 

@@ -17,7 +17,7 @@ const EXPLORE_PATH_LEN = 5 # keep the exploration path at this length
 onready var path_follow = preload('res://Player/AI/PathFollow.gd').new(self)
 
 func _ready():
-	for n in nav.nodes:
+	for _i in range(nav.num_nodes()):
 		last_visited.append(0)
 
 # path following
