@@ -379,7 +379,7 @@ func handle_autocomplete():
 	if len(words) > 1: # command already typed
 		var cmd = words[0]
 		if cmd == 'macro' and len(words) == 2: # autocomplete .macro files in the user directory
-			autocomplete_matches(words, utils.listdir(MACRO_DIR))
+			autocomplete_matches(words, utils.list_dir(MACRO_DIR))
 		if cmd == 'setop' and len(words) == 2: # autocomplete option names
 			autocomplete_matches(words, ac_option_names)
 		elif cmd == 'give' and len(words) == 3: # autocomplete pickups
