@@ -26,7 +26,7 @@ I don't like gdscript very much, here is why.
     - `Engine.editor_hint` is supposed to tell when in the editor and when in the game, but doesn't seem to work when called from a plugin...
 - not well documented. One good example is the documentation for Input.set_mouse_mode: 'Set the mouse mode. See the constants for more information.'. Which constants would those be? You haven't said...
     - also, inconsistent styling. Some arguments are written `likethis` and others `like_this` for no reason, simply sloppy adherence to a single coding style.
-        - even worse, some functions have this problem too: `printraw()` and `print_stack()`
+        - even worse, some functions have this problem too: `printraw()` and `print_stack()`, `is_valid_integer()` and `to_int()`
     - some of the naming is a bit suspect
         - https://godot.readthedocs.io/en/3.0/classes/class_rectangleshape2d.html
         - 'extents - The rectangle’s half extents'
@@ -54,6 +54,10 @@ I don't like gdscript very much, here is why.
     - !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     - Transform2D.affine_inverse() is the actual operation which performs the inverse
     - I think this is the single most brain-dead decision for gdscript yet. No doubt the assumption that there is no scale component is used to create a more efficient inverse implementation, however making this THE DEFAULT behaviour of a method called `inverse' is the stupidest thing I've seen from an API in a while. The optimised version of a method with extra assumptions should be the one which has a name like `rigid_inverse` to make the assumption explicit
+- the class_name keyword is supposed to set the class name for the script (obviously) but get_class and is_class do not return the correct values!
+- the value of an exported array value is shared between all instances of the script!!!!!
+    - this is an intentional design decision!
+    - no other types (as far as I can tell, this doesn't even apply to the pooled arrays so it doesn't make sense even if there is a reason behind it)
 
 
 # Problems with Godot
