@@ -11,4 +11,3 @@ static func list_dir(path: String) -> Array:
 			files.append(f)
 	dir.list_dir_end()
 	return files
-	

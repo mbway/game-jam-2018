@@ -19,18 +19,18 @@ enum Control {
 }
 
 class PlayerConfig:
-	var num # 1-based
-	var name # human readable
-	var team # 1-based
-	var control # Control
-	var gamepad_id = -1 # only used when control == Control.GAMEPAD
+	var num: int # 1-based
+	var name: String # human readable
+	var team: int # 1-based
+	var control: int # Control
+	var gamepad_id: int = -1 # only used when control == Control.GAMEPAD
 
-	func _init(num=-1, name='', team=-1, control=-1, gamepad_id=-1):
-		self.num = num
-		self.name = name
-		self.team = team
-		self.control = control
-		self.gamepad_id = gamepad_id
+	func _init(set_num: int = -1, set_name: String = '', set_team: int = -1, set_control: int = -1, set_gamepad_id: int = -1):
+		self.num = set_num
+		self.name = set_name
+		self.team = set_team
+		self.control = set_control
+		self.gamepad_id = set_gamepad_id
 
 	func get_control_type_string():
 		if control == Control.KEYBOARD:
@@ -109,11 +109,11 @@ var pickups = {
 }
 
 func log(txt):
-	printerr(txt)
+	print(txt)
 	output_queue.append([false, txt])
 
 func log_err(txt):
-	print('Error: ' + txt)
+	printerr('Error: ' + txt)
 	output_queue.append([true, txt])
 
 func get_scene():
@@ -145,9 +145,9 @@ class Settings:
 		'mute_all'         : [TYPE_BOOL, false, 'whether to prevent the game from producing any sound'],
 	}
 
-	func _init(settings_path):
+	func _init(load_settings_path: String):
 		globals.log('settings stored in "%s"' % OS.get_user_data_dir())
-		self.settings_path = settings_path
+		self.settings_path = load_settings_path
 		self.settings_file = ConfigFile.new()
 		var err = self.settings_file.load(settings_path)
 		if err != OK:

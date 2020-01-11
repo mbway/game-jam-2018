@@ -1,7 +1,7 @@
 extends Node
 
 
-static func random_normal(mu, sigma):
+static func random_normal(mu: float, sigma: float) -> float:
 	# Box-Muller transform
 
 	# two samples from U(0,1)
@@ -18,7 +18,7 @@ static func random_normal(mu, sigma):
 # (i.e. distribution[i] = P(choosing values[i])). If none is passed then a
 # uniform distribution is assumed. The distribution will be normalized if
 # normalized=false.
-static func random_choice(values, distribution=null, normalized=true):
+static func random_choice(values: Array, distribution = null, normalized: bool = true) -> Object:
 	var choices = values.size()
 	if choices == 0:
 		return null
@@ -27,7 +27,7 @@ static func random_choice(values, distribution=null, normalized=true):
 	if distribution == null:
 		distribution = []
 		var p = 1.0/choices
-		for i in range(choices):
+		for _i in range(choices):
 			distribution.append(p)
 
 	# normalize the distribution
@@ -48,13 +48,13 @@ static func random_choice(values, distribution=null, normalized=true):
 	return values[choices-1]
 
 # an implementation of `a mod b` where the result is between 0 and b-1 even if a is negative.
-static func positive_modulo(a, b):
+static func positive_modulo(a: int, b: int) -> int:
 	return (a % b + b) % b
 
 # positive modulo for floating point numbers
-static func positive_fmod(a, b):
+static func positive_fmod(a: float, b: float) -> float:
 	return fmod(fmod(a, b)+b, b)
 
-static func shortest_angle_between(a, b):
+static func shortest_angle_between(a: float, b: float) -> float:
 	# https://stackoverflow.com/a/7869457
 	return positive_fmod((a-b)+PI, TAU) - PI

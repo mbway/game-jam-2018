@@ -11,46 +11,46 @@ extends Node2D
 # or
 #	dd.add_vector(..., 'myvector') # will overwrite every time the name is re-used
 
-const DEFAULT_COLOR = Color('#ffff0000')
-var tmp_counter = 0
+const DEFAULT_COLOR := Color('#ffff0000')
+var tmp_counter := 0
 
 var items = {}
 
 
 class Item:
 	# seconds to display for, INF to always display. note: can still be overwritten if another item uses the same name
-	var lifetime
+	var lifetime: float
 	# the name to uniquely identify this item, adding a new item with the same name will replace the old one
-	var name
-	var color
+	var name: String
+	var color: Color
 
-	func _init(lifetime=INF, name=null, color=DEFAULT_COLOR):
-		self.lifetime = lifetime
-		self.name = name
-		self.color = color
+	func _init(set_lifetime: float = INF, set_name: String = "", set_color: Color = DEFAULT_COLOR):
+		self.lifetime = set_lifetime
+		self.name = set_name
+		self.color = set_color
 
 class PointItem:
 	extends Item
-	var pos
-	var radius
+	var pos: Vector2
+	var radius: float
 
-	func _init(pos, radius=5, lifetime=INF, name=null, color=DEFAULT_COLOR):
-		._init(lifetime, name, color)
-		self.pos = pos
-		self.radius = radius
+	func _init(set_pos: Vector2, set_radius: float = 5.0, set_lifetime: float = INF, set_name: String = "", set_color: Color = DEFAULT_COLOR):
+		._init(set_lifetime, set_name, set_color)
+		self.pos = set_pos
+		self.radius = set_radius
 
 	func draw(dd):
 		dd.draw_circle(pos, radius, color)
 
 class LineSegmentItem:
 	extends Item
-	var v1
-	var v2
+	var v1: Vector2
+	var v2: Vector2
 
-	func _init(v1, v2, lifetime=INF, name=null, color=DEFAULT_COLOR):
-		._init(lifetime, name, color)
-		self.v1 = v1
-		self.v2 = v2
+	func _init(set_v1: Vector2, set_v2: Vector2, set_lifetime: float = INF, set_name: String = "", set_color: Color=DEFAULT_COLOR):
+		._init(set_lifetime, set_name, set_color)
+		self.v1 = set_v1
+		self.v2 = set_v2
 
 	func draw(dd):
 		dd.draw_line(v1, v2, color, true)
@@ -58,13 +58,13 @@ class LineSegmentItem:
 
 class VectorItem:
 	extends Item
-	var pos
-	var vec
+	var pos: Vector2
+	var vec: Vector2
 
-	func _init(vec, pos, lifetime=INF, name=null, color=DEFAULT_COLOR):
-		._init(lifetime, name, color)
-		self.vec = vec
-		self.pos = pos
+	func _init(set_vec: Vector2, set_pos: Vector2, set_lifetime: float = INF, set_name: String = "", set_color: Color = DEFAULT_COLOR):
+		._init(set_lifetime, set_name, set_color)
+		self.vec = set_vec
+		self.pos = set_pos
 
 	func draw(dd):
 		var end = pos + vec
@@ -83,21 +83,21 @@ class VectorItem:
 # so for ease of use, I manually have to create an add_* function for every type :(
 # no variadic arguments so I can't even hack something like func add(type, args...)
 
-func add_point(pos, radius=5, lifetime=INF, name=null, color=DEFAULT_COLOR):
+func add_point(pos: Vector2, radius: float = 5.0, lifetime: float = INF, name: String = "", color: Color = DEFAULT_COLOR) -> String:
 	return _add(PointItem.new(pos, radius, lifetime, name, color))
-func add_line_segment(v1, v2, lifetime=INF, name=null, color=DEFAULT_COLOR):
+func add_line_segment(v1: Vector2, v2: Vector2, lifetime: float = INF, name: String = "", color: Color = DEFAULT_COLOR) -> String:
 	return _add(LineSegmentItem.new(v1, v2, lifetime, name, color))
-func add_vector(vec, pos, lifetime=INF, name=null, color=DEFAULT_COLOR):
+func add_vector(vec: Vector2, pos: Vector2, lifetime: float = INF, name: String = "", color: Color = DEFAULT_COLOR) -> String:
 	return _add(VectorItem.new(vec, pos, lifetime, name, color))
 
-func _add(item):
-	if item.name == null:
+func _add(item) -> String:
+	if item.name == "":
 		item.name = tmp_name()
 	items[item.name] = item
 	return item.name
 
 
-func remove(name):
+func remove(name: String):
 	if not items.has(name):
 		print('item "%s" not found' % name)
 	else:
@@ -105,7 +105,7 @@ func remove(name):
 		items.erase(name)
 		i.free() # not sure if this is necessary...
 
-func _process(delta):
+func _process(delta: float):  # override
 	for k in items.keys():
 		var i = items[k]
 		i.lifetime -= delta
@@ -113,25 +113,17 @@ func _process(delta):
 			items.erase(k)
 	update()
 
-func _draw():
+func _draw():  # override
 	for i in items.values():
 		i.draw(self)
 
 
 # Utilities
 
-func tmp_name():
+func tmp_name() -> String:
 	var name = 'tmp_%s' % tmp_counter
 	tmp_counter += 1
 	return name
 
-func _perpendicular_vector(v):
-	# dot(u, v) = 0 because perpendicular
-	# choose u_x = 1, solve for u_y
-	# u_x*v_x + u_y*v_y = 0
-	# u_y = -u_x*v_x / v_y
-	# then normalise
-	if v.y != 0:
-		return Vector2(1, -v.x/v.y).normalized()
-	else:
-		return Vector2(0, 1) # straight up
+static func _perpendicular_vector(vec: Vector2) -> Vector2:
+	return Vector2(vec.y, -vec.x)
