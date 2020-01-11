@@ -1,6 +1,5 @@
 
 var G = globals
-var Math = preload('res://Utils/Math.gd')
 var player
 
 # start_diff is calculated by multiplying by the subtended angle by a factor between 1 and this value.
@@ -32,7 +31,7 @@ func auto_aim_at(raw_angle, target_player):
 	# the weapon-dependent aim angle is taken into account
 	var target_angle = player.weapon_aim_angle(target_player.position - player.position)
 
-	var half_subtended = half_subtended(target_player)
+	var half_subtended = get_half_subtended(target_player)
 	var angle_diff = Math.shortest_angle_between(raw_angle, target_angle)
 	# start_diff is the angle difference where the influence of auto aim starts to take effect
 	# the maximum half-subtended angle is roughly 0.5. A width of 8 was chosen by inspection with this in mind.
@@ -57,14 +56,14 @@ func auto_aim_at(raw_angle, target_player):
 	return raw_angle + correction
 
 # the angle that the target player subtends at the location of this player
-func half_subtended(target_player):
+func get_half_subtended(target_player):
 	var to_target = target_player.position - player.position
 	var hitbox = target_player.get_node('HitBox').shape
 	var r = hitbox.height/2 + hitbox.radius # approximate the capsule hitbox using a circle (less accurate when above or below)
 	var half_subtended = atan(r/to_target.length()) # don't need atan2 since the quadrant doesn't matter
 	return half_subtended
 
-func auto_aim_influence(raw_angle, half_subtended, angle_diff, start_diff):
+func auto_aim_influence(raw_angle, half_subtended, angle_diff, start_diff) -> float:
 	# solve for the width which results in an output of start_influence at an angle difference of start_diff
 	# this could be cached but the other parameters might be changed making the cached value wrong
 	var width = -log(start_influence/max_influence)/pow(start_diff, power) # log is natural logarithm

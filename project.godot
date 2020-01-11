@@ -8,9 +8,50 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://Weapons/Gun.gd"
+}, {
+"base": "Node2D",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Player/Inventory.gd"
+}, {
+"base": "Reference",
+"class": "JumpPhysics",
+"language": "GDScript",
+"path": "res://Player/JumpPhysics.gd"
+}, {
+"base": "Reference",
+"class": "Math",
+"language": "GDScript",
+"path": "res://Utils/Math.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Weapons/Projectiles/Projectile.gd"
+}, {
+"base": "Reference",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://Utils/Utils.gd"
+} ]
 _global_script_class_icons={
-
+"Gun": "",
+"Inventory": "",
+"JumpPhysics": "",
+"Math": "",
+"Player": "",
+"Projectile": "",
+"Utils": ""
 }
 
 [application]

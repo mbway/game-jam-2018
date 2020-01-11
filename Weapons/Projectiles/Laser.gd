@@ -1,9 +1,9 @@
 extends Area2D
 
 # set on setup
-var shot_from
-var player
-var damage
+var shot_from: Gun
+var player: Player
+var damage: float
 
 func setup(player, parent, shot_from, vel, damage):
 	self.shot_from = shot_from

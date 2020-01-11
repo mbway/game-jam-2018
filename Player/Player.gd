@@ -1,9 +1,11 @@
 extends KinematicBody2D
+class_name Player
 
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
 onready var G = globals
+const DiGraph2D = preload('res://addons/graph_node/src/DiGraph2D.gd')
 
 ## Groups ##
 # 'players'
@@ -18,9 +20,9 @@ signal invuln_changed
 ## VARIABLES ##
 var config # globals.PlayerConfig
 
-var camera = null # used for mouse input and camera shake
-var bullet_parent = null # the node to spawn the bullets under
-var nav = null # the navigation node for the map
+var camera: Camera2D # used for mouse input and camera shake
+var bullet_parent: Node2D # the node to spawn the bullets under
+var nav: DiGraph2D # the navigation node for the map
 
 ## INPUT VARIABLES ##
 # these variables are set using whatever method is in control of the player
@@ -28,7 +30,7 @@ var _weapon_angle := 0.0 # set with set_weapon_angle()
 var auto_aim = null # only active when an instance of res://Player/AutoAim.gd
 # a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
 # with analog input this value may be a non-integer
-var move_direction = 0
+var move_direction := 0
 var fire_pressed := false # whether the fire button is pressed down
 var fire_held := false # whether the fire button is held down
 
@@ -38,22 +40,22 @@ var health := 0.0
 var invulnerable := false
 
 ## MOVEMENT VARIABLES ##
-var UP = Vector2(0, -1)
-var ACCELERATION = 3000 # horizontal acceleration
-var MAX_SPEED = 600 # horizontal speed limit
-var FRICTION_DECAY = 0.6
+var UP := Vector2(0, -1)
+var ACCELERATION := 3000.0 # horizontal acceleration
+var MAX_SPEED := 600.0 # horizontal speed limit
+var FRICTION_DECAY := 0.6
 # when the user moves in the opposite direction to the current speed, decay the
 # speed quickly. This avoid the character feeling 'floaty' (set to 1.0 to disable)
-const REACTIVITY_DECAY = 0.5
+const REACTIVITY_DECAY := 0.5
 
-var velocity = Vector2(0, 0) # current velocity
+var velocity := Vector2(0, 0) # current velocity
 
 var knockback = null # knockback velocity vector
 
-var jump_pressed = false
-onready var jump_physics = preload('JumpPhysics.gd').new()
+var jump_pressed := false
+onready var jump_physics := JumpPhysics.new()
 
-onready var inventory = $Inventory
+onready var inventory := $Inventory as Inventory
 
 # to fall through a one-way platform, a temporary collision exception is added.
 # After OneWayPlatformTimer expires the exception is removed.
@@ -110,7 +112,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	#TODO: is_on_floor doesn't count for when a player is on top of another player, so cannot jump for example
-	var on_floor = is_on_floor()
+	var on_floor := is_on_floor()
 
 	# get the direction from user input
 	if is_alive():
@@ -182,10 +184,10 @@ func set_weapon_angle(angle):
 	_weapon_angle = angle
 
 
-func take_damage(damage, knockback):
+func take_damage(damage: float, knockback: Vector2) -> void:
 	if invulnerable or is_dead():
 		return
-	var old_health = health
+	var old_health := health
 	emit_signal('hit')
 	_set_health(health - damage)
 
@@ -200,7 +202,7 @@ func take_damage(damage, knockback):
 # cast a ray of the given length and position (default: current position) which
 # can collide with the map and other players. Returns null if no intersection,
 # and {'pos':..., 'body':...} if there was.
-func cast_ray_down(length, pos=null):
+func cast_ray_down(length: float, pos=null):
 	if pos == null:
 		var hitbox = $HitBox.shape
 		# start the ray a few pixels from the bottom of the hitbox
@@ -216,7 +218,7 @@ func cast_ray_down(length, pos=null):
 		return {'pos': result.position, 'body': result.collider}
 
 # if the player is currently standing on a one way platform: fall through it
-func try_fall_through():
+func try_fall_through() -> void:
 	# shouldn't be non-null because there shouldn't be two one way platforms close enough for this to occur.
 	# if this does become a problem then a list of platforms is required instead.
 	if one_way_platform == null and is_on_floor():
@@ -228,34 +230,34 @@ func try_fall_through():
 				add_collision_exception_with(body)
 				$OneWayPlatformTimer.start()
 
-func _on_OneWayPlatformTimer_timeout():
+func _on_OneWayPlatformTimer_timeout() -> void:
 	if one_way_platform != null:
 		remove_collision_exception_with(one_way_platform)
 		one_way_platform = null
 
-func is_alive():
+func is_alive() -> bool:
 	return health > 0
-func is_dead():
+func is_dead() -> bool:
 	return health <= 0
-func is_on_screen():
+func is_on_screen() -> bool:
 	return $Visibility.is_on_screen()
 
-func _set_health(new_health):
-	health = max(new_health, 0)
+func _set_health(new_health: float) -> void:
+	health = max(new_health, 0.0)
 	$HealthBar.set_health(float(health)/max_health)
 
 # heal the player without exceeding the maximum health
 func heal(amount):
 	_set_health(min(health+amount, max_health))
 
-func _set_invulnerable(new_invuln):
+func _set_invulnerable(new_invuln: bool) -> void:
 	invulnerable = new_invuln
 	if invulnerable:
-		$InvulnTimer.start()
+		($InvulnTimer as Timer).start()
 	$HealthBar.set_invulnerable(invulnerable)
 	emit_signal('invuln_changed')
 
-func die():
+func die() -> void:
 	if invulnerable:
 		return
 	_set_health(0)
@@ -265,7 +267,7 @@ func die():
 	emit_signal('die')
 
 #TODO: this should probably be handled in the gameplay code
-func spawn(position):
+func spawn(position: Vector2) -> void:
 	_set_invulnerable(true)
 	self.position = position
 	collision_layer = G.Layers.PLAYERS
@@ -278,7 +280,7 @@ func spawn(position):
 	inventory.select('Pistol')
 	show()
 
-func teleport(location):
+func teleport(location: Vector2) -> void:
 	global_position = location
 	velocity = Vector2(0, 0)
 	move_direction = 0
@@ -288,14 +290,15 @@ func teleport(location):
 
 
 func delayed_spawn(position):
-	if $SpawnTimer.is_stopped(): # if timer already going, don't restart
-		$SpawnTimer.connect('timeout', self, 'spawn', [position], CONNECT_ONESHOT)
-		$SpawnTimer.start()
+	var timer := $SpawnTimer as Timer
+	if timer.is_stopped(): # if timer already going, don't restart
+		timer.connect('timeout', self, 'spawn', [position], CONNECT_ONESHOT)
+		timer.start()
 
-func _on_InvulnTimer_timeout():
+func _on_InvulnTimer_timeout() -> void:
 	_set_invulnerable(false)
 
-func _on_weapon_fired(bullets):
+func _on_weapon_fired(bullets) -> void:
 	var current_weapon = inventory.lock_current()
 	if current_weapon != null:
 		camera.shake(current_weapon.screen_shake)
@@ -305,7 +308,8 @@ func _on_weapon_fired(bullets):
 		Input.start_joy_vibration(config.gamepad_id, 0.8, 0.8, 0.5)
 
 
-func _on_AnimatedSprite_frame_changed():
-	if $AnimatedSprite.animation == 'run' and ($AnimatedSprite.frame == 1 or $AnimatedSprite.frame == 5):
-		$FootstepSound.play()
+func _on_AnimatedSprite_frame_changed() -> void:
+	var sprite := $AnimatedSprite as AnimatedSprite
+	if sprite.animation == 'run' and (sprite.frame == 1 or sprite.frame == 5):
+		($FootstepSound as AudioStreamPlayer2D).play()
 

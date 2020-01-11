@@ -4,7 +4,6 @@ onready var G = globals
 
 signal back
 
-var Math = preload('res://Utils/Math.gd')
 var player_panel_scene = preload('res://MainMenu/PlayerPanel.tscn')
 
 # note: this doesn't belong in globals because it is only used during the main menu

@@ -1,5 +1,4 @@
-extends Node
-
+class_name Math
 
 static func random_normal(mu: float, sigma: float) -> float:
 	# Box-Muller transform

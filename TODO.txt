@@ -101,6 +101,9 @@ short term todo
 - animation when weapons appear in the pickup locations
 - flying gun turret which follows you? (helps you but doesnt do much damage to enemies)
 - wall jumping
+- footstep sound when player lands after jumping
+- double jump sound effect?
+- bullet spread increases from 0 for the first bullet, up to the value set
 
 # Reference
 - this game has a really nice art style: Lapis x Labyrinth

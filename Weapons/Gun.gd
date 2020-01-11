@@ -1,4 +1,5 @@
 extends Node2D
+class_name Gun
 
 signal fired(bullets)
 
@@ -9,7 +10,6 @@ export (PackedScene) var shell_scene = preload('res://Weapons/BulletShell.tscn')
 export (float) var cooldown := 0.1 # time after firing before the weapon can fire again
 export (bool) var auto_fire := false
 export (int) var bullets_per_shot := 1
-export (bool) var has_reload_animation := false  #TODO: can determine this without setting a flag
 
 export (Texture) var texture  # (used by PickupSpawn)
 export (float) var spread = 0.0 # (used by Bullet) standard deviation of the angle of bullet spread in radians
@@ -19,8 +19,8 @@ export (float) var screen_shake = 7.0 # (used by Player) amount of screen shake 
 const equippable := true
 
 # on setup
-var bullet_parent = null # the node to parent the bullets to
-var player = null # the player holding the gun
+var bullet_parent: Node2D # the node to parent the bullets to
+var player: Player # the player holding the gun
 
 # runtime
 var cooldown_timer := Timer.new()
@@ -28,7 +28,7 @@ var can_shoot := true
 var active := true
 
 
-func setup(set_player):
+func setup(set_player: Player) -> void:
 	assert(player == null)
 	set_active(false)
 	player = set_player
@@ -41,18 +41,20 @@ func setup(set_player):
 	add_child(cooldown_timer)
 
 
-func try_shoot(fire_held: bool):
+func try_shoot(fire_held: bool) -> void:
 	if active and can_shoot: # gun ready
 		if not fire_held or (auto_fire and fire_held): # player wants to fire
 			# weapons that require charging fire once their timer expires
-			if _requires_charging() and $ChargeTimer.is_stopped():
-				can_shoot = false
-				$ChargeSound.play()
-				$ChargeTimer.start()
+			if _requires_charging():
+				var charge_timer := $ChargeTimer as Timer
+				if charge_timer.is_stopped():
+					can_shoot = false
+					($ChargeSound as AudioStreamPlayer2D).play()
+					charge_timer.start()
 			else:
 				_shoot()
 
-func _shoot():
+func _shoot() -> void:
 	var bullets = []
 	for _i in range(bullets_per_shot):
 		var bullet = bullet_scene.instance()
@@ -63,23 +65,24 @@ func _shoot():
 		var shell = shell_scene.instance()
 		shell.setup(bullet_parent, self)
 
-	if has_reload_animation:
-		$Sprite.frame = 0
-		$Sprite.play('reload')
+	var sprite := $Sprite as AnimatedSprite  # null if cast fails
+	if sprite and sprite.frames.has_animation('reload'):
+		sprite.frame = 0
+		sprite.play('reload')
 
-	$FireSound.play()
+	($FireSound as AudioStreamPlayer2D).play()
 	can_shoot = false
 	cooldown_timer.start()
 	emit_signal('fired', bullets)
 
-func set_active(new_active: bool):
+func set_active(new_active: bool) -> void:
 	active = new_active
 	visible = new_active # hide when inactive
 	if _requires_charging() and not new_active:
-		$ChargeTimer.stop()
+		($ChargeTimer as Timer).stop()
 		can_shoot = true
 
-func _on_cooled_down():
+func _on_cooled_down() -> void:
 	can_shoot = true
 
 func _requires_charging() -> bool:

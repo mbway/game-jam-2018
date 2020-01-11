@@ -1,4 +1,4 @@
-extends "res://Player/Player.gd"
+extends Player
 
 var left_pressed = false
 var right_pressed = false

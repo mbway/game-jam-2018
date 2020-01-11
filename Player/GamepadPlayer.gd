@@ -1,4 +1,4 @@
-extends "res://Player/Player.gd"
+extends Player
 
 var aim_direction = Vector2(0, 0)
 

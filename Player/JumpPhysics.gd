@@ -1,3 +1,4 @@
+class_name JumpPhysics
 
 enum State {
 	FLOOR,			# the player is touching the floor.
@@ -7,29 +8,29 @@ enum State {
 	FALLING,		# not on the floor but jump is not pressed, can jump from this state if there are mid_air_jumps available.
 	PREEMPTIVE_JUMP	# can initiate a jump in mid-air (shortly before hitting the floor) which will register once the ground is hit.
 }
-var state = State.FLOOR
-var time_in_state = 0 # seconds
-var vel = 0
+var state: int = State.FLOOR
+var time_in_state := 0.0 # seconds
+var vel := 0.0
 
-const GRAVITY = 2400 # acceleration due to gravity
-const MAX_SPEED = 2000 # clamp the speed if it exceeds this value (in either direction)
-const JUMP_SPEED = 1000 # the speed 'impulse' to apply when triggering a jump
-const RELEASE_SPEED = JUMP_SPEED/5 # the maximum upwards velocity after cancelling a jump in mid air
-const PREEMPTIVE_JUMP_TOLERANCE = 50 / 1000.0 # (seconds) the time before hitting the floor in which a 'preemptive jump' can be performed
-const EDGE_JUMP_TOLERANCE = 100 / 1000.0 # (seconds) the time after leaving the floor in which an 'edge jump' can be performed
-const FLOOR_VEL = 200 # positive is downwards
+const GRAVITY := 2400.0 # acceleration due to gravity
+const MAX_SPEED := 2000.0 # clamp the speed if it exceeds this value (in either direction)
+const JUMP_SPEED := 1000.0 # the speed 'impulse' to apply when triggering a jump
+const RELEASE_SPEED := JUMP_SPEED/5 # the maximum upwards velocity after cancelling a jump in mid air
+const PREEMPTIVE_JUMP_TOLERANCE := 50 / 1000.0 # (seconds) the time before hitting the floor in which a 'preemptive jump' can be performed
+const EDGE_JUMP_TOLERANCE := 100 / 1000.0 # (seconds) the time after leaving the floor in which an 'edge jump' can be performed
+const FLOOR_VEL := 200.0 # positive is downwards
 
 # double jumping #
-const MAX_MID_AIR_JUMPS = 1
-var mid_air_jumps = MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor.
+const MAX_MID_AIR_JUMPS := 1
+var mid_air_jumps := MAX_MID_AIR_JUMPS # used to allow double jumps. Reset when touching the floor.
 
-func reset():
+func reset() -> void:
 	state = State.FLOOR
 	time_in_state = 0
 	vel = 0
 	mid_air_jumps = MAX_MID_AIR_JUMPS
 
-func advance_time_step(last_vel, delta, jump_pressed, on_floor):
+func advance_time_step(last_vel: float, delta: float, jump_pressed: bool, on_floor: bool) -> float:
 	vel = last_vel
 	time_in_state += delta
 	handle_transitions(jump_pressed, on_floor)
@@ -93,8 +94,8 @@ func handle_transitions(jump_pressed, on_floor):
 			transition(State.JUMP_FINISHED)
 
 # transition to a state and perform any actions associated with a transition or entering a state
-func transition(to):
-	var from = state
+func transition(to: int) -> void:
+	var from := state
 
 	# transition actions
 	if from == State.FALLING and to == State.JUMPING:
@@ -122,7 +123,7 @@ func transition(to):
 	#if from == State.PREEMPTIVE_JUMP and to == State.JUMPING:
 		#print('preemptive jump')
 
-func state_name(state):
+func state_name(state: int) -> String:
 	if state == State.FLOOR:
 		return 'FLOOR'
 	elif state == State.EDGE_PLATFORM:

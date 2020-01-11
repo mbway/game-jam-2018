@@ -1,6 +1,4 @@
-extends "res://Player/Player.gd"
-
-var Math = preload('res://Utils/Math.gd')
+extends Player
 
 enum States { EXPLORE, MANUAL }
 var state = States.EXPLORE

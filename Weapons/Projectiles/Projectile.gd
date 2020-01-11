@@ -1,7 +1,7 @@
 extends RigidBody2D
+class_name Projectile
 
 const MAX_DISTANCE_SQ := 1.0 * 10000 * 10000 # despawn after this distance
-onready var Math = preload('res://Utils/Math.gd')
 
 var spawn_pos: Vector2
 var velocity: Vector2
@@ -13,7 +13,7 @@ func _init():  # override
 # player: the player holding the weapon which fired this projectile
 # parent: the container node to add this projectile as a child of
 # shot_from: the weapon which fired this projectile
-func setup(player, parent, shot_from, speed: float, set_damage: float):
+func setup(player, parent: Node2D, shot_from, speed: float, set_damage: float):
 	self.damage = set_damage
 
 	parent.add_child(self)
@@ -23,7 +23,7 @@ func setup(player, parent, shot_from, speed: float, set_damage: float):
 	rotation = shot_from.rotation
 	global_position = shot_from.get_node('Muzzle').global_position
 	spawn_pos = global_position
-	var spread = Math.random_normal(0, shot_from.spread)
+	var spread := Math.random_normal(0.0, shot_from.spread)
 	velocity = Vector2(1, 0).rotated(shot_from.rotation + spread) * speed
 	set_physics_process(true)
 
