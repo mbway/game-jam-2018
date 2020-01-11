@@ -6,8 +6,8 @@ signal unequiped(name)
 
 var current_item = null
 # enforced lock order: inventory_lock, current_lock
-var inventory_lock = Mutex.new() # protects the child nodes
-var current_lock = Mutex.new() # prevents the current item from changing while held
+var inventory_lock := Mutex.new() # protects the child nodes
+var current_lock := Mutex.new() # prevents the current item from changing while held
 
 onready var player = get_parent()
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun1.png" type="Texture" id=2]
 [ext_resource path="res://Weapons/Projectiles/ShotgunBullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Weapons/BulletShell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun3.png" type="Texture" id=6]
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun4.png" type="Texture" id=7]
@@ -13,9 +12,7 @@
 [ext_resource path="res://Assets/weapons/Shotgun/shotgun8.png" type="Texture" id=11]
 [ext_resource path="res://Assets/weapons/shotgun.wav" type="AudioStream" id=12]
 
-
 [sub_resource type="SpriteFrames" id=1]
-
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ) ],
 "loop": false,
@@ -24,46 +21,28 @@ animations = [ {
 } ]
 
 [node name="Shotgun" type="Node2D"]
-
 script = ExtResource( 1 )
-texture = ExtResource( 2 )
-shoot_vel = 2500
-damage = 20
+shoot_speed = 2500.0
 bullet_scene = ExtResource( 3 )
-shell_scene = ExtResource( 4 )
 cooldown = 1.2
-auto_fire = false
+bullets_per_shot = 10
+has_reload_animation = true
+texture = ExtResource( 2 )
 spread = 0.15
 screen_shake = 80.0
-requires_charging = false
-shot_count = 10
-has_reload_animation = true
 
-[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
-
+[node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 17.9772, 10.2064 )
 frames = SubResource( 1 )
 animation = "reload"
 
-[node name="Muzzle" type="Position2D" parent="." index="1"]
-
+[node name="Muzzle" type="Position2D" parent="."]
 position = Vector2( 44.0325, 5.74988 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="FireSound" type="AudioStreamPlayer2D" parent="." index="2"]
-
+[node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 1.39922, 8.6829 )
 scale = Vector2( 0.344856, 0.306339 )
 stream = ExtResource( 12 )
-volume_db = 0.0
-autoplay = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
-[node name="ShellEject" type="Position2D" parent="." index="3"]
-
+[node name="ShellEject" type="Position2D" parent="."]
 position = Vector2( -1.15982, 5.91509 )
-
-

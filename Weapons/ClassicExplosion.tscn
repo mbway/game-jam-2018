@@ -16,73 +16,40 @@
 [ext_resource path="res://Assets/weapons/boom.wav" type="AudioStream" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 20.8255
 
 [sub_resource type="SpriteFrames" id=2]
-
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": false,
 "name": "default",
 "speed": 16.0
 } ]
-_sections_unfolded = [ "Resource" ]
 
 [node name="ClassicExplosion" type="Area2D"]
-
 scale = Vector2( 2, 2 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
 gravity = 0.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="DespawnTimer" type="Timer" parent="." index="0"]
-
-process_mode = 1
-wait_time = 1.0
+[node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="CollisionTimer" type="Timer" parent="." index="1"]
-
-process_mode = 1
+[node name="CollisionTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 autostart = true
 
-[node name="Collision" type="CollisionShape2D" parent="." index="2"]
-
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="ExplosionAnimation" type="AnimatedSprite" parent="." index="3"]
-
+[node name="ExplosionAnimation" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 2 )
-animation = "default"
-_sections_unfolded = [ "Transform" ]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
-
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
-volume_db = 0.0
-pitch_scale = 1.0
 autoplay = true
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-
 [connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
-
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
-
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]
-
-

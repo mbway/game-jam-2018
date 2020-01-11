@@ -24,18 +24,18 @@ var nav = null # the navigation node for the map
 
 ## INPUT VARIABLES ##
 # these variables are set using whatever method is in control of the player
-var _weapon_angle = 0 # set with set_weapon_angle()
+var _weapon_angle := 0.0 # set with set_weapon_angle()
 var auto_aim = null # only active when an instance of res://Player/AutoAim.gd
 # a value between -1 and 1 (0 => idle) to determine the direction to move in (left or right)
 # with analog input this value may be a non-integer
 var move_direction = 0
-var fire_pressed = false # whether the fire button is pressed down
-var fire_held = false # whether the fire button is held down
+var fire_pressed := false # whether the fire button is pressed down
+var fire_held := false # whether the fire button is held down
 
 ## health and damage
-var max_health = 100
-var health = 0
-var invulnerable = false
+var max_health := 100.0
+var health := 0.0
+var invulnerable := false
 
 ## MOVEMENT VARIABLES ##
 var UP = Vector2(0, -1)

@@ -3,14 +3,10 @@
 [ext_resource path="res://Weapons/HealthPack.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/health_pack.png" type="Texture" id=2]
 
-[node name="HealthPack" type="Node2D" index="0"]
-
+[node name="HealthPack" type="Node2D"]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 heal_amount = 20
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-
-

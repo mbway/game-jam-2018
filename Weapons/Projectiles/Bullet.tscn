@@ -1,49 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Weapons/Projectiles/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://Assets/weapons/bullet.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
 
-custom_solver_bias = 0.0
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 2.95959 )
 
-[node name="Bullet" type="RigidBody2D" index="0"]
-
+[node name="Bullet" type="RigidBody2D"]
 z_index = -1
-input_pickable = false
 collision_layer = 0
 collision_mask = 6
-mode = 0
 mass = 0.01
-friction = 0.0
-bounce = 0.0
+physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
-custom_integrator = false
 continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
-sleeping = false
 can_sleep = false
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Collision", "Linear", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -7.22222, 0 )
 scale = Vector2( 2.44444, 1 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Collision" type="CollisionShape2D" parent="." index="1"]
-
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -8, 0 )
-shape = SubResource( 1 )
-
+shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-
-
