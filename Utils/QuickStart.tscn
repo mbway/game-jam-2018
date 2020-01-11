@@ -2,9 +2,5 @@
 
 [ext_resource path="res://Utils/QuickStart.gd" type="Script" id=1]
 
-
-[node name="Node" type="Node" index="0"]
-
+[node name="Node" type="Node"]
 script = ExtResource( 1 )
-
-

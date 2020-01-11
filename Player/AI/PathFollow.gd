@@ -1,3 +1,4 @@
+extends Node
 # the approach of splitting the pathfinding into local/global seems to have been tried before in http://ctrl500.com/tech/teaching-the-ai-to-find-a-path-in-awesomenauts/
 
 #TODO: could probably optimise the pathfinding by having a variable like check_after which is set based on the current player state to decide when the jump state should be re-evaluated. At the moment checks are carried out every tick which may be too much if many AI players are in the scene
@@ -11,32 +12,34 @@ var G = globals
 var path := [] # a list of targets to follow to reach the waypoint
 onready var _target = null # the next target that the player should move directly towards
 
-const CHECK_PROGRESS_EVERY = 2.0 # seconds
-const BUFFER_X = 32.0
-const BUFFER_Y = 64.0
-var last_progress = INF # last distance to the target
-var time_since_last_progress = 0 # time since the progress was measured
+const CHECK_PROGRESS_EVERY := 2.0 # seconds
+const BUFFER_X := 32.0
+const BUFFER_Y := 64.0
+var last_progress := INF # last distance to the target
+var time_since_last_progress := 0.0 # time since the progress was measured
 # the time between detecting that the player could reach the target by releasing
 # jump, to actually releasing jump. A small buffer is required to account for
 # the inaccuracy in the can_reach_target prediction. If jump is released
 # immediately then a subsequent test may indicate that the player can't reach
 # the target any more, causing an unnecessary double jump.
-var jump_release_delay = 0.02
+var jump_release_delay := 0.02
 var jump_release_timer = null
+
+var verbose := 1
 
 # node platforms
 var platforms = null # the tops of collision rects of the map. List of [left_x, right_x, y, one_way]
 # list of indices into platforms (or null) corresponding to the nodes of nav.
 # ie node_platforms[n] = index of the platform node n is above, or null if it is not above any.
 var node_platforms = null
-const platform_search_distance = 64
+const platform_search_distance := 64
 
 var player = null
 var AINodes = null
 var nav = null
 
-func _init(player):
-	self.player = player
+func _init(set_player: Player):
+	self.player = set_player
 	nav = player.nav
 	AINodes = player.get_node('AINodes')
 	platforms = _get_platforms()
@@ -48,13 +51,13 @@ func get_target_relative():
 
 # 'close' is defined based on how close the player should be to the target before moving on to the next.
 # fine control is required in x because moving on early could mean the player is not yet standing on a platform.
-func target_close(t):
+func target_close(t: Vector2) -> bool:
 	return abs(t.x) < BUFFER_X / 2 and (-BUFFER_Y/2 < t.y and t.y < 1.5*BUFFER_Y)
 
 
-func _set_target(t):
+func _set_target(set_target) -> void:
 	player._on_passed_through(_target)
-	_target = t
+	_target = set_target
 	last_progress = INF
 	time_since_last_progress = 0
 	AINodes.falls_short = false
@@ -65,7 +68,7 @@ func _next_target():
 	jump_release_timer = null # new target so have to re-evaluate whether jump should be released
 	return get_target_relative()
 
-func process(delta):
+func process(delta: float) -> void:
 	if player.is_dead():
 		return
 
@@ -114,8 +117,8 @@ func process(delta):
 				reason = 'target below and next shares the same platform'
 				t = _next_target()
 
-	#if reason != null:
-		#print('next target %s, reason: "%s"' % [null if _target == null else _target.pos, reason])
+	if verbose > 0 and reason != null:
+		print('next target %s, reason: "%s"' % [null if _target == null else _target.pos, reason])
 		#get_tree().paused = true
 
 	# check that sufficient progress has been made since the last time it was checked
@@ -126,7 +129,8 @@ func process(delta):
 		if this_progress < last_progress*0.9:
 			last_progress = this_progress
 		else:
-			print('insufficient progress: re-planning route')
+			if verbose > 0:
+				print('insufficient progress: re-planning route')
 			set_waypoint(_target.pos if path.empty() else path[-1].pos)
 
 
@@ -226,16 +230,16 @@ func process(delta):
 				reason = 'falls short'
 				player.jump_pressed = true
 
-	#if reason != null:
-		#var mid_air = bool(player.jump_pressed and state == State.FALLING)
-		#print('%s: player.jump_pressed = %s%s' % [reason, player.jump_pressed, ' (mid air)' if mid_air else ''])
+	if verbose > 0 and reason != null:
+		var mid_air := bool(player.jump_pressed and state == State.FALLING)
+		print('%s: player.jump_pressed = %s%s' % [reason, player.jump_pressed, ' (mid air)' if mid_air else ''])
 		#get_tree().paused = true
 
 
 # if the player released jump right now (or kept it released), would it be able
 # to reach to within 'buffer' pixels of the target, or at least land on the
 # platform that the target resides on.
-func can_fall_to_target(buffer=BUFFER_X/2):
+func can_fall_to_target(buffer: float = BUFFER_X/2) -> bool:
 	# use motion equations to estimate the falling trajectory of the player.
 	# solve for the time at which the player falls to player.y == target.y
 	# acting under gravity alone. Then plug that time in to get the x
@@ -251,8 +255,9 @@ func can_fall_to_target(buffer=BUFFER_X/2):
 		# target is above, so must fall short unless the player is over the same platform as the target
 		# (the target may only be slightly above the player)
 		var fall_platform = _closest_platform_under(player.global_position)
-		var can_reach = fall_platform != -1 and fall_platform == get_target_platform(_target)
-		#print('can reach (target above but can reach platform) = %s' % can_reach)
+		var can_reach := bool(fall_platform != -1 and fall_platform == get_target_platform(_target))
+		if verbose > 0:
+			print('can reach (target above but can reach platform) = %s' % can_reach)
 		return can_reach
 
 	# since target is relative, starting at (0,0)
@@ -262,7 +267,8 @@ func can_fall_to_target(buffer=BUFFER_X/2):
 	var descrim = u*u - 4 * 0.5 * player.jump_physics.GRAVITY * -rel_target.y   # b^2-4ac
 	if descrim < 0:
 		# no solutions, so falls short
-		#print('can reach (no solutions) = %s' % false)
+		if verbose > 0:
+			print('can reach (no solutions) = %s' % false)
 		return false
 
 	# the positive solution for time
@@ -301,14 +307,16 @@ func can_fall_to_target(buffer=BUFFER_X/2):
 	AINodes.fall_short_pos = pos
 
 	if can_reach:
-		#print('can reach = %s' % can_reach)
+		if verbose > 0:
+			print('can reach = %s' % can_reach)
 		return true
 	else:
 		# the platform under the fall location, if it is the same as the target
 		# then the player can still reach it by falling (then walking after landing).
 		var fall_platform = _closest_platform_under(pos)
 		can_reach = fall_platform != -1 and fall_platform == get_target_platform(_target)
-		#print('can reach (falls short but can reach platform?) = %s (%s =?= %s)' % [can_reach, fall_platform, get_target_platform(_target)])
+		if verbose > 0:
+			print('can reach (falls short but can reach platform?) = %s (%s =?= %s)' % [can_reach, fall_platform, get_target_platform(_target)])
 		return can_reach
 
 
@@ -361,9 +369,9 @@ func get_nearest_platform_nodes(pos):
 
 
 # returns whether the waypoint was set (won't be set if the player is in mid air and not above a platform)
-func set_waypoint(waypoint):
+func set_waypoint(waypoint: Vector2) -> bool:
 	if nav == null:#TODO: remove check once made compulsory
-		return
+		return false
 	if not player.is_on_floor():
 		var collision = player.cast_ray_down(1000)
 		if collision == null:
@@ -399,24 +407,24 @@ func get_target_platform(t):
 		return -1
 	return _closest_platform_under(t.pos) if t.id == null else node_platforms[t.id]
 
-func _get_platforms():
-	var platforms = []
+func _get_platforms() -> Array:
+	var found_platforms = []
 	var map = G.get_scene().get_node('Map')
 	for c in map.get_node('Collision').get_children(): # list of StaticBody2D
 		var pos = c.position
 		var half_extents = c.get_node('CollisionShape2D').shape.extents
-		platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, false]) # left_x, right_x, y, one_way
+		found_platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, false]) # left_x, right_x, y, one_way
 
 	if map.has_node('OneWayCollision'): # not every map has need for one way collisions
 		for c in map.get_node('OneWayCollision').get_children(): # list of StaticBody2D
 			var pos = c.position
 			var half_extents = c.get_node('CollisionShape2D').shape.extents
-			platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, true]) # left_x, right_x, y, one_way
+			found_platforms.append([pos.x, pos.x+2*half_extents.x, pos.y, true]) # left_x, right_x, y, one_way
 
 	#var dd = G.get_scene().debug_draw
-	#for p in platforms: dd.add_line_segment(Vector2(p[0], p[2]), Vector2(p[1], p[2]))
+	#for p in found_platforms: dd.add_line_segment(Vector2(p[0], p[2]), Vector2(p[1], p[2]))
 
-	return platforms
+	return found_platforms
 
 # the index of the platform (collidable rectangle in the node Map/Collision) for each node in the graph.
 func _get_node_platforms():

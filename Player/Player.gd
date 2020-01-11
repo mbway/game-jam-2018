@@ -247,7 +247,7 @@ func _set_health(new_health: float) -> void:
 	$HealthBar.set_health(float(health)/max_health)
 
 # heal the player without exceeding the maximum health
-func heal(amount):
+func heal(amount: float) -> void:
 	_set_health(min(health+amount, max_health))
 
 func _set_invulnerable(new_invuln: bool) -> void:

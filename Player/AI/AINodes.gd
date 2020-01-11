@@ -1,16 +1,19 @@
 extends Node2D
 
+const font = preload('res://Assets/fonts/source_code_pro/source_code_pro_regular_16.tres')
+
 onready var G = globals
 # ARGB colors
-var red = Color('#ddd95353')
-var green = Color('#dd53d953')
-var blue = Color('#dd5353d9')
-var grey = Color('#ddaaaaaa')
-var pink = Color('#ddef1b91')
-var purple = Color('#dd791bef')
-var light_grey = Color('#55aaaaaa')
+const red := Color('#ddd95353')
+const green := Color('#dd53d953')
+const blue := Color('#dd5353d9')
+const grey := Color('#ddaaaaaa')
+const pink := Color('#ddef1b91')
+const purple := Color('#dd791bef')
+const light_grey := Color('#55aaaaaa')
 
-var falls_short = false
+
+var falls_short := false
 var fall_short_pos = null
 
 onready var player = get_parent()
@@ -44,8 +47,10 @@ func _draw():
 	for p in player.path_follow.path: # the navigation path being followed
 		path.append(p.pos)
 
-	for p in path:
-		draw_circle(to_local(p), 4, blue)
+	for i in range(path.size()):
+		var pos := to_local(path[i])
+		draw_circle(pos, 4, blue)
+		draw_string(font, pos, String(i))
 	path = [player.position, player.position+t] + path
 	for i in range(1, len(path)):
 		draw_line(to_local(path[i-1]), to_local(path[i]), blue, 2, true)

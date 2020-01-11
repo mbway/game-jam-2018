@@ -10,11 +10,11 @@ extends Node
 #	- TDM : Node2D
 #	- CTF : Node2D
 
-const keyboard_player_scene = preload('res://Player/KeyboardPlayer.tscn')
-const gamepad_player_scene = preload('res://Player/GamepadPlayer.tscn')
-const AI_player_scene = preload('res://Player/AI/AIPlayer.tscn')
+const keyboard_player_scene := preload('res://Player/KeyboardPlayer.tscn')
+const gamepad_player_scene := preload('res://Player/GamepadPlayer.tscn')
+const AI_player_scene := preload('res://Player/AI/AIPlayer.tscn')
 
-const MAX_HEALTH = 100
+const MAX_HEALTH := 100
 
 onready var G = globals
 var input
@@ -28,7 +28,7 @@ var game_mode = null # an element of game_mode_data
 # whether there is a player using the keyboard and mouse. If not, then the cursor can be hidden.
 var keyboard_player = false
 
-onready var debug_draw = preload('res://Utils/DebugDraw.gd').new()
+onready var debug_draw := preload('res://Utils/DebugDraw.gd').new()
 
 
 func _ready():
