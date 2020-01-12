@@ -3,8 +3,9 @@ extends CanvasLayer
 func _ready():
 	$Message.hide()
 	$GameOver.hide()
+	$CenterLabel.hide()
 
-func connect_player(player, player_num):
+func connect_player(player: Player, player_num: int):
 	var slots = null
 	if player_num == 1:
 		slots = $P1WeaponSlots
@@ -17,13 +18,23 @@ func connect_player(player, player_num):
 	player.inventory.connect('unequiped', slots, '_on_unequiped')
 	player.inventory.connect('selected', slots, '_on_selected')
 
-func set_score_labels(L, R):
+func set_score_labels(L: String, R: String):
 	$P1Score.text = L
 	$P2Score.text = R
 
-func show_game_over(winner):
+func hide_score_labels() -> void:
+	$P1Score.hide()
+	$P2Score.hide()
+
+func set_center_label(text: String) -> void:
+	$CenterLabel.text = text
+
+func show_center_label() -> void:
+	$CenterLabel.show()
+
+func show_game_over(message):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$GameOver/GameOverMessage.text = 'Game Over!\n%s Wins' % winner
+	$GameOver/GameOverMessage.text = 'Game Over!\n%s' % message
 	$GameOver.show()
 
 func _gui_input(event):

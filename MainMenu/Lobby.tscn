@@ -7,907 +7,325 @@
 [ext_resource path="res://Assets/blank_map.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-
 size = 40
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
-
 size = 20
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=3]
-
 size = 20
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
-
 size = 40
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 4 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="Lobby" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1920, 1080 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Background" type="Sprite" parent="." index="0"]
-
+[node name="Background" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.397804 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 1920, 1080 )
-_sections_unfolded = [ "Offset", "Region", "Visibility" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
-_sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 1060.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/separation = 10
-alignment = 0
-_sections_unfolded = [ "custom_constants" ]
 
-[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_right = 58.0
 margin_bottom = 31.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 0
-size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Back"
-flat = false
-align = 1
-_sections_unfolded = [ "Margin", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 41.0
 margin_right = 1880.0
 margin_bottom = 1040.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
-alignment = 0
-_sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
 
-[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 409.0
 margin_bottom = 999.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/separation = 10
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn"]
 margin_right = 409.0
 margin_bottom = 882.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
-_sections_unfolded = [ "Anchor", "Rect", "Size Flags" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 402.0
 margin_bottom = 875.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 390.0
 margin_bottom = 863.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
-scroll_horizontal = 0
-scroll_vertical_enabled = true
-scroll_vertical = 0
-scroll_deadzone = 0
-_sections_unfolded = [ "Margin", "Scroll", "Size Flags" ]
 
-[node name="PlayerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer/ScrollContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/PanelContainer/MarginContainer/ScrollContainer"]
 margin_right = 385.0
 margin_bottom = 858.0
 rect_min_size = Vector2( 385, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
-alignment = 0
-_sections_unfolded = [ "Margin", "Rect", "Size Flags", "custom_constants" ]
 
-[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn"]
 margin_top = 892.0
 margin_right = 409.0
 margin_bottom = 923.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Add Player"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn"]
 margin_top = 933.0
 margin_right = 409.0
 margin_bottom = 964.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Host"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="IPEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="IPEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn"]
 margin_top = 974.0
 margin_right = 409.0
 margin_bottom = 999.0
 rect_min_size = Vector2( 0, 25 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 text = "IP:PORT"
-readonly = false
-highlight_current_line = false
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-override_selected_font_color = false
-context_menu_enabled = true
-smooth_scrolling = false
-v_scroll_speed = 80.0
-hiding_enabled = 0
-wrap_lines = false
-caret_block_mode = false
-caret_blink = false
-caret_blink_speed = 0.65
-caret_moving_by_right_click = true
-_sections_unfolded = [ "Rect" ]
 
-[node name="RightColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="RightColumn" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 424.0
 margin_right = 1880.0
 margin_bottom = 999.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_constants/separation = 15
-alignment = 0
-_sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
 
-[node name="MapChoice" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MapChoice" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn"]
 margin_right = 1456.0
 margin_bottom = 527.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "custom_styles" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1449.0
 margin_bottom = 520.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/margin_right = 5
 custom_constants/margin_top = 0
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
-_sections_unfolded = [ "custom_constants" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer"]
 margin_left = 5.0
 margin_right = 1437.0
 margin_bottom = 508.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Margin" ]
 
-[node name="MapTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MapTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer"]
 margin_right = 1432.0
 margin_bottom = 49.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
 text = "Map Title"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Material", "custom_fonts" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer"]
 margin_top = 53.0
 margin_right = 1432.0
 margin_bottom = 508.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
 
-[node name="PrevMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PrevMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 392.0
 margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "<"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect", "custom_fonts" ]
 
-[node name="Screenshot" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Screenshot" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 396.0
 margin_right = 1036.0
 margin_bottom = 455.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 texture = ExtResource( 5 )
-stretch_mode = 0
-_sections_unfolded = [ "Offset" ]
 
-[node name="NextMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="NextMap" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 1040.0
 margin_right = 1432.0
 margin_bottom = 455.0
 rect_min_size = Vector2( 20, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = ">"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect", "custom_fonts", "custom_styles" ]
 
-[node name="GameModeOptions" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn" index="1"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="GameModeOptions" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn"]
 margin_top = 542.0
 margin_right = 1456.0
 margin_bottom = 999.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1449.0
 margin_bottom = 450.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/margin_right = 15
 custom_constants/margin_top = 15
 custom_constants/margin_left = 15
 custom_constants/margin_bottom = 15
-_sections_unfolded = [ "Margin", "custom_constants" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
 margin_right = 1427.0
 margin_bottom = 428.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/separation = 15
-alignment = 0
-_sections_unfolded = [ "custom_constants" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="0"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 margin_right = 1412.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 116.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 text = "Game Mode:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Material", "custom_fonts" ]
 
-[node name="GameMode" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="GameMode" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 120.0
 margin_right = 320.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 200, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 toggle_mode = false
-action_mode = 0
-enabled_focus_mode = 2
-shortcut = null
-group = null
-flat = false
-align = 0
-items = [  ]
-selected = -1
-_sections_unfolded = [ "Rect" ]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 margin_top = 40.0
 margin_right = 1412.0
 margin_bottom = 44.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="TDMOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="TDMOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 margin_top = 59.0
 margin_right = 1412.0
 margin_bottom = 343.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
 columns = 2
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions"]
 margin_right = 118.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 text = "Max Lives:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="MaxLives" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MaxLives" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions"]
 margin_left = 122.0
 margin_right = 196.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 min_value = 1.0
-max_value = 100.0
-step = 1.0
-page = 0.0
 value = 5.0
-exp_edit = false
-rounded = false
-editable = true
-prefix = ""
-suffix = ""
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions"]
 margin_top = 29.0
 margin_right = 118.0
 margin_bottom = 54.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 text = "Num Teams:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="NumTeams" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="NumTeams" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/TDMOptions"]
 margin_left = 122.0
 margin_top = 29.0
 margin_right = 196.0
 margin_bottom = 54.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
 value = 2.0
-exp_edit = false
-rounded = false
 editable = false
-prefix = ""
-suffix = ""
 
-[node name="CTFOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="3"]
-
-editor/display_folded = true
+[node name="CTFOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_top = 40.0
 margin_right = 857.0
 margin_bottom = 215.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
 columns = 2
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/CTFOptions" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/CTFOptions"]
 margin_right = 123.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 text = "CTF Options"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="OverruleOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="4"]
-
-editor/display_folded = true
+[node name="OverruleOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+margin_top = 208.0
+margin_right = 1412.0
+margin_bottom = 342.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/OverruleOptions"]
+visible = false
+margin_right = 169.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 3 )
+text = "Overrule Options"
+
+[node name="SurvivalOptions" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 40.0
 margin_right = 857.0
 margin_bottom = 215.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
 columns = 2
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/OverruleOptions" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/SurvivalOptions"]
 margin_right = 123.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
-text = "Overrule Options"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+text = "Survival Options"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer"]
 margin_top = 358.0
 margin_right = 1412.0
 margin_bottom = 413.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 alignment = 2
 
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer2" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 1179.0
 margin_right = 1412.0
 margin_bottom = 55.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 0
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Start Game"
-flat = false
-align = 1
-_sections_unfolded = [ "Margin", "Size Flags", "custom_colors", "custom_fonts" ]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/LeftColumn/AddPlayerButton" to="." method="_add_player"]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/PrevMap" to="." method="_on_PrevMap_pressed"]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/MapChoice/MarginContainer/VBoxContainer/HBoxContainer/NextMap" to="." method="_on_NextMap_pressed"]
-
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer/GameMode" to="." method="_on_GameMode_item_selected"]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RightColumn/GameModeOptions/MarginContainer/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_StartButton_pressed"]
-
-

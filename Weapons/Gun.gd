@@ -35,6 +35,7 @@ func setup(set_player: Player) -> void:
 	bullet_parent = player.bullet_parent
 	connect('fired', player, '_on_weapon_fired')
 
+	cooldown_timer.set_name('CooldownTimer')
 	cooldown_timer.set_one_shot(true)
 	cooldown_timer.set_wait_time(cooldown)
 	cooldown_timer.connect('timeout', self, '_on_cooled_down')

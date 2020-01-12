@@ -25,7 +25,7 @@ var time_since_last_progress := 0.0 # time since the progress was measured
 var jump_release_delay := 0.02
 var jump_release_timer = null
 
-var verbose := 1
+var verbose := 0
 
 # node platforms
 var platforms = null # the tops of collision rects of the map. List of [left_x, right_x, y, one_way]
@@ -72,7 +72,6 @@ func process(delta: float) -> void:
 	if player.is_dead():
 		return
 
-	var on_floor = player.is_on_floor()
 	time_since_last_progress += delta
 	var t = get_target_relative() # vector from the current position to the target
 	var state = player.jump_physics.state
@@ -334,7 +333,12 @@ func path_append(node_id):
 func _set_from_path_along_graph(path_along_graph):
 	path = []
 	for i in range(path_along_graph.points.size()):
-		path.append({'pos': path_along_graph.points[i], 'id': path_along_graph.ids[i]})
+		var pos = path_along_graph.points[i]
+		if not can_skip_waypoint(pos):
+			path.append({'pos': pos, 'id': path_along_graph.ids[i]})
+
+func can_skip_waypoint(pos: Vector2) -> bool:
+	return player.is_on_floor() and target_close(pos - player.position)
 
 # get the ids of the nodes to the left and right of the given position on the
 # same platform as pos. Returns null if pos is not on a platform. The left or
@@ -381,12 +385,14 @@ func set_waypoint(waypoint: Vector2) -> bool:
 	else:
 		_set_from_path_along_graph(nav.get_shortest_path(player.position, waypoint))
 	_set_target(null)
-	var c = AINodes.get_node('Path').curve
+	_update_ai_nodes()
+	return true
+
+func _update_ai_nodes() -> void:
+	var c: Curve2D = AINodes.get_node('Path').curve
 	c.clear_points()
 	for i in path:
 		c.add_point(i.pos)
-	return true
-
 
 # returns the index of the closest platform under the given point
 # returns -1 if no platform is found within max_distance

@@ -34,6 +34,7 @@ onready var debug_draw := preload('res://Utils/DebugDraw.gd').new()
 func _ready():
 	G.log('Game started: %s' % get_tree().get_current_scene().get_name())
 
+	debug_draw.set_name('DebugDraw')
 	add_child(debug_draw)
 
 	# store the game mode specific nodes away in a data structure and remove them from the tree for now
@@ -41,6 +42,7 @@ func _ready():
 		game_mode_nodes[n.name] = n
 		$GameMode.remove_child(n)
 		game_mode_data[n.name] = load('res://Gameplay/' + n.name +'.gd').new()
+		game_mode_data[n.name].set_name('%s_Data' % n.name)
 		add_child(game_mode_data[n.name])
 
 	for p in G.player_data:
@@ -56,7 +58,7 @@ func _ready():
 	G.settings.connect('settings_changed', self, '_on_settings_changed')
 
 
-func set_game_mode(mode):
+func set_game_mode(mode: String):
 	assert(mode in game_mode_nodes)
 	for n in $GameMode.get_children():
 		$GameMode.remove_child(n)

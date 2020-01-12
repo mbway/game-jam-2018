@@ -15,6 +15,7 @@ var HUD
 var camera
 
 func setup(details):
+	assert(not is_setup)
 	self.details = details
 	nodes = get_node('../GameMode/TDM')
 	spawn_points = nodes.get_node('SpawnPoints')
@@ -47,7 +48,7 @@ func on_player_die(player):
 	update_HUD()
 	if lives[t] == 0:
 		#TODO: assuming only 2 teams
-		HUD.show_game_over('Team %d' % ((1-t)+1))
+		HUD.show_game_over('Team %d Wins!' % ((1-t)+1))
 	else:
 		spawn_player(player, true)
 

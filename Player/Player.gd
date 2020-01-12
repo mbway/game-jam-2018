@@ -39,6 +39,10 @@ var max_health := 100.0
 var health := 0.0
 var invulnerable := false
 
+var damage_on_contact := false
+var contact_damage_ready := true
+var contact_damage_amount = 10
+
 ## MOVEMENT VARIABLES ##
 var UP := Vector2(0, -1)
 var ACCELERATION := 3000.0 # horizontal acceleration
@@ -151,6 +155,18 @@ func _physics_process(delta):
 			velocity.y = clamp(velocity.y, -jump_physics.MAX_SPEED, jump_physics.MAX_SPEED)
 
 	velocity = move_and_slide(velocity, UP)
+	_handle_contact_damage()
+
+	
+func _handle_contact_damage() -> void:
+	if damage_on_contact and contact_damage_ready:
+		for i in range(get_slide_count()):
+			var contact = get_slide_collision(i).collider
+			if contact.is_in_group('players'):
+				if contact.config.team != config.team:
+					contact.take_damage(contact_damage_amount, contact.position - position)
+					contact_damage_ready = false
+					$ContactDamageTimer.start()
 
 
 # get the angle to rotate the weapon by such that the barrel exactly aims at the given position.
@@ -313,3 +329,7 @@ func _on_AnimatedSprite_frame_changed() -> void:
 	if sprite.animation == 'run' and (sprite.frame == 1 or sprite.frame == 5):
 		($FootstepSound as AudioStreamPlayer2D).play()
 
+
+
+func _on_ContactDamageTimer_timeout():
+	contact_damage_ready = true

@@ -1,4 +1,5 @@
 extends Player
+class_name AIPlayer
 
 enum States { EXPLORE, MANUAL, FOLLOW }
 var state: int = States.FOLLOW
@@ -37,8 +38,7 @@ func _process(delta: float) -> void:  # override
 	# handle combat
 	if target == null:
 		# find a target
-		if not known_players.empty():
-			target = known_players[0]
+		target = _get_closest_enemy()
 	else:
 		# attack the target
 		set_weapon_angle(weapon_aim_angle(to_local(target.global_position)))
@@ -51,9 +51,19 @@ func _process(delta: float) -> void:  # override
 		_process_follow()
 
 
+func _get_closest_enemy():
+	var closest_distance := INF
+	var closest = null
+	for p in known_players:
+		if p.config.team != config.team:
+			var distance = position.distance_to(p.position)
+			if distance < closest_distance:
+				closest = p
+				closest_distance = distance
+	return closest
+
 func _process_follow() -> void:
-	if timer - last_update_time > 0.5 and target != null and is_on_floor():
-		print('setting waypoint', target.position)
+	if timer - last_update_time > 0.5 and target != null and is_on_floor() and target.is_on_floor():
 		path_follow.set_waypoint(target.position)
 		last_update_time = timer
 
@@ -114,11 +124,11 @@ func _on_player_enter_SearchArea(player):
 	if player == self or not player.is_in_group('players'):
 		return
 	known_players.append(player)
-	print('enter ', player)
+	#print('enter ', player)
 
 
 func _on_player_exit_SearchArea(player):
 	known_players.erase(player)
 	if player == target:
 		target = null
-	print('exit ', player)
+	#print('exit ', player)

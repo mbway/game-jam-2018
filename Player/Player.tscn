@@ -80,6 +80,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
@@ -102,6 +103,9 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="ContactDamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+
 [node name="BulletCollider" parent="." instance=ExtResource( 31 )]
 visible = false
 collision_mask = 0
@@ -118,3 +122,4 @@ pitch_scale = 3.0
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_InvulnTimer_timeout"]
 [connection signal="timeout" from="OneWayPlatformTimer" to="." method="_on_OneWayPlatformTimer_timeout"]
+[connection signal="timeout" from="ContactDamageTimer" to="." method="_on_ContactDamageTimer_timeout"]

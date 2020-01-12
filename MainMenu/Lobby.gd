@@ -4,7 +4,7 @@ onready var G = globals
 
 signal back
 
-var player_panel_scene = preload('res://MainMenu/PlayerPanel.tscn')
+const player_panel_scene = preload('res://MainMenu/PlayerPanel.tscn')
 
 # note: this doesn't belong in globals because it is only used during the main menu
 # not a dictionary because order is important
@@ -38,7 +38,8 @@ var maps = [
 var game_modes = [
 	['TDM', 'Team Death Match'],
 	['CTF', 'Capture The Flag'],
-	['Overrule', 'Overrule']
+	['Overrule', 'Overrule'],
+	['Survival', 'Survival']
 ]
 var input_methods = [] # [{'type': globals.CONTROL_TYPE, 'name':#, 'index':(only with GAMEPAD)}]
 var teams = ['Team 1', 'Team 2']
