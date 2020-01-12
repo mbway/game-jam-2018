@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
+[ext_resource path="res://Maps/Forts/Forts.tmx" type="PackedScene" id=2]
+[ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=5]
+
+[node name="Forts" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="Forts" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 2144.29, 2922.12 )
+
+[node name="Bullets" type="Node2D" parent="." index="2"]
+
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Players" type="Node" parent="." index="3"]
+
+[node name="HUD" parent="." index="4" instance=ExtResource( 4 )]
+
+[node name="Camera" parent="." index="5" instance=ExtResource( 5 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="." index="6"]
+
+stream = null
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="GameMode" type="Node" parent="." index="7"]
+
+[node name="TDM" type="Node" parent="GameMode" index="0"]
+
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="0"]
+
+[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
+
+position = Vector2( 4298.85, -1048.34 )
+
+[node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="1"]
+
+position = Vector2( -1356.55, 1709.98 )
+
+
