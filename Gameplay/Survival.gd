@@ -22,6 +22,9 @@ var camera
 
 var spawn_timer
 
+func _ready():
+	set_process(false)  # the node is present even when not the current mode
+
 func setup(details):
 	assert(not is_setup)
 	self.details = details
@@ -31,7 +34,7 @@ func setup(details):
 	players = root.get_node('Players')
 	HUD = root.get_node('HUD')
 	camera = root.get_node('Camera')
-	is_setup = true
+
 
 	var p1 = players.get_child(0)
 	p1.connect('die', self, '_on_team1_die')
@@ -57,6 +60,9 @@ func setup(details):
 	HUD.hide_score_labels()
 	HUD.show_center_label()
 
+	is_setup = true
+	set_process(true)
+
 func _spawn_zombie():
 	print('spawning zombie %d' % player_counter)
 	var p
@@ -81,6 +87,8 @@ func _spawn_zombie():
 	spawn_player(p, false)
 
 func _process(delta: float) -> void:  # override
+	if not is_setup:
+		return
 	if is_game_over:
 		HUD.show_game_over('')
 	else:
