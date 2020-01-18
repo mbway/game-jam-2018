@@ -75,6 +75,8 @@ func _spawn_zombie():
 			if player.config.control == G.Control.AI and player.is_dead():
 				p = player
 				break
+		if p == null:
+			return
 
 	spawn_player(p, false)
 
