@@ -1,105 +1,95 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Obelisk/Obelisk.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/graph-node/Graph2D.gd" type="Script" id=4]
-[ext_resource path="res://addons/graph-node/Assets/icon.png" type="Texture" id=5]
+[ext_resource path="res://addons/graph_node/src/DiGraph2D.gd" type="Script" id=4]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Camera.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=9]
 
 [node name="Obelisk" type="Node2D"]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Z Index" ]
 
-[node name="Map" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Map" parent="." instance=ExtResource( 2 )]
 
-[node name="MapBottom" parent="." index="1" instance=ExtResource( 3 )]
-
+[node name="MapBottom" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 2500 )
 
-[node name="Nav" type="Node2D" parent="." index="2"]
+[node name="Bullets" type="Node2D" parent="."]
 
+[node name="Players" type="Node" parent="."]
+
+[node name="Nav" type="Node2D" parent="."]
 script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
-nodes = PoolVector2Array(  )
-edges = [  ]
+_stored_adjacency = "1600.000000 680.000000 1
+1816.000000 680.000000 2 3 0
+1896.000000 1008.000000 15 1 3
+1960.000000 680.000000 1 2 4
+2072.000000 680.000000 3 5
+2216.000000 488.000000 4 6
+2392.000000 488.000000 5 7
+2536.000000 240.000000 6 8 5
+2840.000000 240.000000 7
+1568.000000 64.000000 0 1 3 4 5 10
+1448.000000 64.000000 20 19 18 21 22 9
+1656.000000 1008.000000 12 14 15
+1736.000000 1320.000000 13 11
+1280.000000 1320.000000 16 14 12
+1352.000000 1008.000000 16 13 11
+1800.000000 1008.000000 11 2
+1216.000000 1008.000000 17 14 13
+1120.000000 1008.000000 18 19 16
+1048.000000 680.000000 21 19 17
+1192.000000 680.000000 18 20 17
+1408.000000 680.000000 19
+936.000000 680.000000 22 18
+792.000000 488.000000 23 21
+624.000000 488.000000 24 22
+472.000000 240.000000 25 23 22
+168.000000 240.000000 24"
 
-[node name="Bullets" type="Node2D" parent="." index="3"]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
-_sections_unfolded = [ "Z Index" ]
-
-[node name="Players" type="Node" parent="." index="4"]
-
-[node name="HUD" parent="." index="5" instance=ExtResource( 6 )]
-
-[node name="Camera" type="Camera2D" parent="." index="6"]
-
-anchor_mode = 1
-rotating = false
+[node name="Camera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_enabled = true
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 script = ExtResource( 7 )
-_sections_unfolded = [ "Drag Margin", "Editor", "Offset", "Smoothing" ]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="7"]
-
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
 
-[node name="GameMode" type="Node" parent="." index="8"]
+[node name="GameMode" type="Node" parent="."]
 
-[node name="TDM" type="Node" parent="GameMode" index="0"]
+[node name="TDM" type="Node" parent="GameMode"]
 
-[node name="PickupSpawn" parent="GameMode/TDM" index="0" instance=ExtResource( 9 )]
-
+[node name="PickupSpawn" parent="GameMode/TDM" instance=ExtResource( 9 )]
 position = Vector2( 992, 736 )
 
-[node name="PickupSpawn2" parent="GameMode/TDM" index="1" instance=ExtResource( 9 )]
-
+[node name="PickupSpawn2" parent="GameMode/TDM" instance=ExtResource( 9 )]
 position = Vector2( 2016, 736 )
 
-[node name="PickupSpawn3" parent="GameMode/TDM" index="2" instance=ExtResource( 9 )]
-
+[node name="PickupSpawn3" parent="GameMode/TDM" instance=ExtResource( 9 )]
 position = Vector2( 1520, 1376 )
 
-[node name="SpawnPoints" type="Node" parent="GameMode/TDM" index="3"]
+[node name="SpawnPoints" type="Node" parent="GameMode/TDM"]
 
-editor/display_folded = true
-
-[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="0"]
-
+[node name="Position2D" type="Position2D" parent="GameMode/TDM/SpawnPoints"]
 position = Vector2( 320, 208 )
 
-[node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints" index="1"]
-
+[node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints"]
 position = Vector2( 2672, 208 )
 
+[node name="Survival" type="Node" parent="GameMode"]
 
+[node name="SpawnPoints" type="Node" parent="GameMode/Survival"]
+
+[node name="Position2D" type="Position2D" parent="GameMode/Survival/SpawnPoints"]
+position = Vector2( 320, 208 )
+
+[node name="Position2D2" type="Position2D" parent="GameMode/Survival/SpawnPoints"]
+position = Vector2( 2672, 208 )
+
+[node name="Position2D3" type="Position2D" parent="GameMode/Survival/SpawnPoints"]
+position = Vector2( 1509.34, 39.8555 )
