@@ -18,11 +18,12 @@ func post_import(scene):
 	var foreground = scene.get_node_or_null('Foreground')
 	if foreground != null:
 		_fix_tile_offset(foreground)
-		foreground.z_index = 10
+		foreground.z_index = 2
 
 	var background = scene.get_node_or_null('Background')
 	if background != null:
 		_fix_tile_offset(background)
+		background.z_index = -2
 
 	var collision = scene.get_node('Collision')
 	for c in collision.get_children():
