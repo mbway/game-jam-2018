@@ -1,12 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Gameplay/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Obelisk/Obelisk.tmx" type="PackedScene" id=2]
 [ext_resource path="res://Objects/MapBottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/graph_node/src/DiGraph2D.gd" type="Script" id=4]
-[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/Camera.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Music/city_crumbles_b_loop.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Objects/PickupSpawn.tscn" type="PackedScene" id=9]
 
 [node name="Obelisk" type="Node2D"]
@@ -16,10 +13,6 @@ script = ExtResource( 1 )
 
 [node name="MapBottom" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 2500 )
-
-[node name="Bullets" type="Node2D" parent="."]
-
-[node name="Players" type="Node" parent="."]
 
 [node name="Nav" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -50,19 +43,9 @@ _stored_adjacency = "1600.000000 680.000000 1
 472.000000 240.000000 25 23 22
 168.000000 240.000000 24"
 
-[node name="HUD" parent="." instance=ExtResource( 6 )]
-
-[node name="Camera" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
-script = ExtResource( 7 )
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-
 [node name="GameMode" type="Node" parent="."]
 
-[node name="TDM" type="Node" parent="GameMode"]
+[node name="TDM" type="Node2D" parent="GameMode"]
 
 [node name="PickupSpawn" parent="GameMode/TDM" instance=ExtResource( 9 )]
 position = Vector2( 992, 736 )
@@ -81,7 +64,8 @@ position = Vector2( 320, 208 )
 [node name="Position2D2" type="Position2D" parent="GameMode/TDM/SpawnPoints"]
 position = Vector2( 2672, 208 )
 
-[node name="Survival" type="Node" parent="GameMode"]
+[node name="Survival" type="Node2D" parent="GameMode"]
+visible = false
 
 [node name="SpawnPoints" type="Node" parent="GameMode/Survival"]
 
