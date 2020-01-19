@@ -37,8 +37,6 @@ var maps = [
 ]
 var game_modes = [
 	['TDM', 'Team Death Match'],
-	['CTF', 'Capture The Flag'],
-	['Overrule', 'Overrule'],
 	['Survival', 'Survival']
 ]
 var input_methods = [] # [{'type': globals.CONTROL_TYPE, 'name':#, 'index':(only with GAMEPAD)}]
