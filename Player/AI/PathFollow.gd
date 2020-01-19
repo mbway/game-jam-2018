@@ -41,6 +41,7 @@ var nav = null
 func _init(set_player: Player):
 	self.player = set_player
 	nav = player.nav
+	assert(nav.position == Vector2(0, 0))
 	AINodes = player.get_node('AINodes')
 	platforms = _get_platforms()
 	node_platforms = _get_node_platforms()
