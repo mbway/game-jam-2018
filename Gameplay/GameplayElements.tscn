@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Camera.tscn" type="PackedScene" id=5]
+
+[node name="GameplayElements" type="Node2D"]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="Camera" parent="." instance=ExtResource( 5 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]

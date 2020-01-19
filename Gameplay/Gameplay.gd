@@ -14,6 +14,8 @@ const keyboard_player_scene := preload('res://Player/KeyboardPlayer.tscn')
 const gamepad_player_scene := preload('res://Player/GamepadPlayer.tscn')
 const AI_player_scene := preload('res://Player/AI/AIPlayer.tscn')
 
+const GameplayElements_Scene := preload('res://Gameplay/GameplayElements.tscn')
+
 const MAX_HEALTH := 100
 
 onready var G = globals
@@ -33,6 +35,7 @@ onready var debug_draw := preload('res://Utils/DebugDraw.gd').new()
 
 func _ready():
 	G.log('Game started: %s' % get_tree().get_current_scene().get_name())
+	_add_gameplay_elements()
 
 	debug_draw.set_name('DebugDraw')
 	add_child(debug_draw)
@@ -57,6 +60,13 @@ func _ready():
 	_on_settings_changed()
 	G.settings.connect('settings_changed', self, '_on_settings_changed')
 
+func _add_gameplay_elements():
+	var gameplay_elements = GameplayElements_Scene.instance()
+	var add_after = $Map
+	for elem in gameplay_elements.get_children():
+		gameplay_elements.remove_child(elem)
+		add_child_below_node(add_after, elem)
+		add_after = elem
 
 func set_game_mode(mode: String):
 	assert(mode in game_mode_nodes)
