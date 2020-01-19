@@ -7,7 +7,7 @@
 friction = 0.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 2.95959 )
+extents = Vector2( 10.9918, 2.95959 )
 
 [node name="Bullet" type="RigidBody2D"]
 z_index = -1
@@ -16,7 +16,7 @@ collision_mask = 6
 mass = 0.01
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
-continuous_cd = 2
+continuous_cd = 1
 contacts_reported = 1
 contact_monitor = true
 can_sleep = false
@@ -28,6 +28,6 @@ scale = Vector2( 2.44444, 1 )
 texture = ExtResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -8, 0 )
+position = Vector2( -8.5, 0 )
 shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

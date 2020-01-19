@@ -6,7 +6,7 @@ var detonating := false
 
 func _on_body_entered(body: PhysicsBody2D):  # override
 	if !body.is_in_group('damageable'):
-		self.velocity = Vector2(0, 0)
+		self.linear_velocity *= 0.2
 		self.rotation = 0.0
 
 
