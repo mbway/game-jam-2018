@@ -4,7 +4,7 @@ class_name Player
 # This blog post was very useful for determining how to make the movement feel better
 # https://www.gamasutra.com/blogs/YoannPignole/20140103/207987/Platformer_controls_how_to_avoid_limpness_and_rigidity_feelings.php
 
-onready var G = globals
+var G = globals
 const DiGraph2D = preload('res://addons/graph_node/src/DiGraph2D.gd')
 
 ## Groups ##
@@ -71,10 +71,10 @@ func init(config, camera, bullet_parent, nav):
 	self.camera = camera
 	self.bullet_parent = bullet_parent
 	self.nav = nav
+	if config.control == G.Control.GAMEPAD:
+		auto_aim = preload('res://Player/AutoAim.gd').new(self)
 
 func _ready():
-	if config.control == G.Control.GAMEPAD:# or config.control == G.Control.KEYBOARD:
-		auto_aim = preload('res://Player/AutoAim.gd').new(self)
 	hide()
 
 func _process(delta):
@@ -319,7 +319,7 @@ func _on_InvulnTimer_timeout() -> void:
 
 func _on_weapon_fired(bullets) -> void:
 	var current_weapon = inventory.lock_current()
-	if current_weapon != null:
+	if current_weapon != null and camera != null:
 		camera.shake(current_weapon.screen_shake)
 	inventory.unlock_current()
 
