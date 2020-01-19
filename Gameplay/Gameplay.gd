@@ -87,6 +87,8 @@ func create_player(config):
 	var nav = null if not has_node('Nav') else $Nav # TODO: make mandatory once pathfinding is finished and applied to all maps
 	p.init(config, $Camera, $Bullets, nav)
 	p.name = 'P%d' % config.num
+	if config.color != null:
+		p.set_color(config.color)
 	$Players.add_child(p)
 
 	if G.settings.get('inspect_window'):

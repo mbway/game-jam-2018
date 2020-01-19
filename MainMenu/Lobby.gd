@@ -101,13 +101,16 @@ func _on_StartButton_pressed():
 	G.player_data.clear()
 	for i in range(len(players_list)):
 		var p = players_list[i]
+		var details = p.get_player_details()
 
 		var config = G.PlayerConfig.new()
 		config.num = i + 1 # 1-based
-		config.name = p.find_node('PlayerName').text
-		config.team = p.find_node('TeamOption').selected + 1 # 1-based
+		config.name = details["name"]
+		config.team = details["team"] + 1 # 1-based
+		if details["color"] != Color(255, 255, 255):
+			config.color = details["color"]
 
-		var selected_input = input_methods[p.find_node('ControlOption').selected]
+		var selected_input = input_methods[details["input_method"]]
 		config.control = selected_input['type']
 		if config.control == G.Control.GAMEPAD:
 			config.gamepad_id = selected_input['index']
@@ -155,25 +158,22 @@ func _on_GameMode_item_selected(ID):
 
 func _add_player():
 	var player = player_panel_scene.instance()
-	player.find_node('PlayerName').text = 'Player ' + str(players.get_child_count() + 1)
-	player.find_node('DeleteButton').connect('pressed', self, '_remove_player', [player])
-	var controls = player.find_node('ControlOption')
-	for i in input_methods:
-		controls.add_item(i['name'])
+	var name = 'Player ' + str(players.get_child_count() + 1)
+	var default_team = players.get_child_count() % len(teams)
+	var default_input_method
 
 	# initially assign the lowest index into input_methods which has not yet been assigned to a player
 	var available_indices = range(len(input_methods))
 	for p in players.get_children():
-		available_indices.erase(p.find_node('ControlOption').selected) # remove by value, not index
+		# note: erase removes by value
+		available_indices.erase(p.get_player_details()["input_method"])
 	if len(available_indices) == 0:
-		controls.select(len(input_methods) - 1) # AI
+		default_input_method = len(input_methods) - 1 # AI
 	else:
-		controls.select(available_indices[0]) # the smallest index not yet allocated
+		default_input_method = available_indices[0] # the smallest index not yet allocated
 
-	var team = player.find_node('TeamOption')
-	for t in teams:
-		team.add_item(t)
-	team.select(players.get_child_count() % len(teams))
+	player.setup(name, teams, input_methods, default_team, default_input_method)
+	player.connect('delete', self, '_remove_player', [player])
 
 	players.add_child(player)
 

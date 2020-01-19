@@ -296,6 +296,9 @@ func spawn(position: Vector2) -> void:
 	inventory.select('Pistol')
 	show()
 
+func set_color(color: Color) -> void:
+	$AnimatedSprite.set_self_modulate(color)
+
 func teleport(location: Vector2) -> void:
 	global_position = location
 	velocity = Vector2(0, 0)

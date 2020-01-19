@@ -24,13 +24,15 @@ class PlayerConfig:
 	var team: int # 1-based
 	var control: int # Control
 	var gamepad_id: int = -1 # only used when control == Control.GAMEPAD
+	var color
 
-	func _init(set_num: int = -1, set_name: String = '', set_team: int = -1, set_control: int = -1, set_gamepad_id: int = -1):
+	func _init(set_num: int = -1, set_name: String = '', set_team: int = -1, set_control: int = -1, set_gamepad_id: int = -1, set_color = null):
 		self.num = set_num
 		self.name = set_name
 		self.team = set_team
 		self.control = set_control
 		self.gamepad_id = set_gamepad_id
+		self.color = set_color
 
 	func get_control_type_string():
 		if control == Control.KEYBOARD:
