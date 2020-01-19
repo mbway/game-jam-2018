@@ -15,19 +15,21 @@ func post_import(scene):
 	var map = scene.get_node('Map')
 	_fix_tile_offset(map)
 
-	var foreground = scene.get_node('Foreground')
-	_fix_tile_offset(foreground)
-	foreground.z_index = 10
+	var foreground = scene.get_node_or_null('Foreground')
+	if foreground != null:
+		_fix_tile_offset(foreground)
+		foreground.z_index = 10
 
-	var background = scene.get_node('Background')
-	_fix_tile_offset(background)
+	var background = scene.get_node_or_null('Background')
+	if background != null:
+		_fix_tile_offset(background)
 
 	var collision = scene.get_node('Collision')
 	for c in collision.get_children():
 		_init_collision(c)
 
-	if scene.has_node('OneWayCollision'): # optional
-		var one_way_collision = scene.get_node('OneWayCollision')
+	var one_way_collision = scene.get_node_or_null('OneWayCollision')
+	if one_way_collision != null:
 		for c in one_way_collision.get_children():
 			_init_collision(c)
 			c.get_node('CollisionShape2D').one_way_collision = true
