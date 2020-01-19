@@ -20,6 +20,7 @@ position = Vector2( 0, 4000 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Nav" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 4 )
 _stored_adjacency = "3144.000000 1776.000000 10 28 29
 4144.000000 1776.000000 7 10 18

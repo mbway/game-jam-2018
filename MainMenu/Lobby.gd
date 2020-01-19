@@ -76,7 +76,7 @@ func _ready():
 	input_methods.append({'type' : G.Control.AI, 'name' : 'AI'})
 
 	# add a player for each non-AI input method
-	for i in range(len(input_methods) - 1):
+	for _i in range(len(input_methods) - 1):
 		_add_player()
 
 

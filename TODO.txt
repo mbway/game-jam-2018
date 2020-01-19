@@ -104,7 +104,7 @@ short term todo
 - footstep sound when player lands after jumping
 - double jump sound effect?
 - bullet spread increases from 0 for the first bullet, up to the value set
-- spawn in sound effect
+- spawn in sound effect and particle effects
 - pickup sound effect
 - reload sound effects
 

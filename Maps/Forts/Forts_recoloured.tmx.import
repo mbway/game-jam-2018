@@ -2,11 +2,13 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-valid=false
+path="res://.import/Forts_recoloured.tmx-80843c08a1b3569a29a876dad4353cd8.scn"
 
 [deps]
 
 source_file="res://Maps/Forts/Forts_recoloured.tmx"
+dest_files=[ "res://.import/Forts_recoloured.tmx-80843c08a1b3569a29a876dad4353cd8.scn" ]
+
 [params]
 
 custom_properties=false

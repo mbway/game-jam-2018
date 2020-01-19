@@ -22,7 +22,6 @@ func post_import(scene):
 	var background = scene.get_node('Background')
 	_fix_tile_offset(background)
 
-
 	var collision = scene.get_node('Collision')
 	for c in collision.get_children():
 		_init_collision(c)
