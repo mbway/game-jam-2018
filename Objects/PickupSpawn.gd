@@ -3,6 +3,7 @@ extends Area2D
 var G = globals
 
 onready var pickup_names = G.pickups.keys()
+export var cooldown = 5.0
 
 var current_pickup = null # a dictionary with scene and texture keys
 var t = 0 # game time
@@ -10,6 +11,7 @@ var t = 0 # game time
 
 func _ready():
 	pickup_names.erase('pistol') # don't want to spawn this
+	$Cooldown.set_wait_time(cooldown)
 	set_pickup(random_pickup_name())
 
 func _process(delta):
