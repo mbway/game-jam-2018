@@ -42,6 +42,15 @@ var game_modes = [
 var input_methods = [] # [{'type': globals.CONTROL_TYPE, 'name':#, 'index':(only with GAMEPAD)}]
 var teams = ['Team 1', 'Team 2']
 
+var preset_colors = [
+	Color(0.98, 0.94, 0.1),
+	Color(0.4, 0.4, 0.9),
+	Color(0.3, 0.98, 0.16),
+	Color(0.98, 0.16, 0.78),
+	Color(0.1, 0.98, 0.95),
+	Color(0.98, 0.1, 0.1)
+]
+
 var selected_map = 0
 
 
@@ -158,8 +167,9 @@ func _on_GameMode_item_selected(ID):
 
 func _add_player():
 	var player = player_panel_scene.instance()
-	var name = 'Player ' + str(players.get_child_count() + 1)
-	var default_team = players.get_child_count() % len(teams)
+	var n = players.get_child_count()
+	var name = 'Player ' + str(n + 1)
+	var default_team = n % len(teams)
 	var default_input_method
 
 	# initially assign the lowest index into input_methods which has not yet been assigned to a player
@@ -173,9 +183,9 @@ func _add_player():
 		default_input_method = available_indices[0] # the smallest index not yet allocated
 
 	player.setup(name, teams, input_methods, default_team, default_input_method)
-	player.connect('delete', self, '_remove_player', [player])
-
 	players.add_child(player)
+	player.set_player_color(preset_colors[n] if n < preset_colors.size() else Color(255, 255, 255))
+	player.connect('delete', self, '_remove_player', [player])
 
 func _remove_player(player):
 	players.remove_child(player)

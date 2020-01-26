@@ -13,7 +13,7 @@ func get_player_details():
 		"name": find_node("PlayerName").text,
 		"team": find_node("TeamOption").selected,
 		"input_method": find_node('ControlOption').selected,  # value not index
-		"color": player_sprite.get_modulate()
+		"color": $ColorPicker.get_pick_color()
 	}
 
 func setup(name, teams, input_methods, default_team, default_input_method):
