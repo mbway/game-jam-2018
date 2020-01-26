@@ -73,6 +73,7 @@ func set_game_mode(mode: String):
 	for n in $GameMode.get_children():
 		$GameMode.remove_child(n)
 	$GameMode.add_child(game_mode_nodes[mode])
+	game_mode_nodes[mode].set_visible(true)
 	game_mode = game_mode_data[mode]
 	G.log('game mode changed to: ' + mode)
 
