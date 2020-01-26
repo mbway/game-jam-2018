@@ -80,6 +80,7 @@ _stored_adjacency = "1568.000000 912.000000 30 29 31 2 9
 [node name="GameMode" type="Node2D" parent="."]
 
 [node name="TDM" type="Node2D" parent="GameMode"]
+visible = false
 
 [node name="SpawnPoints" type="Node" parent="GameMode/TDM"]
 
@@ -98,7 +99,7 @@ position = Vector2( 1760, 1440 )
 [node name="PickupSpawn2" parent="GameMode/TDM" instance=ExtResource( 8 )]
 position = Vector2( 1310, 1440 )
 
-[node name="Survival" type="Node" parent="GameMode"]
+[node name="Survival" type="Node2D" parent="GameMode"]
 
 [node name="SpawnPoints" type="Node" parent="GameMode/Survival"]
 
@@ -107,3 +108,7 @@ position = Vector2( 133.897, 1416 )
 
 [node name="Position2D2" type="Position2D" parent="GameMode/Survival/SpawnPoints"]
 position = Vector2( 2931.78, 1416 )
+
+[node name="PickupSpawn" parent="GameMode/Survival" instance=ExtResource( 8 )]
+position = Vector2( 519.34, 1503.94 )
+cooldown = 10.0
