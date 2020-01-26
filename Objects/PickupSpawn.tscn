@@ -4,51 +4,27 @@
 [ext_resource path="res://Assets/Objects/WeaponSpawn/WeaponSpawn1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/weapons/pistol.png" type="Texture" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 24, 16 )
 
 [node name="PickupSpawn" type="Area2D"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-available_pickups_path = null
 
-[node name="Base" type="Sprite" parent="." index="0"]
-
+[node name="Base" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -24 )
 shape = SubResource( 1 )
 
-[node name="PickupSprite" type="Sprite" parent="." index="2"]
-
+[node name="PickupSprite" type="Sprite" parent="."]
 position = Vector2( 0, -30 )
 rotation = -0.349066
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Cooldown" type="Timer" parent="." index="3"]
-
-process_mode = 1
-wait_time = 1.0
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.001
 one_shot = true
-autostart = false
-
 [connection signal="body_entered" from="." to="." method="_on_PickupSpawn_body_entered"]
-
 [connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
-
-
