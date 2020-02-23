@@ -13,10 +13,10 @@ dest_files=[ "res://.import/Forts.tmx-022938e2607d2c955395265c605e61b3.scn" ]
 
 custom_properties=false
 tile_metadata=false
-uv_clip=false
+uv_clip=true
 image_flags=0
 collision_layer=0
 embed_internal_images=false
 save_tiled_properties=false
-add_background=true
+add_background=false
 post_import_script="res://Utils/TiledPostImport.gd"

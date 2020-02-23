@@ -33,6 +33,11 @@ var maps = [
 		'path': 'res://Maps/AIStressTest/AIStressTest.tscn',
 		'name' : 'AI Stress Test',
 		'screenshot' : preload('res://Maps/AIStressTest/AIStressTest.png'),
+	},
+	{
+		'path': 'res://Maps/Forts/Forts.tscn',
+		'name' : 'Forts',
+		'screenshot' : preload('res://Maps/Forts/Forts.png'),
 	}
 ]
 var game_modes = [
